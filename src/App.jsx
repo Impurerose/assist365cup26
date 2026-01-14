@@ -11,10 +11,10 @@ function App() {
   const [panelTab, setPanelTab] = useState('groups')
 
   return (
-    <div className="w-full h-screen flex flex-col bg-white">
+    <div className="w-full min-h-screen flex flex-col bg-white">
       <HeaderBar />
       
-      <div className="flex flex-1 overflow-hidden">
+      <div className="flex flex-1">
         <div className="flex-1 flex flex-col">
           <Controls
             selectedTeam={selectedTeam}
