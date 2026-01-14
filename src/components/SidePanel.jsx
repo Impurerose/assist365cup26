@@ -1,13 +1,13 @@
 export default function SidePanel({ panelTab, setPanelTab, selectedCity }) {
   return (
-    <div className="w-96 bg-white border-l border-gray-200 flex flex-col">
+    <div className="rounded-xl overflow-hidden flex flex-col" style={{ width: '467px', height: '640px', backgroundColor: 'rgba(81, 90, 96, 0.06)' }}>
       <div className="flex border-b border-gray-200">
         <button
           onClick={() => setPanelTab('groups')}
           className={`flex-1 py-3 font-semibold text-center ${
             panelTab === 'groups'
               ? 'bg-white text-secondary border-b-2 border-secondary'
-              : 'bg-gray-50 text-gray-600'
+              : 'bg-transparent text-gray-600'
           }`}
         >
           Grupos
@@ -17,7 +17,7 @@ export default function SidePanel({ panelTab, setPanelTab, selectedCity }) {
           className={`flex-1 py-3 font-semibold text-center ${
             panelTab === 'elimination'
               ? 'bg-white text-secondary border-b-2 border-secondary'
-              : 'bg-gray-50 text-gray-600'
+              : 'bg-transparent text-gray-600'
           }`}
         >
           Eliminación

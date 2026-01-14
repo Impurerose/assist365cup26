@@ -1,6 +1,6 @@
 export default function Controls({ selectedTeam, setSelectedTeam, viewMode, setViewMode }) {
   return (
-    <div className="bg-gray-50 border-b border-gray-200 px-6 py-4 flex items-center justify-between gap-6">
+    <div className="py-4 flex items-center justify-between gap-6">
       <div className="flex items-center gap-4">
         <label className="font-semibold text-gray-700">Soy fan de:</label>
         <select

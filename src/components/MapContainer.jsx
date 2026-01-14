@@ -7,10 +7,10 @@ export default function MapContainer({
   setSelectedCity,
 }) {
   return (
-    <div className="flex-1 overflow-auto bg-sky-200 p-4">
+    <div className="rounded-xl overflow-hidden" style={{ width: '790px', height: '640px' }}>
       <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
         <Map
-          style={{ width: "790px", height: "640px" }}
+          style={{ width: "100%", height: "100%" }}
           defaultCenter={{ lat: 45.5, lng: -100 }}
           defaultZoom={4}
           gestureHandling="greedy"

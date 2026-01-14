@@ -14,26 +14,29 @@ function App() {
     <div className="w-full min-h-screen flex flex-col bg-white">
       <HeaderBar />
       
-      <div className="flex flex-1">
-        <div className="flex-1 flex flex-col">
+      <div className="w-full flex justify-center bg-gray-50">
+        <div className="w-full max-w-[1366px] px-4">
           <Controls
             selectedTeam={selectedTeam}
             setSelectedTeam={setSelectedTeam}
             viewMode={viewMode}
             setViewMode={setViewMode}
           />
-          <MapContainer
-            selectedTeam={selectedTeam}
-            selectedCity={selectedCity}
-            setSelectedCity={setSelectedCity}
-          />
-        </div>
+          
+          <div className="flex gap-6 py-6">
+            <MapContainer
+              selectedTeam={selectedTeam}
+              selectedCity={selectedCity}
+              setSelectedCity={setSelectedCity}
+            />
 
-        <SidePanel
-          panelTab={panelTab}
-          setPanelTab={setPanelTab}
-          selectedCity={selectedCity}
-        />
+            <SidePanel
+              panelTab={panelTab}
+              setPanelTab={setPanelTab}
+              selectedCity={selectedCity}
+            />
+          </div>
+        </div>
       </div>
     </div>
   )
