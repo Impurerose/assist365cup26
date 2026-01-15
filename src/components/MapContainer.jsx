@@ -1,5 +1,5 @@
-import React from 'react';
-import {APIProvider, Map} from '@vis.gl/react-google-maps';
+import React from "react";
+import { APIProvider, Map, Marker } from "@vis.gl/react-google-maps";
 
 export default function MapContainer({
   selectedTeam,
@@ -7,7 +7,10 @@ export default function MapContainer({
   setSelectedCity,
 }) {
   return (
-    <div className="rounded-2xl overflow-hidden" style={{ width: '790px', height: '640px' }}>
+    <div
+      className="rounded-2xl overflow-hidden"
+      style={{ width: "790px", height: "640px" }}
+    >
       <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
         <Map
           style={{ width: "100%", height: "100%" }}
@@ -15,7 +18,9 @@ export default function MapContainer({
           defaultZoom={4}
           gestureHandling="greedy"
           disableDefaultUI
-        />
+        >
+          <Marker position={{ lat: 39.0997, lng: -94.5786 }} />
+        </Map>
       </APIProvider>
     </div>
   );

@@ -27,7 +27,7 @@ export default function SidePanel({ panelTab, setPanelTab, selectedCity }) {
         {teams.map((team) => (
           <button
             key={team.code}
-            className="bg-white rounded-xl p-4 flex items-center gap-3 transition-shadow"
+            className="bg-white rounded-xl p-4 flex items-center gap-3"
           >
             <span className="text-3xl">{team.flag}</span>
             <span className="font-semibold text-[#31363A]">{team.name}</span>
