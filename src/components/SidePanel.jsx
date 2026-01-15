@@ -15,14 +15,9 @@ const teams = [
 
 export default function SidePanel({ panelTab, setPanelTab, selectedCity }) {
   return (
-    <div 
-      className="rounded-l-xl overflow-hidden flex flex-col p-6 w-[467px] h-[640px] bg-[rgba(81,90,96,0.06)] bg-no-repeat bg-center bg-contain"
-      style={{ backgroundImage: 'url(https://assistcdn.s3.us-west-1.amazonaws.com/assets/wc2026/BallWidthDots.svg)' }}
-    >
-      <div className="flex flex-col items-center text-center mb-8">
-        <div className="mb-4">
-          <SoccerBall size={64} weight="duotone" className="text-[#00A7E1]" />
-        </div>
+    <div className="rounded-l-xl overflow-hidden flex flex-col p-6 w-[467px] 
+    h-[640px] bg-[rgba(81,90,96,0.06)] bg-[url(https://assistcdn.s3.us-west-1.amazonaws.com/assets/wc2026/BallWidthDots.svg)] bg-no-repeat bg-top bg-contain">
+      <div className="flex flex-col items-center text-center mt-32 mb-8">
         <h2 className="text-xl font-semibold text-[#0059BA] leading-snug text-left">
           Seleccioná tu equipo para explorar tu camino a la gran final 2026
         </h2>
@@ -32,7 +27,7 @@ export default function SidePanel({ panelTab, setPanelTab, selectedCity }) {
         {teams.map((team) => (
           <button
             key={team.code}
-            className="bg-white rounded-lg p-4 flex items-center gap-3 hover:shadow-md transition-shadow"
+            className="bg-white rounded-xl p-4 flex items-center gap-3 transition-shadow"
           >
             <span className="text-3xl">{team.flag}</span>
             <span className="font-semibold text-[#31363A]">{team.name}</span>

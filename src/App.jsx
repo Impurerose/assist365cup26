@@ -16,7 +16,7 @@ function App() {
         <div className="w-full max-w-[1200px] mx-auto">
           <div className="w-full flex justify-center bg-[#F2F2F2]">
             <div className="w-full max-w-[1366px] px-4">
-              <div className="flex gap-6 py-6">
+              <div className="flex gap-6 mt-12">
                 <MapContainer
                   selectedTeam={selectedTeam}
                   selectedCity={selectedCity}
