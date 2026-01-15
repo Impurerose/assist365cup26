@@ -171,9 +171,14 @@ const Select = ({
             tabIndex={disabled ? -1 : 0}
             aria-disabled={disabled}
           >
-            {selectedOption
-              ? selectedOption.label ?? selectedOption.name
-              : placeholder}
+            {selectedOption ? (
+              <span className="flex items-center gap-2">
+                {selectedOption.flag && <span className="text-xl">{selectedOption.flag}</span>}
+                <span>{selectedOption.label ?? selectedOption.name}</span>
+              </span>
+            ) : (
+              placeholder
+            )}
 
             <div>
               <CaretDown
@@ -198,7 +203,8 @@ const Select = ({
                       (selectedOption?.value ?? selectedOption?.id),
                   })}
                 >
-                  {option.label ?? option.name}
+                  {option.flag && <span className="text-xl">{option.flag}</span>}
+                  <span>{option.label ?? option.name}</span>
                 </div>
               ))}
             </div>
