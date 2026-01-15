@@ -1,58 +1,40 @@
+import { SoccerBall } from '@phosphor-icons/react'
+
+const teams = [
+  { name: 'Argentina', flag: '🇦🇷', code: 'ARG' },
+  { name: 'Brasil', flag: '🇧🇷', code: 'BRA' },
+  { name: 'Colombia', flag: '🇨🇴', code: 'COL' },
+  { name: 'México', flag: '🇲🇽', code: 'MEX' },
+  { name: 'Paraguay', flag: '🇵🇾', code: 'PAR' },
+  { name: 'Uruguay', flag: '🇺🇾', code: 'URU' },
+  { name: 'Ecuador', flag: '🇪🇨', code: 'ECU' },
+]
+
+
+// https://assistcdn.s3.us-west-1.amazonaws.com/assets/wc2026/BallWidthDots.svg
+
 export default function SidePanel({ panelTab, setPanelTab, selectedCity }) {
   return (
-    <div className="rounded-xl overflow-hidden flex flex-col" style={{ width: '467px', height: '640px', backgroundColor: 'rgba(81, 90, 96, 0.06)' }}>
-      <div className="flex border-b border-gray-200">
-        <button
-          onClick={() => setPanelTab('groups')}
-          className={`flex-1 py-3 font-semibold text-center ${
-            panelTab === 'groups'
-              ? 'bg-white text-secondary border-b-2 border-secondary'
-              : 'bg-transparent text-gray-600'
-          }`}
-        >
-          Grupos
-        </button>
-        <button
-          onClick={() => setPanelTab('elimination')}
-          className={`flex-1 py-3 font-semibold text-center ${
-            panelTab === 'elimination'
-              ? 'bg-white text-secondary border-b-2 border-secondary'
-              : 'bg-transparent text-gray-600'
-          }`}
-        >
-          Eliminación
-        </button>
+    <div className="rounded-l-xl overflow-hidden flex flex-col p-6" style={{ width: '467px', height: '640px', backgroundColor: 'rgba(81, 90, 96, 0.06)' }}>
+      <div className="flex flex-col items-center text-center mb-8">
+        <div className="mb-4">
+          <SoccerBall size={64} weight="duotone" className="text-[#00A7E1]" />
+        </div>
+        <h2 className="text-xl font-semibold text-[#0059BA] leading-snug text-left">
+          Seleccioná tu equipo para explorar tu camino a la gran final 2026
+        </h2>
       </div>
 
-      <div className="flex-1 overflow-y-auto p-6">
-        {selectedCity ? (
-          <div>
-            <h3 className="text-2xl font-bold text-primary mb-2">{selectedCity.name}</h3>
-            <p className="text-muted mb-4">{selectedCity.country}</p>
-            
-            {panelTab === 'groups' && (
-              <div className="space-y-4">
-                <h4 className="font-semibold text-text">Partidos - Fase de Grupos</h4>
-                <div className="text-sm text-muted">
-                  <p>Los partidos de grupos en {selectedCity.name} se mostrarán aquí</p>
-                </div>
-              </div>
-            )}
-
-            {panelTab === 'elimination' && (
-              <div className="space-y-4">
-                <h4 className="font-semibold text-text">Partidos - Eliminación</h4>
-                <div className="text-sm text-muted">
-                  <p>Los partidos de eliminación en {selectedCity.name} se mostrarán aquí</p>
-                </div>
-              </div>
-            )}
-          </div>
-        ) : (
-          <div className="text-center text-muted">
-            <p>Selecciona una ciudad en el mapa para ver los partidos</p>
-          </div>
-        )}
+      <div className="grid grid-cols-2 gap-3">
+        {teams.map((team) => (
+          <button
+            key={team.code}
+            className="bg-white rounded-lg p-4 flex items-center gap-3 hover:shadow-md transition-shadow"
+          >
+            <span className="text-3xl">{team.flag}</span>
+            <span className="font-semibold text-[#31363A]">{team.name}</span>
+          </button>
+        ))}
       </div>
     </div>
   )
