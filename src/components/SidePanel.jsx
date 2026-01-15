@@ -1,39 +1,60 @@
-import { SoccerBall } from '@phosphor-icons/react'
+import { useState } from 'react';
+import Chip from '../dsys/Chip';
+import TeamCard from './TeamCard';
+import { TEAMS } from '../config/teamsConfig';
 
-const teams = [
-  { name: 'Argentina', flag: '🇦🇷', code: 'ARG' },
-  { name: 'Brasil', flag: '🇧🇷', code: 'BRA' },
-  { name: 'Colombia', flag: '🇨🇴', code: 'COL' },
-  { name: 'México', flag: '🇲🇽', code: 'MEX' },
-  { name: 'Paraguay', flag: '🇵🇾', code: 'PAR' },
-  { name: 'Uruguay', flag: '🇺🇾', code: 'URU' },
-  { name: 'Ecuador', flag: '🇪🇨', code: 'ECU' },
-]
+const SidePanel = ({
+  selectedTeam,
+  setSelectedTeam,
+  selectedCity,
+  setSelectedCity,
+}) => {
+  const [activeTab, setActiveTab] = useState('groups');
 
-
-// https://assistcdn.s3.us-west-1.amazonaws.com/assets/wc2026/BallWidthDots.svg
-
-export default function SidePanel({ panelTab, setPanelTab, selectedCity }) {
   return (
-    <div className="rounded-l-xl overflow-hidden flex flex-col p-6 w-[467px] 
-    h-[640px] bg-[rgba(81,90,96,0.06)] bg-[url(https://assistcdn.s3.us-west-1.amazonaws.com/assets/wc2026/BallWidthDots.svg)] bg-no-repeat bg-top bg-contain">
-      <div className="flex flex-col items-center text-center mt-32 mb-8">
-        <h2 className="text-xl font-semibold text-[#0059BA] leading-snug text-left">
-          Seleccioná tu equipo para explorar tu camino a la gran final 2026
-        </h2>
-      </div>
+    <div className={`rounded-l-xl flex flex-col p-6 w-[467px] h-[640px] bg-[rgba(81,90,96,0.06)] ${!selectedTeam ? 'bg-[url(https://assistcdn.s3.us-west-1.amazonaws.com/assets/wc2026/BallWidthDots.svg)] bg-no-repeat bg-top bg-contain' : ''}`}>
+      {selectedTeam ? (
+        <>
+          {/* Chips de navegación */}
+          <div className="flex gap-2 mb-6">
+            <Chip
+              state={activeTab === 'groups' ? 'selected' : 'default'}
+              onClick={() => setActiveTab('groups')}
+            >
+              Grupos
+            </Chip>
+            <Chip
+              state={activeTab === 'elimination' ? 'selected' : 'default'}
+              onClick={() => setActiveTab('elimination')}
+            >
+              Eliminación
+            </Chip>
+          </div>
 
-      <div className="grid grid-cols-2 gap-3">
-        {teams.map((team) => (
-          <button
-            key={team.code}
-            className="bg-white rounded-xl p-4 flex items-center gap-3"
-          >
-            <span className="text-3xl">{team.flag}</span>
-            <span className="font-semibold text-[#31363A]">{team.name}</span>
-          </button>
-        ))}
-      </div>
+          {/* Cards de partidos */}
+          <div className="flex flex-col gap-3">
+            {/* Aquí irán los cards de partidos */}
+          </div>
+        </>
+      ) : (
+        <>
+          {/* Texto de selección */}
+          <div className="flex flex-col items-start mb-6 mt-32">
+            <h2 className="text-lg font-semibold text-[#0059BA] leading-snug">
+              Seleccioná tu equipo para explorar tu camino a la gran final 2026
+            </h2>
+          </div>
+
+          {/* Grid de equipos */}
+          <div className="grid grid-cols-2 gap-3">
+            {TEAMS.map((team) => (
+              <TeamCard key={team.id} team={team} onClick={setSelectedTeam} />
+            ))}
+          </div>
+        </>
+      )}
     </div>
-  )
-}
+  );
+};
+
+export default SidePanel;
