@@ -16,6 +16,7 @@ export const MAP_RESTRICTIONS = {
 
 // Configuración de vista inicial del mapa
 export const MAP_CONFIG = {
+  mapId: import.meta.env.VITE_GOOGLE_MAP_ID,
   defaultCenter: { lat: 45.5, lng: -100 },
   defaultZoom: 4,
   minZoom: 3,
@@ -25,28 +26,37 @@ export const MAP_CONFIG = {
 
 // Estilos del mapa para apariencia minimalista
 export const MAP_STYLES = [
+  // Ocultar todos los labels primero
   {
     featureType: 'all',
     elementType: 'labels',
-    stylers: [{ visibility: 'simplified' }],
+    stylers: [{ visibility: 'off' }],
   },
+  // Mostrar solo labels de países
+  {
+    featureType: 'administrative.country',
+    elementType: 'labels.text',
+    stylers: [{ visibility: 'on' }],
+  },
+  {
+    featureType: 'administrative.country',
+    elementType: 'labels.text.fill',
+    stylers: [{ color: '#444444' }],
+  },
+  // Ocultar puntos de interés
   {
     featureType: 'poi',
     stylers: [{ visibility: 'off' }],
   },
+  // Ocultar rutas
+  {
+    featureType: 'road',
+    stylers: [{ visibility: 'off' }],
+  },
+  // Ocultar transporte
   {
     featureType: 'transit',
     stylers: [{ visibility: 'off' }],
-  },
-  {
-    featureType: 'road',
-    elementType: 'labels.icon',
-    stylers: [{ visibility: 'off' }],
-  },
-  {
-    featureType: 'administrative',
-    elementType: 'labels.text.fill',
-    stylers: [{ color: '#0059BA' }],
   },
 ];
 

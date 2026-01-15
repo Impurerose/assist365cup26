@@ -1,7 +1,12 @@
-import { APIProvider, Map, Marker } from '@vis.gl/react-google-maps';
+import { APIProvider, Map } from '@vis.gl/react-google-maps';
 import { MAP_CONFIG, MAP_RESTRICTIONS, MAP_STYLES, VENUES } from '../config/mapConfig';
+import VenueMarker from './VenueMarker';
 
 export default function MapContainer({ selectedTeam, selectedCity, setSelectedCity }) {
+  const handleMarkerClick = (venue) => {
+    setSelectedCity(venue);
+  };
+
   return (
     <div className="rounded-2xl overflow-hidden w-[790px] h-[640px]">
       <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
@@ -12,10 +17,10 @@ export default function MapContainer({ selectedTeam, selectedCity, setSelectedCi
           {...MAP_CONFIG}
         >
           {VENUES.map((venue) => (
-            <Marker
+            <VenueMarker
               key={venue.id}
-              position={venue.coordinates}
-              title={venue.name}
+              venue={venue}
+              onClick={() => handleMarkerClick(venue)}
             />
           ))}
         </Map>
