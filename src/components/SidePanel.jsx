@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Chip from '../dsys/Chip';
 import TeamCard from './TeamCard';
+import MatchCard from './MatchCard';
 import { TEAMS } from '../config/teamsConfig';
 
 const SidePanel = ({
@@ -33,7 +34,45 @@ const SidePanel = ({
 
           {/* Cards de partidos */}
           <div className="flex flex-col gap-3">
-            {/* Aquí irán los cards de partidos */}
+            <MatchCard 
+              match={{
+                number: 1,
+                team1: { name: 'Argentina', flag: '🇦🇷' },
+                team2: { name: 'Algeria', flag: '🇩🇿' },
+                date: 'Martes 16 de junio',
+                city: 'Kansas city',
+                time: {
+                  local: '21:00 h (AR)',
+                  venue: '18:00 h (KCK)'
+                }
+              }}
+            />
+            <MatchCard 
+              match={{
+                number: 2,
+                team1: { name: 'Argentina', flag: '🇦🇷' },
+                team2: { name: 'Austria', flag: '🇦🇹' },
+                date: 'Lunes 22 de junio',
+                city: 'Dallas',
+                time: {
+                  local: '13:00 h (AR)',
+                  venue: '10:00 h (DL)'
+                }
+              }}
+            />
+            <MatchCard 
+              match={{
+                number: 3,
+                team1: { name: 'Jordania', flag: '🇯🇴' },
+                team2: { name: 'Argentina', flag: '🇦🇷' },
+                date: 'Sábado 27 de junio',
+                city: 'Dallas',
+                time: {
+                  local: '22:00 h (AR)',
+                  venue: '19:00 h (DL)'
+                }
+              }}
+            />
           </div>
         </>
       ) : (

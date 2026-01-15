@@ -48,11 +48,11 @@ const Chip = ({
       'flex items-center justify-center': fullWidth,
 
       // Default variant and primary color - default state
-      'bg-transparent border-2 border-blue-600 text-gray-500 hover:border-3 hover:border-blue-700 hover:text-gray-500 active:border-blue-800 active:text-blue-800 focus:border-blue-700 focus:text-blue-700 focus:ring-blue-700 focus:ring-opacity-100':
+      'bg-transparent border-2 border-[#C2DFFF] text-[#70777C] hover:border-[#006FE8] hover:text-[#31363A] active:border-[#006FE8] active:text-[#31363A]':
         variant === 'default' && color === 'primary' && !disabled && state === 'default',
         
       // Default variant and primary color - selected state
-      'bg-transparent border-2 border-blue-600 text-gray-800 hover:border-3 hover:border-blue-600 hover:text-gray-800 active:border-blue-800 active:text-blue-800 focus:border-blue-700 focus:text-blue-700 focus:ring-blue-700 focus:ring-opacity-100':
+      'bg-transparent border-2 border-[#006FE8] text-[#31363A] hover:border-[#006FE8] hover:text-[#31363A] active:border-[#006FE8] active:text-[#31363A]':
         variant === 'default' && color === 'primary' && !disabled && state === 'selected',
       
       // Disabled state
