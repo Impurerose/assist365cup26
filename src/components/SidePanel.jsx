@@ -15,7 +15,10 @@ const teams = [
 
 export default function SidePanel({ panelTab, setPanelTab, selectedCity }) {
   return (
-    <div className="rounded-l-xl overflow-hidden flex flex-col p-6" style={{ width: '467px', height: '640px', backgroundColor: 'rgba(81, 90, 96, 0.06)' }}>
+    <div 
+      className="rounded-l-xl overflow-hidden flex flex-col p-6 w-[467px] h-[640px] bg-[rgba(81,90,96,0.06)] bg-no-repeat bg-center bg-contain"
+      style={{ backgroundImage: 'url(https://assistcdn.s3.us-west-1.amazonaws.com/assets/wc2026/BallWidthDots.svg)' }}
+    >
       <div className="flex flex-col items-center text-center mb-8">
         <div className="mb-4">
           <SoccerBall size={64} weight="duotone" className="text-[#00A7E1]" />
