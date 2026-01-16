@@ -364,6 +364,24 @@ const html = `<!DOCTYPE html>
       rel="stylesheet" 
     />
     
+    <!-- Favicons -->
+    <link
+      rel="icon"
+      href="https://assistcdn.s3.us-west-1.amazonaws.com/assets/site/favicon/FaviconA365.ico"
+      sizes="48x48"
+      type="image/x-icon"
+    />
+    <link
+      rel="icon"
+      href="https://assistcdn.s3.us-west-1.amazonaws.com/assets/site/favicon/FaviconA365.svg"
+      type="image/svg+xml"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="https://assistcdn.s3.us-west-1.amazonaws.com/assets/site/favicon/apple-touch-icon.png"
+      sizes="180x180"
+    />
+    
     <!-- Phosphor Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
     
