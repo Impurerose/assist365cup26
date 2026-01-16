@@ -55,9 +55,10 @@ const Chip = ({
       'bg-transparent border-2 border-[#006FE8] text-[#31363A] hover:border-[#006FE8] hover:text-[#31363A] active:border-[#006FE8] active:text-[#31363A]':
         variant === 'default' && color === 'primary' && !disabled && state === 'selected',
       
-      // Disabled state
+      // Disabled state (default variant, primary color)
       'bg-transparent border-2 border-gray-300 text-gray-400 cursor-not-allowed pointer-events-none':
-        variant === 'default' && color === 'primary' && disabled,
+        (variant === 'default' && color === 'primary' && disabled) || 
+        (variant === 'alt' && color === 'primary' && disabled),
 
       // Default variant and secondary color - default state
       'bg-white border-2 border-blue-600 text-blue-600 hover:border-3 hover:border-blue-700 hover:text-blue-700 active:border-blue-800 active:text-blue-800 focus:border-blue-700 focus:text-blue-700 focus:ring-blue-700 focus:ring-opacity-100':
@@ -88,9 +89,6 @@ const Chip = ({
       // Alt variant and primary color - selected state
       'bg-transparent border-2 border-teal-300 text-teal-300 hover:border-3 hover:border-teal-300 hover:text-teal-300 active:bg-white active:bg-opacity-10 focus:border-teal-300 focus:ring-teal-400 focus:ring-opacity-100':
         variant === 'alt' && color === 'primary' && !disabled && state === 'selected',
-        
-      'bg-transparent border-2 border-gray-300 text-gray-400 cursor-not-allowed pointer-events-none':
-        variant === 'alt' && color === 'primary' && disabled,
     }
   );
 
