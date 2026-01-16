@@ -24,24 +24,13 @@ export const MAP_CONFIG = {
   disableDefaultUI: true,
 };
 
-// Estilos del mapa para apariencia minimalista
-export const MAP_STYLES = [
-  // Ocultar todos los labels primero
+// Estilos para zoom bajo (≤ 8) - Sin etiquetas, solo markers
+export const MAP_STYLES_LOW_ZOOM = [
+  // Ocultar todos los labels
   {
     featureType: 'all',
     elementType: 'labels',
     stylers: [{ visibility: 'off' }],
-  },
-  // Mostrar solo labels de países
-  {
-    featureType: 'administrative.country',
-    elementType: 'labels.text',
-    stylers: [{ visibility: 'on' }],
-  },
-  {
-    featureType: 'administrative.country',
-    elementType: 'labels.text.fill',
-    stylers: [{ color: '#444444' }],
   },
   // Ocultar puntos de interés
   {
@@ -59,6 +48,56 @@ export const MAP_STYLES = [
     stylers: [{ visibility: 'off' }],
   },
 ];
+
+// Estilos para zoom alto (> 8) - Con etiquetas de países y estados
+export const MAP_STYLES_HIGH_ZOOM = [
+  // Ocultar todos los labels primero
+  {
+    featureType: 'all',
+    elementType: 'labels',
+    stylers: [{ visibility: 'off' }],
+  },
+  // Mostrar labels de países
+  {
+    featureType: 'administrative.country',
+    elementType: 'labels.text',
+    stylers: [{ visibility: 'on' }],
+  },
+  {
+    featureType: 'administrative.country',
+    elementType: 'labels.text.fill',
+    stylers: [{ color: '#444444' }],
+  },
+  // Mostrar labels de estados/provincias
+  {
+    featureType: 'administrative.province',
+    elementType: 'labels.text',
+    stylers: [{ visibility: 'on' }],
+  },
+  {
+    featureType: 'administrative.province',
+    elementType: 'labels.text.fill',
+    stylers: [{ color: '#666666' }],
+  },
+  // Ocultar puntos de interés
+  {
+    featureType: 'poi',
+    stylers: [{ visibility: 'off' }],
+  },
+  // Ocultar rutas
+  {
+    featureType: 'road',
+    stylers: [{ visibility: 'off' }],
+  },
+  // Ocultar transporte
+  {
+    featureType: 'transit',
+    stylers: [{ visibility: 'off' }],
+  },
+];
+
+// Nivel de zoom donde aparecen las etiquetas
+export const ZOOM_THRESHOLD = 8;
 
 // Datos de sedes (venues)
 export const VENUES = [
