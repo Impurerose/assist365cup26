@@ -48,9 +48,9 @@ const VARIANT_STYLES = {
     },
     secondary: {
       active:
-        'bg-white border-2 border-[#006FE8] text-[#006FE8] hover:border-[#0059BA] hover:text-[#0059BA] active:border-[#004A9C] active:text-[#004A9C] focus:border-[#0059BA] focus:text-[#0059BA] focus:border-transparent focus:ring-[#006FE8] focus:ring-opacity-100',
+        'border-2 border-[#006FE8] text-[#006FE8] hover:border-[#0059BA] hover:text-[#0059BA] active:border-[#004A9C] active:text-[#004A9C] focus:border-[#0059BA] focus:text-[#0059BA] focus:border-transparent focus:ring-[#006FE8] focus:ring-opacity-100',
       disabled:
-        'bg-white border-2 border-[#C8C9CB] text-[#70777C] cursor-not-allowed pointer-events-none',
+        'border-2 border-[#C8C9CB] text-[#70777C] cursor-not-allowed pointer-events-none',
     },
     tertiary: {
       active:

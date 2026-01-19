@@ -24,12 +24,48 @@ export const MAP_CONFIG = {
   disableDefaultUI: true,
 };
 
-// Estilos para zoom bajo (≤ 8) - Sin etiquetas, solo markers
+// Estilos para zoom inicial/bajo (zoom ≤ 7) - Mapa completamente limpio, solo markers
 export const MAP_STYLES_LOW_ZOOM = [
-  // Ocultar todos los labels
+  // Ocultar TODOS los labels - todos los niveles administrativos
   {
     featureType: 'all',
     elementType: 'labels',
+    stylers: [{ visibility: 'off' }],
+  },
+  {
+    featureType: 'administrative',
+    elementType: 'labels',
+    stylers: [{ visibility: 'off' }],
+  },
+  {
+    featureType: 'administrative.country',
+    elementType: 'labels',
+    stylers: [{ visibility: 'off' }],
+  },
+  {
+    featureType: 'administrative.province',
+    elementType: 'labels',
+    stylers: [{ visibility: 'off' }],
+  },
+  {
+    featureType: 'administrative.locality',
+    elementType: 'labels',
+    stylers: [{ visibility: 'off' }],
+  },
+  // Ocultar geometría administrativa (bordes)
+  {
+    featureType: 'administrative',
+    elementType: 'geometry',
+    stylers: [{ visibility: 'off' }],
+  },
+  {
+    featureType: 'administrative.country',
+    elementType: 'geometry',
+    stylers: [{ visibility: 'off' }],
+  },
+  {
+    featureType: 'administrative.province',
+    elementType: 'geometry',
     stylers: [{ visibility: 'off' }],
   },
   // Ocultar puntos de interés
@@ -37,7 +73,7 @@ export const MAP_STYLES_LOW_ZOOM = [
     featureType: 'poi',
     stylers: [{ visibility: 'off' }],
   },
-  // Ocultar rutas
+  // Ocultar todas las carreteras
   {
     featureType: 'road',
     stylers: [{ visibility: 'off' }],
@@ -47,57 +83,55 @@ export const MAP_STYLES_LOW_ZOOM = [
     featureType: 'transit',
     stylers: [{ visibility: 'off' }],
   },
+  // Agua con color suave
+  {
+    featureType: 'water',
+    elementType: 'geometry',
+    stylers: [{ color: '#a8d5f7' }],
+  },
+  // Tierra con color beige claro
+  {
+    featureType: 'landscape',
+    elementType: 'geometry',
+    stylers: [{ color: '#f5f1e8' }],
+  },
 ];
 
-// Estilos para zoom alto (> 8) - Con etiquetas de países y estados
+// Estilos para zoom alto (zoom > 7) - Mostrar solo labels de países
 export const MAP_STYLES_HIGH_ZOOM = [
-  // Ocultar todos los labels primero
-  {
-    featureType: 'all',
-    elementType: 'labels',
-    stylers: [{ visibility: 'off' }],
-  },
   // Mostrar labels de países
   {
     featureType: 'administrative.country',
-    elementType: 'labels.text',
+    elementType: 'labels',
     stylers: [{ visibility: 'on' }],
   },
-  {
-    featureType: 'administrative.country',
-    elementType: 'labels.text.fill',
-    stylers: [{ color: '#444444' }],
-  },
-  // Mostrar labels de estados/provincias
+  // Mantener TODO lo demás oculto
   {
     featureType: 'administrative.province',
-    elementType: 'labels.text',
-    stylers: [{ visibility: 'on' }],
+    elementType: 'labels',
+    stylers: [{ visibility: 'off' }],
   },
   {
-    featureType: 'administrative.province',
-    elementType: 'labels.text.fill',
-    stylers: [{ color: '#666666' }],
+    featureType: 'administrative.locality',
+    elementType: 'labels',
+    stylers: [{ visibility: 'off' }],
   },
-  // Ocultar puntos de interés
   {
     featureType: 'poi',
     stylers: [{ visibility: 'off' }],
   },
-  // Ocultar rutas
   {
     featureType: 'road',
     stylers: [{ visibility: 'off' }],
   },
-  // Ocultar transporte
   {
     featureType: 'transit',
     stylers: [{ visibility: 'off' }],
   },
 ];
 
-// Nivel de zoom donde aparecen las etiquetas
-export const ZOOM_THRESHOLD = 8;
+// Nivel de zoom donde aparecen las etiquetas (cuando zoom > 7)
+export const ZOOM_THRESHOLD = 7;
 
 // Datos de sedes (venues)
 export const VENUES = [

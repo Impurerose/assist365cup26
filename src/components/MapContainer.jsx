@@ -3,7 +3,6 @@ import { APIProvider, Map, useMap } from '@vis.gl/react-google-maps';
 import { 
   MAP_CONFIG, 
   MAP_RESTRICTIONS, 
-  MAP_STYLES_LOW_ZOOM,
   MAP_STYLES_HIGH_ZOOM,
   ZOOM_THRESHOLD,
   VENUES 
@@ -18,9 +17,17 @@ function MapContent({ selectedCity, setSelectedCity }) {
 
     const handleZoomChange = () => {
       const zoom = map.getZoom();
-      const styles = zoom > ZOOM_THRESHOLD ? MAP_STYLES_HIGH_ZOOM : MAP_STYLES_LOW_ZOOM;
+      // Si zoom > 7, aplicar estilos que MUESTREN labels de países
+      // Si zoom <= 7, aplicar estilos que OCULTEN todo
+      const styles = zoom > ZOOM_THRESHOLD ? MAP_STYLES_HIGH_ZOOM : [
+        { elementType: 'labels', stylers: [{ visibility: 'off' }] },
+        { featureType: 'administrative', elementType: 'labels', stylers: [{ visibility: 'off' }] },
+      ];
       map.setOptions({ styles });
     };
+
+    // Ejecutar inmediatamente al montar para aplicar estilos iniciales
+    handleZoomChange();
 
     const listener = map.addListener('zoom_changed', handleZoomChange);
 
@@ -56,7 +63,6 @@ export default function MapContainer({ selectedTeam, selectedCity, setSelectedCi
         <Map
           className="w-full h-full"
           restriction={MAP_RESTRICTIONS}
-          styles={MAP_STYLES_LOW_ZOOM}
           {...MAP_CONFIG}
         >
           <MapContent selectedCity={selectedCity} setSelectedCity={setSelectedCity} />

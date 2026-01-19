@@ -6,10 +6,10 @@
 const TeamCard = ({ team, onClick }) => (
   <button
     onClick={() => onClick(team)}
-    className="bg-white rounded-lg p-4 flex items-center gap-3 hover:shadow-md transition-shadow"
+    className="bg-white rounded-xl px-4 py-3 flex items-center gap-3 w-[150px] hover:shadow-md transition-shadow"
   >
-    <span className="text-3xl">{team.flag}</span>
-    <span className="font-semibold text-gray-800">{team.name}</span>
+    <span className="text-[32px] leading-none">{team.flag}</span>
+    <span className="font-semibold text-[#31363A] text-base">{team.name}</span>
   </button>
 );
 

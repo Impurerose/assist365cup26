@@ -11,4 +11,5 @@ export const TEAMS = [
   { id: 'PAR', name: 'Paraguay', flag: '🇵🇾' },
   { id: 'URU', name: 'Uruguay', flag: '🇺🇾' },
   { id: 'ECU', name: 'Ecuador', flag: '🇪🇨' },
+  { id: 'PAN', name: 'Panamá', flag: '🇵🇦' },
 ];
