@@ -5,9 +5,9 @@
 
 const MatchCard = ({ match }) => {
   return (
-    <div className="bg-white border border-[#C2DFFF] rounded-xl px-3 py-4 flex flex-col gap-4 relative">
-      {/* Número de partido (badge azul) */}
-      <div className="absolute right-[7px] top-[7px] w-5 h-5">
+    <div className="bg-white border border-[#C2DFFF] rounded-xl px-3 py-4 flex flex-col gap-4 relative overflow-visible">
+      {/* Número de partido (badge azul) - siempre visible */}
+      <div className="absolute right-[7px] -top-[3px] w-5 h-5">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
           <circle cx="10" cy="10" r="10" fill="#006FE8"/>
           <text
@@ -24,9 +24,24 @@ const MatchCard = ({ match }) => {
         </svg>
       </div>
 
+      {/* Badge de fase (solo para eliminación) */}
+      {match.phase && (
+        <div className="absolute right-8 -top-[9px]">
+          <div className="bg-[#0059BA] text-white text-sm font-normal px-2 py-1 rounded-full whitespace-nowrap" style={{ fontFamily: 'Titillium Web, sans-serif', lineHeight: '20px' }}>
+            {match.phase}
+          </div>
+        </div>
+      )}
+
       {/* Equipos */}
       <div className="flex items-center gap-2">
-        <span className="text-xl">{match.team1.flag}</span>
+        {match.team1.flag ? (
+          <span className="text-xl">{match.team1.flag}</span>
+        ) : (
+          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="15" viewBox="0 0 21 15" fill="none">
+            <path d="M19 0.5H2C1.17157 0.5 0.5 1.17157 0.5 2V13C0.5 13.8284 1.17157 14.5 2 14.5H19C19.8284 14.5 20.5 13.8284 20.5 13V2C20.5 1.17157 19.8284 0.5 19 0.5Z" fill="#DDDDDD" stroke="black" strokeOpacity="0.1"/>
+          </svg>
+        )}
         <p className="text-base font-semibold text-[#31363A]" style={{ fontFamily: 'Titillium Web, sans-serif' }}>
           {match.team1.name}
         </p>
@@ -36,7 +51,13 @@ const MatchCard = ({ match }) => {
         <p className="text-base font-semibold text-[#31363A]" style={{ fontFamily: 'Titillium Web, sans-serif' }}>
           {match.team2.name}
         </p>
-        <span className="text-xl">{match.team2.flag}</span>
+        {match.team2.flag ? (
+          <span className="text-xl">{match.team2.flag}</span>
+        ) : (
+          <svg xmlns="http://www.w3.org/2000/svg" width="21" height="15" viewBox="0 0 21 15" fill="none">
+            <path d="M19 0.5H2C1.17157 0.5 0.5 1.17157 0.5 2V13C0.5 13.8284 1.17157 14.5 2 14.5H19C19.8284 14.5 20.5 13.8284 20.5 13V2C20.5 1.17157 19.8284 0.5 19 0.5Z" fill="#DDDDDD" stroke="black" strokeOpacity="0.1"/>
+          </svg>
+        )}
       </div>
 
       {/* Información del partido */}
