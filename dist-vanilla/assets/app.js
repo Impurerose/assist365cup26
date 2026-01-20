@@ -1,5 +1,5 @@
 // World Cup 2026 - Main Application
-// Auto-generated: 2026-01-20T20:23:33.595Z
+// Auto-generated: 2026-01-20T20:59:40.985Z
 
 const APP_STATE = {
   selectedTeam: null,
@@ -18,22 +18,15 @@ window.initMap = async function() {
     return;
   }
 
-  APP_STATE.map = new google.maps.Map(mapElement, {
-    ...MAP_CONFIG,
-    styles: MAP_STYLES_LOW_ZOOM
-  });
+  APP_STATE.map = new google.maps.Map(mapElement, MAP_CONFIG);
 
-  APP_STATE.map.addListener('zoom_changed', handleZoomChange);
+  APP_STATE.map.addListener('zoom_changed', () => {
+    console.log('Zoom level:', APP_STATE.map.getZoom());
+  });
   
   await createMarkers();
   console.log('✅ Map initialized');
 };
-
-function handleZoomChange() {
-  const zoom = APP_STATE.map.getZoom();
-  const styles = zoom > ZOOM_THRESHOLD ? MAP_STYLES_HIGH_ZOOM : MAP_STYLES_LOW_ZOOM;
-  APP_STATE.map.setOptions({ styles });
-}
 
 async function createMarkers() {
   const { AdvancedMarkerElement } = await google.maps.importLibrary('marker');
@@ -57,13 +50,12 @@ function createMarkerContent(venue) {
   const container = document.createElement('div');
   container.className = 'flex flex-col items-center gap-2 cursor-pointer';
   container.innerHTML = `
-    <div class="relative">
-      <div class="w-14 h-14 rounded-full flex items-center justify-center border-3 border-white shadow-lg" style="background: linear-gradient(to bottom, #59D3C2, #006FE8);">
-        <i class="ph-fill ph-soccer-ball text-white" style="font-size: 28px;"></i>
-      </div>
-      <div style="position:absolute;left:50%;transform:translateX(-50%);top:52px;width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-top:12px solid #006FE8;"></div>
-    </div>
-    <div class="bg-white px-3 py-1 rounded-lg shadow-md">
+    <img 
+      src="https://assistcdn.s3.us-west-1.amazonaws.com/assets/wc2026/a365pin.svg" 
+      alt="${venue.name}"
+      class="w-auto h-auto"
+    />
+    <div class="px-3 py-1">
       <span class="text-text-decorative-darker font-bold text-sm whitespace-nowrap">${venue.name}</span>
     </div>
   `;

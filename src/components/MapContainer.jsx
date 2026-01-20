@@ -3,8 +3,6 @@ import { APIProvider, Map, useMap } from '@vis.gl/react-google-maps';
 import { 
   MAP_CONFIG, 
   MAP_RESTRICTIONS, 
-  MAP_STYLES_HIGH_ZOOM,
-  ZOOM_THRESHOLD,
   VENUES 
 } from '../config/mapConfig';
 import VenueMarker from './VenueMarker';
@@ -15,19 +13,11 @@ function MapContent({ selectedCity, setSelectedCity }) {
   useEffect(() => {
     if (!map) return;
 
+    // Solo log del zoom, sin aplicar estilos locales
+    // Los estilos se manejan desde Google Cloud Map Styling
     const handleZoomChange = () => {
-      const zoom = map.getZoom();
-      // Si zoom > 7, aplicar estilos que MUESTREN labels de países
-      // Si zoom <= 7, aplicar estilos que OCULTEN todo
-      const styles = zoom > ZOOM_THRESHOLD ? MAP_STYLES_HIGH_ZOOM : [
-        { elementType: 'labels', stylers: [{ visibility: 'off' }] },
-        { featureType: 'administrative', elementType: 'labels', stylers: [{ visibility: 'off' }] },
-      ];
-      map.setOptions({ styles });
+      console.log('Zoom level:', map.getZoom());
     };
-
-    // Ejecutar inmediatamente al montar para aplicar estilos iniciales
-    handleZoomChange();
 
     const listener = map.addListener('zoom_changed', handleZoomChange);
 

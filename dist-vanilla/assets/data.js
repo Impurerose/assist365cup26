@@ -1,5 +1,5 @@
 // World Cup 2026 - Data
-// Auto-generated: 2026-01-20T20:23:33.595Z
+// Auto-generated: 2026-01-20T20:59:40.984Z
 
 const TEAMS = [
   { id: 'ARG', name: 'Argentina', flag: '🇦🇷' },
@@ -32,7 +32,7 @@ const VENUES = [
 ];
 
 const MAP_CONFIG = {
-  mapId: 'c56ad705aa33bcadd4058d69',
+  mapId: 'c6f5508b76c0d2152b22324d',
   center: { lat: 45.5, lng: -100 },
   zoom: 4,
   minZoom: 3,
