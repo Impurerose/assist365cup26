@@ -1,5 +1,5 @@
 // World Cup 2026 - Main Application
-// Auto-generated: 2026-01-20T18:14:08.559Z
+// Auto-generated: 2026-01-20T18:15:18.536Z
 
 const APP_STATE = {
   selectedTeam: null,
@@ -274,22 +274,16 @@ function renderFinalPathBanner() {
         <p class="text-base text-default text-center leading-6" style="font-family: 'Titillium Web', sans-serif;">
           Si en la fase de grupos quedamos:
         </p>
-        <div class="flex gap-3 w-full">
-          <div class="">
-            <button class="bg-[#BDEDE7] text-default hover:bg-[#A8E5DD] active:bg-[#93DDD3] focus:bg-[#BDEDE7] focus:ring-icon-lighter focus:ring-4 focus:outline-none w-full lg:w-fit px-4 py-[10px] h-[48px] text-lg font-semibold rounded-xl transition-all duration-300" style="font-family: 'Titillium Web', sans-serif;">
-              Primeros
-            </button>
-          </div>
-          <div class="">
-            <button class="bg-[#BDEDE7] text-default hover:bg-[#A8E5DD] active:bg-[#93DDD3] focus:bg-[#BDEDE7] focus:ring-icon-lighter focus:ring-4 focus:outline-none w-full lg:w-fit px-4 py-[10px] h-[48px] text-lg font-semibold rounded-xl transition-all duration-300" style="font-family: 'Titillium Web', sans-serif;">
-              Segundos
-            </button>
-          </div>
-          <div class="">
-            <button class="bg-[#BDEDE7] text-default hover:bg-[#A8E5DD] active:bg-[#93DDD3] focus:bg-[#BDEDE7] focus:ring-icon-lighter focus:ring-4 focus:outline-none w-full lg:w-fit px-4 py-[10px] h-[48px] text-lg font-semibold rounded-xl transition-all duration-300" style="font-family: 'Titillium Web', sans-serif;">
-              Terceros
-            </button>
-          </div>
+        <div class="flex items-center justify-between lg:justify-center w-full gap-2">
+          <button class="bg-[#BDEDE7] text-default hover:bg-[#A8E5DD] active:bg-[#93DDD3] focus:bg-[#BDEDE7] focus:ring-icon-lighter focus:ring-4 focus:outline-none w-full lg:w-fit px-4 py-[10px] h-[48px] text-lg font-semibold rounded-xl transition-all duration-300" style="font-family: 'Titillium Web', sans-serif;">
+            Primeros
+          </button>
+          <button class="bg-[#BDEDE7] text-default hover:bg-[#A8E5DD] active:bg-[#93DDD3] focus:bg-[#BDEDE7] focus:ring-icon-lighter focus:ring-4 focus:outline-none w-full lg:w-fit px-4 py-[10px] h-[48px] text-lg font-semibold rounded-xl transition-all duration-300" style="font-family: 'Titillium Web', sans-serif;">
+            Segundos
+          </button>
+          <button class="bg-[#BDEDE7] text-default hover:bg-[#A8E5DD] active:bg-[#93DDD3] focus:bg-[#BDEDE7] focus:ring-icon-lighter focus:ring-4 focus:outline-none w-full lg:w-fit px-4 py-[10px] h-[48px] text-lg font-semibold rounded-xl transition-all duration-300" style="font-family: 'Titillium Web', sans-serif;">
+            Terceros
+          </button>
         </div>
       </div>
     </div>

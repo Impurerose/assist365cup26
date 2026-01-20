@@ -571,22 +571,16 @@ function renderFinalPathBanner() {
         <p class="text-base text-default text-center leading-6" style="font-family: 'Titillium Web', sans-serif;">
           Si en la fase de grupos quedamos:
         </p>
-        <div class="flex gap-3 w-full">
-          <div class="">
-            <button class="bg-[#BDEDE7] text-default hover:bg-[#A8E5DD] active:bg-[#93DDD3] focus:bg-[#BDEDE7] focus:ring-icon-lighter focus:ring-4 focus:outline-none w-full lg:w-fit px-4 py-[10px] h-[48px] text-lg font-semibold rounded-xl transition-all duration-300" style="font-family: 'Titillium Web', sans-serif;">
-              Primeros
-            </button>
-          </div>
-          <div class="">
-            <button class="bg-[#BDEDE7] text-default hover:bg-[#A8E5DD] active:bg-[#93DDD3] focus:bg-[#BDEDE7] focus:ring-icon-lighter focus:ring-4 focus:outline-none w-full lg:w-fit px-4 py-[10px] h-[48px] text-lg font-semibold rounded-xl transition-all duration-300" style="font-family: 'Titillium Web', sans-serif;">
-              Segundos
-            </button>
-          </div>
-          <div class="">
-            <button class="bg-[#BDEDE7] text-default hover:bg-[#A8E5DD] active:bg-[#93DDD3] focus:bg-[#BDEDE7] focus:ring-icon-lighter focus:ring-4 focus:outline-none w-full lg:w-fit px-4 py-[10px] h-[48px] text-lg font-semibold rounded-xl transition-all duration-300" style="font-family: 'Titillium Web', sans-serif;">
-              Terceros
-            </button>
-          </div>
+        <div class="flex items-center justify-between lg:justify-center w-full gap-2">
+          <button class="bg-[#BDEDE7] text-default hover:bg-[#A8E5DD] active:bg-[#93DDD3] focus:bg-[#BDEDE7] focus:ring-icon-lighter focus:ring-4 focus:outline-none w-full lg:w-fit px-4 py-[10px] h-[48px] text-lg font-semibold rounded-xl transition-all duration-300" style="font-family: 'Titillium Web', sans-serif;">
+            Primeros
+          </button>
+          <button class="bg-[#BDEDE7] text-default hover:bg-[#A8E5DD] active:bg-[#93DDD3] focus:bg-[#BDEDE7] focus:ring-icon-lighter focus:ring-4 focus:outline-none w-full lg:w-fit px-4 py-[10px] h-[48px] text-lg font-semibold rounded-xl transition-all duration-300" style="font-family: 'Titillium Web', sans-serif;">
+            Segundos
+          </button>
+          <button class="bg-[#BDEDE7] text-default hover:bg-[#A8E5DD] active:bg-[#93DDD3] focus:bg-[#BDEDE7] focus:ring-icon-lighter focus:ring-4 focus:outline-none w-full lg:w-fit px-4 py-[10px] h-[48px] text-lg font-semibold rounded-xl transition-all duration-300" style="font-family: 'Titillium Web', sans-serif;">
+            Terceros
+          </button>
         </div>
       </div>
     </div>
@@ -788,7 +782,7 @@ const html = `<!DOCTYPE html>
               <div id="side-panel" class="mx-auto lg:mx-0 rounded-l-xl flex flex-col lg:px-4 pt-4 lg:pt-6 lg:p-6 w-full max-w-[368px] lg:max-w-full lg:w-[467px] h-[640px] lg:bg-[url(https://assistcdn.s3.us-west-1.amazonaws.com/assets/wc2026/BallWidthDots.svg)] bg-no-repeat bg-top bg-contain">
                 <div id="initial-state">
                   <div class="max-w-[360px] lg:max-w-[316px] w-full mx-auto">
-                    <div class="flex flex-col mb-6 mt-6 lg:mt-32">
+                    <div class="flex flex-col mb-6 mt-6 lg:mt-32 pt-2">
                       <h2 class="text-xl lg:text-2xl font-semibold text-text-decorative-darker leading-snug" style="font-family: 'Titillium Web', sans-serif;">
                         Seleccioná tu equipo y explorá el camino a la final
                       </h2>
