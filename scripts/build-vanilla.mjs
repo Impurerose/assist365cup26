@@ -426,11 +426,11 @@ function togglePanelState() {
   if (APP_STATE.selectedTeam) {
     initialState.classList.add('hidden');
     selectedState.classList.remove('hidden');
-    sidePanel.classList.remove('bg-[url(https://assistcdn.s3.us-west-1.amazonaws.com/assets/wc2026/BallWidthDots.svg)]');
+    sidePanel.classList.remove('bg-[url(https://assistcdn.s3.us-west-1.amazonaws.com/assets/wc2026/BallWidthDots.svg)]', 'bg-no-repeat', 'bg-top', 'bg-contain');
   } else {
     initialState.classList.remove('hidden');
     selectedState.classList.add('hidden');
-    sidePanel.classList.add('bg-[url(https://assistcdn.s3.us-west-1.amazonaws.com/assets/wc2026/BallWidthDots.svg)]');
+    sidePanel.classList.add('bg-[url(https://assistcdn.s3.us-west-1.amazonaws.com/assets/wc2026/BallWidthDots.svg)]', 'bg-no-repeat', 'bg-top', 'bg-contain');
   }
 }
 
@@ -465,7 +465,7 @@ function populateMatchCards() {
 
 function renderMatchCard(match) {
   const finishedBadge = match.finished ? \`
-    <div class="absolute right-8 -top-[9px]">
+    <div class="absolute right-8 -top-[6px]">
       <div class="bg-success-primary text-white text-sm font-normal px-2 py-1 rounded-full whitespace-nowrap" style="font-family: 'Titillium Web', sans-serif; line-height: 20px;">
         Finalizado
       </div>
@@ -560,8 +560,8 @@ function renderFinalPathBanner() {
         Eliminación
       </button>
     </div>
-    <div class="bg-white border border-border-primary rounded-xl p-4 flex flex-col gap-6 items-center w-full max-w-full">
-      <div class="bg-brand-comp-lilac rounded-full w-[50px] h-[50px] flex items-center justify-center">
+    <div class="bg-white border pb-8 border-border-primary rounded-xl p-4 flex flex-col gap-6 items-center w-full max-w-full">
+      <div class="bg-brand-comp-lilac mt-4 rounded-full w-[50px] h-[50px] flex items-center justify-center">
         <i class="ph-duotone ph-trophy" style="font-size: 32px; color: #31319B;"></i>
       </div>
       <div class="flex flex-col gap-4 w-full">
@@ -571,22 +571,19 @@ function renderFinalPathBanner() {
         <p class="text-base text-default text-center leading-6" style="font-family: 'Titillium Web', sans-serif;">
           Si en la fase de grupos quedamos:
         </p>
-        <p class="text-sm text-lighter text-center mb-6" style="font-family: 'Titillium Web', sans-serif;">
-          Completá el camino a la final seleccionando el puesto en el grupo
-        </p>
         <div class="flex gap-3 w-full">
-          <div class="flex-1">
-            <button class="bg-action-alt-default text-default hover:bg-[#A8E5DD] active:bg-[#93DDD3] focus:bg-action-alt-default focus:ring-icon-lighter focus:ring-4 focus:outline-none w-full px-4 py-[10px] h-[48px] text-lg font-semibold rounded-xl transition-all duration-300" style="font-family: 'Titillium Web', sans-serif;">
+          <div class="">
+            <button class="bg-[#BDEDE7] text-default hover:bg-[#A8E5DD] active:bg-[#93DDD3] focus:bg-[#BDEDE7] focus:ring-icon-lighter focus:ring-4 focus:outline-none w-full lg:w-fit px-4 py-[10px] h-[48px] text-lg font-semibold rounded-xl transition-all duration-300" style="font-family: 'Titillium Web', sans-serif;">
               Primeros
             </button>
           </div>
-          <div class="flex-1">
-            <button class="bg-action-alt-default text-default hover:bg-[#A8E5DD] active:bg-[#93DDD3] focus:bg-action-alt-default focus:ring-icon-lighter focus:ring-4 focus:outline-none w-full px-4 py-[10px] h-[48px] text-lg font-semibold rounded-xl transition-all duration-300" style="font-family: 'Titillium Web', sans-serif;">
+          <div class="">
+            <button class="bg-[#BDEDE7] text-default hover:bg-[#A8E5DD] active:bg-[#93DDD3] focus:bg-[#BDEDE7] focus:ring-icon-lighter focus:ring-4 focus:outline-none w-full lg:w-fit px-4 py-[10px] h-[48px] text-lg font-semibold rounded-xl transition-all duration-300" style="font-family: 'Titillium Web', sans-serif;">
               Segundos
             </button>
           </div>
-          <div class="flex-1">
-            <button class="bg-action-alt-default text-default hover:bg-[#A8E5DD] active:bg-[#93DDD3] focus:bg-action-alt-default focus:ring-icon-lighter focus:ring-4 focus:outline-none w-full px-4 py-[10px] h-[48px] text-lg font-semibold rounded-xl transition-all duration-300" style="font-family: 'Titillium Web', sans-serif;">
+          <div class="">
+            <button class="bg-[#BDEDE7] text-default hover:bg-[#A8E5DD] active:bg-[#93DDD3] focus:bg-[#BDEDE7] focus:ring-icon-lighter focus:ring-4 focus:outline-none w-full lg:w-fit px-4 py-[10px] h-[48px] text-lg font-semibold rounded-xl transition-all duration-300" style="font-family: 'Titillium Web', sans-serif;">
               Terceros
             </button>
           </div>
@@ -598,15 +595,15 @@ function renderFinalPathBanner() {
 
 function renderPendingDefinitionBanner() {
   return \`
-    <div class="bg-white border border-[#C2DFFF] rounded-xl px-4 py-8 flex flex-col gap-6 items-center">
-      <div class="bg-[#E3DEF9] rounded-full w-[50px] h-[50px] flex items-center justify-center">
+    <div class="bg-white border border-border-primary rounded-xl px-4 py-8 flex flex-col gap-6 items-center">
+      <div class="bg-brand-comp-lilac rounded-full w-[50px] h-[50px] flex items-center justify-center">
         <i class="ph-duotone ph-clock-countdown" style="font-size: 32px; color: #31319B;"></i>
       </div>
       <div class="flex flex-col gap-4 w-full text-center">
-        <p class="text-xl font-semibold text-[#31363A] leading-7" style="font-family: 'Titillium Web', sans-serif;">
+        <p class="text-xl font-semibold text-default leading-7" style="font-family: 'Titillium Web', sans-serif;">
           Todavía está por definirse
         </p>
-        <p class="text-base text-[#31363A] leading-6" style="font-family: 'Titillium Web', sans-serif;">
+        <p class="text-base text-default leading-6" style="font-family: 'Titillium Web', sans-serif;">
           Los partidos se definirán según los resultados de la etapa de grupos.
         </p>
       </div>

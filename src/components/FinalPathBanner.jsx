@@ -17,11 +17,11 @@ const FinalPathBanner = () => {
       </div>
 
       <div
-        className="bg-white border border-border-primary rounded-xl p-4 flex flex-col gap-6 items-center
+        className="bg-white border pb-8 border-border-primary rounded-xl p-4 flex flex-col gap-6 items-center
       w-full max-w-full"
       >
         {/* Ícono */}
-        <div className="bg-brand-comp-lilac rounded-full w-[50px] h-[50px] flex items-center justify-center">
+        <div className="bg-brand-comp-lilac mt-4 rounded-full w-[50px] h-[50px] flex items-center justify-center">
           <Trophy size={32} weight="duotone" className="text-bg-alt-primary" />
         </div>
 
@@ -35,7 +35,7 @@ const FinalPathBanner = () => {
           </p>
 
           {/* Botones */}
-          <div className="flex items-center justify-between w-full gap-2">
+          <div className="flex items-center justify-between lg:justify-center w-full gap-2">
             <Button variant="alt">Primeros</Button>
             <Button variant="alt">Segundos</Button>
             <Button variant="alt">Terceros</Button>
