@@ -1,5 +1,5 @@
 // World Cup 2026 - Main Application
-// Auto-generated: 2026-01-20T18:24:13.064Z
+// Auto-generated: 2026-01-20T18:26:53.352Z
 
 const APP_STATE = {
   selectedTeam: null,
@@ -230,6 +230,18 @@ function renderMatchesContainer(matches, initialTab = 'groups') {
   const groupMatches = matches.filter(m => m.stage === 'groups');
   const eliminationMatches = matches.filter(m => m.stage === 'elimination');
   
+  // Position selector para tab de eliminación
+  const positionSelect = initialTab === 'elimination' ? `
+    <div class="mb-4">
+      <select id="position-select" class="w-full bg-white border border-border-primary rounded-xl p-3 text-base font-normal focus:outline-none focus:ring-2 focus:ring-border-primary">
+        <option value="1st">Primer puesto</option>
+        <option value="2nd">Segundo puesto</option>
+        <option value="3rd">Tercer puesto</option>
+        <option value="4th">Cuarto puesto</option>
+      </select>
+    </div>
+  ` : '';
+  
   return `
     <div class="flex gap-2 mb-6">
       <button 
@@ -247,6 +259,7 @@ function renderMatchesContainer(matches, initialTab = 'groups') {
         Eliminación
       </button>
     </div>
+    ${positionSelect}
     <div class="flex flex-col gap-3 pt-3 overflow-y-auto">
       ${(initialTab === 'groups' ? groupMatches : eliminationMatches).map(m => renderMatchCard(m)).join('')}
     </div>

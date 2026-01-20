@@ -527,6 +527,18 @@ function renderMatchesContainer(matches, initialTab = 'groups') {
   const groupMatches = matches.filter(m => m.stage === 'groups');
   const eliminationMatches = matches.filter(m => m.stage === 'elimination');
   
+  // Position selector para tab de eliminación
+  const positionSelect = initialTab === 'elimination' ? \`
+    <div class="mb-4">
+      <select id="position-select" class="w-full bg-white border border-border-primary rounded-xl p-3 text-base font-normal focus:outline-none focus:ring-2 focus:ring-border-primary">
+        <option value="1st">Primer puesto</option>
+        <option value="2nd">Segundo puesto</option>
+        <option value="3rd">Tercer puesto</option>
+        <option value="4th">Cuarto puesto</option>
+      </select>
+    </div>
+  \` : '';
+  
   return \`
     <div class="flex gap-2 mb-6">
       <button 
@@ -544,6 +556,7 @@ function renderMatchesContainer(matches, initialTab = 'groups') {
         Eliminación
       </button>
     </div>
+    \${positionSelect}
     <div class="flex flex-col gap-3 pt-3 overflow-y-auto">
       \${(initialTab === 'groups' ? groupMatches : eliminationMatches).map(m => renderMatchCard(m)).join('')}
     </div>
@@ -724,17 +737,16 @@ const html = `<!DOCTYPE html>
               src="https://assistcdn.s3.us-west-1.amazonaws.com/assets/site/home/img/brand/a365_logo_xa.svg"
               alt="A365 Logo"
             />
-            <svg width="32" height="32" viewBox="0 0 32 32" class="flex-shrink-0">
+            <svg width="0" height="0" class="absolute">
               <defs>
                 <linearGradient id="soccerGradient" x1="0%" y1="0%" x2="0%" y2="100%">
                   <stop offset="0%" stop-color="#59D3C2" stop-opacity="1" />
                   <stop offset="100%" stop-color="#006FE8" stop-opacity="1" />
                 </linearGradient>
               </defs>
-              <circle cx="16" cy="16" r="14" fill="url(#soccerGradient)" opacity="0.2"/>
-              <path d="M16 4C9.4 4 4 9.4 4 16s5.4 12 12 12 12-5.4 12-12S22.6 4 16 4zm0 22c-5.5 0-10-4.5-10-10S10.5 6 16 6s10 4.5 10 10-4.5 10-10 10z" fill="url(#soccerGradient)"/>
             </svg>
-            <h1 class="text-xl font-semibold text-[#0059BA]">
+            <i class="ph-duotone ph-soccer-ball" style="font-size: 32px; background: linear-gradient(180deg, #59D3C2 0%, #006FE8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;"></i>
+            <h1 class="text-xl font-semibold text-text-decorative-darker">
               World Cup Map 2026
             </h1>
           </div>
