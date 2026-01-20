@@ -1,5 +1,5 @@
 // World Cup 2026 - Main Application
-// Auto-generated: 2026-01-20T18:06:19.832Z
+// Auto-generated: 2026-01-20T18:14:08.559Z
 
 const APP_STATE = {
   selectedTeam: null,
@@ -129,11 +129,11 @@ function togglePanelState() {
   if (APP_STATE.selectedTeam) {
     initialState.classList.add('hidden');
     selectedState.classList.remove('hidden');
-    sidePanel.classList.remove('bg-[url(https://assistcdn.s3.us-west-1.amazonaws.com/assets/wc2026/BallWidthDots.svg)]', 'bg-no-repeat', 'bg-top', 'bg-contain');
+    sidePanel.classList.remove('lg:bg-[url(https://assistcdn.s3.us-west-1.amazonaws.com/assets/wc2026/BallWidthDots.svg)]', 'bg-no-repeat', 'bg-top', 'bg-contain');
   } else {
     initialState.classList.remove('hidden');
     selectedState.classList.add('hidden');
-    sidePanel.classList.add('bg-[url(https://assistcdn.s3.us-west-1.amazonaws.com/assets/wc2026/BallWidthDots.svg)]', 'bg-no-repeat', 'bg-top', 'bg-contain');
+    sidePanel.classList.add('lg:bg-[url(https://assistcdn.s3.us-west-1.amazonaws.com/assets/wc2026/BallWidthDots.svg)]', 'bg-no-repeat', 'bg-top', 'bg-contain');
   }
 }
 

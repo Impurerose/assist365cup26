@@ -11,7 +11,7 @@ const TeamSelection = ({ onTeamSelect }) => {
   return (
     <div className="max-w-[360px] lg:max-w-[316px] w-full mx-auto">
       {/* Texto de selección */}
-      <div className="flex flex-col mb-6 mt-6 lg:mt-32">
+      <div className="flex flex-col mb-6 mt-6 lg:mt-32 pt-2">
         <h2 className="text-xl lg:text-2xl font-semibold text-text-decorative-darker leading-snug">
           Seleccioná tu equipo y explorá el camino a la final
         </h2>

@@ -426,11 +426,11 @@ function togglePanelState() {
   if (APP_STATE.selectedTeam) {
     initialState.classList.add('hidden');
     selectedState.classList.remove('hidden');
-    sidePanel.classList.remove('bg-[url(https://assistcdn.s3.us-west-1.amazonaws.com/assets/wc2026/BallWidthDots.svg)]', 'bg-no-repeat', 'bg-top', 'bg-contain');
+    sidePanel.classList.remove('lg:bg-[url(https://assistcdn.s3.us-west-1.amazonaws.com/assets/wc2026/BallWidthDots.svg)]', 'bg-no-repeat', 'bg-top', 'bg-contain');
   } else {
     initialState.classList.remove('hidden');
     selectedState.classList.add('hidden');
-    sidePanel.classList.add('bg-[url(https://assistcdn.s3.us-west-1.amazonaws.com/assets/wc2026/BallWidthDots.svg)]', 'bg-no-repeat', 'bg-top', 'bg-contain');
+    sidePanel.classList.add('lg:bg-[url(https://assistcdn.s3.us-west-1.amazonaws.com/assets/wc2026/BallWidthDots.svg)]', 'bg-no-repeat', 'bg-top', 'bg-contain');
   }
 }
 
@@ -752,7 +752,7 @@ const html = `<!DOCTYPE html>
       </header>
 
       <!-- Selection Controls (shown when team selected) -->
-      <div id="selection-controls" class="hidden w-full max-w-[1366px] mx-auto mt-6">
+      <div id="selection-controls" class="w-full max-w-[1366px] mx-auto mt-6">
         <div class="w-full max-w-[834px] lg:max-w-[1200px] mx-auto">
           <div class="w-full flex items-end justify-center lg:justify-between gap-4 lg:gap-6 lg:mt-6 lg:mb-8 font-semibold mx-auto">
             <div class="flex gap-x-2 items-center">
@@ -766,7 +766,7 @@ const html = `<!DOCTYPE html>
                 <option value="">Seleccioná sede</option>
               </select>
             </div>
-            <button class="hidden lg:flex items-center gap-2 px-4 py-2 h-10 text-base font-semibold rounded-xl border-2 border-brand-primary text-brand-primary hover:border-alt-secondary hover:text-alt-secondary active:border-[#004A9C] active:text-[#004A9C] focus:outline-none focus:ring-4 focus:ring-brand-primary transition-all duration-300">
+            <button class="hidden lg:flex items-center gap-2 px-4 py-2 h-10 text-base font-semibold rounded-xl border-2 border-[#006FE8] text-[#006FE8] hover:border-[#0059BA] hover:text-[#0059BA] active:border-[#004A9C] active:text-[#004A9C] focus:outline-none focus:ring-4 focus:ring-[#C2DFFF] transition-all duration-300">
               <i class="ph ph-map-pin-area" style="font-size: 16px; font-weight: bold;"></i>
               Explorar sedes
             </button>
@@ -785,7 +785,7 @@ const html = `<!DOCTYPE html>
             </div>
 
             <div class="bg-brand-darkening w-full lg:max-w-[467px]">
-              <div id="side-panel" class="mx-auto lg:mx-0 rounded-l-xl flex flex-col lg:px-4 pt-4 lg:pt-6 lg:p-6 w-full max-w-[368px] lg:max-w-full lg:w-[467px] h-[640px] bg-[url(https://assistcdn.s3.us-west-1.amazonaws.com/assets/wc2026/BallWidthDots.svg)] bg-no-repeat bg-top bg-contain">
+              <div id="side-panel" class="mx-auto lg:mx-0 rounded-l-xl flex flex-col lg:px-4 pt-4 lg:pt-6 lg:p-6 w-full max-w-[368px] lg:max-w-full lg:w-[467px] h-[640px] lg:bg-[url(https://assistcdn.s3.us-west-1.amazonaws.com/assets/wc2026/BallWidthDots.svg)] bg-no-repeat bg-top bg-contain">
                 <div id="initial-state">
                   <div class="max-w-[360px] lg:max-w-[316px] w-full mx-auto">
                     <div class="flex flex-col mb-6 mt-6 lg:mt-32">
