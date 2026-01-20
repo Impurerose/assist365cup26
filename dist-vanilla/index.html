@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
     <!-- World Cup 2026 Map - Vanilla Build -->
-    <!-- Generated: 2026-01-16T19:33:03.859Z -->
+    <!-- Generated: 2026-01-20T17:37:01.999Z -->
     <!-- Pure HTML + CSS + JavaScript (No React) -->
     
     <!-- Google Fonts -->
@@ -75,80 +75,144 @@
         </div>
       </header>
 
-      <!-- Selection Controls (hidden initially, shown when team selected) -->
+      <!-- Selection Controls (shown when team selected) -->
       <div id="selection-controls" class="hidden w-full max-w-[1366px] mx-auto mt-6">
-        <div class="px-4 w-full max-w-[1200px] mx-auto">
-          <div class="flex items-end justify-between gap-6 font-semibold">
+        <div class="w-full max-w-[834px] lg:max-w-[1200px] mx-auto">
+          <div class="w-full flex items-end justify-center lg:justify-between gap-4 lg:gap-6 lg:mt-6 lg:mb-8 font-semibold mx-auto">
             <div class="flex gap-x-2 items-center">
-              <span class="text-[#31363A] text-xl pr-4">Soy fan de:</span>
-              <select id="team-select" class="w-80 bg-white border border-[#C2DFFF] rounded-xl p-3 text-base font-normal focus:outline-none focus:ring-2 focus:ring-[#C2DFFF]">
+              <span class="text-[#31363A] text-xl pr-4 hidden lg:block">Soy fan de:</span>
+              <select id="team-select" class="w-[200px] lg:w-80 bg-white border border-[#C2DFFF] rounded-xl p-3 text-base font-normal focus:outline-none focus:ring-2 focus:ring-[#C2DFFF]">
                 <option value="">Seleccioná tu equipo</option>
               </select>
             </div>
-            <div class="flex gap-x-2 items-center">
-              <span class="text-[#31363A] text-xl pr-4">Ver partidos en:</span>
-              <select id="city-select" class="w-80 bg-white border border-[#C2DFFF] rounded-xl p-3 text-base font-normal focus:outline-none focus:ring-2 focus:ring-[#C2DFFF]">
+            <div class="flex gap-x-2 items-center lg:hidden">
+              <select id="city-select" class="w-[200px] lg:w-80 bg-white border border-[#C2DFFF] rounded-xl p-3 text-base font-normal focus:outline-none focus:ring-2 focus:ring-[#C2DFFF]">
                 <option value="">Seleccioná sede</option>
               </select>
             </div>
+            <button class="hidden lg:flex items-center gap-2 px-4 py-2 h-10 text-base font-semibold rounded-xl border-2 border-brand-primary text-brand-primary hover:border-alt-secondary hover:text-alt-secondary active:border-[#004A9C] active:text-[#004A9C] focus:outline-none focus:ring-4 focus:ring-brand-primary transition-all duration-300">
+              <i class="ph ph-map-pin-area" style="font-size: 16px; font-weight: bold;"></i>
+              Explorar sedes
+            </button>
           </div>
         </div>
       </div>
 
       <!-- Main Content -->
       <div class="w-full max-w-[1366px] mx-auto mt-8">
-        <div class="px-4 w-full max-w-[1200px] mx-auto">
+        <div class="w-full max-w-[834px] lg:max-w-[1200px] mx-auto flex flex-col gap-y-8">
           
-          <!-- Map + Side Panel Container -->
-          <div class="gap-6 w-full flex justify-center bg-[#F2F2F2]">
-            
-            <!-- Map Container -->
-            <div class="rounded-2xl overflow-hidden w-[790px] h-[640px]">
+          <!-- SECTION 1: Map + Side Panel Container -->
+          <div class="gap-6 w-full flex flex-col lg:flex-row justify-center bg-[#F2F2F2]">
+            <div class="rounded-2xl overflow-hidden w-full lg:w-[715px] h-[640px]">
               <div id="map" class="w-full h-full"></div>
             </div>
 
-            <!-- Side Panel -->
-            <div id="side-panel" class="rounded-l-xl flex flex-col p-6 w-[467px] h-[640px] bg-[rgba(81,90,96,0.06)] bg-[url(https://assistcdn.s3.us-west-1.amazonaws.com/assets/wc2026/BallWidthDots.svg)] bg-no-repeat bg-top bg-contain">
-              
-              <!-- ESTADO INICIAL (no team selected) -->
-              <div id="initial-state">
-                <div class="flex flex-col items-start mb-6 mt-32">
-                  <h2 class="text-lg font-semibold text-[#0059BA] leading-snug">
-                    Seleccioná tu equipo para explorar tu camino a la gran final 2026
-                  </h2>
+            <div class="bg-brand-darkening w-full lg:max-w-[467px]">
+              <div id="side-panel" class="mx-auto lg:mx-0 rounded-l-xl flex flex-col lg:px-4 pt-4 lg:pt-6 lg:p-6 w-full max-w-[368px] lg:max-w-full lg:w-[467px] h-[640px] bg-[url(https://assistcdn.s3.us-west-1.amazonaws.com/assets/wc2026/BallWidthDots.svg)] bg-no-repeat bg-top bg-contain">
+                <div id="initial-state">
+                  <div class="max-w-[360px] lg:max-w-[316px] w-full mx-auto">
+                    <div class="flex flex-col mb-6 mt-6 lg:mt-32">
+                      <h2 class="text-xl lg:text-2xl font-semibold text-text-decorative-darker leading-snug" style="font-family: 'Titillium Web', sans-serif;">
+                        Seleccioná tu equipo y explorá el camino a la final
+                      </h2>
+                    </div>
+                    <div id="teams-grid" class="grid grid-cols-2 gap-4 w-full">
+                      <!-- Teams populated by JavaScript -->
+                    </div>
+                    <div class="mt-6">
+                      <select id="other-team-select" class="w-full bg-white border border-border-primary rounded-xl p-3 text-base font-normal focus:outline-none focus:ring-2 focus:ring-border-primary">
+                        <option value="">Otro equipo</option>
+                      </select>
+                    </div>
+                  </div>
                 </div>
-                <div id="teams-grid" class="grid grid-cols-2 gap-3">
-                  <!-- Teams populated by JavaScript -->
-                </div>
-              </div>
 
-              <!-- ESTADO SELECCIONADO (team selected) -->
-              <div id="selected-state" class="hidden">
-                <!-- Chips Navigation -->
-                <div id="chips-nav" class="flex gap-2 mb-6">
+                <div id="selected-state" class="hidden">
+                  <div id="chips-nav" class="flex gap-2 mb-6">
                   <button 
                     data-tab="groups" 
                     class="border-2 border-[#006FE8] text-[#31363A] font-semibold rounded-full px-4 py-[10px] text-lg transition-all duration-300 cursor-pointer"
+                    style="font-family: 'Titillium Web', sans-serif;"
                   >
                     Grupos
                   </button>
                   <button 
                     data-tab="elimination" 
                     class="border-2 border-[#C2DFFF] text-[#70777C] font-semibold rounded-full px-4 py-[10px] text-lg transition-all duration-300 cursor-pointer hover:border-[#006FE8] hover:text-[#31363A]"
+                    style="font-family: 'Titillium Web', sans-serif;"
                   >
                     Eliminación
                   </button>
                 </div>
-
-                <!-- Match Cards -->
-                <div id="match-cards" class="flex flex-col gap-3">
+                <div id="match-cards" class="flex flex-col gap-3 pt-3 overflow-y-auto">
                   <!-- Match cards populated by JavaScript -->
                 </div>
               </div>
-              
             </div>
-
+            </div>
           </div>
+
+          <!-- SECTION 2: Placeholder + All Matches -->
+          <div class="gap-6 w-full flex flex-col lg:flex-row items-center lg:items-start justify-center bg-[#F2F2F2]">
+            <div class="text-2xl">
+              <img src="https://placehold.co/715x640" alt="Placeholder" class="w-full lg:w-auto" />
+            </div>
+            <div class="bg-brand-darkening w-full lg:max-w-[467px]">
+              <div id="matches-section-2" class="mx-auto lg:mx-0 rounded-l-xl flex flex-col lg:px-4 pt-4 lg:pt-6 lg:p-6 w-full max-w-[368px] lg:max-w-full lg:w-[467px] h-[640px]">
+                <!-- Populated by JavaScript -->
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 3: Placeholder + Final Path Banner -->
+          <div class="gap-6 w-full flex flex-col lg:flex-row items-center lg:items-start justify-center bg-[#F2F2F2]">
+            <div class="text-2xl">
+              <img src="https://placehold.co/715x640" alt="Placeholder" class="w-full lg:w-auto" />
+            </div>
+            <div class="bg-brand-darkening w-full lg:max-w-[467px]">
+              <div id="final-path-banner" class="mx-auto lg:mx-0 rounded-l-xl flex flex-col lg:px-4 pt-4 lg:pt-6 lg:p-6 w-full max-w-[368px] lg:max-w-full lg:w-[467px] h-[640px]">
+                <!-- Populated by JavaScript -->
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 4: Placeholder + Matches Without Pending (Elimination) -->
+          <div class="gap-6 w-full flex flex-col lg:flex-row items-center lg:items-start justify-center bg-[#F2F2F2]">
+            <div class="text-2xl">
+              <img src="https://placehold.co/715x640" alt="Placeholder" class="w-full lg:w-auto" />
+            </div>
+            <div class="bg-brand-darkening w-full lg:max-w-[467px]">
+              <div id="matches-section-4" class="mx-auto lg:mx-0 rounded-l-xl flex flex-col lg:px-4 pt-4 lg:pt-6 lg:p-6 w-full max-w-[368px] lg:max-w-full lg:w-[467px] h-[640px]">
+                <!-- Populated by JavaScript -->
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 5: Placeholder + Pending Definition Banner -->
+          <div class="gap-6 w-full flex flex-col lg:flex-row items-center lg:items-start justify-center bg-[#F2F2F2]">
+            <div class="text-2xl">
+              <img src="https://placehold.co/715x640" alt="Placeholder" class="w-full lg:w-auto" />
+            </div>
+            <div class="bg-brand-darkening w-full lg:max-w-[467px]">
+              <div id="pending-banner" class="mx-auto lg:mx-0 rounded-l-xl flex flex-col lg:px-4 pt-4 lg:pt-6 lg:p-6 w-full max-w-[368px] lg:max-w-full lg:w-[467px] h-[640px]">
+                <!-- Populated by JavaScript -->
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 6: Placeholder + Finished Matches -->
+          <div class="gap-6 w-full flex flex-col lg:flex-row items-center lg:items-start justify-center bg-[#F2F2F2]">
+            <div class="text-2xl">
+              <img src="https://placehold.co/715x640" alt="Placeholder" class="w-full lg:w-auto" />
+            </div>
+            <div class="bg-brand-darkening w-full lg:max-w-[467px]">
+              <div id="matches-finished" class="mx-auto lg:mx-0 rounded-l-xl flex flex-col lg:px-4 pt-4 lg:pt-6 lg:p-6 w-full max-w-[368px] lg:max-w-full lg:w-[467px] h-[640px]">
+                <!-- Populated by JavaScript -->
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>

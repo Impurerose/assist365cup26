@@ -1,5 +1,5 @@
 // World Cup 2026 - Main Application
-// Auto-generated: 2026-01-16T19:33:03.859Z
+// Auto-generated: 2026-01-20T17:37:01.999Z
 
 const APP_STATE = {
   selectedTeam: null,
@@ -87,12 +87,26 @@ function populateTeamsGrid() {
   grid.innerHTML = TEAMS.map(team => `
     <button 
       onclick="handleTeamSelect('${team.id}')"
-      class="bg-white rounded-lg p-4 flex items-center gap-3 hover:shadow-md transition-shadow cursor-pointer"
+      class="bg-white rounded-xl px-4 py-3 flex items-center gap-3 w-full lg:w-[150px] hover:shadow-md transition-shadow"
     >
-      <span class="text-3xl">${team.flag}</span>
-      <span class="font-semibold text-gray-800">${team.name}</span>
+      <span class="text-[32px] leading-none">${team.flag}</span>
+      <span class="font-semibold text-default text-base">${team.name}</span>
     </button>
   `).join('');
+}
+
+function populateOtherTeamSelect() {
+  const select = document.getElementById('other-team-select');
+  if (!select) return;
+
+  select.innerHTML = '<option value="">Otro equipo</option>' + 
+    TEAMS.map(t => `<option value="${t.id}">${t.flag} ${t.name}</option>`).join('');
+  
+  select.addEventListener('change', (e) => {
+    if (e.target.value) {
+      handleTeamSelect(e.target.value);
+    }
+  });
 }
 
 window.handleTeamSelect = function(teamId) {
@@ -149,37 +163,190 @@ function populateMatchCards() {
   const container = document.getElementById('match-cards');
   if (!container) return;
 
-  container.innerHTML = MOCK_MATCHES.map(match => `
-    <div class="bg-white border border-[#C2DFFF] rounded-xl px-3 py-4 flex flex-col gap-4 relative">
-      <div class="absolute right-[7px] top-[7px] w-5 h-5">
+  container.innerHTML = MOCK_MATCHES.map(match => renderMatchCard(match)).join('');
+}
+
+function renderMatchCard(match) {
+  const finishedBadge = match.finished ? `
+    <div class="absolute right-8 -top-[9px]">
+      <div class="bg-success-primary text-white text-sm font-normal px-2 py-1 rounded-full whitespace-nowrap" style="font-family: 'Titillium Web', sans-serif; line-height: 20px;">
+        Finalizado
+      </div>
+    </div>
+  ` : '';
+
+  const phaseBadge = match.phase ? `
+    <div class="absolute right-8 -top-[6px]">
+      <div class="bg-[#0059BA] text-white text-sm font-normal px-2 py-1 rounded-full whitespace-nowrap" style="font-family: 'Titillium Web', sans-serif; line-height: 20px;">
+        ${match.phase}
+      </div>
+    </div>
+  ` : '';
+
+  const teamDisplay = match.finished 
+    ? `${match.team1.name} ${match.team1.score} - ${match.team2.score} ${match.team2.name}`
+    : `${match.team1.name} - ${match.team2.name}`;
+
+  const flagPlaceholder = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="21" height="15" viewBox="0 0 21 15" fill="none">
+      <path d="M19 0.5H2C1.17157 0.5 0.5 1.17157 0.5 2V13C0.5 13.8284 1.17157 14.5 2 14.5H19C19.8284 14.5 20.5 13.8284 20.5 13V2C20.5 1.17157 19.8284 0.5 19 0.5Z" fill="#DDDDDD" stroke="black" stroke-opacity="0.1"/>
+    </svg>
+  `;
+
+  return `
+    <div class="bg-white border border-[#C2DFFF] rounded-xl px-3 py-4 flex flex-col gap-4 relative overflow-visible">
+      <div class="absolute right-[7px] -top-[3px] w-5 h-5">
         <svg width="20" height="20" viewBox="0 0 20 20">
           <circle cx="10" cy="10" r="10" fill="#006FE8"/>
           <text x="10" y="14" text-anchor="middle" fill="white" class="text-xs font-semibold" style="font-family: 'Titillium Web', sans-serif;">${match.number}</text>
         </svg>
       </div>
+      ${finishedBadge}
+      ${phaseBadge}
       <div class="flex items-center gap-2">
-        <span class="text-xl">${match.team1.flag}</span>
-        <p class="text-base font-semibold text-[#31363A]">${match.team1.name}</p>
-        <p class="text-base font-semibold text-[#31363A]">-</p>
-        <p class="text-base font-semibold text-[#31363A]">${match.team2.name}</p>
-        <span class="text-xl">${match.team2.flag}</span>
+        ${match.team1.flag ? `<span class="text-xl">${match.team1.flag}</span>` : flagPlaceholder}
+        <p class="text-base font-semibold text-[#31363A]" style="font-family: 'Titillium Web', sans-serif;">${teamDisplay}</p>
+        ${match.team2.flag ? `<span class="text-xl">${match.team2.flag}</span>` : flagPlaceholder}
       </div>
       <div class="flex flex-col gap-2">
         <div class="flex items-center gap-2">
           <i class="ph ph-calendar" style="font-size: 20px; color: #7BD0C2;"></i>
-          <p class="text-base text-[#31363A]">${match.date}</p>
+          <p class="text-base text-[#31363A]" style="font-family: 'Titillium Web', sans-serif;">${match.date}</p>
         </div>
         <div class="flex items-center gap-2">
           <i class="ph ph-map-pin" style="font-size: 20px; color: #7BD0C2;"></i>
-          <p class="text-base text-[#31363A]">${match.city}</p>
+          <p class="text-base text-[#31363A]" style="font-family: 'Titillium Web', sans-serif;">${match.city}</p>
         </div>
         <div class="flex items-center gap-2">
           <i class="ph ph-clock" style="font-size: 20px; color: #7BD0C2;"></i>
-          <p class="text-base text-[#31363A]">${match.time.local} - ${match.time.venue}</p>
+          <p class="text-base text-[#31363A]" style="font-family: 'Titillium Web', sans-serif;">${match.time.local} - ${match.time.venue}</p>
         </div>
       </div>
     </div>
-  `).join('');
+  `;
+}
+
+function renderMatchesContainer(matches, initialTab = 'groups') {
+  const groupMatches = matches.filter(m => m.stage === 'groups');
+  const eliminationMatches = matches.filter(m => m.stage === 'elimination');
+  
+  return `
+    <div class="flex gap-2 mb-6">
+      <button 
+        data-tab="groups" 
+        class="border-2 ${initialTab === 'groups' ? 'border-[#006FE8] text-[#31363A]' : 'border-[#C2DFFF] text-[#70777C]'} font-semibold rounded-full px-4 py-[10px] text-lg transition-all duration-300 cursor-pointer"
+        style="font-family: 'Titillium Web', sans-serif;"
+      >
+        Grupos
+      </button>
+      <button 
+        data-tab="elimination" 
+        class="border-2 ${initialTab === 'elimination' ? 'border-[#006FE8] text-[#31363A]' : 'border-[#C2DFFF] text-[#70777C]'} font-semibold rounded-full px-4 py-[10px] text-lg transition-all duration-300 cursor-pointer"
+        style="font-family: 'Titillium Web', sans-serif;"
+      >
+        Eliminación
+      </button>
+    </div>
+    <div class="flex flex-col gap-3 pt-3 overflow-y-auto">
+      ${(initialTab === 'groups' ? groupMatches : eliminationMatches).map(m => renderMatchCard(m)).join('')}
+    </div>
+  `;
+}
+
+function renderFinalPathBanner() {
+  return `
+    <div class="flex gap-2 mb-6">
+      <button class="border-2 border-[#C2DFFF] text-[#70777C] font-semibold rounded-full px-4 py-[10px] text-lg" style="font-family: 'Titillium Web', sans-serif;">
+        Grupos
+      </button>
+      <button class="border-2 border-[#006FE8] text-[#31363A] font-semibold rounded-full px-4 py-[10px] text-lg" style="font-family: 'Titillium Web', sans-serif;">
+        Eliminación
+      </button>
+    </div>
+    <div class="bg-white border border-border-primary rounded-xl p-4 flex flex-col gap-6 items-center w-full max-w-full">
+      <div class="bg-brand-comp-lilac rounded-full w-[50px] h-[50px] flex items-center justify-center">
+        <i class="ph-duotone ph-trophy" style="font-size: 32px; color: #31319B;"></i>
+      </div>
+      <div class="flex flex-col gap-4 w-full">
+        <p class="text-xl font-semibold text-default text-center leading-7" style="font-family: 'Titillium Web', sans-serif;">
+          Mirá cómo sería el camino a la final
+        </p>
+        <p class="text-base text-default text-center leading-6" style="font-family: 'Titillium Web', sans-serif;">
+          Si en la fase de grupos quedamos:
+        </p>
+        <p class="text-sm text-lighter text-center mb-6" style="font-family: 'Titillium Web', sans-serif;">
+          Completá el camino a la final seleccionando el puesto en el grupo
+        </p>
+        <div class="flex gap-3 w-full">
+          <div class="flex-1">
+            <button class="bg-action-alt-default text-default hover:bg-[#A8E5DD] active:bg-[#93DDD3] focus:bg-action-alt-default focus:ring-icon-lighter focus:ring-4 focus:outline-none w-full px-4 py-[10px] h-[48px] text-lg font-semibold rounded-xl transition-all duration-300" style="font-family: 'Titillium Web', sans-serif;">
+              Primeros
+            </button>
+          </div>
+          <div class="flex-1">
+            <button class="bg-action-alt-default text-default hover:bg-[#A8E5DD] active:bg-[#93DDD3] focus:bg-action-alt-default focus:ring-icon-lighter focus:ring-4 focus:outline-none w-full px-4 py-[10px] h-[48px] text-lg font-semibold rounded-xl transition-all duration-300" style="font-family: 'Titillium Web', sans-serif;">
+              Segundos
+            </button>
+          </div>
+          <div class="flex-1">
+            <button class="bg-action-alt-default text-default hover:bg-[#A8E5DD] active:bg-[#93DDD3] focus:bg-action-alt-default focus:ring-icon-lighter focus:ring-4 focus:outline-none w-full px-4 py-[10px] h-[48px] text-lg font-semibold rounded-xl transition-all duration-300" style="font-family: 'Titillium Web', sans-serif;">
+              Terceros
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderPendingDefinitionBanner() {
+  return `
+    <div class="bg-white border border-[#C2DFFF] rounded-xl px-4 py-8 flex flex-col gap-6 items-center">
+      <div class="bg-[#E3DEF9] rounded-full w-[50px] h-[50px] flex items-center justify-center">
+        <i class="ph-duotone ph-clock-countdown" style="font-size: 32px; color: #31319B;"></i>
+      </div>
+      <div class="flex flex-col gap-4 w-full text-center">
+        <p class="text-xl font-semibold text-[#31363A] leading-7" style="font-family: 'Titillium Web', sans-serif;">
+          Todavía está por definirse
+        </p>
+        <p class="text-base text-[#31363A] leading-6" style="font-family: 'Titillium Web', sans-serif;">
+          Los partidos se definirán según los resultados de la etapa de grupos.
+        </p>
+      </div>
+    </div>
+  `;
+}
+
+function initAllSections() {
+  // Section 2: All matches
+  const section2 = document.getElementById('matches-section-2');
+  if (section2) {
+    section2.innerHTML = renderMatchesContainer(MOCK_MATCHES, 'groups');
+  }
+
+  // Section 3: Final Path Banner
+  const section3 = document.getElementById('final-path-banner');
+  if (section3) {
+    section3.innerHTML = renderFinalPathBanner();
+  }
+
+  // Section 4: Matches without pending (elimination tab)
+  const section4 = document.getElementById('matches-section-4');
+  if (section4) {
+    section4.innerHTML = renderMatchesContainer(MOCK_MATCHES_WITHOUT_PENDING, 'elimination');
+  }
+
+  // Section 5: Pending Definition Banner
+  const section5 = document.getElementById('pending-banner');
+  if (section5) {
+    section5.innerHTML = renderPendingDefinitionBanner();
+  }
+
+  // Section 6: Finished Matches
+  const section6 = document.getElementById('matches-finished');
+  if (section6) {
+    section6.innerHTML = renderMatchesContainer(MOCK_MATCHES_FINISHED, 'groups');
+  }
 }
 
 function initChipsNav() {
@@ -204,5 +371,7 @@ function initChipsNav() {
 document.addEventListener('DOMContentLoaded', () => {
   console.log('🚀 World Cup 2026 Map - Vanilla Edition');
   populateTeamsGrid();
+  populateOtherTeamSelect();
   initChipsNav();
+  initAllSections();
 });

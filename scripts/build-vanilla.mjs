@@ -48,7 +48,8 @@ const TEAMS = [
   { id: 'MEX', name: 'México', flag: '🇲🇽' },
   { id: 'PAR', name: 'Paraguay', flag: '🇵🇾' },
   { id: 'URU', name: 'Uruguay', flag: '🇺🇾' },
-  { id: 'ECU', name: 'Ecuador', flag: '🇪🇨' }
+  { id: 'ECU', name: 'Ecuador', flag: '🇪🇨' },
+  { id: 'PAN', name: 'Panamá', flag: '🇵🇦' }
 ];
 
 const VENUES = [
@@ -104,28 +105,189 @@ const ZOOM_THRESHOLD = 8;
 
 const MOCK_MATCHES = [
   {
+    id: 1,
     number: 1,
     team1: { name: 'Argentina', flag: '🇦🇷' },
     team2: { name: 'Algeria', flag: '🇩🇿' },
     date: 'Martes 16 de junio',
     city: 'Kansas city',
-    time: { local: '21:00 h (AR)', venue: '18:00 h (KCK)' }
+    time: { local: '21:00 h (AR)', venue: '18:00 h (KCK)' },
+    stage: 'groups',
+    group: 'A'
   },
   {
+    id: 2,
     number: 2,
     team1: { name: 'Argentina', flag: '🇦🇷' },
     team2: { name: 'Austria', flag: '🇦🇹' },
     date: 'Lunes 22 de junio',
     city: 'Dallas',
-    time: { local: '13:00 h (AR)', venue: '10:00 h (DL)' }
+    time: { local: '13:00 h (AR)', venue: '10:00 h (DL)' },
+    stage: 'groups',
+    group: 'A'
   },
   {
+    id: 3,
     number: 3,
-    team1: { name: 'Jordania', flag: '🇯🇴' },
-    team2: { name: 'Argentina', flag: '🇦🇷' },
-    date: 'Sábado 27 de junio',
+    team1: { name: 'Pendiente', flag: null },
+    team2: { name: 'A definir', flag: null },
+    date: 'Viernes 20 de junio',
+    city: 'Vélez',
+    time: { local: '18:00 h (AR)', venue: '18:00 h (VEL)' },
+    stage: 'groups',
+    group: 'B'
+  },
+  {
+    id: 4,
+    number: 4,
+    team1: { name: 'A definir', flag: null },
+    team2: { name: 'A definir', flag: null },
+    date: 'Jueves 26 de junio',
+    city: 'Vélez',
+    time: { local: '16:30 h (AR)', venue: '16:30 h (VEL)' },
+    stage: 'elimination',
+    phase: '16avos'
+  },
+  {
+    id: 5,
+    number: 5,
+    team1: { name: 'A definir', flag: null },
+    team2: { name: 'A definir', flag: null },
+    date: 'Viernes 27 de junio',
+    city: 'River Plate',
+    time: { local: '19:00 h (AR)', venue: '19:00 h (RP)' },
+    stage: 'elimination',
+    phase: 'Octavos'
+  },
+  {
+    id: 6,
+    number: 6,
+    team1: { name: 'A definir', flag: null },
+    team2: { name: 'A definir', flag: null },
+    date: 'Sábado 28 de junio',
+    city: 'River Plate',
+    time: { local: '21:00 h (AR)', venue: '21:00 h (RP)' },
+    stage: 'elimination',
+    phase: 'Cuartos'
+  },
+  {
+    id: 7,
+    number: 7,
+    team1: { name: 'A definir', flag: null },
+    team2: { name: 'A definir', flag: null },
+    date: 'Domingo 29 de junio',
+    city: 'Vélez',
+    time: { local: '20:00 h (AR)', venue: '20:00 h (VEL)' },
+    stage: 'elimination',
+    phase: 'Semi'
+  }
+];
+
+const MOCK_MATCHES_WITHOUT_PENDING = [
+  {
+    id: 1,
+    number: 1,
+    team1: { name: 'Argentina', flag: '🇦🇷' },
+    team2: { name: 'Algeria', flag: '🇩🇿' },
+    date: 'Martes 16 de junio',
+    city: 'Kansas city',
+    time: { local: '21:00 h (AR)', venue: '18:00 h (KCK)' },
+    stage: 'groups',
+    group: 'A'
+  },
+  {
+    id: 2,
+    number: 2,
+    team1: { name: 'Argentina', flag: '🇦🇷' },
+    team2: { name: 'Austria', flag: '🇦🇹' },
+    date: 'Lunes 22 de junio',
     city: 'Dallas',
-    time: { local: '22:00 h (AR)', venue: '19:00 h (DL)' }
+    time: { local: '13:00 h (AR)', venue: '10:00 h (DL)' },
+    stage: 'groups',
+    group: 'A'
+  },
+  {
+    id: 3,
+    number: 1,
+    team1: { name: 'A definir', flag: null },
+    team2: { name: 'A definir', flag: null },
+    date: 'Jueves 26 de junio',
+    city: 'Vélez',
+    time: { local: '16:30 h (AR)', venue: '16:30 h (VEL)' },
+    stage: 'elimination',
+    phase: '16avos'
+  },
+  {
+    id: 4,
+    number: 2,
+    team1: { name: 'A definir', flag: null },
+    team2: { name: 'A definir', flag: null },
+    date: 'Viernes 27 de junio',
+    city: 'River Plate',
+    time: { local: '19:00 h (AR)', venue: '19:00 h (RP)' },
+    stage: 'elimination',
+    phase: 'Octavos'
+  },
+  {
+    id: 5,
+    number: 3,
+    team1: { name: 'A definir', flag: null },
+    team2: { name: 'A definir', flag: null },
+    date: 'Sábado 28 de junio',
+    city: 'River Plate',
+    time: { local: '21:00 h (AR)', venue: '21:00 h (RP)' },
+    stage: 'elimination',
+    phase: 'Cuartos'
+  },
+  {
+    id: 6,
+    number: 4,
+    team1: { name: 'A definir', flag: null },
+    team2: { name: 'A definir', flag: null },
+    date: 'Domingo 29 de junio',
+    city: 'Vélez',
+    time: { local: '20:00 h (AR)', venue: '20:00 h (VEL)' },
+    stage: 'elimination',
+    phase: 'Semi'
+  }
+];
+
+const MOCK_MATCHES_FINISHED = [
+  {
+    id: 1,
+    number: 1,
+    team1: { name: 'Argentina', flag: '🇦🇷', score: 5 },
+    team2: { name: 'Argelia', flag: '🇩🇿', score: 1 },
+    city: 'Kansas city',
+    date: 'Martes 16 de junio',
+    time: { local: '21:00 h (AR)', venue: '18:00 h (KCK)' },
+    stage: 'groups',
+    group: 'A',
+    finished: true
+  },
+  {
+    id: 2,
+    number: 2,
+    team1: { name: 'Argentina', flag: '🇦🇷', score: 6 },
+    team2: { name: 'Austria', flag: '🇦🇹', score: 2 },
+    city: 'Dallas',
+    date: 'Lunes 22 de junio',
+    time: { local: '13:00 h (AR)', venue: '10:00 h (DL)' },
+    stage: 'groups',
+    group: 'A',
+    finished: true
+  },
+  {
+    id: 3,
+    number: 3,
+    team1: { name: 'Jordania', flag: '🇯🇴', score: 3 },
+    team2: { name: 'Argentina', flag: '🇦🇷', score: 7 },
+    city: 'Dallas',
+    date: 'Sábado 27 de junio',
+    time: { local: '22:00 h (AR)', venue: '19:00 h (DL)' },
+    stage: 'groups',
+    group: 'A',
+    finished: true
   }
 ];
 `;
@@ -222,12 +384,26 @@ function populateTeamsGrid() {
   grid.innerHTML = TEAMS.map(team => \`
     <button 
       onclick="handleTeamSelect('\${team.id}')"
-      class="bg-white rounded-lg p-4 flex items-center gap-3 hover:shadow-md transition-shadow cursor-pointer"
+      class="bg-white rounded-xl px-4 py-3 flex items-center gap-3 w-full lg:w-[150px] hover:shadow-md transition-shadow"
     >
-      <span class="text-3xl">\${team.flag}</span>
-      <span class="font-semibold text-gray-800">\${team.name}</span>
+      <span class="text-[32px] leading-none">\${team.flag}</span>
+      <span class="font-semibold text-default text-base">\${team.name}</span>
     </button>
   \`).join('');
+}
+
+function populateOtherTeamSelect() {
+  const select = document.getElementById('other-team-select');
+  if (!select) return;
+
+  select.innerHTML = '<option value="">Otro equipo</option>' + 
+    TEAMS.map(t => \`<option value="\${t.id}">\${t.flag} \${t.name}</option>\`).join('');
+  
+  select.addEventListener('change', (e) => {
+    if (e.target.value) {
+      handleTeamSelect(e.target.value);
+    }
+  });
 }
 
 window.handleTeamSelect = function(teamId) {
@@ -284,37 +460,190 @@ function populateMatchCards() {
   const container = document.getElementById('match-cards');
   if (!container) return;
 
-  container.innerHTML = MOCK_MATCHES.map(match => \`
-    <div class="bg-white border border-[#C2DFFF] rounded-xl px-3 py-4 flex flex-col gap-4 relative">
-      <div class="absolute right-[7px] top-[7px] w-5 h-5">
+  container.innerHTML = MOCK_MATCHES.map(match => renderMatchCard(match)).join('');
+}
+
+function renderMatchCard(match) {
+  const finishedBadge = match.finished ? \`
+    <div class="absolute right-8 -top-[9px]">
+      <div class="bg-success-primary text-white text-sm font-normal px-2 py-1 rounded-full whitespace-nowrap" style="font-family: 'Titillium Web', sans-serif; line-height: 20px;">
+        Finalizado
+      </div>
+    </div>
+  \` : '';
+
+  const phaseBadge = match.phase ? \`
+    <div class="absolute right-8 -top-[6px]">
+      <div class="bg-[#0059BA] text-white text-sm font-normal px-2 py-1 rounded-full whitespace-nowrap" style="font-family: 'Titillium Web', sans-serif; line-height: 20px;">
+        \${match.phase}
+      </div>
+    </div>
+  \` : '';
+
+  const teamDisplay = match.finished 
+    ? \`\${match.team1.name} \${match.team1.score} - \${match.team2.score} \${match.team2.name}\`
+    : \`\${match.team1.name} - \${match.team2.name}\`;
+
+  const flagPlaceholder = \`
+    <svg xmlns="http://www.w3.org/2000/svg" width="21" height="15" viewBox="0 0 21 15" fill="none">
+      <path d="M19 0.5H2C1.17157 0.5 0.5 1.17157 0.5 2V13C0.5 13.8284 1.17157 14.5 2 14.5H19C19.8284 14.5 20.5 13.8284 20.5 13V2C20.5 1.17157 19.8284 0.5 19 0.5Z" fill="#DDDDDD" stroke="black" stroke-opacity="0.1"/>
+    </svg>
+  \`;
+
+  return \`
+    <div class="bg-white border border-[#C2DFFF] rounded-xl px-3 py-4 flex flex-col gap-4 relative overflow-visible">
+      <div class="absolute right-[7px] -top-[3px] w-5 h-5">
         <svg width="20" height="20" viewBox="0 0 20 20">
           <circle cx="10" cy="10" r="10" fill="#006FE8"/>
           <text x="10" y="14" text-anchor="middle" fill="white" class="text-xs font-semibold" style="font-family: 'Titillium Web', sans-serif;">\${match.number}</text>
         </svg>
       </div>
+      \${finishedBadge}
+      \${phaseBadge}
       <div class="flex items-center gap-2">
-        <span class="text-xl">\${match.team1.flag}</span>
-        <p class="text-base font-semibold text-[#31363A]">\${match.team1.name}</p>
-        <p class="text-base font-semibold text-[#31363A]">-</p>
-        <p class="text-base font-semibold text-[#31363A]">\${match.team2.name}</p>
-        <span class="text-xl">\${match.team2.flag}</span>
+        \${match.team1.flag ? \`<span class="text-xl">\${match.team1.flag}</span>\` : flagPlaceholder}
+        <p class="text-base font-semibold text-[#31363A]" style="font-family: 'Titillium Web', sans-serif;">\${teamDisplay}</p>
+        \${match.team2.flag ? \`<span class="text-xl">\${match.team2.flag}</span>\` : flagPlaceholder}
       </div>
       <div class="flex flex-col gap-2">
         <div class="flex items-center gap-2">
           <i class="ph ph-calendar" style="font-size: 20px; color: #7BD0C2;"></i>
-          <p class="text-base text-[#31363A]">\${match.date}</p>
+          <p class="text-base text-[#31363A]" style="font-family: 'Titillium Web', sans-serif;">\${match.date}</p>
         </div>
         <div class="flex items-center gap-2">
           <i class="ph ph-map-pin" style="font-size: 20px; color: #7BD0C2;"></i>
-          <p class="text-base text-[#31363A]">\${match.city}</p>
+          <p class="text-base text-[#31363A]" style="font-family: 'Titillium Web', sans-serif;">\${match.city}</p>
         </div>
         <div class="flex items-center gap-2">
           <i class="ph ph-clock" style="font-size: 20px; color: #7BD0C2;"></i>
-          <p class="text-base text-[#31363A]">\${match.time.local} - \${match.time.venue}</p>
+          <p class="text-base text-[#31363A]" style="font-family: 'Titillium Web', sans-serif;">\${match.time.local} - \${match.time.venue}</p>
         </div>
       </div>
     </div>
-  \`).join('');
+  \`;
+}
+
+function renderMatchesContainer(matches, initialTab = 'groups') {
+  const groupMatches = matches.filter(m => m.stage === 'groups');
+  const eliminationMatches = matches.filter(m => m.stage === 'elimination');
+  
+  return \`
+    <div class="flex gap-2 mb-6">
+      <button 
+        data-tab="groups" 
+        class="border-2 \${initialTab === 'groups' ? 'border-[#006FE8] text-[#31363A]' : 'border-[#C2DFFF] text-[#70777C]'} font-semibold rounded-full px-4 py-[10px] text-lg transition-all duration-300 cursor-pointer"
+        style="font-family: 'Titillium Web', sans-serif;"
+      >
+        Grupos
+      </button>
+      <button 
+        data-tab="elimination" 
+        class="border-2 \${initialTab === 'elimination' ? 'border-[#006FE8] text-[#31363A]' : 'border-[#C2DFFF] text-[#70777C]'} font-semibold rounded-full px-4 py-[10px] text-lg transition-all duration-300 cursor-pointer"
+        style="font-family: 'Titillium Web', sans-serif;"
+      >
+        Eliminación
+      </button>
+    </div>
+    <div class="flex flex-col gap-3 pt-3 overflow-y-auto">
+      \${(initialTab === 'groups' ? groupMatches : eliminationMatches).map(m => renderMatchCard(m)).join('')}
+    </div>
+  \`;
+}
+
+function renderFinalPathBanner() {
+  return \`
+    <div class="flex gap-2 mb-6">
+      <button class="border-2 border-[#C2DFFF] text-[#70777C] font-semibold rounded-full px-4 py-[10px] text-lg" style="font-family: 'Titillium Web', sans-serif;">
+        Grupos
+      </button>
+      <button class="border-2 border-[#006FE8] text-[#31363A] font-semibold rounded-full px-4 py-[10px] text-lg" style="font-family: 'Titillium Web', sans-serif;">
+        Eliminación
+      </button>
+    </div>
+    <div class="bg-white border border-border-primary rounded-xl p-4 flex flex-col gap-6 items-center w-full max-w-full">
+      <div class="bg-brand-comp-lilac rounded-full w-[50px] h-[50px] flex items-center justify-center">
+        <i class="ph-duotone ph-trophy" style="font-size: 32px; color: #31319B;"></i>
+      </div>
+      <div class="flex flex-col gap-4 w-full">
+        <p class="text-xl font-semibold text-default text-center leading-7" style="font-family: 'Titillium Web', sans-serif;">
+          Mirá cómo sería el camino a la final
+        </p>
+        <p class="text-base text-default text-center leading-6" style="font-family: 'Titillium Web', sans-serif;">
+          Si en la fase de grupos quedamos:
+        </p>
+        <p class="text-sm text-lighter text-center mb-6" style="font-family: 'Titillium Web', sans-serif;">
+          Completá el camino a la final seleccionando el puesto en el grupo
+        </p>
+        <div class="flex gap-3 w-full">
+          <div class="flex-1">
+            <button class="bg-action-alt-default text-default hover:bg-[#A8E5DD] active:bg-[#93DDD3] focus:bg-action-alt-default focus:ring-icon-lighter focus:ring-4 focus:outline-none w-full px-4 py-[10px] h-[48px] text-lg font-semibold rounded-xl transition-all duration-300" style="font-family: 'Titillium Web', sans-serif;">
+              Primeros
+            </button>
+          </div>
+          <div class="flex-1">
+            <button class="bg-action-alt-default text-default hover:bg-[#A8E5DD] active:bg-[#93DDD3] focus:bg-action-alt-default focus:ring-icon-lighter focus:ring-4 focus:outline-none w-full px-4 py-[10px] h-[48px] text-lg font-semibold rounded-xl transition-all duration-300" style="font-family: 'Titillium Web', sans-serif;">
+              Segundos
+            </button>
+          </div>
+          <div class="flex-1">
+            <button class="bg-action-alt-default text-default hover:bg-[#A8E5DD] active:bg-[#93DDD3] focus:bg-action-alt-default focus:ring-icon-lighter focus:ring-4 focus:outline-none w-full px-4 py-[10px] h-[48px] text-lg font-semibold rounded-xl transition-all duration-300" style="font-family: 'Titillium Web', sans-serif;">
+              Terceros
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  \`;
+}
+
+function renderPendingDefinitionBanner() {
+  return \`
+    <div class="bg-white border border-[#C2DFFF] rounded-xl px-4 py-8 flex flex-col gap-6 items-center">
+      <div class="bg-[#E3DEF9] rounded-full w-[50px] h-[50px] flex items-center justify-center">
+        <i class="ph-duotone ph-clock-countdown" style="font-size: 32px; color: #31319B;"></i>
+      </div>
+      <div class="flex flex-col gap-4 w-full text-center">
+        <p class="text-xl font-semibold text-[#31363A] leading-7" style="font-family: 'Titillium Web', sans-serif;">
+          Todavía está por definirse
+        </p>
+        <p class="text-base text-[#31363A] leading-6" style="font-family: 'Titillium Web', sans-serif;">
+          Los partidos se definirán según los resultados de la etapa de grupos.
+        </p>
+      </div>
+    </div>
+  \`;
+}
+
+function initAllSections() {
+  // Section 2: All matches
+  const section2 = document.getElementById('matches-section-2');
+  if (section2) {
+    section2.innerHTML = renderMatchesContainer(MOCK_MATCHES, 'groups');
+  }
+
+  // Section 3: Final Path Banner
+  const section3 = document.getElementById('final-path-banner');
+  if (section3) {
+    section3.innerHTML = renderFinalPathBanner();
+  }
+
+  // Section 4: Matches without pending (elimination tab)
+  const section4 = document.getElementById('matches-section-4');
+  if (section4) {
+    section4.innerHTML = renderMatchesContainer(MOCK_MATCHES_WITHOUT_PENDING, 'elimination');
+  }
+
+  // Section 5: Pending Definition Banner
+  const section5 = document.getElementById('pending-banner');
+  if (section5) {
+    section5.innerHTML = renderPendingDefinitionBanner();
+  }
+
+  // Section 6: Finished Matches
+  const section6 = document.getElementById('matches-finished');
+  if (section6) {
+    section6.innerHTML = renderMatchesContainer(MOCK_MATCHES_FINISHED, 'groups');
+  }
 }
 
 function initChipsNav() {
@@ -339,7 +668,9 @@ function initChipsNav() {
 document.addEventListener('DOMContentLoaded', () => {
   console.log('🚀 World Cup 2026 Map - Vanilla Edition');
   populateTeamsGrid();
+  populateOtherTeamSelect();
   initChipsNav();
+  initAllSections();
 });
 `;
 
@@ -423,80 +754,144 @@ const html = `<!DOCTYPE html>
         </div>
       </header>
 
-      <!-- Selection Controls (hidden initially, shown when team selected) -->
+      <!-- Selection Controls (shown when team selected) -->
       <div id="selection-controls" class="hidden w-full max-w-[1366px] mx-auto mt-6">
-        <div class="px-4 w-full max-w-[1200px] mx-auto">
-          <div class="flex items-end justify-between gap-6 font-semibold">
+        <div class="w-full max-w-[834px] lg:max-w-[1200px] mx-auto">
+          <div class="w-full flex items-end justify-center lg:justify-between gap-4 lg:gap-6 lg:mt-6 lg:mb-8 font-semibold mx-auto">
             <div class="flex gap-x-2 items-center">
-              <span class="text-[#31363A] text-xl pr-4">Soy fan de:</span>
-              <select id="team-select" class="w-80 bg-white border border-[#C2DFFF] rounded-xl p-3 text-base font-normal focus:outline-none focus:ring-2 focus:ring-[#C2DFFF]">
+              <span class="text-[#31363A] text-xl pr-4 hidden lg:block">Soy fan de:</span>
+              <select id="team-select" class="w-[200px] lg:w-80 bg-white border border-[#C2DFFF] rounded-xl p-3 text-base font-normal focus:outline-none focus:ring-2 focus:ring-[#C2DFFF]">
                 <option value="">Seleccioná tu equipo</option>
               </select>
             </div>
-            <div class="flex gap-x-2 items-center">
-              <span class="text-[#31363A] text-xl pr-4">Ver partidos en:</span>
-              <select id="city-select" class="w-80 bg-white border border-[#C2DFFF] rounded-xl p-3 text-base font-normal focus:outline-none focus:ring-2 focus:ring-[#C2DFFF]">
+            <div class="flex gap-x-2 items-center lg:hidden">
+              <select id="city-select" class="w-[200px] lg:w-80 bg-white border border-[#C2DFFF] rounded-xl p-3 text-base font-normal focus:outline-none focus:ring-2 focus:ring-[#C2DFFF]">
                 <option value="">Seleccioná sede</option>
               </select>
             </div>
+            <button class="hidden lg:flex items-center gap-2 px-4 py-2 h-10 text-base font-semibold rounded-xl border-2 border-brand-primary text-brand-primary hover:border-alt-secondary hover:text-alt-secondary active:border-[#004A9C] active:text-[#004A9C] focus:outline-none focus:ring-4 focus:ring-brand-primary transition-all duration-300">
+              <i class="ph ph-map-pin-area" style="font-size: 16px; font-weight: bold;"></i>
+              Explorar sedes
+            </button>
           </div>
         </div>
       </div>
 
       <!-- Main Content -->
       <div class="w-full max-w-[1366px] mx-auto mt-8">
-        <div class="px-4 w-full max-w-[1200px] mx-auto">
+        <div class="w-full max-w-[834px] lg:max-w-[1200px] mx-auto flex flex-col gap-y-8">
           
-          <!-- Map + Side Panel Container -->
-          <div class="gap-6 w-full flex justify-center bg-[#F2F2F2]">
-            
-            <!-- Map Container -->
-            <div class="rounded-2xl overflow-hidden w-[790px] h-[640px]">
+          <!-- SECTION 1: Map + Side Panel Container -->
+          <div class="gap-6 w-full flex flex-col lg:flex-row justify-center bg-[#F2F2F2]">
+            <div class="rounded-2xl overflow-hidden w-full lg:w-[715px] h-[640px]">
               <div id="map" class="w-full h-full"></div>
             </div>
 
-            <!-- Side Panel -->
-            <div id="side-panel" class="rounded-l-xl flex flex-col p-6 w-[467px] h-[640px] bg-[rgba(81,90,96,0.06)] bg-[url(https://assistcdn.s3.us-west-1.amazonaws.com/assets/wc2026/BallWidthDots.svg)] bg-no-repeat bg-top bg-contain">
-              
-              <!-- ESTADO INICIAL (no team selected) -->
-              <div id="initial-state">
-                <div class="flex flex-col items-start mb-6 mt-32">
-                  <h2 class="text-lg font-semibold text-[#0059BA] leading-snug">
-                    Seleccioná tu equipo para explorar tu camino a la gran final 2026
-                  </h2>
+            <div class="bg-brand-darkening w-full lg:max-w-[467px]">
+              <div id="side-panel" class="mx-auto lg:mx-0 rounded-l-xl flex flex-col lg:px-4 pt-4 lg:pt-6 lg:p-6 w-full max-w-[368px] lg:max-w-full lg:w-[467px] h-[640px] bg-[url(https://assistcdn.s3.us-west-1.amazonaws.com/assets/wc2026/BallWidthDots.svg)] bg-no-repeat bg-top bg-contain">
+                <div id="initial-state">
+                  <div class="max-w-[360px] lg:max-w-[316px] w-full mx-auto">
+                    <div class="flex flex-col mb-6 mt-6 lg:mt-32">
+                      <h2 class="text-xl lg:text-2xl font-semibold text-text-decorative-darker leading-snug" style="font-family: 'Titillium Web', sans-serif;">
+                        Seleccioná tu equipo y explorá el camino a la final
+                      </h2>
+                    </div>
+                    <div id="teams-grid" class="grid grid-cols-2 gap-4 w-full">
+                      <!-- Teams populated by JavaScript -->
+                    </div>
+                    <div class="mt-6">
+                      <select id="other-team-select" class="w-full bg-white border border-border-primary rounded-xl p-3 text-base font-normal focus:outline-none focus:ring-2 focus:ring-border-primary">
+                        <option value="">Otro equipo</option>
+                      </select>
+                    </div>
+                  </div>
                 </div>
-                <div id="teams-grid" class="grid grid-cols-2 gap-3">
-                  <!-- Teams populated by JavaScript -->
-                </div>
-              </div>
 
-              <!-- ESTADO SELECCIONADO (team selected) -->
-              <div id="selected-state" class="hidden">
-                <!-- Chips Navigation -->
-                <div id="chips-nav" class="flex gap-2 mb-6">
+                <div id="selected-state" class="hidden">
+                  <div id="chips-nav" class="flex gap-2 mb-6">
                   <button 
                     data-tab="groups" 
                     class="border-2 border-[#006FE8] text-[#31363A] font-semibold rounded-full px-4 py-[10px] text-lg transition-all duration-300 cursor-pointer"
+                    style="font-family: 'Titillium Web', sans-serif;"
                   >
                     Grupos
                   </button>
                   <button 
                     data-tab="elimination" 
                     class="border-2 border-[#C2DFFF] text-[#70777C] font-semibold rounded-full px-4 py-[10px] text-lg transition-all duration-300 cursor-pointer hover:border-[#006FE8] hover:text-[#31363A]"
+                    style="font-family: 'Titillium Web', sans-serif;"
                   >
                     Eliminación
                   </button>
                 </div>
-
-                <!-- Match Cards -->
-                <div id="match-cards" class="flex flex-col gap-3">
+                <div id="match-cards" class="flex flex-col gap-3 pt-3 overflow-y-auto">
                   <!-- Match cards populated by JavaScript -->
                 </div>
               </div>
-              
             </div>
-
+            </div>
           </div>
+
+          <!-- SECTION 2: Placeholder + All Matches -->
+          <div class="gap-6 w-full flex flex-col lg:flex-row items-center lg:items-start justify-center bg-[#F2F2F2]">
+            <div class="text-2xl">
+              <img src="https://placehold.co/715x640" alt="Placeholder" class="w-full lg:w-auto" />
+            </div>
+            <div class="bg-brand-darkening w-full lg:max-w-[467px]">
+              <div id="matches-section-2" class="mx-auto lg:mx-0 rounded-l-xl flex flex-col lg:px-4 pt-4 lg:pt-6 lg:p-6 w-full max-w-[368px] lg:max-w-full lg:w-[467px] h-[640px]">
+                <!-- Populated by JavaScript -->
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 3: Placeholder + Final Path Banner -->
+          <div class="gap-6 w-full flex flex-col lg:flex-row items-center lg:items-start justify-center bg-[#F2F2F2]">
+            <div class="text-2xl">
+              <img src="https://placehold.co/715x640" alt="Placeholder" class="w-full lg:w-auto" />
+            </div>
+            <div class="bg-brand-darkening w-full lg:max-w-[467px]">
+              <div id="final-path-banner" class="mx-auto lg:mx-0 rounded-l-xl flex flex-col lg:px-4 pt-4 lg:pt-6 lg:p-6 w-full max-w-[368px] lg:max-w-full lg:w-[467px] h-[640px]">
+                <!-- Populated by JavaScript -->
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 4: Placeholder + Matches Without Pending (Elimination) -->
+          <div class="gap-6 w-full flex flex-col lg:flex-row items-center lg:items-start justify-center bg-[#F2F2F2]">
+            <div class="text-2xl">
+              <img src="https://placehold.co/715x640" alt="Placeholder" class="w-full lg:w-auto" />
+            </div>
+            <div class="bg-brand-darkening w-full lg:max-w-[467px]">
+              <div id="matches-section-4" class="mx-auto lg:mx-0 rounded-l-xl flex flex-col lg:px-4 pt-4 lg:pt-6 lg:p-6 w-full max-w-[368px] lg:max-w-full lg:w-[467px] h-[640px]">
+                <!-- Populated by JavaScript -->
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 5: Placeholder + Pending Definition Banner -->
+          <div class="gap-6 w-full flex flex-col lg:flex-row items-center lg:items-start justify-center bg-[#F2F2F2]">
+            <div class="text-2xl">
+              <img src="https://placehold.co/715x640" alt="Placeholder" class="w-full lg:w-auto" />
+            </div>
+            <div class="bg-brand-darkening w-full lg:max-w-[467px]">
+              <div id="pending-banner" class="mx-auto lg:mx-0 rounded-l-xl flex flex-col lg:px-4 pt-4 lg:pt-6 lg:p-6 w-full max-w-[368px] lg:max-w-full lg:w-[467px] h-[640px]">
+                <!-- Populated by JavaScript -->
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 6: Placeholder + Finished Matches -->
+          <div class="gap-6 w-full flex flex-col lg:flex-row items-center lg:items-start justify-center bg-[#F2F2F2]">
+            <div class="text-2xl">
+              <img src="https://placehold.co/715x640" alt="Placeholder" class="w-full lg:w-auto" />
+            </div>
+            <div class="bg-brand-darkening w-full lg:max-w-[467px]">
+              <div id="matches-finished" class="mx-auto lg:mx-0 rounded-l-xl flex flex-col lg:px-4 pt-4 lg:pt-6 lg:p-6 w-full max-w-[368px] lg:max-w-full lg:w-[467px] h-[640px]">
+                <!-- Populated by JavaScript -->
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>

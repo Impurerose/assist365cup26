@@ -1,5 +1,5 @@
 // World Cup 2026 - Data
-// Auto-generated: 2026-01-16T19:33:03.858Z
+// Auto-generated: 2026-01-20T17:37:01.998Z
 
 const TEAMS = [
   { id: 'ARG', name: 'Argentina', flag: '🇦🇷' },
@@ -8,7 +8,8 @@ const TEAMS = [
   { id: 'MEX', name: 'México', flag: '🇲🇽' },
   { id: 'PAR', name: 'Paraguay', flag: '🇵🇾' },
   { id: 'URU', name: 'Uruguay', flag: '🇺🇾' },
-  { id: 'ECU', name: 'Ecuador', flag: '🇪🇨' }
+  { id: 'ECU', name: 'Ecuador', flag: '🇪🇨' },
+  { id: 'PAN', name: 'Panamá', flag: '🇵🇦' }
 ];
 
 const VENUES = [
@@ -64,27 +65,188 @@ const ZOOM_THRESHOLD = 8;
 
 const MOCK_MATCHES = [
   {
+    id: 1,
     number: 1,
     team1: { name: 'Argentina', flag: '🇦🇷' },
     team2: { name: 'Algeria', flag: '🇩🇿' },
     date: 'Martes 16 de junio',
     city: 'Kansas city',
-    time: { local: '21:00 h (AR)', venue: '18:00 h (KCK)' }
+    time: { local: '21:00 h (AR)', venue: '18:00 h (KCK)' },
+    stage: 'groups',
+    group: 'A'
   },
   {
+    id: 2,
     number: 2,
     team1: { name: 'Argentina', flag: '🇦🇷' },
     team2: { name: 'Austria', flag: '🇦🇹' },
     date: 'Lunes 22 de junio',
     city: 'Dallas',
-    time: { local: '13:00 h (AR)', venue: '10:00 h (DL)' }
+    time: { local: '13:00 h (AR)', venue: '10:00 h (DL)' },
+    stage: 'groups',
+    group: 'A'
   },
   {
+    id: 3,
     number: 3,
-    team1: { name: 'Jordania', flag: '🇯🇴' },
-    team2: { name: 'Argentina', flag: '🇦🇷' },
-    date: 'Sábado 27 de junio',
+    team1: { name: 'Pendiente', flag: null },
+    team2: { name: 'A definir', flag: null },
+    date: 'Viernes 20 de junio',
+    city: 'Vélez',
+    time: { local: '18:00 h (AR)', venue: '18:00 h (VEL)' },
+    stage: 'groups',
+    group: 'B'
+  },
+  {
+    id: 4,
+    number: 4,
+    team1: { name: 'A definir', flag: null },
+    team2: { name: 'A definir', flag: null },
+    date: 'Jueves 26 de junio',
+    city: 'Vélez',
+    time: { local: '16:30 h (AR)', venue: '16:30 h (VEL)' },
+    stage: 'elimination',
+    phase: '16avos'
+  },
+  {
+    id: 5,
+    number: 5,
+    team1: { name: 'A definir', flag: null },
+    team2: { name: 'A definir', flag: null },
+    date: 'Viernes 27 de junio',
+    city: 'River Plate',
+    time: { local: '19:00 h (AR)', venue: '19:00 h (RP)' },
+    stage: 'elimination',
+    phase: 'Octavos'
+  },
+  {
+    id: 6,
+    number: 6,
+    team1: { name: 'A definir', flag: null },
+    team2: { name: 'A definir', flag: null },
+    date: 'Sábado 28 de junio',
+    city: 'River Plate',
+    time: { local: '21:00 h (AR)', venue: '21:00 h (RP)' },
+    stage: 'elimination',
+    phase: 'Cuartos'
+  },
+  {
+    id: 7,
+    number: 7,
+    team1: { name: 'A definir', flag: null },
+    team2: { name: 'A definir', flag: null },
+    date: 'Domingo 29 de junio',
+    city: 'Vélez',
+    time: { local: '20:00 h (AR)', venue: '20:00 h (VEL)' },
+    stage: 'elimination',
+    phase: 'Semi'
+  }
+];
+
+const MOCK_MATCHES_WITHOUT_PENDING = [
+  {
+    id: 1,
+    number: 1,
+    team1: { name: 'Argentina', flag: '🇦🇷' },
+    team2: { name: 'Algeria', flag: '🇩🇿' },
+    date: 'Martes 16 de junio',
+    city: 'Kansas city',
+    time: { local: '21:00 h (AR)', venue: '18:00 h (KCK)' },
+    stage: 'groups',
+    group: 'A'
+  },
+  {
+    id: 2,
+    number: 2,
+    team1: { name: 'Argentina', flag: '🇦🇷' },
+    team2: { name: 'Austria', flag: '🇦🇹' },
+    date: 'Lunes 22 de junio',
     city: 'Dallas',
-    time: { local: '22:00 h (AR)', venue: '19:00 h (DL)' }
+    time: { local: '13:00 h (AR)', venue: '10:00 h (DL)' },
+    stage: 'groups',
+    group: 'A'
+  },
+  {
+    id: 3,
+    number: 1,
+    team1: { name: 'A definir', flag: null },
+    team2: { name: 'A definir', flag: null },
+    date: 'Jueves 26 de junio',
+    city: 'Vélez',
+    time: { local: '16:30 h (AR)', venue: '16:30 h (VEL)' },
+    stage: 'elimination',
+    phase: '16avos'
+  },
+  {
+    id: 4,
+    number: 2,
+    team1: { name: 'A definir', flag: null },
+    team2: { name: 'A definir', flag: null },
+    date: 'Viernes 27 de junio',
+    city: 'River Plate',
+    time: { local: '19:00 h (AR)', venue: '19:00 h (RP)' },
+    stage: 'elimination',
+    phase: 'Octavos'
+  },
+  {
+    id: 5,
+    number: 3,
+    team1: { name: 'A definir', flag: null },
+    team2: { name: 'A definir', flag: null },
+    date: 'Sábado 28 de junio',
+    city: 'River Plate',
+    time: { local: '21:00 h (AR)', venue: '21:00 h (RP)' },
+    stage: 'elimination',
+    phase: 'Cuartos'
+  },
+  {
+    id: 6,
+    number: 4,
+    team1: { name: 'A definir', flag: null },
+    team2: { name: 'A definir', flag: null },
+    date: 'Domingo 29 de junio',
+    city: 'Vélez',
+    time: { local: '20:00 h (AR)', venue: '20:00 h (VEL)' },
+    stage: 'elimination',
+    phase: 'Semi'
+  }
+];
+
+const MOCK_MATCHES_FINISHED = [
+  {
+    id: 1,
+    number: 1,
+    team1: { name: 'Argentina', flag: '🇦🇷', score: 5 },
+    team2: { name: 'Argelia', flag: '🇩🇿', score: 1 },
+    city: 'Kansas city',
+    date: 'Martes 16 de junio',
+    time: { local: '21:00 h (AR)', venue: '18:00 h (KCK)' },
+    stage: 'groups',
+    group: 'A',
+    finished: true
+  },
+  {
+    id: 2,
+    number: 2,
+    team1: { name: 'Argentina', flag: '🇦🇷', score: 6 },
+    team2: { name: 'Austria', flag: '🇦🇹', score: 2 },
+    city: 'Dallas',
+    date: 'Lunes 22 de junio',
+    time: { local: '13:00 h (AR)', venue: '10:00 h (DL)' },
+    stage: 'groups',
+    group: 'A',
+    finished: true
+  },
+  {
+    id: 3,
+    number: 3,
+    team1: { name: 'Jordania', flag: '🇯🇴', score: 3 },
+    team2: { name: 'Argentina', flag: '🇦🇷', score: 7 },
+    city: 'Dallas',
+    date: 'Sábado 27 de junio',
+    time: { local: '22:00 h (AR)', venue: '19:00 h (DL)' },
+    stage: 'groups',
+    group: 'A',
+    finished: true
   }
 ];
