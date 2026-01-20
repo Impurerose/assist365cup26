@@ -1,4 +1,4 @@
-import { SoccerBall, ShareNetwork } from "@phosphor-icons/react";
+import { SoccerBall, PaperPlaneTiltIcon } from "@phosphor-icons/react";
 import Button from "../dsys/Button.jsx";
 
 const SoccerBallGradient = () => (
@@ -30,8 +30,8 @@ export default function HeaderBar() {
           </h1>
         </div>
         <Button
-          icon={<ShareNetwork size={16} weight="bold" />}
-          iconPosition="left"
+          icon={<PaperPlaneTiltIcon size={16} weight="bold" />}
+          iconPosition="right"
         >
           Compartir
         </Button>

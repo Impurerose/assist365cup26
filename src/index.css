@@ -23,3 +23,44 @@ body {
 #root {
   width: 100%;
 }
+
+/* Custom Select Styles */
+.custom-select {
+  position: relative;
+}
+
+.custom-select-selected {
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.custom-select-selected:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(194 223 255 / var(--tw-ring-opacity, 1));
+}
+
+.custom-select-items {
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.custom-select-item {
+  padding: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.custom-select-item:hover {
+  background-color: #f2f2f2;
+}
+
+.custom-select-item.selected {
+  background-color: #f2f2f2;
+  color: #31363a;
+}

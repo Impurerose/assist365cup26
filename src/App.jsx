@@ -22,7 +22,7 @@ function App() {
   const [panelTab, setPanelTab] = useState("groups");
 
   return (
-    <div className="w-full min-h-screen flex flex-col bg-bg-secondary">
+    <div className="w-full min-h-screen flex flex-col bg-bg-secondary pb-32">
       <HeaderBar />
       <div
         className={`w-full mt-12 max-w-[1366px] mx-auto flex flex-col gap-y-6${

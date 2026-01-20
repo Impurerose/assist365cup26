@@ -393,16 +393,8 @@ function populateTeamsGrid() {
 }
 
 function populateOtherTeamSelect() {
-  const select = document.getElementById('other-team-select');
-  if (!select) return;
-
-  select.innerHTML = '<option value="">Otro equipo</option>' + 
-    TEAMS.map(t => \`<option value="\${t.id}">\${t.flag} \${t.name}</option>\`).join('');
-  
-  select.addEventListener('change', (e) => {
-    if (e.target.value) {
-      handleTeamSelect(e.target.value);
-    }
+  initCustomSelect('other-team-select', TEAMS, 'Otro equipo', (option) => {
+    handleTeamSelect(option.id);
   });
 }
 
@@ -442,18 +434,99 @@ function showSelectionControls() {
 }
 
 function populateSelects() {
-  const teamSelect = document.getElementById('team-select');
-  const citySelect = document.getElementById('city-select');
+  initCustomSelect('team-select', TEAMS, 'Seleccioná tu equipo', (option) => {
+    handleTeamSelect(option.id);
+  }, APP_STATE.selectedTeam?.id);
 
-  if (teamSelect) {
-    teamSelect.innerHTML = '<option value="">Seleccioná tu equipo</option>' + 
-      TEAMS.map(t => \`<option value="\${t.id}" \${APP_STATE.selectedTeam?.id === t.id ? 'selected' : ''}>\${t.flag} \${t.name}</option>\`).join('');
+  initCustomSelect('city-select', VENUES, 'Seleccioná sede', (option) => {
+    APP_STATE.selectedCity = option;
+    if (APP_STATE.map) {
+      APP_STATE.map.panTo({ lat: option.lat, lng: option.lng });
+      APP_STATE.map.setZoom(10);
+    }
+  });
+}
+
+function initCustomSelect(selectId, options, placeholder, onChange, selectedValue = null) {
+  const selectContainer = document.getElementById(selectId);
+  if (!selectContainer) return;
+
+  const selectedDiv = selectContainer.querySelector('.custom-select-selected');
+  const itemsDiv = selectContainer.querySelector('.custom-select-items');
+  const valueSpan = selectContainer.querySelector('.select-value');
+
+  // Populate options
+  itemsDiv.innerHTML = options.map(option => {
+    const isSelected = selectedValue && (option.value ?? option.id) === selectedValue;
+    return \`
+      <div class="custom-select-item\${isSelected ? ' selected' : ''}" data-value="\${option.value ?? option.id}">
+        \${option.flag ? \`<span class="text-xl">\${option.flag}</span>\` : ''}
+        <span>\${option.label ?? option.name}</span>
+      </div>
+    \`;
+  }).join('');
+
+  // Set initial value if selected
+  if (selectedValue) {
+    const selectedOption = options.find(opt => (opt.value ?? opt.id) === selectedValue);
+    if (selectedOption) {
+      valueSpan.innerHTML = \`
+        \${selectedOption.flag ? \`<span class="text-xl">\${selectedOption.flag}</span>\` : ''}
+        <span>\${selectedOption.label ?? selectedOption.name}</span>
+      \`;
+      valueSpan.classList.remove('text-text-lighter');
+    }
   }
 
-  if (citySelect) {
-    citySelect.innerHTML = '<option value="">Seleccioná sede</option>' + 
-      VENUES.map(v => \`<option value="\${v.id}">\${v.name}</option>\`).join('');
-  }
+  // Toggle dropdown
+  selectedDiv.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = !itemsDiv.classList.contains('hidden');
+    
+    // Close all other dropdowns
+    document.querySelectorAll('.custom-select-items').forEach(dropdown => {
+      dropdown.classList.add('hidden');
+    });
+
+    if (!isOpen) {
+      itemsDiv.classList.remove('hidden');
+    }
+  });
+
+  // Handle option selection
+  itemsDiv.addEventListener('click', (e) => {
+    const item = e.target.closest('.custom-select-item');
+    if (!item) return;
+
+    const value = item.dataset.value;
+    const selectedOption = options.find(opt => String(opt.value ?? opt.id) === String(value));
+    
+    if (selectedOption) {
+      // Update display
+      valueSpan.innerHTML = \`
+        \${selectedOption.flag ? \`<span class="text-xl">\${selectedOption.flag}</span>\` : ''}
+        <span>\${selectedOption.label ?? selectedOption.name}</span>
+      \`;
+      valueSpan.classList.remove('text-text-lighter');
+
+      // Update selected state
+      itemsDiv.querySelectorAll('.custom-select-item').forEach(i => i.classList.remove('selected'));
+      item.classList.add('selected');
+
+      // Close dropdown
+      itemsDiv.classList.add('hidden');
+
+      // Trigger callback
+      if (onChange) onChange(selectedOption);
+    }
+  });
+
+  // Close dropdown when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!selectContainer.contains(e.target)) {
+      itemsDiv.classList.add('hidden');
+    }
+  });
 }
 
 function populateMatchCards() {
@@ -530,12 +603,30 @@ function renderMatchesContainer(matches, initialTab = 'groups') {
   // Position selector para tab de eliminación
   const positionSelect = initialTab === 'elimination' ? \`
     <div class="mb-4">
-      <select id="position-select" class="w-full bg-white border border-border-primary rounded-xl p-3 text-base font-normal focus:outline-none focus:ring-2 focus:ring-border-primary">
-        <option value="1st">Primer puesto</option>
-        <option value="2nd">Segundo puesto</option>
-        <option value="3rd">Tercer puesto</option>
-        <option value="4th">Cuarto puesto</option>
-      </select>
+      <div class="relative pt-1 w-full">
+        <div class="custom-select position-select">
+          <div class="custom-select-selected bg-white border border-border-primary rounded-xl p-3 text-base font-normal flex items-center justify-between cursor-pointer" tabindex="0">
+            <span class="select-value text-text-default">Primer puesto</span>
+            <div class="select-chevron">
+              <i class="ph-bold ph-caret-down" style="font-size: 20px; color: #31363A;"></i>
+            </div>
+          </div>
+          <div class="custom-select-items bg-white z-50 w-full rounded-xl shadow-lg overflow-y-auto absolute mt-1 top-full hidden" style="max-height: 256px;">
+            <div class="custom-select-item selected" data-value="1st">
+              <span>Primer puesto</span>
+            </div>
+            <div class="custom-select-item" data-value="2nd">
+              <span>Segundo puesto</span>
+            </div>
+            <div class="custom-select-item" data-value="3rd">
+              <span>Tercer puesto</span>
+            </div>
+            <div class="custom-select-item" data-value="4th">
+              <span>Cuarto puesto</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   \` : '';
   
@@ -618,6 +709,56 @@ function renderPendingDefinitionBanner() {
   \`;
 }
 
+function initPositionSelects() {
+  document.querySelectorAll('.position-select').forEach(selectContainer => {
+    const selectedDiv = selectContainer.querySelector('.custom-select-selected');
+    const itemsDiv = selectContainer.querySelector('.custom-select-items');
+    const valueSpan = selectContainer.querySelector('.select-value');
+
+    // Toggle dropdown
+    selectedDiv.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = !itemsDiv.classList.contains('hidden');
+      
+      // Close all other dropdowns
+      document.querySelectorAll('.custom-select-items').forEach(dropdown => {
+        dropdown.classList.add('hidden');
+      });
+
+      if (!isOpen) {
+        itemsDiv.classList.remove('hidden');
+      }
+    });
+
+    // Handle option selection
+    itemsDiv.addEventListener('click', (e) => {
+      const item = e.target.closest('.custom-select-item');
+      if (!item) return;
+
+      const value = item.dataset.value;
+      
+      // Update display
+      valueSpan.textContent = item.querySelector('span').textContent;
+
+      // Update selected state
+      itemsDiv.querySelectorAll('.custom-select-item').forEach(i => i.classList.remove('selected'));
+      item.classList.add('selected');
+
+      // Close dropdown
+      itemsDiv.classList.add('hidden');
+
+      console.log('\uD83D\uDCCA Position selected:', value);
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!selectContainer.contains(e.target)) {
+        itemsDiv.classList.add('hidden');
+      }
+    });
+  });
+}
+
 function initAllSections() {
   // Section 2: All matches
   const section2 = document.getElementById('matches-section-2');
@@ -648,6 +789,9 @@ function initAllSections() {
   if (section6) {
     section6.innerHTML = renderMatchesContainer(MOCK_MATCHES_FINISHED, 'groups');
   }
+
+  // Initialize position selects after rendering
+  initPositionSelects();
 }
 
 function initChipsNav() {
@@ -727,7 +871,7 @@ const html = `<!DOCTYPE html>
   </head>
   
   <body class="bg-bg-secondary">
-    <div class="w-full min-h-screen flex flex-col">
+    <div class="w-full min-h-screen flex flex-col bg-bg-secondary pb-32">
       
       <!-- Header -->
       <header class="bg-white w-full">
@@ -763,14 +907,30 @@ const html = `<!DOCTYPE html>
           <div class="w-full flex items-end justify-center lg:justify-between gap-4 lg:gap-6 lg:mt-6 lg:mb-8 font-semibold mx-auto">
             <div class="flex gap-x-2 items-center">
               <span class="text-text-default text-xl pr-4 hidden lg:block">Soy fan de:</span>
-              <select id="team-select" class="w-[200px] lg:w-80 bg-white border border-border-primary rounded-xl p-3 text-base font-normal focus:outline-none focus:ring-2 focus:ring-border-primary">
-                <option value="">Seleccioná tu equipo</option>
-              </select>
+              <div class="relative pt-1 w-[200px] lg:w-80">
+                <div class="custom-select" id="team-select">
+                  <div class="custom-select-selected bg-white border border-border-primary rounded-xl p-3 text-base font-normal flex items-center justify-between cursor-pointer" tabindex="0">
+                    <span class="select-value text-text-default">Seleccioná tu equipo</span>
+                    <div class="select-chevron">
+                      <i class="ph-bold ph-caret-down" style="font-size: 20px; color: #31363A;"></i>
+                    </div>
+                  </div>
+                  <div class="custom-select-items bg-white z-50 w-full rounded-xl shadow-lg overflow-y-auto absolute mt-1 top-full hidden" style="max-height: 256px;"></div>
+                </div>
+              </div>
             </div>
             <div class="flex gap-x-2 items-center lg:hidden">
-              <select id="city-select" class="w-[200px] lg:w-80 bg-white border border-border-primary rounded-xl p-3 text-base font-normal focus:outline-none focus:ring-2 focus:ring-border-primary">
-                <option value="">Seleccioná sede</option>
-              </select>
+              <div class="relative pt-1 w-[200px] lg:w-80">
+                <div class="custom-select" id="city-select">
+                  <div class="custom-select-selected bg-white border border-border-primary rounded-xl p-3 text-base font-normal flex items-center justify-between cursor-pointer" tabindex="0">
+                    <span class="select-value text-text-default">Seleccioná sede</span>
+                    <div class="select-chevron">
+                      <i class="ph-bold ph-caret-down" style="font-size: 20px; color: #31363A;"></i>
+                    </div>
+                  </div>
+                  <div class="custom-select-items bg-white z-50 w-full rounded-xl shadow-lg overflow-y-auto absolute mt-1 top-full hidden" style="max-height: 256px;"></div>
+                </div>
+              </div>
             </div>
             <button class="hidden lg:flex items-center gap-2 px-4 py-2 h-10 text-base font-semibold rounded-xl border-2 border-brand-primary text-brand-primary hover:border-bg-alt-secondary hover:text-bg-alt-secondary active:border-action-pressed active:text-action-pressed focus:outline-none focus:ring-4 focus:ring-border-primary transition-all duration-300">
               <i class="ph ph-map-pin-area" style="font-size: 16px; font-weight: bold;"></i>
@@ -803,9 +963,17 @@ const html = `<!DOCTYPE html>
                       <!-- Teams populated by JavaScript -->
                     </div>
                     <div class="mt-6">
-                      <select id="other-team-select" class="w-full bg-white border border-border-primary rounded-xl p-3 text-base font-normal focus:outline-none focus:ring-2 focus:ring-border-primary">
-                        <option value="">Otro equipo</option>
-                      </select>
+                      <div class="relative pt-1 w-full">
+                        <div class="custom-select" id="other-team-select">
+                          <div class="custom-select-selected bg-white border border-border-primary rounded-xl p-3 text-base font-normal flex items-center justify-between cursor-pointer" tabindex="0">
+                            <span class="select-value text-text-default">Otro equipo</span>
+                            <div class="select-chevron">
+                              <i class="ph-bold ph-caret-down" style="font-size: 20px; color: #31363A;"></i>
+                            </div>
+                          </div>
+                          <div class="custom-select-items bg-white z-50 w-full rounded-xl shadow-lg overflow-y-auto absolute mt-1 top-full hidden" style="max-height: 256px;"></div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>

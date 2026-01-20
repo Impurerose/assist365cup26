@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
     <!-- World Cup 2026 Map - Vanilla Build -->
-    <!-- Generated: 2026-01-20T18:38:58.572Z -->
+    <!-- Generated: 2026-01-20T20:23:33.595Z -->
     <!-- Pure HTML + CSS + JavaScript (No React) -->
     
     <!-- Google Fonts -->
@@ -44,7 +44,7 @@
   </head>
   
   <body class="bg-bg-secondary">
-    <div class="w-full min-h-screen flex flex-col">
+    <div class="w-full min-h-screen flex flex-col bg-bg-secondary pb-32">
       
       <!-- Header -->
       <header class="bg-white w-full">
@@ -80,14 +80,30 @@
           <div class="w-full flex items-end justify-center lg:justify-between gap-4 lg:gap-6 lg:mt-6 lg:mb-8 font-semibold mx-auto">
             <div class="flex gap-x-2 items-center">
               <span class="text-text-default text-xl pr-4 hidden lg:block">Soy fan de:</span>
-              <select id="team-select" class="w-[200px] lg:w-80 bg-white border border-border-primary rounded-xl p-3 text-base font-normal focus:outline-none focus:ring-2 focus:ring-border-primary">
-                <option value="">Seleccioná tu equipo</option>
-              </select>
+              <div class="relative pt-1 w-[200px] lg:w-80">
+                <div class="custom-select" id="team-select">
+                  <div class="custom-select-selected bg-white border border-border-primary rounded-xl p-3 text-base font-normal flex items-center justify-between cursor-pointer" tabindex="0">
+                    <span class="select-value text-text-default">Seleccioná tu equipo</span>
+                    <div class="select-chevron">
+                      <i class="ph-bold ph-caret-down" style="font-size: 20px; color: #31363A;"></i>
+                    </div>
+                  </div>
+                  <div class="custom-select-items bg-white z-50 w-full rounded-xl shadow-lg overflow-y-auto absolute mt-1 top-full hidden" style="max-height: 256px;"></div>
+                </div>
+              </div>
             </div>
             <div class="flex gap-x-2 items-center lg:hidden">
-              <select id="city-select" class="w-[200px] lg:w-80 bg-white border border-border-primary rounded-xl p-3 text-base font-normal focus:outline-none focus:ring-2 focus:ring-border-primary">
-                <option value="">Seleccioná sede</option>
-              </select>
+              <div class="relative pt-1 w-[200px] lg:w-80">
+                <div class="custom-select" id="city-select">
+                  <div class="custom-select-selected bg-white border border-border-primary rounded-xl p-3 text-base font-normal flex items-center justify-between cursor-pointer" tabindex="0">
+                    <span class="select-value text-text-default">Seleccioná sede</span>
+                    <div class="select-chevron">
+                      <i class="ph-bold ph-caret-down" style="font-size: 20px; color: #31363A;"></i>
+                    </div>
+                  </div>
+                  <div class="custom-select-items bg-white z-50 w-full rounded-xl shadow-lg overflow-y-auto absolute mt-1 top-full hidden" style="max-height: 256px;"></div>
+                </div>
+              </div>
             </div>
             <button class="hidden lg:flex items-center gap-2 px-4 py-2 h-10 text-base font-semibold rounded-xl border-2 border-brand-primary text-brand-primary hover:border-bg-alt-secondary hover:text-bg-alt-secondary active:border-action-pressed active:text-action-pressed focus:outline-none focus:ring-4 focus:ring-border-primary transition-all duration-300">
               <i class="ph ph-map-pin-area" style="font-size: 16px; font-weight: bold;"></i>
@@ -120,9 +136,17 @@
                       <!-- Teams populated by JavaScript -->
                     </div>
                     <div class="mt-6">
-                      <select id="other-team-select" class="w-full bg-white border border-border-primary rounded-xl p-3 text-base font-normal focus:outline-none focus:ring-2 focus:ring-border-primary">
-                        <option value="">Otro equipo</option>
-                      </select>
+                      <div class="relative pt-1 w-full">
+                        <div class="custom-select" id="other-team-select">
+                          <div class="custom-select-selected bg-white border border-border-primary rounded-xl p-3 text-base font-normal flex items-center justify-between cursor-pointer" tabindex="0">
+                            <span class="select-value text-text-default">Otro equipo</span>
+                            <div class="select-chevron">
+                              <i class="ph-bold ph-caret-down" style="font-size: 20px; color: #31363A;"></i>
+                            </div>
+                          </div>
+                          <div class="custom-select-items bg-white z-50 w-full rounded-xl shadow-lg overflow-y-auto absolute mt-1 top-full hidden" style="max-height: 256px;"></div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -165,7 +189,7 @@
           </div>
 
           <!-- SECTION 3: Placeholder + Final Path Banner -->
-          <div class="gap-6 w-full flex flex-col lg:flex-row items-center lg:items-start justify-center bg-bg-secondary">
+          <div class="gap-6 w-full flex flex-col lg:flex-row items-center lg:items-start justify-center bg-[#F2F2F2]">
             <div class="text-2xl">
               <img src="https://placehold.co/715x640" alt="Placeholder" class="w-full lg:w-auto" />
             </div>
@@ -177,7 +201,7 @@
           </div>
 
           <!-- SECTION 4: Placeholder + Matches Without Pending (Elimination) -->
-          <div class="gap-6 w-full flex flex-col lg:flex-row items-center lg:items-start justify-center bg-bg-secondary">
+          <div class="gap-6 w-full flex flex-col lg:flex-row items-center lg:items-start justify-center bg-[#F2F2F2]">
             <div class="text-2xl">
               <img src="https://placehold.co/715x640" alt="Placeholder" class="w-full lg:w-auto" />
             </div>
@@ -189,7 +213,7 @@
           </div>
 
           <!-- SECTION 5: Placeholder + Pending Definition Banner -->
-          <div class="gap-6 w-full flex flex-col lg:flex-row items-center lg:items-start justify-center bg-bg-secondary">
+          <div class="gap-6 w-full flex flex-col lg:flex-row items-center lg:items-start justify-center bg-[#F2F2F2]">
             <div class="text-2xl">
               <img src="https://placehold.co/715x640" alt="Placeholder" class="w-full lg:w-auto" />
             </div>
@@ -201,7 +225,7 @@
           </div>
 
           <!-- SECTION 6: Placeholder + Finished Matches -->
-          <div class="gap-6 w-full flex flex-col lg:flex-row items-center lg:items-start justify-center bg-bg-secondary">
+          <div class="gap-6 w-full flex flex-col lg:flex-row items-center lg:items-start justify-center bg-[#F2F2F2]">
             <div class="text-2xl">
               <img src="https://placehold.co/715x640" alt="Placeholder" class="w-full lg:w-auto" />
             </div>
