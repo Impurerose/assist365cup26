@@ -3,31 +3,26 @@
  * Banner modal para mostrar el camino a la final
  */
 
-import { Trophy } from '@phosphor-icons/react';
-import Button from '../dsys/Button';
-import Chip from '../dsys/Chip';
+import { Trophy } from "@phosphor-icons/react";
+import Button from "../dsys/Button";
+import Chip from "../dsys/Chip";
 
 const FinalPathBanner = () => {
   return (
     <>
       {/* Chips de navegación */}
       <div className="flex gap-2 mb-6">
-        <Chip state="default">
-          Grupos
-        </Chip>
-        <Chip state="selected">
-          Eliminación
-        </Chip>
+        <Chip state="default">Grupos</Chip>
+        <Chip state="selected">Eliminación</Chip>
       </div>
 
-      <div className="bg-white border border-border-primary rounded-xl p-8 flex flex-col gap-6 items-center">
+      <div
+        className="bg-white border border-border-primary rounded-xl p-4 flex flex-col gap-6 items-center
+      w-full max-w-full"
+      >
         {/* Ícono */}
         <div className="bg-brand-comp-lilac rounded-full w-[50px] h-[50px] flex items-center justify-center">
-          <Trophy
-            size={32}
-            weight="duotone"
-            className="text-bg-alt-primary"
-          />
+          <Trophy size={32} weight="duotone" className="text-bg-alt-primary" />
         </div>
 
         {/* Contenido */}
@@ -35,7 +30,7 @@ const FinalPathBanner = () => {
           <p className="text-xl font-semibold text-text-default text-center leading-7">
             Mirá cómo sería el camino a la final
           </p>
-          <p className="text-base text-[#31363A] text-center leading-6">
+          <p className="text-base text-text-default text-center leading-6">
             Si en la fase de grupos quedamos:
           </p>
 

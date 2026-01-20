@@ -13,6 +13,7 @@ import { VENUES } from "./config/mapConfig";
 import { MapPinAreaIcon } from "@phosphor-icons/react";
 import { mockMatches } from "./data/mockMatches";
 import { mockMatchesWithoutPending } from "./data/mockMatchesWithoutPending";
+import { mockMatchesFinished } from "./data/mockMatchesFinished";
 
 function App() {
   const [selectedTeam, setSelectedTeam] = useState(null);
@@ -28,8 +29,8 @@ function App() {
           !selectedTeam ? "mt-12" : ""
         }`}
       >
-        <div className="px-4 w-full max-w-[1200px] mx-auto flex flex-col gap-y-8">
-          <div className="gap-6 w-full flex justify-center bg-bg-secondary">
+        <div className="w-full max-w-[834px] lg:max-w-[1200px] mx-auto flex flex-col gap-y-8">
+          <div className="gap-6 w-full flex lg:flex-row flex-col justify-center bg-bg-secondary">
             <MapContainer
               selectedTeam={selectedTeam}
               selectedCity={selectedCity}
@@ -46,9 +47,9 @@ function App() {
           </div>
 
           {/* Selects de control - solo se muestran cuando hay equipo seleccionado */}
-          <div className="flex items-end justify-between gap-6 mt-6 mb-8 font-semibold">
+          <div className="w-full flex items-end justify-center lg:justify-between gap-4 lg:gap-6 lg:mt-6 lg:mb-8 font-semibold mx-auto">
             <div className="flex gap-x-2 items-center">
-              <span className="text-text-default text-xl pr-4">
+              <span className="text-text-default text-xl pr-4 hidden lg:block">
                 Soy fan de:
               </span>
               <Select
@@ -56,11 +57,25 @@ function App() {
                 options={TEAMS}
                 value={selectedTeam?.id}
                 handleSelectChange={setSelectedTeam}
-                classes="w-80"
+                classes="w-[200px] lg:w-80"
+              />
+            </div>
+
+            <div className="flex gap-x-2 items-center lg:hidden">
+              <span className="text-text-default text-xl pr-4 hidden lg:block">
+                Sede:
+              </span>
+              <Select
+                placeholder="Seleccioná sede"
+                options={VENUES}
+                value={selectedCity?.id}
+                handleSelectChange={setSelectedCity}
+                classes="w-[200px] lg:w-80"
               />
             </div>
 
             <Button
+              classes="hidden lg:flex"
               color="secondary"
               iconPosition="left"
               icon={<MapPinAreaIcon />}
@@ -69,7 +84,7 @@ function App() {
             </Button>
           </div>
 
-          <div className="gap-6 w-full flex justify-center bg-bg-secondary">
+          <div className="gap-6 w-full flex-col items-center lg:flex-row lg:items-start flex justify-center bg-bg-secondary">
             <div className="text-2xl">
               <img src="https://placehold.co/715x640" alt="Placeholder" />
             </div>
@@ -79,7 +94,7 @@ function App() {
             </SidePanel>
           </div>
 
-          <div className="gap-6 w-full flex justify-center bg-bg-secondary">
+          <div className="gap-6 w-full flex-col items-center lg:flex-row lg:items-start flex justify-center bg-bg-secondary">
             <div className="text-2xl">
               <img src="https://placehold.co/715x640" alt="Placeholder" />
             </div>
@@ -89,24 +104,36 @@ function App() {
             </SidePanel>
           </div>
 
-          <div className="gap-6 w-full flex justify-center bg-bg-secondary">
+          <div className="gap-6 w-full flex-col items-center lg:flex-row lg:items-start flex justify-center bg-bg-secondary">
             <div className="text-2xl">
               <img src="https://placehold.co/715x640" alt="Placeholder" />
             </div>
 
             <SidePanel>
-              <MatchesContainer matches={mockMatchesWithoutPending} initialTab="elimination" />
+              <MatchesContainer
+                matches={mockMatchesWithoutPending}
+                initialTab="elimination"
+              />
             </SidePanel>
           </div>
 
-
-              <div className="gap-6 w-full flex justify-center bg-bg-secondary">
+          <div className="gap-6 w-full flex-col items-center lg:flex-row lg:items-start flex justify-center bg-bg-secondary">
             <div className="text-2xl">
               <img src="https://placehold.co/715x640" alt="Placeholder" />
             </div>
 
             <SidePanel>
               <PendingDefinitionBanner />
+            </SidePanel>
+          </div>
+
+          <div className="gap-6 w-full flex-col items-center lg:flex-row lg:items-start flex justify-center bg-bg-secondary">
+            <div className="text-2xl">
+              <img src="https://placehold.co/715x640" alt="Placeholder" />
+            </div>
+
+            <SidePanel>
+              <MatchesContainer matches={mockMatchesFinished} />
             </SidePanel>
           </div>
         </div>

@@ -58,7 +58,7 @@ function MapContent({ selectedCity, setSelectedCity }) {
 
 export default function MapContainer({ selectedTeam, selectedCity, setSelectedCity }) {
   return (
-    <div className="rounded-2xl overflow-hidden w-[790px] h-[640px]">
+    <div className="rounded-2xl overflow-hidden w-full lg:w-[790px] h-[640px]">
       <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
         <Map
           className="w-full h-full"

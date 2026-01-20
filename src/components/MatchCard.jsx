@@ -24,9 +24,18 @@ const MatchCard = ({ match }) => {
         </svg>
       </div>
 
+      {/* Badge de partido finalizado (verde) - solo si está finalizado */}
+      {match.finished && (
+        <div className="absolute right-8 -top-[6px]">
+          <div className="bg-success-primary text-white text-sm font-normal px-2 py-1 rounded-full whitespace-nowrap" style={{ fontFamily: 'Titillium Web, sans-serif', lineHeight: '20px' }}>
+            Finalizado
+          </div>
+        </div>
+      )}
+
       {/* Badge de fase (solo para eliminación) */}
       {match.phase && (
-        <div className="absolute right-8 -top-[9px]">
+        <div className="absolute right-8 -top-[6px]">
           <div className="bg-[#0059BA] text-white text-sm font-normal px-2 py-1 rounded-full whitespace-nowrap" style={{ fontFamily: 'Titillium Web, sans-serif', lineHeight: '20px' }}>
             {match.phase}
           </div>
@@ -43,13 +52,7 @@ const MatchCard = ({ match }) => {
           </svg>
         )}
         <p className="text-base font-semibold text-[#31363A]" style={{ fontFamily: 'Titillium Web, sans-serif' }}>
-          {match.team1.name}
-        </p>
-        <p className="text-base font-semibold text-[#31363A]" style={{ fontFamily: 'Titillium Web, sans-serif' }}>
-          -
-        </p>
-        <p className="text-base font-semibold text-[#31363A]" style={{ fontFamily: 'Titillium Web, sans-serif' }}>
-          {match.team2.name}
+          {match.team1.name} {match.finished && match.team1.score !== undefined && match.team1.score} - {match.finished && match.team2.score !== undefined && match.team2.score} {match.team2.name}
         </p>
         {match.team2.flag ? (
           <span className="text-xl">{match.team2.flag}</span>
