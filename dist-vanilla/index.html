@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
     <!-- World Cup 2026 Map - Vanilla Build -->
-    <!-- Generated: 2026-01-20T21:03:22.143Z -->
+    <!-- Generated: 2026-01-20T21:53:34.187Z -->
     <!-- Pure HTML + CSS + JavaScript (No React) -->
     
     <!-- Google Fonts -->
@@ -36,6 +36,10 @@
     
     <!-- Phosphor Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+    
+    <!-- Tom Select -->
+    <link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
     
     <title>World Cup Map 2026</title>
     
@@ -81,28 +85,12 @@
             <div class="flex gap-x-2 items-center">
               <span class="text-text-default text-xl pr-4 hidden lg:block">Soy fan de:</span>
               <div class="relative pt-1 w-[200px] lg:w-80">
-                <div class="custom-select" id="team-select">
-                  <div class="custom-select-selected bg-white border border-border-primary rounded-xl p-3 text-base font-normal flex items-center justify-between cursor-pointer" tabindex="0">
-                    <span class="select-value text-text-default">Seleccioná tu equipo</span>
-                    <div class="select-chevron">
-                      <i class="ph-bold ph-caret-down" style="font-size: 20px; color: #31363A;"></i>
-                    </div>
-                  </div>
-                  <div class="custom-select-items bg-white z-50 w-full rounded-xl shadow-lg overflow-y-auto absolute mt-1 top-full hidden" style="max-height: 256px;"></div>
-                </div>
+                <select id="team-select" placeholder="Seleccioná tu equipo"></select>
               </div>
             </div>
             <div class="flex gap-x-2 items-center lg:hidden">
               <div class="relative pt-1 w-[200px] lg:w-80">
-                <div class="custom-select" id="city-select">
-                  <div class="custom-select-selected bg-white border border-border-primary rounded-xl p-3 text-base font-normal flex items-center justify-between cursor-pointer" tabindex="0">
-                    <span class="select-value text-text-default">Seleccioná sede</span>
-                    <div class="select-chevron">
-                      <i class="ph-bold ph-caret-down" style="font-size: 20px; color: #31363A;"></i>
-                    </div>
-                  </div>
-                  <div class="custom-select-items bg-white z-50 w-full rounded-xl shadow-lg overflow-y-auto absolute mt-1 top-full hidden" style="max-height: 256px;"></div>
-                </div>
+                <select id="city-select" placeholder="Seleccioná sede"></select>
               </div>
             </div>
             <button class="hidden lg:flex items-center gap-2 px-4 py-2 h-10 text-base font-semibold rounded-xl border-2 border-brand-primary text-brand-primary hover:border-bg-alt-secondary hover:text-bg-alt-secondary active:border-action-pressed active:text-action-pressed focus:outline-none focus:ring-4 focus:ring-border-primary transition-all duration-300">
@@ -137,15 +125,7 @@
                     </div>
                     <div class="mt-6">
                       <div class="relative pt-1 w-full">
-                        <div class="custom-select" id="other-team-select">
-                          <div class="custom-select-selected bg-white border border-border-primary rounded-xl p-3 text-base font-normal flex items-center justify-between cursor-pointer" tabindex="0">
-                            <span class="select-value text-text-default">Otro equipo</span>
-                            <div class="select-chevron">
-                              <i class="ph-bold ph-caret-down" style="font-size: 20px; color: #31363A;"></i>
-                            </div>
-                          </div>
-                          <div class="custom-select-items bg-white z-50 w-full rounded-xl shadow-lg overflow-y-auto absolute mt-1 top-full hidden" style="max-height: 256px;"></div>
-                        </div>
+                        <select id="other-team-select" placeholder="Otro equipo"></select>
                       </div>
                     </div>
                   </div>

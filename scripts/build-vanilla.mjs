@@ -33,6 +33,142 @@ try {
 
 console.log('✅ CSS compilado\n');
 
+// 2.5. Agregar estilos de Tom Select
+console.log('🎨 Agregando estilos de Tom Select...');
+const tomSelectStyles = `
+
+/* Tom Select Custom Styles - A365 Design System */
+.ts-wrapper.single .ts-control {
+  background: #fff;
+  border: 1px solid rgb(194, 223, 255);
+  border-radius: 0.75rem;
+  padding: 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 400;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+
+.ts-wrapper.single .ts-control:hover {
+  border-color: rgb(51, 140, 237);
+}
+
+.ts-wrapper.single.focus .ts-control {
+  outline: none;
+  border-color: rgb(194, 223, 255);
+  box-shadow: 0 0 0 2px rgb(194, 223, 255);
+}
+
+.ts-wrapper .ts-control .item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ts-wrapper.single .ts-control:after {
+  content: '';
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid #31363A;
+  pointer-events: none;
+}
+
+.ts-dropdown {
+  background: #fff;
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  margin-top: 0.25rem;
+  border: none;
+  overflow: hidden;
+}
+
+.ts-dropdown .option {
+  padding: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.ts-dropdown .option:hover,
+.ts-dropdown .option.active {
+  background-color: #f2f2f2;
+  color: #31363A;
+}
+
+.ts-dropdown .option .flex {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ts-wrapper.single .ts-control .item .text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+.ts-dropdown .option .text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+/* Hide native dropdown arrow */
+.ts-wrapper.single .ts-control input {
+  display: none;
+}
+
+/* Placeholder style */
+.ts-wrapper.single .ts-control.dropdown-active:before {
+  display: none;
+}
+
+.ts-wrapper .ts-control > * {
+  vertical-align: middle;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Input hidden when item selected */
+.ts-wrapper.single.has-items .ts-control input {
+  display: none !important;
+}
+
+/* Max height for dropdown */
+.ts-dropdown-content {
+  max-height: 256px;
+  overflow-y: auto;
+}
+
+/* Scrollbar style */
+.ts-dropdown-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.ts-dropdown-content::-webkit-scrollbar-track {
+  background: #f2f2f2;
+  border-radius: 0.75rem;
+}
+
+.ts-dropdown-content::-webkit-scrollbar-thumb {
+  background: #c2dfff;
+  border-radius: 0.75rem;
+}
+
+.ts-dropdown-content::-webkit-scrollbar-thumb:hover {
+  background: #338ced;
+}
+`;
+
+const cssPath = path.join(distPath, 'assets', 'styles.css');
+const currentCss = fs.readFileSync(cssPath, 'utf8');
+fs.writeFileSync(cssPath, currentCss + tomSelectStyles);
+console.log('✅ Estilos de Tom Select agregados\n');
+
 // 3. Leer configuración de mapas y teams
 const mapConfigPath = path.join(__dirname, '..', 'src', 'config', 'mapConfig.js');
 const teamsConfigPath = path.join(__dirname, '..', 'src', 'config', 'teamsConfig.js');
@@ -439,86 +575,66 @@ function populateSelects() {
   });
 }
 
+/**
+ * Initialize Tom Select on a select element
+ * @param {string} selectId - ID of the select element
+ * @param {Array} options - Array of options
+ * @param {string} placeholder - Placeholder text
+ * @param {Function} onChange - Callback when selection changes
+ * @param {string|null} selectedValue - Initial selected value
+ */
 function initCustomSelect(selectId, options, placeholder, onChange, selectedValue = null) {
-  const selectContainer = document.getElementById(selectId);
-  if (!selectContainer) return;
+  const selectElement = document.getElementById(selectId);
+  if (!selectElement) return;
 
-  const selectedDiv = selectContainer.querySelector('.custom-select-selected');
-  const itemsDiv = selectContainer.querySelector('.custom-select-items');
-  const valueSpan = selectContainer.querySelector('.select-value');
-
-  // Populate options
-  itemsDiv.innerHTML = options.map(option => {
-    const isSelected = selectedValue && (option.value ?? option.id) === selectedValue;
-    return \`
-      <div class="custom-select-item\${isSelected ? ' selected' : ''}" data-value="\${option.value ?? option.id}">
-        \${option.flag ? \`<span class="text-xl">\${option.flag}</span>\` : ''}
-        <span>\${option.label ?? option.name}</span>
-      </div>
-    \`;
-  }).join('');
-
-  // Set initial value if selected
-  if (selectedValue) {
-    const selectedOption = options.find(opt => (opt.value ?? opt.id) === selectedValue);
-    if (selectedOption) {
-      valueSpan.innerHTML = \`
-        \${selectedOption.flag ? \`<span class="text-xl">\${selectedOption.flag}</span>\` : ''}
-        <span>\${selectedOption.label ?? selectedOption.name}</span>
-      \`;
-      valueSpan.classList.remove('text-text-lighter');
+  // Configure Tom Select
+  const tomSelect = new TomSelect(\`#\${selectId}\`, {
+    valueField: 'id',
+    labelField: 'name',
+    searchField: 'name',
+    options: options,
+    placeholder: placeholder,
+    create: false,
+    maxItems: 1,
+    allowEmptyOption: false,
+    closeAfterSelect: true,
+    
+    // Custom rendering with flags
+    render: {
+      option: function(data, escape) {
+        return \`
+          <div class="flex items-center gap-2 p-2">
+            \${data.flag ? \`<span class="text-xl">\${data.flag}</span>\` : ''}
+            <span>\${escape(data.name)}</span>
+          </div>
+        \`;
+      },
+      item: function(data, escape) {
+        return \`
+          <div class="flex items-center gap-2">
+            \${data.flag ? \`<span class="text-xl">\${data.flag}</span>\` : ''}
+            <span>\${escape(data.name)}</span>
+          </div>
+        \`;
+      }
+    },
+    
+    // Handle selection change
+    onChange: function(value) {
+      if (!value) return;
+      const selectedOption = options.find(opt => String(opt.id) === String(value));
+      if (selectedOption && onChange) {
+        onChange(selectedOption);
+      }
     }
+  });
+
+  // Set initial value if provided
+  if (selectedValue) {
+    tomSelect.setValue(selectedValue, true);
   }
 
-  // Toggle dropdown
-  selectedDiv.addEventListener('click', (e) => {
-    e.stopPropagation();
-    const isOpen = !itemsDiv.classList.contains('hidden');
-    
-    // Close all other dropdowns
-    document.querySelectorAll('.custom-select-items').forEach(dropdown => {
-      dropdown.classList.add('hidden');
-    });
-
-    if (!isOpen) {
-      itemsDiv.classList.remove('hidden');
-    }
-  });
-
-  // Handle option selection
-  itemsDiv.addEventListener('click', (e) => {
-    const item = e.target.closest('.custom-select-item');
-    if (!item) return;
-
-    const value = item.dataset.value;
-    const selectedOption = options.find(opt => String(opt.value ?? opt.id) === String(value));
-    
-    if (selectedOption) {
-      // Update display
-      valueSpan.innerHTML = \`
-        \${selectedOption.flag ? \`<span class="text-xl">\${selectedOption.flag}</span>\` : ''}
-        <span>\${selectedOption.label ?? selectedOption.name}</span>
-      \`;
-      valueSpan.classList.remove('text-text-lighter');
-
-      // Update selected state
-      itemsDiv.querySelectorAll('.custom-select-item').forEach(i => i.classList.remove('selected'));
-      item.classList.add('selected');
-
-      // Close dropdown
-      itemsDiv.classList.add('hidden');
-
-      // Trigger callback
-      if (onChange) onChange(selectedOption);
-    }
-  });
-
-  // Close dropdown when clicking outside
-  document.addEventListener('click', (e) => {
-    if (!selectContainer.contains(e.target)) {
-      itemsDiv.classList.add('hidden');
-    }
-  });
+  return tomSelect;
 }
 
 function populateMatchCards() {
@@ -856,6 +972,10 @@ const html = `<!DOCTYPE html>
     <!-- Phosphor Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
     
+    <!-- Tom Select -->
+    <link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
+    
     <title>World Cup Map 2026</title>
     
     <!-- Styles -->
@@ -900,28 +1020,12 @@ const html = `<!DOCTYPE html>
             <div class="flex gap-x-2 items-center">
               <span class="text-text-default text-xl pr-4 hidden lg:block">Soy fan de:</span>
               <div class="relative pt-1 w-[200px] lg:w-80">
-                <div class="custom-select" id="team-select">
-                  <div class="custom-select-selected bg-white border border-border-primary rounded-xl p-3 text-base font-normal flex items-center justify-between cursor-pointer" tabindex="0">
-                    <span class="select-value text-text-default">Seleccioná tu equipo</span>
-                    <div class="select-chevron">
-                      <i class="ph-bold ph-caret-down" style="font-size: 20px; color: #31363A;"></i>
-                    </div>
-                  </div>
-                  <div class="custom-select-items bg-white z-50 w-full rounded-xl shadow-lg overflow-y-auto absolute mt-1 top-full hidden" style="max-height: 256px;"></div>
-                </div>
+                <select id="team-select" placeholder="Seleccioná tu equipo"></select>
               </div>
             </div>
             <div class="flex gap-x-2 items-center lg:hidden">
               <div class="relative pt-1 w-[200px] lg:w-80">
-                <div class="custom-select" id="city-select">
-                  <div class="custom-select-selected bg-white border border-border-primary rounded-xl p-3 text-base font-normal flex items-center justify-between cursor-pointer" tabindex="0">
-                    <span class="select-value text-text-default">Seleccioná sede</span>
-                    <div class="select-chevron">
-                      <i class="ph-bold ph-caret-down" style="font-size: 20px; color: #31363A;"></i>
-                    </div>
-                  </div>
-                  <div class="custom-select-items bg-white z-50 w-full rounded-xl shadow-lg overflow-y-auto absolute mt-1 top-full hidden" style="max-height: 256px;"></div>
-                </div>
+                <select id="city-select" placeholder="Seleccioná sede"></select>
               </div>
             </div>
             <button class="hidden lg:flex items-center gap-2 px-4 py-2 h-10 text-base font-semibold rounded-xl border-2 border-brand-primary text-brand-primary hover:border-bg-alt-secondary hover:text-bg-alt-secondary active:border-action-pressed active:text-action-pressed focus:outline-none focus:ring-4 focus:ring-border-primary transition-all duration-300">
@@ -956,15 +1060,7 @@ const html = `<!DOCTYPE html>
                     </div>
                     <div class="mt-6">
                       <div class="relative pt-1 w-full">
-                        <div class="custom-select" id="other-team-select">
-                          <div class="custom-select-selected bg-white border border-border-primary rounded-xl p-3 text-base font-normal flex items-center justify-between cursor-pointer" tabindex="0">
-                            <span class="select-value text-text-default">Otro equipo</span>
-                            <div class="select-chevron">
-                              <i class="ph-bold ph-caret-down" style="font-size: 20px; color: #31363A;"></i>
-                            </div>
-                          </div>
-                          <div class="custom-select-items bg-white z-50 w-full rounded-xl shadow-lg overflow-y-auto absolute mt-1 top-full hidden" style="max-height: 256px;"></div>
-                        </div>
+                        <select id="other-team-select" placeholder="Otro equipo"></select>
                       </div>
                     </div>
                   </div>

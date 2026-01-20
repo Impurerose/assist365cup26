@@ -1,5 +1,5 @@
 // World Cup 2026 - Main Application
-// Auto-generated: 2026-01-20T21:03:22.143Z
+// Auto-generated: 2026-01-20T21:53:34.187Z
 
 const APP_STATE = {
   selectedTeam: null,
@@ -142,86 +142,66 @@ function populateSelects() {
   });
 }
 
+/**
+ * Initialize Tom Select on a select element
+ * @param {string} selectId - ID of the select element
+ * @param {Array} options - Array of options
+ * @param {string} placeholder - Placeholder text
+ * @param {Function} onChange - Callback when selection changes
+ * @param {string|null} selectedValue - Initial selected value
+ */
 function initCustomSelect(selectId, options, placeholder, onChange, selectedValue = null) {
-  const selectContainer = document.getElementById(selectId);
-  if (!selectContainer) return;
+  const selectElement = document.getElementById(selectId);
+  if (!selectElement) return;
 
-  const selectedDiv = selectContainer.querySelector('.custom-select-selected');
-  const itemsDiv = selectContainer.querySelector('.custom-select-items');
-  const valueSpan = selectContainer.querySelector('.select-value');
-
-  // Populate options
-  itemsDiv.innerHTML = options.map(option => {
-    const isSelected = selectedValue && (option.value ?? option.id) === selectedValue;
-    return `
-      <div class="custom-select-item${isSelected ? ' selected' : ''}" data-value="${option.value ?? option.id}">
-        ${option.flag ? `<span class="text-xl">${option.flag}</span>` : ''}
-        <span>${option.label ?? option.name}</span>
-      </div>
-    `;
-  }).join('');
-
-  // Set initial value if selected
-  if (selectedValue) {
-    const selectedOption = options.find(opt => (opt.value ?? opt.id) === selectedValue);
-    if (selectedOption) {
-      valueSpan.innerHTML = `
-        ${selectedOption.flag ? `<span class="text-xl">${selectedOption.flag}</span>` : ''}
-        <span>${selectedOption.label ?? selectedOption.name}</span>
-      `;
-      valueSpan.classList.remove('text-text-lighter');
+  // Configure Tom Select
+  const tomSelect = new TomSelect(`#${selectId}`, {
+    valueField: 'id',
+    labelField: 'name',
+    searchField: 'name',
+    options: options,
+    placeholder: placeholder,
+    create: false,
+    maxItems: 1,
+    allowEmptyOption: false,
+    closeAfterSelect: true,
+    
+    // Custom rendering with flags
+    render: {
+      option: function(data, escape) {
+        return `
+          <div class="flex items-center gap-2 p-2">
+            ${data.flag ? `<span class="text-xl">${data.flag}</span>` : ''}
+            <span>${escape(data.name)}</span>
+          </div>
+        `;
+      },
+      item: function(data, escape) {
+        return `
+          <div class="flex items-center gap-2">
+            ${data.flag ? `<span class="text-xl">${data.flag}</span>` : ''}
+            <span>${escape(data.name)}</span>
+          </div>
+        `;
+      }
+    },
+    
+    // Handle selection change
+    onChange: function(value) {
+      if (!value) return;
+      const selectedOption = options.find(opt => String(opt.id) === String(value));
+      if (selectedOption && onChange) {
+        onChange(selectedOption);
+      }
     }
+  });
+
+  // Set initial value if provided
+  if (selectedValue) {
+    tomSelect.setValue(selectedValue, true);
   }
 
-  // Toggle dropdown
-  selectedDiv.addEventListener('click', (e) => {
-    e.stopPropagation();
-    const isOpen = !itemsDiv.classList.contains('hidden');
-    
-    // Close all other dropdowns
-    document.querySelectorAll('.custom-select-items').forEach(dropdown => {
-      dropdown.classList.add('hidden');
-    });
-
-    if (!isOpen) {
-      itemsDiv.classList.remove('hidden');
-    }
-  });
-
-  // Handle option selection
-  itemsDiv.addEventListener('click', (e) => {
-    const item = e.target.closest('.custom-select-item');
-    if (!item) return;
-
-    const value = item.dataset.value;
-    const selectedOption = options.find(opt => String(opt.value ?? opt.id) === String(value));
-    
-    if (selectedOption) {
-      // Update display
-      valueSpan.innerHTML = `
-        ${selectedOption.flag ? `<span class="text-xl">${selectedOption.flag}</span>` : ''}
-        <span>${selectedOption.label ?? selectedOption.name}</span>
-      `;
-      valueSpan.classList.remove('text-text-lighter');
-
-      // Update selected state
-      itemsDiv.querySelectorAll('.custom-select-item').forEach(i => i.classList.remove('selected'));
-      item.classList.add('selected');
-
-      // Close dropdown
-      itemsDiv.classList.add('hidden');
-
-      // Trigger callback
-      if (onChange) onChange(selectedOption);
-    }
-  });
-
-  // Close dropdown when clicking outside
-  document.addEventListener('click', (e) => {
-    if (!selectContainer.contains(e.target)) {
-      itemsDiv.classList.add('hidden');
-    }
-  });
+  return tomSelect;
 }
 
 function populateMatchCards() {
