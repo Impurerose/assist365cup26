@@ -361,7 +361,7 @@ function createMarkerContent(venue) {
       <div style="position:absolute;left:50%;transform:translateX(-50%);top:52px;width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-top:12px solid #006FE8;"></div>
     </div>
     <div class="bg-white px-3 py-1 rounded-lg shadow-md">
-      <span class="text-[#0059BA] font-bold text-sm whitespace-nowrap">\${venue.name}</span>
+      <span class="text-text-decorative-darker font-bold text-sm whitespace-nowrap">\${venue.name}</span>
     </div>
   \`;
   return container;
@@ -474,7 +474,7 @@ function renderMatchCard(match) {
 
   const phaseBadge = match.phase ? \`
     <div class="absolute right-8 -top-[6px]">
-      <div class="bg-[#0059BA] text-white text-sm font-normal px-2 py-1 rounded-full whitespace-nowrap" style="font-family: 'Titillium Web', sans-serif; line-height: 20px;">
+      <div class="bg-bg-alt-secondary text-white text-sm font-normal px-2 py-1 rounded-full whitespace-nowrap" style="font-family: 'Titillium Web', sans-serif; line-height: 20px;">
         \${match.phase}
       </div>
     </div>
@@ -491,7 +491,7 @@ function renderMatchCard(match) {
   \`;
 
   return \`
-    <div class="bg-white border border-[#C2DFFF] rounded-xl px-3 py-4 flex flex-col gap-4 relative overflow-visible">
+    <div class="bg-white border border-border-primary rounded-xl px-3 py-4 flex flex-col gap-4 relative overflow-visible">
       <div class="absolute right-[7px] -top-[3px] w-5 h-5">
         <svg width="20" height="20" viewBox="0 0 20 20">
           <circle cx="10" cy="10" r="10" fill="#006FE8"/>
@@ -502,21 +502,21 @@ function renderMatchCard(match) {
       \${phaseBadge}
       <div class="flex items-center gap-2">
         \${match.team1.flag ? \`<span class="text-xl">\${match.team1.flag}</span>\` : flagPlaceholder}
-        <p class="text-base font-semibold text-[#31363A]" style="font-family: 'Titillium Web', sans-serif;">\${teamDisplay}</p>
+        <p class="text-base font-semibold text-text-default" style="font-family: 'Titillium Web', sans-serif;">\${teamDisplay}</p>
         \${match.team2.flag ? \`<span class="text-xl">\${match.team2.flag}</span>\` : flagPlaceholder}
       </div>
       <div class="flex flex-col gap-2">
         <div class="flex items-center gap-2">
           <i class="ph ph-calendar" style="font-size: 20px; color: #7BD0C2;"></i>
-          <p class="text-base text-[#31363A]" style="font-family: 'Titillium Web', sans-serif;">\${match.date}</p>
+          <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">\${match.date}</p>
         </div>
         <div class="flex items-center gap-2">
           <i class="ph ph-map-pin" style="font-size: 20px; color: #7BD0C2;"></i>
-          <p class="text-base text-[#31363A]" style="font-family: 'Titillium Web', sans-serif;">\${match.city}</p>
+          <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">\${match.city}</p>
         </div>
         <div class="flex items-center gap-2">
           <i class="ph ph-clock" style="font-size: 20px; color: #7BD0C2;"></i>
-          <p class="text-base text-[#31363A]" style="font-family: 'Titillium Web', sans-serif;">\${match.time.local} - \${match.time.venue}</p>
+          <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">\${match.time.local} - \${match.time.venue}</p>
         </div>
       </div>
     </div>
@@ -543,14 +543,14 @@ function renderMatchesContainer(matches, initialTab = 'groups') {
     <div class="flex gap-2 mb-6">
       <button 
         data-tab="groups" 
-        class="border-2 \${initialTab === 'groups' ? 'border-[#006FE8] text-[#31363A]' : 'border-[#C2DFFF] text-[#70777C]'} font-semibold rounded-full px-4 py-[10px] text-lg transition-all duration-300 cursor-pointer"
+        class="border-2 \${initialTab === 'groups' ? 'border-brand-primary text-text-default' : 'border-border-primary text-text-lighter'} font-semibold rounded-full px-4 py-[10px] text-lg transition-all duration-300 cursor-pointer"
         style="font-family: 'Titillium Web', sans-serif;"
       >
         Grupos
       </button>
       <button 
         data-tab="elimination" 
-        class="border-2 \${initialTab === 'elimination' ? 'border-[#006FE8] text-[#31363A]' : 'border-[#C2DFFF] text-[#70777C]'} font-semibold rounded-full px-4 py-[10px] text-lg transition-all duration-300 cursor-pointer"
+        class="border-2 \${initialTab === 'elimination' ? 'border-brand-primary text-text-default' : 'border-border-primary text-text-lighter'} font-semibold rounded-full px-4 py-[10px] text-lg transition-all duration-300 cursor-pointer"
         style="font-family: 'Titillium Web', sans-serif;"
       >
         Eliminación
@@ -566,10 +566,10 @@ function renderMatchesContainer(matches, initialTab = 'groups') {
 function renderFinalPathBanner() {
   return \`
     <div class="flex gap-2 mb-6">
-      <button class="border-2 border-[#C2DFFF] text-[#70777C] font-semibold rounded-full px-4 py-[10px] text-lg" style="font-family: 'Titillium Web', sans-serif;">
+      <button class="border-2 border-border-primary text-text-lighter font-semibold rounded-full px-4 py-[10px] text-lg" style="font-family: 'Titillium Web', sans-serif;">
         Grupos
       </button>
-      <button class="border-2 border-[#006FE8] text-[#31363A] font-semibold rounded-full px-4 py-[10px] text-lg" style="font-family: 'Titillium Web', sans-serif;">
+      <button class="border-2 border-brand-primary text-text-default font-semibold rounded-full px-4 py-[10px] text-lg" style="font-family: 'Titillium Web', sans-serif;">
         Eliminación
       </button>
     </div>
@@ -585,13 +585,13 @@ function renderFinalPathBanner() {
           Si en la fase de grupos quedamos:
         </p>
         <div class="flex items-center justify-between lg:justify-center w-full gap-2">
-          <button class="bg-[#BDEDE7] text-default hover:bg-[#A8E5DD] active:bg-[#93DDD3] focus:bg-[#BDEDE7] focus:ring-icon-lighter focus:ring-4 focus:outline-none w-full lg:w-fit px-4 py-[10px] h-[48px] text-lg font-semibold rounded-xl transition-all duration-300" style="font-family: 'Titillium Web', sans-serif;">
+          <button class="bg-action-alt-default text-default hover:bg-action-alt-hover active:bg-action-alt-pressed focus:bg-action-alt-default focus:ring-icon-lighter focus:ring-4 focus:outline-none w-full lg:w-fit px-4 py-[10px] h-[48px] text-lg font-semibold rounded-xl transition-all duration-300" style="font-family: 'Titillium Web', sans-serif;">
             Primeros
           </button>
-          <button class="bg-[#BDEDE7] text-default hover:bg-[#A8E5DD] active:bg-[#93DDD3] focus:bg-[#BDEDE7] focus:ring-icon-lighter focus:ring-4 focus:outline-none w-full lg:w-fit px-4 py-[10px] h-[48px] text-lg font-semibold rounded-xl transition-all duration-300" style="font-family: 'Titillium Web', sans-serif;">
+          <button class="bg-action-alt-default text-default hover:bg-action-alt-hover active:bg-action-alt-pressed focus:bg-action-alt-default focus:ring-icon-lighter focus:ring-4 focus:outline-none w-full lg:w-fit px-4 py-[10px] h-[48px] text-lg font-semibold rounded-xl transition-all duration-300" style="font-family: 'Titillium Web', sans-serif;">
             Segundos
           </button>
-          <button class="bg-[#BDEDE7] text-default hover:bg-[#A8E5DD] active:bg-[#93DDD3] focus:bg-[#BDEDE7] focus:ring-icon-lighter focus:ring-4 focus:outline-none w-full lg:w-fit px-4 py-[10px] h-[48px] text-lg font-semibold rounded-xl transition-all duration-300" style="font-family: 'Titillium Web', sans-serif;">
+          <button class="bg-action-alt-default text-default hover:bg-action-alt-hover active:bg-action-alt-pressed focus:bg-action-alt-default focus:ring-icon-lighter focus:ring-4 focus:outline-none w-full lg:w-fit px-4 py-[10px] h-[48px] text-lg font-semibold rounded-xl transition-all duration-300" style="font-family: 'Titillium Web', sans-serif;">
             Terceros
           </button>
         </div>
@@ -657,11 +657,11 @@ function initChipsNav() {
       APP_STATE.activeTab = chip.dataset.tab;
       chips.forEach(c => {
         if (c.dataset.tab === APP_STATE.activeTab) {
-          c.classList.add('border-[#006FE8]', 'text-[#31363A]');
-          c.classList.remove('border-[#C2DFFF]', 'text-[#70777C]');
+          c.classList.add('border-brand-primary', 'text-text-default');
+          c.classList.remove('border-border-primary', 'text-text-lighter');
         } else {
-          c.classList.remove('border-[#006FE8]', 'text-[#31363A]');
-          c.classList.add('border-[#C2DFFF]', 'text-[#70777C]');
+          c.classList.remove('border-brand-primary', 'text-text-default');
+          c.classList.add('border-border-primary', 'text-text-lighter');
         }
       });
       console.log('📑 Tab:', APP_STATE.activeTab);
@@ -726,7 +726,7 @@ const html = `<!DOCTYPE html>
     <link rel="stylesheet" href="assets/styles.css" />
   </head>
   
-  <body class="bg-[#F2F2F2]">
+  <body class="bg-bg-secondary">
     <div class="w-full min-h-screen flex flex-col">
       
       <!-- Header -->
@@ -750,7 +750,7 @@ const html = `<!DOCTYPE html>
               World Cup Map 2026
             </h1>
           </div>
-          <button class="inline-flex items-center justify-center gap-2 px-4 py-2 h-10 text-base font-semibold rounded-xl bg-[#006FE8] text-white hover:bg-[#0059BA] transition-colors">
+          <button class="inline-flex items-center justify-center gap-2 px-4 py-2 h-10 text-base font-semibold rounded-xl bg-brand-primary text-white hover:bg-bg-alt-secondary transition-colors">
             <i class="ph ph-share-network" style="font-size: 16px; font-weight: bold;"></i>
             Compartir
           </button>
@@ -762,17 +762,17 @@ const html = `<!DOCTYPE html>
         <div class="w-full max-w-[834px] lg:max-w-[1200px] mx-auto">
           <div class="w-full flex items-end justify-center lg:justify-between gap-4 lg:gap-6 lg:mt-6 lg:mb-8 font-semibold mx-auto">
             <div class="flex gap-x-2 items-center">
-              <span class="text-[#31363A] text-xl pr-4 hidden lg:block">Soy fan de:</span>
-              <select id="team-select" class="w-[200px] lg:w-80 bg-white border border-[#C2DFFF] rounded-xl p-3 text-base font-normal focus:outline-none focus:ring-2 focus:ring-[#C2DFFF]">
+              <span class="text-text-default text-xl pr-4 hidden lg:block">Soy fan de:</span>
+              <select id="team-select" class="w-[200px] lg:w-80 bg-white border border-border-primary rounded-xl p-3 text-base font-normal focus:outline-none focus:ring-2 focus:ring-border-primary">
                 <option value="">Seleccioná tu equipo</option>
               </select>
             </div>
             <div class="flex gap-x-2 items-center lg:hidden">
-              <select id="city-select" class="w-[200px] lg:w-80 bg-white border border-[#C2DFFF] rounded-xl p-3 text-base font-normal focus:outline-none focus:ring-2 focus:ring-[#C2DFFF]">
+              <select id="city-select" class="w-[200px] lg:w-80 bg-white border border-border-primary rounded-xl p-3 text-base font-normal focus:outline-none focus:ring-2 focus:ring-border-primary">
                 <option value="">Seleccioná sede</option>
               </select>
             </div>
-            <button class="hidden lg:flex items-center gap-2 px-4 py-2 h-10 text-base font-semibold rounded-xl border-2 border-[#006FE8] text-[#006FE8] hover:border-[#0059BA] hover:text-[#0059BA] active:border-[#004A9C] active:text-[#004A9C] focus:outline-none focus:ring-4 focus:ring-[#C2DFFF] transition-all duration-300">
+            <button class="hidden lg:flex items-center gap-2 px-4 py-2 h-10 text-base font-semibold rounded-xl border-2 border-brand-primary text-brand-primary hover:border-bg-alt-secondary hover:text-bg-alt-secondary active:border-action-pressed active:text-action-pressed focus:outline-none focus:ring-4 focus:ring-border-primary transition-all duration-300">
               <i class="ph ph-map-pin-area" style="font-size: 16px; font-weight: bold;"></i>
               Explorar sedes
             </button>
@@ -785,7 +785,7 @@ const html = `<!DOCTYPE html>
         <div class="w-full max-w-[834px] lg:max-w-[1200px] mx-auto flex flex-col gap-y-8">
           
           <!-- SECTION 1: Map + Side Panel Container -->
-          <div class="gap-6 w-full flex flex-col lg:flex-row justify-center bg-[#F2F2F2]">
+          <div class="gap-6 w-full flex flex-col lg:flex-row justify-center bg-bg-secondary">
             <div class="rounded-2xl overflow-hidden w-full lg:w-[715px] h-[640px]">
               <div id="map" class="w-full h-full"></div>
             </div>
@@ -814,14 +814,14 @@ const html = `<!DOCTYPE html>
                   <div id="chips-nav" class="flex gap-2 mb-6">
                   <button 
                     data-tab="groups" 
-                    class="border-2 border-[#006FE8] text-[#31363A] font-semibold rounded-full px-4 py-[10px] text-lg transition-all duration-300 cursor-pointer"
+                    class="border-2 border-brand-primary text-text-default font-semibold rounded-full px-4 py-[10px] text-lg transition-all duration-300 cursor-pointer"
                     style="font-family: 'Titillium Web', sans-serif;"
                   >
                     Grupos
                   </button>
                   <button 
                     data-tab="elimination" 
-                    class="border-2 border-[#C2DFFF] text-[#70777C] font-semibold rounded-full px-4 py-[10px] text-lg transition-all duration-300 cursor-pointer hover:border-[#006FE8] hover:text-[#31363A]"
+                    class="border-2 border-border-primary text-text-lighter font-semibold rounded-full px-4 py-[10px] text-lg transition-all duration-300 cursor-pointer hover:border-brand-primary hover:text-text-default"
                     style="font-family: 'Titillium Web', sans-serif;"
                   >
                     Eliminación
@@ -836,7 +836,7 @@ const html = `<!DOCTYPE html>
           </div>
 
           <!-- SECTION 2: Placeholder + All Matches -->
-          <div class="gap-6 w-full flex flex-col lg:flex-row items-center lg:items-start justify-center bg-[#F2F2F2]">
+          <div class="gap-6 w-full flex flex-col lg:flex-row items-center lg:items-start justify-center bg-bg-secondary">
             <div class="text-2xl">
               <img src="https://placehold.co/715x640" alt="Placeholder" class="w-full lg:w-auto" />
             </div>

@@ -1,5 +1,5 @@
 // World Cup 2026 - Main Application
-// Auto-generated: 2026-01-20T18:26:53.352Z
+// Auto-generated: 2026-01-20T18:38:58.572Z
 
 const APP_STATE = {
   selectedTeam: null,
@@ -64,7 +64,7 @@ function createMarkerContent(venue) {
       <div style="position:absolute;left:50%;transform:translateX(-50%);top:52px;width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-top:12px solid #006FE8;"></div>
     </div>
     <div class="bg-white px-3 py-1 rounded-lg shadow-md">
-      <span class="text-[#0059BA] font-bold text-sm whitespace-nowrap">${venue.name}</span>
+      <span class="text-text-decorative-darker font-bold text-sm whitespace-nowrap">${venue.name}</span>
     </div>
   `;
   return container;
@@ -177,7 +177,7 @@ function renderMatchCard(match) {
 
   const phaseBadge = match.phase ? `
     <div class="absolute right-8 -top-[6px]">
-      <div class="bg-[#0059BA] text-white text-sm font-normal px-2 py-1 rounded-full whitespace-nowrap" style="font-family: 'Titillium Web', sans-serif; line-height: 20px;">
+      <div class="bg-bg-alt-secondary text-white text-sm font-normal px-2 py-1 rounded-full whitespace-nowrap" style="font-family: 'Titillium Web', sans-serif; line-height: 20px;">
         ${match.phase}
       </div>
     </div>
@@ -194,7 +194,7 @@ function renderMatchCard(match) {
   `;
 
   return `
-    <div class="bg-white border border-[#C2DFFF] rounded-xl px-3 py-4 flex flex-col gap-4 relative overflow-visible">
+    <div class="bg-white border border-border-primary rounded-xl px-3 py-4 flex flex-col gap-4 relative overflow-visible">
       <div class="absolute right-[7px] -top-[3px] w-5 h-5">
         <svg width="20" height="20" viewBox="0 0 20 20">
           <circle cx="10" cy="10" r="10" fill="#006FE8"/>
@@ -205,21 +205,21 @@ function renderMatchCard(match) {
       ${phaseBadge}
       <div class="flex items-center gap-2">
         ${match.team1.flag ? `<span class="text-xl">${match.team1.flag}</span>` : flagPlaceholder}
-        <p class="text-base font-semibold text-[#31363A]" style="font-family: 'Titillium Web', sans-serif;">${teamDisplay}</p>
+        <p class="text-base font-semibold text-text-default" style="font-family: 'Titillium Web', sans-serif;">${teamDisplay}</p>
         ${match.team2.flag ? `<span class="text-xl">${match.team2.flag}</span>` : flagPlaceholder}
       </div>
       <div class="flex flex-col gap-2">
         <div class="flex items-center gap-2">
           <i class="ph ph-calendar" style="font-size: 20px; color: #7BD0C2;"></i>
-          <p class="text-base text-[#31363A]" style="font-family: 'Titillium Web', sans-serif;">${match.date}</p>
+          <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">${match.date}</p>
         </div>
         <div class="flex items-center gap-2">
           <i class="ph ph-map-pin" style="font-size: 20px; color: #7BD0C2;"></i>
-          <p class="text-base text-[#31363A]" style="font-family: 'Titillium Web', sans-serif;">${match.city}</p>
+          <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">${match.city}</p>
         </div>
         <div class="flex items-center gap-2">
           <i class="ph ph-clock" style="font-size: 20px; color: #7BD0C2;"></i>
-          <p class="text-base text-[#31363A]" style="font-family: 'Titillium Web', sans-serif;">${match.time.local} - ${match.time.venue}</p>
+          <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">${match.time.local} - ${match.time.venue}</p>
         </div>
       </div>
     </div>
@@ -246,14 +246,14 @@ function renderMatchesContainer(matches, initialTab = 'groups') {
     <div class="flex gap-2 mb-6">
       <button 
         data-tab="groups" 
-        class="border-2 ${initialTab === 'groups' ? 'border-[#006FE8] text-[#31363A]' : 'border-[#C2DFFF] text-[#70777C]'} font-semibold rounded-full px-4 py-[10px] text-lg transition-all duration-300 cursor-pointer"
+        class="border-2 ${initialTab === 'groups' ? 'border-brand-primary text-text-default' : 'border-border-primary text-text-lighter'} font-semibold rounded-full px-4 py-[10px] text-lg transition-all duration-300 cursor-pointer"
         style="font-family: 'Titillium Web', sans-serif;"
       >
         Grupos
       </button>
       <button 
         data-tab="elimination" 
-        class="border-2 ${initialTab === 'elimination' ? 'border-[#006FE8] text-[#31363A]' : 'border-[#C2DFFF] text-[#70777C]'} font-semibold rounded-full px-4 py-[10px] text-lg transition-all duration-300 cursor-pointer"
+        class="border-2 ${initialTab === 'elimination' ? 'border-brand-primary text-text-default' : 'border-border-primary text-text-lighter'} font-semibold rounded-full px-4 py-[10px] text-lg transition-all duration-300 cursor-pointer"
         style="font-family: 'Titillium Web', sans-serif;"
       >
         Eliminación
@@ -269,10 +269,10 @@ function renderMatchesContainer(matches, initialTab = 'groups') {
 function renderFinalPathBanner() {
   return `
     <div class="flex gap-2 mb-6">
-      <button class="border-2 border-[#C2DFFF] text-[#70777C] font-semibold rounded-full px-4 py-[10px] text-lg" style="font-family: 'Titillium Web', sans-serif;">
+      <button class="border-2 border-border-primary text-text-lighter font-semibold rounded-full px-4 py-[10px] text-lg" style="font-family: 'Titillium Web', sans-serif;">
         Grupos
       </button>
-      <button class="border-2 border-[#006FE8] text-[#31363A] font-semibold rounded-full px-4 py-[10px] text-lg" style="font-family: 'Titillium Web', sans-serif;">
+      <button class="border-2 border-brand-primary text-text-default font-semibold rounded-full px-4 py-[10px] text-lg" style="font-family: 'Titillium Web', sans-serif;">
         Eliminación
       </button>
     </div>
@@ -288,13 +288,13 @@ function renderFinalPathBanner() {
           Si en la fase de grupos quedamos:
         </p>
         <div class="flex items-center justify-between lg:justify-center w-full gap-2">
-          <button class="bg-[#BDEDE7] text-default hover:bg-[#A8E5DD] active:bg-[#93DDD3] focus:bg-[#BDEDE7] focus:ring-icon-lighter focus:ring-4 focus:outline-none w-full lg:w-fit px-4 py-[10px] h-[48px] text-lg font-semibold rounded-xl transition-all duration-300" style="font-family: 'Titillium Web', sans-serif;">
+          <button class="bg-action-alt-default text-default hover:bg-action-alt-hover active:bg-action-alt-pressed focus:bg-action-alt-default focus:ring-icon-lighter focus:ring-4 focus:outline-none w-full lg:w-fit px-4 py-[10px] h-[48px] text-lg font-semibold rounded-xl transition-all duration-300" style="font-family: 'Titillium Web', sans-serif;">
             Primeros
           </button>
-          <button class="bg-[#BDEDE7] text-default hover:bg-[#A8E5DD] active:bg-[#93DDD3] focus:bg-[#BDEDE7] focus:ring-icon-lighter focus:ring-4 focus:outline-none w-full lg:w-fit px-4 py-[10px] h-[48px] text-lg font-semibold rounded-xl transition-all duration-300" style="font-family: 'Titillium Web', sans-serif;">
+          <button class="bg-action-alt-default text-default hover:bg-action-alt-hover active:bg-action-alt-pressed focus:bg-action-alt-default focus:ring-icon-lighter focus:ring-4 focus:outline-none w-full lg:w-fit px-4 py-[10px] h-[48px] text-lg font-semibold rounded-xl transition-all duration-300" style="font-family: 'Titillium Web', sans-serif;">
             Segundos
           </button>
-          <button class="bg-[#BDEDE7] text-default hover:bg-[#A8E5DD] active:bg-[#93DDD3] focus:bg-[#BDEDE7] focus:ring-icon-lighter focus:ring-4 focus:outline-none w-full lg:w-fit px-4 py-[10px] h-[48px] text-lg font-semibold rounded-xl transition-all duration-300" style="font-family: 'Titillium Web', sans-serif;">
+          <button class="bg-action-alt-default text-default hover:bg-action-alt-hover active:bg-action-alt-pressed focus:bg-action-alt-default focus:ring-icon-lighter focus:ring-4 focus:outline-none w-full lg:w-fit px-4 py-[10px] h-[48px] text-lg font-semibold rounded-xl transition-all duration-300" style="font-family: 'Titillium Web', sans-serif;">
             Terceros
           </button>
         </div>
@@ -360,11 +360,11 @@ function initChipsNav() {
       APP_STATE.activeTab = chip.dataset.tab;
       chips.forEach(c => {
         if (c.dataset.tab === APP_STATE.activeTab) {
-          c.classList.add('border-[#006FE8]', 'text-[#31363A]');
-          c.classList.remove('border-[#C2DFFF]', 'text-[#70777C]');
+          c.classList.add('border-brand-primary', 'text-text-default');
+          c.classList.remove('border-border-primary', 'text-text-lighter');
         } else {
-          c.classList.remove('border-[#006FE8]', 'text-[#31363A]');
-          c.classList.add('border-[#C2DFFF]', 'text-[#70777C]');
+          c.classList.remove('border-brand-primary', 'text-text-default');
+          c.classList.add('border-border-primary', 'text-text-lighter');
         }
       });
       console.log('📑 Tab:', APP_STATE.activeTab);

@@ -42,39 +42,39 @@ const VARIANT_STYLES = {
   default: {
     primary: {
       active:
-        'bg-[#006FE8] focus:bg-[#0059BA] text-white hover:bg-[#0059BA] active:bg-[#004A9C] focus:ring-[#C2DFFF] focus:ring-opacity-100',
+        'bg-brand-primary focus:bg-bg-alt-secondary text-white hover:bg-bg-alt-secondary active:bg-action-pressed focus:ring-border-primary focus:ring-opacity-100',
       disabled:
-        'bg-[#C8C9CB] text-[#70777C] cursor-not-allowed pointer-events-none',
+        'bg-border-secondary text-text-lighter cursor-not-allowed pointer-events-none',
     },
     secondary: {
       active:
-        'border-2 border-[#006FE8] text-[#006FE8] hover:border-[#0059BA] hover:text-[#0059BA] active:border-[#004A9C] active:text-[#004A9C] focus:border-[#0059BA] focus:text-[#0059BA] focus:border-transparent focus:ring-[#006FE8] focus:ring-opacity-100',
+        'border-2 border-brand-primary text-brand-primary hover:border-bg-alt-secondary hover:text-bg-alt-secondary active:border-action-pressed active:text-action-pressed focus:border-bg-alt-secondary focus:text-bg-alt-secondary focus:border-transparent focus:ring-brand-primary focus:ring-opacity-100',
       disabled:
-        'border-2 border-[#C8C9CB] text-[#70777C] cursor-not-allowed pointer-events-none',
+        'border-2 border-border-secondary text-text-lighter cursor-not-allowed pointer-events-none',
     },
     tertiary: {
       active:
-        'text-[#006FE8] hover:text-[#0059BA] active:text-[#004A9C] focus:border-[#0059BA] focus:text-[#0059BA] focus:border-transparent focus:ring-[#C2DFFF] focus:ring-opacity-100',
-      disabled: 'text-[#70777C] cursor-not-allowed pointer-events-none',
+        'text-brand-primary hover:text-bg-alt-secondary active:text-action-pressed focus:border-bg-alt-secondary focus:text-bg-alt-secondary focus:border-transparent focus:ring-border-primary focus:ring-opacity-100',
+      disabled: 'text-text-lighter cursor-not-allowed pointer-events-none',
     },
   },
   alt: {
     primary: {
       active:
-        'bg-[#BDEDE7] text-[#31363A] hover:bg-[#A8E5DD] active:bg-[#93DDD3] focus:bg-[#BDEDE7] focus:ring-[#7BD0C2] focus:ring-opacity-100',
+        'bg-action-alt-default text-text-default hover:bg-action-alt-hover active:bg-action-alt-pressed focus:bg-action-alt-default focus:ring-icon-lighter focus:ring-opacity-100',
       disabled:
-        'bg-[#E0E0E0] text-[#70777C] cursor-not-allowed pointer-events-none',
+        'bg-border-lighter text-text-lighter cursor-not-allowed pointer-events-none',
     },
     secondary: {
       active:
         'bg-transparent border-2 border-white text-white hover:bg-white hover:bg-opacity-10 active:bg-white active:bg-opacity-20 focus:bg-transparent focus:ring-white focus:ring-opacity-50',
       disabled:
-        'bg-transparent border-2 border-[#C8C9CB] text-[#70777C] cursor-not-allowed pointer-events-none',
+        'bg-transparent border-2 border-border-secondary text-text-lighter cursor-not-allowed pointer-events-none',
     },
     tertiary: {
       active:
-        'bg-transparent text-[#BDEDE7] hover:text-[#A8E5DD] active:text-[#93DDD3] focus:border-transparent focus:text-[#BDEDE7] focus:ring-[#7BD0C2] focus:ring-opacity-100',
-      disabled: 'bg-transparent text-[#70777C] cursor-not-allowed pointer-events-none',
+        'bg-transparent text-action-alt-default hover:text-action-alt-hover active:text-action-alt-pressed focus:border-transparent focus:text-action-alt-default focus:ring-icon-lighter focus:ring-opacity-100',
+      disabled: 'bg-transparent text-text-lighter cursor-not-allowed pointer-events-none',
     },
   },
 };
