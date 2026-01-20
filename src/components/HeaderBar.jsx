@@ -25,7 +25,7 @@ export default function HeaderBar() {
           <svg width="32" height="32" viewBox="0 0 32 32" className="flex-shrink-0">
             <SoccerBall size={32} weight="duotone" style={{ fill: "url(#soccerGradient)" }} />
           </svg>
-          <h1 className="text-xl font-semibold text-[#0059BA]">
+          <h1 className="text-xl font-semibold text-text-decorative-darker">
             World Cup Map 2026
           </h1>
         </div>

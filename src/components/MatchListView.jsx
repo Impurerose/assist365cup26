@@ -71,7 +71,7 @@ const MatchListView = ({
               <p className="text-xl font-semibold text-text-default text-center leading-7">
                 Mirá cómo sería el camino a la final
               </p>
-              <p className="text-base text-[#31363A] text-center leading-6">
+              <p className="text-base text-text-default text-center leading-6">
                 Si en la fase de grupos quedamos:
               </p>
 

@@ -5,7 +5,7 @@
 
 const MatchCard = ({ match }) => {
   return (
-    <div className="bg-white border border-[#C2DFFF] rounded-xl px-3 py-4 flex flex-col gap-4 relative overflow-visible">
+    <div className="bg-white border border-border-primary rounded-xl px-3 py-4 flex flex-col gap-4 relative overflow-visible">
       {/* Número de partido (badge azul) - siempre visible */}
       <div className="absolute right-[7px] -top-[3px] w-5 h-5">
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none">

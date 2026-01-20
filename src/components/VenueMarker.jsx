@@ -27,7 +27,7 @@ const VenueMarker = ({ venue, onClick }) => {
         
         {/* Label con nombre de la ciudad */}
         <div className="bg-white px-3 py-1 rounded-lg shadow-md">
-          <span className="text-[#0059BA] font-bold text-sm whitespace-nowrap">
+          <span className="text-text-decorative-darker font-bold text-sm whitespace-nowrap">
             {venue.name}
           </span>
         </div>

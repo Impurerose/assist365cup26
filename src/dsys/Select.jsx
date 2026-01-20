@@ -121,12 +121,12 @@ const Select = ({
     {
       'cursor-pointer': !disabled,
       'cursor-not-allowed opacity-60 bg-gray-100': disabled,
-      'hover:border-[#338CED]': !isOpen && !disabled,
-      'focus:outline-none focus:border-[#C2DFFF]': isOpen && !disabled,
-      'text-[#70777C]': !selectedOption,
-      'border-[#C2DFFF]': !error,
-      'border-[#DF563B]': error,
-      'focus:outline-none focus:ring-offset-0 focus:ring-2 focus:ring-[#C2DFFF]':
+      'hover:border-action-hover': !isOpen && !disabled,
+      'focus:outline-none focus:border-border-primary': isOpen && !disabled,
+      'text-text-lighter': !selectedOption,
+      'border-border-primary': !error,
+      'border-error-primary': error,
+      'focus:outline-none focus:ring-offset-0 focus:ring-2 focus:ring-border-primary':
         !disabled,
     }
   );
