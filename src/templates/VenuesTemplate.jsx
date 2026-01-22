@@ -128,42 +128,48 @@ function VenuesTemplate() {
   const accommodationsData = [
     {
       name: "Sheraton Hotel",
-      image: "https://www.figma.com/api/mcp/asset/ab043acf-c0ad-4656-ad5a-a118d3c9f470",
+      image:
+        "https://www.figma.com/api/mcp/asset/ab043acf-c0ad-4656-ad5a-a118d3c9f470",
       rating: 4.3,
       reviews: "X reviews",
       priceLevel: "$$$$$",
     },
     {
       name: "Nombre Hotel",
-      image: "https://www.figma.com/api/mcp/asset/ab043acf-c0ad-4656-ad5a-a118d3c9f470",
+      image:
+        "https://www.figma.com/api/mcp/asset/ab043acf-c0ad-4656-ad5a-a118d3c9f470",
       rating: 4.3,
       reviews: "X reviews",
       priceLevel: "$$$",
     },
     {
       name: "Nombre Hotel",
-      image: "https://www.figma.com/api/mcp/asset/ab043acf-c0ad-4656-ad5a-a118d3c9f470",
+      image:
+        "https://www.figma.com/api/mcp/asset/ab043acf-c0ad-4656-ad5a-a118d3c9f470",
       rating: 4.3,
       reviews: "X reviews",
       priceLevel: "$",
     },
     {
       name: "Hilton Garden Inn",
-      image: "https://www.figma.com/api/mcp/asset/ab043acf-c0ad-4656-ad5a-a118d3c9f470",
+      image:
+        "https://www.figma.com/api/mcp/asset/ab043acf-c0ad-4656-ad5a-a118d3c9f470",
       rating: 4.5,
       reviews: "250 reviews",
       priceLevel: "$$$",
     },
     {
       name: "Marriott Marquis",
-      image: "https://www.figma.com/api/mcp/asset/ab043acf-c0ad-4656-ad5a-a118d3c9f470",
+      image:
+        "https://www.figma.com/api/mcp/asset/ab043acf-c0ad-4656-ad5a-a118d3c9f470",
       rating: 4.7,
       reviews: "1200 reviews",
       priceLevel: "$$$$",
     },
     {
       name: "Holiday Inn Express",
-      image: "https://www.figma.com/api/mcp/asset/ab043acf-c0ad-4656-ad5a-a118d3c9f470",
+      image:
+        "https://www.figma.com/api/mcp/asset/ab043acf-c0ad-4656-ad5a-a118d3c9f470",
       rating: 4.2,
       reviews: "300 reviews",
       priceLevel: "$$",
@@ -310,19 +316,15 @@ function VenuesTemplate() {
             </Button>
           </div>
 
-
-
           <div className="max-w-[996px] mx-auto">
-
-                      <div className="text-text-default text-2xl font-semibold pt-8 pb-6 flex gap-x-2">
-            <MapPinLineIcon
-              className="text-icon-default"
-              size={32}
-              weight="duotone"
-            />
-            {cityData.name}
-          </div>
-
+            <div className="text-text-default text-2xl font-semibold pt-8 pb-6 flex gap-x-2">
+              <MapPinLineIcon
+                className="text-icon-default"
+                size={32}
+                weight="duotone"
+              />
+              {cityData.name}
+            </div>
 
             <div className="grid grid-cols-2 gap-6 mb-6">
               <div className="w-[486px] flex flex-col">
@@ -406,6 +408,10 @@ function VenuesTemplate() {
 
             <div className="bg-brand-darkening p-6 rounded-3xl mt-10 mx-auto">
               <AccommodationsWidget hotels={accommodationsData} />
+            </div>
+
+            <div className="bg-brand-darkening p-6 rounded-3xl mt-6 mx-auto">
+              
             </div>
           </div>
         </div>

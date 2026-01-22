@@ -5,7 +5,7 @@ export default function HotelCard({ name, image, rating, reviews, priceLevel }) 
   const fullStars = Math.round(rating);
   
   return (
-    <div className="bg-white rounded-xl p-3 flex flex-col gap-3 min-w-[184px]">
+    <div className="bg-white rounded-xl p-3 flex flex-col gap-3 min-w-[184px] snap-start" style={{ scrollSnapAlign: 'start' }}>
       {/* Imagen del hotel */}
       <img
         src={image}
