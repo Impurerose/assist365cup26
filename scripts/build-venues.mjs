@@ -486,7 +486,7 @@ const html = `<!DOCTYPE html>
                   <span class="text-text-default text-base font-semibold block pb-3 flex-shrink-0">
                     Partidos en Kansas City
                   </span>
-                  <div class="flex-1 overflow-y-auto min-h-0 flex flex-col gap-4 w-full max-w-[368px]">
+                  <div class="flex-1 overflow-y-auto min-h-0 flex flex-col gap-4 w-full max-w-[368px] venues-scrollbar pr-1">
                     ${kansasCityMatches.map(match => generateMatchCard(match)).join('')}
                   </div>
                 </div>

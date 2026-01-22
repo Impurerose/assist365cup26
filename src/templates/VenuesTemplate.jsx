@@ -435,7 +435,7 @@ function VenuesTemplate() {
                   <span className="text-text-default text-base font-semibold block pb-3 flex-shrink-0">
                     Partidos en Kansas City
                   </span>
-                  <div className="flex-1 overflow-y-auto min-h-0 flex flex-col gap-4 w-fuil max-w-[368px]">
+                  <div className="flex-1 overflow-y-auto min-h-0 flex flex-col gap-4 w-fuil max-w-[368px] venues-scrollbar pr-2">
                     {kansasCityMatches.map((match, index) => (
                       <MatchCard
                         key={index}

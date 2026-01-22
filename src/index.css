@@ -74,3 +74,27 @@ body {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+/* Custom scrollbar for venues matches list */
+.venues-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.venues-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.venues-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(0, 111, 232, 0.25);
+  border-radius: 20px;
+}
+
+.venues-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 111, 232, 0.25);
+}
+
+/* Firefox */
+.venues-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 111, 232, 0.25) transparent;
+}
