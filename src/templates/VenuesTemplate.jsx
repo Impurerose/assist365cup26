@@ -3,7 +3,11 @@ import HeaderBar from "../components/HeaderBar";
 import MapContainer from "../components/MapContainer";
 import MatchCard from "../components/MatchCard";
 import Button from "../dsys/Button";
-import VenueCard from '../components/VenueCard';
+import VenueCard from "../components/VenueCard";
+import VenueInfo from "../components/VenueInfo";
+import CurrentWeather from "../components/CurrentWeather";
+import TypicalWeather from "../components/TypicalWeather";
+import FlightsWidget from "../components/FlightsWidget";
 import {
   AirplaneTiltIcon,
   CaretLeftIcon,
@@ -29,6 +33,59 @@ import {
 function VenuesTemplate() {
   const [selectedTeam, setSelectedTeam] = useState(null);
   const [selectedCity, setSelectedCity] = useState(null);
+
+  // Datos de la ciudad
+  const cityData = {
+    name: "Kansas City, Missouri, Estados Unidos",
+    description:
+      "Famosa por su cultura deportiva, su hospitalidad y su legendaria barbacoa, ofrece una experiencia cómoda y amigable para el viajero internacional.",
+  };
+
+  // Datos del estadio
+  const venueData = {
+    image:
+      "https://assistcdn.s3.us-west-1.amazonaws.com/assets/img/affiliates/venue.png",
+    name: "Arrowhead Stadium",
+    address: "1 Arrowhead Dr, Kansas City, MO 64129",
+    capacity: "67,513",
+  };
+
+  // Datos de vuelos
+  const flightsData = {
+    origin: "Ministro Pistarini Ezeiza (EZE)",
+    destination: "Kansas City International (MCI)",
+    period: "Junio - Julio",
+    flights: [
+      {
+        airline: "Aerolinea",
+        logo: "https://www.figma.com/api/mcp/asset/c8f98591-ffd7-4846-9d97-65ea101be8e0",
+        duration: "16h 30min",
+        type: "Directo",
+        price: "desde USD XXX",
+      },
+      {
+        airline: "Aerolinea2",
+        logo: "https://www.figma.com/api/mcp/asset/c8f98591-ffd7-4846-9d97-65ea101be8e0",
+        duration: "14h 32min",
+        type: "Directo",
+        price: "desde USD XXX",
+      },
+      {
+        airline: "Aerolinea3",
+        logo: "https://www.figma.com/api/mcp/asset/c8f98591-ffd7-4846-9d97-65ea101be8e0",
+        duration: "17h 42min",
+        type: "Conexión",
+        price: "desde USD XXX",
+      },
+      {
+        airline: "Aerolinea4",
+        logo: "https://www.figma.com/api/mcp/asset/c8f98591-ffd7-4846-9d97-65ea101be8e0",
+        duration: "22h 7min",
+        type: "Conexión",
+        price: "desde USD XXX",
+      },
+    ],
+  };
 
   // Datos de clima actual
   const currentWeather = {
@@ -128,7 +185,7 @@ function VenuesTemplate() {
   ];
 
   return (
-    <div className="w-full min-h-screen flex flex-col bg-bg-secondary">
+    <div className="w-full min-h-screen flex flex-col bg-bg-secondary mb-10">
       <HeaderBar />
       <div className="w-full max-w-[1366px] mx-auto mt-4">
         <div className="max-w-[1200px] mx-auto">
@@ -176,48 +233,21 @@ function VenuesTemplate() {
               size={32}
               weight="duotone"
             />
-            Kansas City, Missouri, Estados Unidos
+            {cityData.name}
           </div>
 
           <div className="grid grid-cols-2 gap-6 max-w-[996px] mb-6">
             <div className="w-[486px] flex flex-col">
-              <VenueCard>
-                Famosa por su cultura deportiva, su hospitalidad y su legendaria
-                barbacoa, ofrece una experiencia cómoda y amigable para el
-                viajero internacional.
-              </VenueCard>
+              <VenueCard>{cityData.description}</VenueCard>
 
-              <div className="bg-bg-primary rounded-3xl text-base text-text-default p-6 mt-4">
-                <img
-                  src="https://assistcdn.s3.us-west-1.amazonaws.com/assets/img/affiliates/venue.png"
-                  alt="Venue"
-                  className="w-full h-auto rounded-2xl mb-4"
+              <VenueCard className="mt-4">
+                <VenueInfo
+                  image={venueData.image}
+                  name={venueData.name}
+                  address={venueData.address}
+                  capacity={venueData.capacity}
                 />
-
-                <div className="flex flex-col gap-y-4 text-base text-text-default">
-                  <span className="font-semibold text-xl">
-                    Arrowhead Stadium
-                  </span>
-                  <div className="gap-y-2 flex flex-col">
-                    <span>
-                      <MapPinIcon
-                        className="inline-block mr-2 text-icon-lighter"
-                        size={20}
-                        weight="duotone"
-                      />
-                      1 Arrowhead Dr, Kansas City, MO 64129
-                    </span>
-                    <span>
-                      <UsersFourIcon
-                        size={20}
-                        weight="duotone"
-                        className="inline-block mr-2 text-icon-lighter"
-                      />
-                      Capacidad: 67,513
-                    </span>
-                  </div>
-                </div>
-              </div>
+              </VenueCard>
 
               <div className="rounded-3xl overflow-hidden w-[486px] h-[242px] mt-4">
                 <MapContainer
@@ -227,114 +257,18 @@ function VenuesTemplate() {
                 />
               </div>
 
-              <div className="bg-bg-primary rounded-3xl text-base text-text-default p-6 mt-4">
-                <div className="flex flex-col gap-1">
-                  <p className="text-xl font-semibold text-text-default">
-                    Clima actual
-                  </p>
-                </div>
+              <VenueCard className="mt-4">
+                <CurrentWeather />
+              </VenueCard>
 
-                <div className="flex gap-10 mt-4">
-                  {/* Clima de hoy - izquierda */}
-                  <div className="flex gap-2 items-center pl-4">
-                    <CloudSun
-                      size={40}
-                      weight="duotone"
-                      className="text-text-lighter"
-                    />
-                    <div className="flex flex-col gap-1.5 w-[98px]">
-                      <p className="text-sm text-text-default">Hoy</p>
-                      <div className="flex flex-col gap-1.5">
-                        <p className="text-4xl font-semibold text-text-default leading-10">
-                          17° C
-                        </p>
-                        <p className="text-sm text-text-lighter">
-                          Nubes dispersas
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Pronóstico 4 días - derecha */}
-                  <div className="flex flex-col gap-3 border-l border-border-primary w-full _w-[209px] pl-4">
-                    {/* Miércoles */}
-                    <div className="flex gap-4 items-center">
-                      <div className="flex gap-4 items-center">
-                        <p className="text-sm text-text-default">Mié</p>
-                        <div className="flex gap-3 items-center">
-                          <Cloud
-                            size={24}
-                            weight="duotone"
-                            className="text-text-lighter"
-                          />
-                          <div className="flex gap-1 items-center text-sm">
-                            <p className="text-text-lighter">13°</p>
-                            <p className="text-text-default">26°</p>
-                          </div>
-                        </div>
-                      </div>
-                      <p className="text-sm text-text-lighter">Nubes</p>
-                    </div>
-
-                    {/* Jueves */}
-                    <div className="flex gap-4 items-center">
-                      <div className="flex gap-4 items-center">
-                        <p className="text-sm text-text-default">Jue</p>
-                        <div className="flex gap-3 items-center">
-                          <CloudRain
-                            size={24}
-                            weight="duotone"
-                            className="text-text-lighter"
-                          />
-                          <div className="flex gap-1 items-center text-sm">
-                            <p className="text-text-lighter">11°</p>
-                            <p className="text-text-default">24°</p>
-                          </div>
-                        </div>
-                      </div>
-                      <p className="text-sm text-text-lighter">Lluvia ligera</p>
-                    </div>
-
-                    {/* Viernes */}
-                    <div className="flex gap-4 items-center">
-                      <div className="flex gap-4 items-center">
-                        <p className="text-sm text-text-default">Vie</p>
-                        <div className="flex gap-3 items-center">
-                          <Cloud
-                            size={24}
-                            weight="duotone"
-                            className="text-text-lighter"
-                          />
-                          <div className="flex gap-1 items-center text-sm w-[52px] justify-end">
-                            <p className="text-text-lighter">9°</p>
-                            <p className="text-text-default">20°</p>
-                          </div>
-                        </div>
-                      </div>
-                      <p className="text-sm text-text-lighter">Nubes</p>
-                    </div>
-
-                    {/* Sábado */}
-                    <div className="flex gap-4 items-center">
-                      <div className="flex gap-4 items-center">
-                        <p className="text-sm text-text-default">Sáb</p>
-                        <div className="flex gap-3 items-center">
-                          <Sun
-                            size={24}
-                            weight="duotone"
-                            className="text-warning-primary"
-                          />
-                          <div className="flex gap-1 items-center text-sm">
-                            <p className="text-text-lighter">13°</p>
-                            <p className="text-text-default">26°</p>
-                          </div>
-                        </div>
-                      </div>
-                      <p className="text-sm text-text-lighter">Soleado</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <VenueCard className="mt-4">
+                <FlightsWidget
+                  origin={flightsData.origin}
+                  destination={flightsData.destination}
+                  period={flightsData.period}
+                  flights={flightsData.flights}
+                />
+              </VenueCard>
             </div>
 
             <div className="w-[486px] h-[824px] self-stretch">
@@ -353,61 +287,9 @@ function VenuesTemplate() {
                 </div>
               </div>
 
-              <div className="bg-bg-primary rounded-3xl text-base text-text-default p-6 mt-4 min-h-[224px]">
-                <p className="text-base font-semibold text-text-default">
-                  Clima habitual en Junio - Julio
-                </p>
-
-                <div className="flex flex-col gap-2 mt-4">
-                  {/* Temperaturas */}
-                  <div className="flex gap-2 items-center">
-                    <Thermometer
-                      size={20}
-                      weight="duotone"
-                      className="text-icon-lighter"
-                    />
-                    <p className="text-base text-text-lighter">Temperaturas:</p>
-                    <p className="text-base text-text-default">22°C a 32°C</p>
-                  </div>
-
-                  {/* Días calurosos */}
-                  <div className="flex gap-2 items-center">
-                    <Sun
-                      size={20}
-                      weight="duotone"
-                      className="text-icon-lighter"
-                    />
-                    <p className="text-base text-text-default">
-                      Días calurosos y húmedos
-                    </p>
-                  </div>
-
-                  {/* Tormentas */}
-                  <div className="flex gap-2 items-center">
-                    <CloudLightning
-                      size={20}
-                      weight="duotone"
-                      className="text-icon-lighter"
-                    />
-                    <p className="text-base text-text-default">
-                      Posibles tormentas eléctricas aisladas
-                    </p>
-                  </div>
-
-                  {/* Recomendación */}
-                  <div className="flex gap-2 items-start">
-                    <WarningCircle
-                      size={20}
-                      weight="duotone"
-                      className="text-icon-lighter flex-shrink-0"
-                    />
-                    <p className="text-base text-text-default">
-                      Lleva ropa liviana, gorra, protector solar y botella
-                      reutilizable.
-                    </p>
-                  </div>
-                </div>
-              </div>
+              <VenueCard className="mt-4 min-h-[224px]">
+                <TypicalWeather />
+              </VenueCard>
             </div>
           </div>
         </div>
