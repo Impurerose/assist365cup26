@@ -8,6 +8,10 @@ import VenueInfo from "../components/VenueInfo";
 import CurrentWeather from "../components/CurrentWeather";
 import TypicalWeather from "../components/TypicalWeather";
 import FlightsWidget from "../components/FlightsWidget";
+import AirportInfo from "../components/AirportInfo";
+import TransportInfo from "../components/TransportInfo";
+import USEntryRequirements from "../components/USEntryRequirements";
+import AccommodationsWidget from "../components/AccommodationsWidget";
 import {
   AirplaneTiltIcon,
   CaretLeftIcon,
@@ -86,6 +90,85 @@ function VenuesTemplate() {
       },
     ],
   };
+
+  // Datos del aeropuerto
+  const airportData = {
+    name: "Kansas City International (MCI)",
+    description: "Kansas City International (MCI) es el principal.",
+    features: [
+      "Vuelos nacionales e internacionales",
+      "A 30–35 minutos del centro",
+    ],
+    officialLink: "https://www.flykci.com/",
+  };
+
+  // Datos de traslados
+  const transportData = {
+    description:
+      "Kansas City no cuenta con un sistema de transporte público muy extenso, el traslado en auto es clave.",
+    recommendations: [
+      "Uber / Lyft (muy disponibles y confiables)",
+      "Alquiler de auto (ideal si te alojas fuera del centro)",
+      "Servicios especiales de transporte al estadio en días de partido",
+    ],
+  };
+
+  // Datos de normativas de ingreso a Estados Unidos
+  const usEntryData = {
+    requirements: [
+      "Pasaporte vigente",
+      "Visa o ESTA (según nacionalidad)",
+      "Ticket de salida del país",
+      "Seguro médico de viaje recomendado",
+    ],
+    officialLink: "https://travel.state.gov/",
+  };
+
+  // Datos de alojamientos
+  const accommodationsData = [
+    {
+      name: "Sheraton Hotel",
+      image: "https://www.figma.com/api/mcp/asset/ab043acf-c0ad-4656-ad5a-a118d3c9f470",
+      rating: 4.3,
+      reviews: "X reviews",
+      priceLevel: "$$$$$",
+    },
+    {
+      name: "Nombre Hotel",
+      image: "https://www.figma.com/api/mcp/asset/ab043acf-c0ad-4656-ad5a-a118d3c9f470",
+      rating: 4.3,
+      reviews: "X reviews",
+      priceLevel: "$$$",
+    },
+    {
+      name: "Nombre Hotel",
+      image: "https://www.figma.com/api/mcp/asset/ab043acf-c0ad-4656-ad5a-a118d3c9f470",
+      rating: 4.3,
+      reviews: "X reviews",
+      priceLevel: "$",
+    },
+    {
+      name: "Hilton Garden Inn",
+      image: "https://www.figma.com/api/mcp/asset/ab043acf-c0ad-4656-ad5a-a118d3c9f470",
+      rating: 4.5,
+      reviews: "250 reviews",
+      priceLevel: "$$$",
+    },
+    {
+      name: "Marriott Marquis",
+      image: "https://www.figma.com/api/mcp/asset/ab043acf-c0ad-4656-ad5a-a118d3c9f470",
+      rating: 4.7,
+      reviews: "1200 reviews",
+      priceLevel: "$$$$",
+    },
+    {
+      name: "Holiday Inn Express",
+      image: "https://www.figma.com/api/mcp/asset/ab043acf-c0ad-4656-ad5a-a118d3c9f470",
+      rating: 4.2,
+      reviews: "300 reviews",
+      priceLevel: "$$",
+    },
+  ];
 
   // Datos de clima actual
   const currentWeather = {
@@ -227,7 +310,11 @@ function VenuesTemplate() {
             </Button>
           </div>
 
-          <div className="text-text-default text-2xl font-semibold pt-8 pb-6 flex gap-x-2">
+
+
+          <div className="max-w-[996px] mx-auto">
+
+                      <div className="text-text-default text-2xl font-semibold pt-8 pb-6 flex gap-x-2">
             <MapPinLineIcon
               className="text-icon-default"
               size={32}
@@ -236,65 +323,89 @@ function VenuesTemplate() {
             {cityData.name}
           </div>
 
-          <div className="grid grid-cols-2 gap-6 max-w-[996px] mb-6">
-            <div className="w-[486px] flex flex-col">
-              <VenueCard>{cityData.description}</VenueCard>
 
-              <VenueCard className="mt-4">
-                <VenueInfo
-                  image={venueData.image}
-                  name={venueData.name}
-                  address={venueData.address}
-                  capacity={venueData.capacity}
-                />
-              </VenueCard>
+            <div className="grid grid-cols-2 gap-6 mb-6">
+              <div className="w-[486px] flex flex-col">
+                <VenueCard>{cityData.description}</VenueCard>
 
-              <div className="rounded-3xl overflow-hidden w-[486px] h-[242px] mt-4">
-                <MapContainer
-                  selectedTeam={selectedTeam}
-                  selectedCity={selectedCity}
-                  setSelectedCity={setSelectedCity}
-                />
+                <VenueCard className="mt-4">
+                  <VenueInfo
+                    image={venueData.image}
+                    name={venueData.name}
+                    address={venueData.address}
+                    capacity={venueData.capacity}
+                  />
+                </VenueCard>
+
+                <div className="rounded-3xl overflow-hidden w-[486px] h-[242px] mt-4">
+                  <MapContainer
+                    selectedTeam={selectedTeam}
+                    selectedCity={selectedCity}
+                    setSelectedCity={setSelectedCity}
+                  />
+                </div>
+
+                <VenueCard className="mt-4 min-h-[228px]">
+                  <CurrentWeather />
+                </VenueCard>
+
+                <VenueCard className="mt-4 min-h-[260px]">
+                  <FlightsWidget
+                    origin={flightsData.origin}
+                    destination={flightsData.destination}
+                    period={flightsData.period}
+                    flights={flightsData.flights}
+                  />
+                </VenueCard>
+
+                <VenueCard className="mt-4 min-h-[248px]">
+                  <TransportInfo
+                    description={transportData.description}
+                    recommendations={transportData.recommendations}
+                  />
+                </VenueCard>
               </div>
 
-              <VenueCard className="mt-4">
-                <CurrentWeather />
-              </VenueCard>
+              <div className="w-[486px] h-[824px] self-stretch">
+                <div className="bg-brand-darkening rounded-xl py-6 px-10 flex flex-col h-full">
+                  <span className="text-text-default text-base font-semibold block pb-3 flex-shrink-0">
+                    Partidos en Kansas City
+                  </span>
+                  <div className="flex-1 overflow-y-auto min-h-0 flex flex-col gap-4 w-fuil max-w-[368px]">
+                    {kansasCityMatches.map((match, index) => (
+                      <MatchCard
+                        key={index}
+                        match={match}
+                        showMatchNumber={false}
+                      />
+                    ))}
+                  </div>
+                </div>
 
-              <VenueCard className="mt-4">
-                <FlightsWidget
-                  origin={flightsData.origin}
-                  destination={flightsData.destination}
-                  period={flightsData.period}
-                  flights={flightsData.flights}
-                />
-              </VenueCard>
+                <VenueCard className="mt-4 min-h-[228px]">
+                  <TypicalWeather />
+                </VenueCard>
+
+                <VenueCard className="mt-4 min-h-[260px]">
+                  <AirportInfo
+                    name={airportData.name}
+                    description={airportData.description}
+                    features={airportData.features}
+                    officialLink={airportData.officialLink}
+                  />
+                </VenueCard>
+
+                <VenueCard className="mt-4 min-h-[248px]">
+                  <USEntryRequirements
+                    requirements={usEntryData.requirements}
+                    officialLink={usEntryData.officialLink}
+                  />
+                </VenueCard>
+              </div>
             </div>
 
-            <div className="w-[486px] h-[824px] self-stretch">
-              <div className="bg-brand-darkening rounded-xl py-6 px-10 flex flex-col h-full">
-                <span className="text-text-default text-base font-semibold block pb-3 flex-shrink-0">
-                  Partidos en Kansas City
-                </span>
-                <div className="flex-1 overflow-y-auto min-h-0 flex flex-col gap-4">
-                  {kansasCityMatches.map((match, index) => (
-                    <MatchCard
-                      key={index}
-                      match={match}
-                      showMatchNumber={false}
-                    />
-                  ))}
-                </div>
-              </div>
-
-              <VenueCard className="mt-4 min-h-[224px]">
-                <TypicalWeather />
-              </VenueCard>
-
-              <VenueCard className="mt-4">
-
-                
-              </VenueCard>
+            <div className="bg-brand-darkening p-6 rounded-3xl mt-10 mx-auto">
+              <AccommodationsWidget hotels={accommodationsData} />
             </div>
           </div>
         </div>
