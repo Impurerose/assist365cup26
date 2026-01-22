@@ -290,6 +290,11 @@ function VenuesTemplate() {
               <VenueCard className="mt-4 min-h-[224px]">
                 <TypicalWeather />
               </VenueCard>
+
+              <VenueCard className="mt-4">
+
+                
+              </VenueCard>
             </div>
           </div>
         </div>

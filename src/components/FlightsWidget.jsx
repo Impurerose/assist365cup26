@@ -1,5 +1,4 @@
 import { CalendarBlank, ArrowRight } from '@phosphor-icons/react';
-import FlightOption from './FlightOption';
 
 export default function FlightsWidget({ origin, destination, period, flights }) {
   return (
@@ -35,19 +34,36 @@ export default function FlightsWidget({ origin, destination, period, flights }) 
         </p>
       </div>
 
-      {/* Lista de opciones de vuelos */}
-      <div className="flex flex-col gap-2">
-        {flights.map((flight, index) => (
-          <FlightOption
-            key={index}
-            airline={flight.airline}
-            logo={flight.logo}
-            duration={flight.duration}
-            type={flight.type}
-            price={flight.price}
-          />
-        ))}
-      </div>
+      {/* Lista de opciones de vuelos - tabla */}
+      <table className="w-full">
+        <tbody>
+          {flights.map((flight, index) => (
+            <tr key={index}>
+              <td className="py-1">
+                <div className="flex gap-2 items-center">
+                  <img 
+                    src={flight.logo} 
+                    alt={flight.airline}
+                    className="w-6 h-6 object-cover"
+                  />
+                  <p className="text-sm text-text-default whitespace-nowrap">
+                    {flight.airline}
+                  </p>
+                </div>
+              </td>
+              <td className="py-1 text-sm text-text-lighter text-center">
+                {flight.duration}
+              </td>
+              <td className="py-1 text-sm text-text-lighter">
+                {flight.type}
+              </td>
+              <td className="py-1 text-sm text-text-default text-right">
+                {flight.price}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
