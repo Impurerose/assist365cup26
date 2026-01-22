@@ -12,6 +12,9 @@ import AirportInfo from "../components/AirportInfo";
 import TransportInfo from "../components/TransportInfo";
 import USEntryRequirements from "../components/USEntryRequirements";
 import AccommodationsWidget from "../components/AccommodationsWidget";
+import GastronomyWidget from "../components/GastronomyWidget";
+import SafetyWidget from "../components/SafetyWidget";
+import PreventionWidget from "../components/PreventionWidget";
 import {
   AirplaneTiltIcon,
   CaretLeftIcon,
@@ -176,6 +179,64 @@ function VenuesTemplate() {
     },
   ];
 
+  // Datos de gastronomía
+  const gastronomyData = [
+    {
+      name: "La Trattoria",
+      image:
+        "https://www.figma.com/api/mcp/asset/ec478964-b6ac-42fd-afb8-1ab0f2cfd236",
+      rating: 4.6,
+      reviews: "150 reviews",
+      cuisine: "Italiana, pizzería",
+      priceRange: { min: "$$", max: "$$$" },
+    },
+    {
+      name: "Sushi Haven",
+      image:
+        "https://www.figma.com/api/mcp/asset/ec478964-b6ac-42fd-afb8-1ab0f2cfd236",
+      rating: 4.8,
+      reviews: "200 reviews",
+      cuisine: "Japonesa, sushi bar",
+      priceRange: { min: "$", max: "$$" },
+    },
+    {
+      name: "Café de Paris",
+      image:
+        "https://www.figma.com/api/mcp/asset/ec478964-b6ac-42fd-afb8-1ab0f2cfd236",
+      rating: 4.2,
+      reviews: "80 reviews",
+      cuisine: "Francesa, brasserie",
+      priceRange: { min: "$$$", max: "$$$$" },
+    },
+    {
+      name: "Taco Fiesta",
+      image:
+        "https://www.figma.com/api/mcp/asset/ec478964-b6ac-42fd-afb8-1ab0f2cfd236",
+      rating: 4.5,
+      reviews: "120 reviews",
+      cuisine: "Mexicana, taquería",
+      priceRange: { min: "$", max: "$$" },
+    },
+    {
+      name: "The Spice Route",
+      image:
+        "https://www.figma.com/api/mcp/asset/ec478964-b6ac-42fd-afb8-1ab0f2cfd236",
+      rating: 4.7,
+      reviews: "95 reviews",
+      cuisine: "India, curry house",
+      priceRange: { min: "$$", max: "$$$" },
+    },
+    {
+      name: "Burger Joint",
+      image:
+        "https://www.figma.com/api/mcp/asset/ec478964-b6ac-42fd-afb8-1ab0f2cfd236",
+      rating: 4.3,
+      reviews: "300 reviews",
+      cuisine: "Americana, hamburguesería",
+      priceRange: { min: "$", max: "$$" },
+    },
+  ];
+
   // Datos de clima actual
   const currentWeather = {
     temp: "17° C",
@@ -274,7 +335,7 @@ function VenuesTemplate() {
   ];
 
   return (
-    <div className="w-full min-h-screen flex flex-col bg-bg-secondary mb-10">
+    <div className="w-full min-h-screen flex flex-col bg-bg-secondary pb-10">
       <HeaderBar />
       <div className="w-full max-w-[1366px] mx-auto mt-4">
         <div className="max-w-[1200px] mx-auto">
@@ -411,7 +472,20 @@ function VenuesTemplate() {
             </div>
 
             <div className="bg-brand-darkening p-6 rounded-3xl mt-6 mx-auto">
-              
+              <GastronomyWidget restaurants={gastronomyData} />
+            </div>
+
+            <div className="grid grid-cols-2 gap-6 mb-6 mt-10">
+              <div className="w-[486px] flex flex-col">
+                <VenueCard>
+                  <SafetyWidget />
+                </VenueCard>
+              </div>
+              <div className="w-[486px] self-stretch bg-bg-primary rounded-3xl">
+                <VenueCard>
+                  <PreventionWidget />
+                </VenueCard>
+              </div>
             </div>
           </div>
         </div>
