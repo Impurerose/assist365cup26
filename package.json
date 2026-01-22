@@ -10,6 +10,9 @@
     "build:static": "node scripts/build-static.mjs",
     "build:inline": "node scripts/build-inline.mjs",
     "build:vanilla": "node scripts/build-vanilla.mjs",
+    "build:mainpage": "node scripts/build-mainpage.mjs",
+    "build:venues": "node scripts/build-venues.mjs",
+    "build:all-vanilla": "npm run build:vanilla && npm run build:mainpage && npm run build:venues",
     "help": "bash scripts/help.sh",
     "preview": "vite preview",
     "lint": "eslint ."

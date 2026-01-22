@@ -1,5 +1,5 @@
 // World Cup 2026 - Main Application
-// Auto-generated: 2026-01-20T21:53:34.187Z
+// Auto-generated: 2026-01-22T02:02:21.183Z
 
 const APP_STATE = {
   selectedTeam: null,

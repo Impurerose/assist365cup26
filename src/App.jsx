@@ -1,143 +1,94 @@
-import { useState } from "react";
-import HeaderBar from "./components/HeaderBar";
-import MapContainer from "./components/MapContainer";
-import SidePanel from "./components/SidePanel";
-import TeamSelection from "./components/TeamSelection";
-import MatchesContainer from "./components/MatchesContainer";
-import FinalPathBanner from "./components/FinalPathBanner";
-import PendingDefinitionBanner from "./components/PendingDefinitionBanner";
-import Select from "./dsys/Select";
-import Button from "./dsys/Button";
-import { TEAMS } from "./config/teamsConfig";
-import { VENUES } from "./config/mapConfig";
-import { MapPinAreaIcon } from "@phosphor-icons/react";
-import { mockMatches } from "./data/mockMatches";
-import { mockMatchesWithoutPending } from "./data/mockMatchesWithoutPending";
-import { mockMatchesFinished } from "./data/mockMatchesFinished";
+import { useEffect, useState } from "react";
+import { MainPageTemplate, VenuesTemplate } from "./templates";
 
+/**
+ * App Component
+ * Router de templates basado en URL params
+ * Desarrollo: localhost:5173/?template=mainpage
+ * NO se usa en producción vanilla
+ */
 function App() {
-  const [selectedTeam, setSelectedTeam] = useState(null);
-  const [viewMode, setViewMode] = useState("venue");
-  const [selectedCity, setSelectedCity] = useState(null);
-  const [panelTab, setPanelTab] = useState("groups");
+  const [activeTemplate, setActiveTemplate] = useState("mainpage");
+
+  // Mapeo de templates disponibles
+  const templates = {
+    mainpage: MainPageTemplate,
+    venues: VenuesTemplate,
+    // Fácil agregar más:
+    // brackets: BracketsTemplate,
+    // stats: StatsTemplate,
+  };
+
+  // Leer template desde URL al montar
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const template = params.get('template') || 'mainpage';
+    
+    // Validar que el template existe
+    if (templates[template]) {
+      setActiveTemplate(template);
+    } else {
+      console.warn(`Template "${template}" no existe, usando "mainpage"`);
+      setActiveTemplate('mainpage');
+    }
+  }, []);
+
+  // Escuchar cambios en la URL (browser back/forward)
+  useEffect(() => {
+    const handlePopState = () => {
+      const params = new URLSearchParams(window.location.search);
+      const template = params.get('template') || 'mainpage';
+      if (templates[template]) {
+        setActiveTemplate(template);
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  // Cambiar template y actualizar URL
+  const changeTemplate = (template) => {
+    if (!templates[template]) return;
+    
+    setActiveTemplate(template);
+    const url = new URL(window.location);
+    url.searchParams.set('template', template);
+    window.history.pushState({}, '', url);
+  };
+
+  // Obtener componente del template actual
+  const TemplateComponent = templates[activeTemplate] || templates.mainpage;
 
   return (
-    <div className="w-full min-h-screen flex flex-col bg-bg-secondary pb-32">
-      <HeaderBar />
-      <div
-        className={`w-full mt-12 max-w-[1366px] mx-auto flex flex-col gap-y-6${
-          !selectedTeam ? "mt-12" : ""
-        }`}
-      >
-        <div className="w-full max-w-[834px] lg:max-w-[1200px] mx-auto flex flex-col gap-y-8">
-          <div className="gap-6 w-full flex lg:flex-row flex-col justify-center bg-bg-secondary">
-            <MapContainer
-              selectedTeam={selectedTeam}
-              selectedCity={selectedCity}
-              setSelectedCity={setSelectedCity}
-            />
-
-            <SidePanel showBackground={!selectedTeam}>
-              {selectedTeam ? (
-                <MatchesContainer matches={mockMatches} />
-              ) : (
-                <TeamSelection onTeamSelect={setSelectedTeam} />
-              )}
-            </SidePanel>
-          </div>
-
-          {/* Selects de control - solo se muestran cuando hay equipo seleccionado */}
-          <div className="w-full flex items-end justify-center lg:justify-between gap-4 lg:gap-6 lg:mt-6 lg:mb-8 font-semibold mx-auto">
-            <div className="flex gap-x-2 items-center">
-              <span className="text-text-default text-xl pr-4 hidden lg:block">
-                Soy fan de:
-              </span>
-              <Select
-                placeholder="Selecioná tu equipo"
-                options={TEAMS}
-                value={selectedTeam?.id}
-                handleSelectChange={setSelectedTeam}
-                classes="w-[200px] lg:w-80"
-              />
-            </div>
-
-            <div className="flex gap-x-2 items-center lg:hidden">
-              <span className="text-text-default text-xl pr-4 hidden lg:block">
-                Sede:
-              </span>
-              <Select
-                placeholder="Seleccioná sede"
-                options={VENUES}
-                value={selectedCity?.id}
-                handleSelectChange={setSelectedCity}
-                classes="w-[200px] lg:w-80"
-              />
-            </div>
-
-            <Button
-              classes="hidden lg:flex"
-              color="secondary"
-              iconPosition="left"
-              icon={<MapPinAreaIcon />}
+    <div className="w-full min-h-screen bg-bg-secondary">
+      {/* Dev Toolbar - Solo para desarrollo */}
+      <div className="fixed top-4 right-4 z-50 bg-white p-4 rounded-xl shadow-lg border-2 border-brand-primary">
+        <p className="text-xs text-gray-500 mb-2 font-semibold">
+          Template Preview:
+        </p>
+        <div className="flex gap-2">
+          {Object.keys(templates).map((name) => (
+            <button
+              key={name}
+              onClick={() => changeTemplate(name)}
+              className={`px-3 py-1.5 rounded-lg text-sm font-semibold transition-all ${
+                activeTemplate === name
+                  ? 'bg-brand-primary text-white shadow-md'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
             >
-              Explorar sedes
-            </Button>
-          </div>
-
-          <div className="gap-6 w-full flex-col items-center lg:flex-row lg:items-start flex justify-center bg-bg-secondary">
-            <div className="text-2xl">
-              <img src="https://placehold.co/715x640" alt="Placeholder" />
-            </div>
-
-            <SidePanel>
-              <MatchesContainer matches={mockMatches} />
-            </SidePanel>
-          </div>
-
-          <div className="gap-6 w-full flex-col items-center lg:flex-row lg:items-start flex justify-center bg-bg-secondary">
-            <div className="text-2xl">
-              <img src="https://placehold.co/715x640" alt="Placeholder" />
-            </div>
-
-            <SidePanel>
-              <FinalPathBanner />
-            </SidePanel>
-          </div>
-
-          <div className="gap-6 w-full flex-col items-center lg:flex-row lg:items-start flex justify-center bg-bg-secondary">
-            <div className="text-2xl">
-              <img src="https://placehold.co/715x640" alt="Placeholder" />
-            </div>
-
-            <SidePanel>
-              <MatchesContainer
-                matches={mockMatchesWithoutPending}
-                initialTab="elimination"
-              />
-            </SidePanel>
-          </div>
-
-          <div className="gap-6 w-full flex-col items-center lg:flex-row lg:items-start flex justify-center bg-bg-secondary">
-            <div className="text-2xl">
-              <img src="https://placehold.co/715x640" alt="Placeholder" />
-            </div>
-
-            <SidePanel>
-              <PendingDefinitionBanner />
-            </SidePanel>
-          </div>
-
-          <div className="gap-6 w-full flex-col items-center lg:flex-row lg:items-start flex justify-center bg-bg-secondary">
-            <div className="text-2xl">
-              <img src="https://placehold.co/715x640" alt="Placeholder" />
-            </div>
-
-            <SidePanel>
-              <MatchesContainer matches={mockMatchesFinished} />
-            </SidePanel>
-          </div>
+              {name}
+            </button>
+          ))}
         </div>
+        <p className="text-xs text-gray-400 mt-2 font-mono">
+          ?template={activeTemplate}
+        </p>
       </div>
+
+      {/* Render template actual */}
+      <TemplateComponent />
     </div>
   );
 }
