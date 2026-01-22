@@ -489,6 +489,11 @@ function VenuesTemplate() {
             </div>
           </div>
         </div>
+
+
+        <div className="w-full bg-lime-300">
+          
+        </div>
       </div>
     </div>
   );
