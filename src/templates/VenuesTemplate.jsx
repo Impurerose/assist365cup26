@@ -3,9 +3,7 @@ import HeaderBar from "../components/HeaderBar";
 import MapContainer from "../components/MapContainer";
 import MatchCard from "../components/MatchCard";
 import Button from "../dsys/Button";
-import VenueCard from "../components/venues/VenueCard";
-import CurrentWeather from "../components/venues/CurrentWeather";
-import TypicalWeather from "../components/venues/TypicalWeather";
+import VenueCard from '../components/VenueCard';
 import {
   AirplaneTiltIcon,
   CaretLeftIcon,
@@ -183,11 +181,11 @@ function VenuesTemplate() {
 
           <div className="grid grid-cols-2 gap-6 max-w-[996px] mb-6">
             <div className="w-[486px] flex flex-col">
-              <div className="bg-bg-primary rounded-3xl text-base text-text-default p-6">
+              <VenueCard>
                 Famosa por su cultura deportiva, su hospitalidad y su legendaria
                 barbacoa, ofrece una experiencia cómoda y amigable para el
                 viajero internacional.
-              </div>
+              </VenueCard>
 
               <div className="bg-bg-primary rounded-3xl text-base text-text-default p-6 mt-4">
                 <img
