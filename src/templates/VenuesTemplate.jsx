@@ -15,6 +15,7 @@ import AccommodationsWidget from "../components/AccommodationsWidget";
 import GastronomyWidget from "../components/GastronomyWidget";
 import SafetyWidget from "../components/SafetyWidget";
 import PreventionWidget from "../components/PreventionWidget";
+import Assist365BannersWidget from "../components/Assist365BannersWidget";
 import {
   AirplaneTiltIcon,
   CaretLeftIcon,
@@ -489,10 +490,8 @@ function VenuesTemplate() {
             </div>
           </div>
         </div>
-
-
-        <div className="w-full bg-lime-300">
-          
+        <div className="w-full max-w-[1200px] mx-auto mt-10">
+          <Assist365BannersWidget />
         </div>
       </div>
     </div>

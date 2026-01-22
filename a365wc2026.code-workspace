@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../assist365front"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "a365wc2026"
+	}
+}
