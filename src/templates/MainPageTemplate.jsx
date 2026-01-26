@@ -85,12 +85,16 @@ function MainPageTemplate() {
               iconPosition="left"
               icon={<MapPinAreaIcon />}
               onClick={() => {
-                // En desarrollo React: cambiar template
-                // En vanilla: navegar a venues.html
+                // En desarrollo React: cambiar template a venuesSelection
+                // En vanilla: navegar a venuesSelection.html
                 if (typeof window !== 'undefined') {
                   const isVanilla = !document.getElementById('root');
                   if (isVanilla) {
-                    window.location.href = 'venues.html';
+                    window.location.href = 'venuesSelection.html';
+                  } else {
+                    // En React, cambiar el parámetro de template
+                    window.history.pushState({}, '', '?template=venuesSelection');
+                    window.dispatchEvent(new PopStateEvent('popstate'));
                   }
                 }
               }}

@@ -5,3 +5,4 @@
 
 export { default as MainPageTemplate } from './MainPageTemplate';
 export { default as VenuesTemplate } from './VenuesTemplate';
+export { default as VenuesSelectionTemplate } from './VenuesSelectionTemplate';

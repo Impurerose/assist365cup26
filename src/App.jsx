@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { MainPageTemplate, VenuesTemplate } from "./templates";
+import { MainPageTemplate, VenuesTemplate, VenuesSelectionTemplate } from "./templates";
 
 /**
  * App Component
@@ -14,6 +14,7 @@ function App() {
   const templates = {
     mainpage: MainPageTemplate,
     venues: VenuesTemplate,
+    venuesSelection: VenuesSelectionTemplate,
     // Fácil agregar más:
     // brackets: BracketsTemplate,
     // stats: StatsTemplate,
@@ -63,7 +64,7 @@ function App() {
   return (
     <div className="w-full min-h-screen bg-bg-secondary">
       {/* Dev Toolbar - Solo para desarrollo */}
-      <div className="fixed top-4 right-4 z-50 bg-white p-4 rounded-xl shadow-lg border-2 border-brand-primary">
+      <div className="fixed bottom-4 right-4 z-50 bg-white p-4 rounded-xl shadow-lg border-2 border-brand-primary">
         <p className="text-xs text-gray-500 mb-2 font-semibold">
           Template Preview:
         </p>

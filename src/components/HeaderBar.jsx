@@ -1,4 +1,8 @@
-import { SoccerBall, PaperPlaneTiltIcon } from "@phosphor-icons/react";
+import {
+  SoccerBall,
+  PaperPlaneTiltIcon,
+  ArrowLeft,
+} from "@phosphor-icons/react";
 import Button from "../dsys/Button.jsx";
 
 const SoccerBallGradient = () => (
@@ -15,25 +19,47 @@ const SoccerBallGradient = () => (
 export default function HeaderBar() {
   return (
     <header className="bg-white w-full">
-      <div className="flex items-center justify-between w-full max-w-[1200px] mx-auto px-6 py-3">
-        <div className="flex items-center gap-3">
+      <div className="flex items-center justify-between w-full max-w-[358px] md:max-w-[548px] lg:max-w-[1200px] mx-auto py-3">
+        <ArrowLeft
+          size={24}
+          weight="bold"
+          className="text-action-default block lg:hidden"
+        />
+
+        <div className="flex w-fit items-center">
           <img
+            className="hidden lg:block"
             src="https://assistcdn.s3.us-west-1.amazonaws.com/assets/site/home/img/brand/a365_logo_xa.svg"
             alt="A365 Logo"
           />
+
+          <img
+            className="block lg:hidden"
+            src="https://assistcdn.s3.us-west-1.amazonaws.com/assets/site/home/img/brand/Assist-logo.svg"
+            alt=""
+          />
+
           <SoccerBallGradient />
-          <svg width="32" height="32" viewBox="0 0 32 32" className="flex-shrink-0">
-            <SoccerBall size={32} weight="duotone" style={{ fill: "url(#soccerGradient)" }} />
+          <svg
+            viewBox="0 0 32 32"
+            className="flex-shrink-0 w-6 h-6 lg:w-8 lg:h-8"
+          >
+            <SoccerBall
+              size={32}
+              weight="duotone"
+              style={{ fill: "url(#soccerGradient)" }}
+            />
           </svg>
-          <h1 className="text-xl font-semibold text-text-decorative-darker">
+          <h1 className="text-base lg:text-xl font-semibold text-text-decorative-darker">
             World Cup Map 2026
           </h1>
         </div>
+
         <Button
           icon={<PaperPlaneTiltIcon size={16} weight="bold" />}
           iconPosition="right"
         >
-          Compartir
+          <span className="hidden lg:block">Compartir</span>
         </Button>
       </div>
     </header>
