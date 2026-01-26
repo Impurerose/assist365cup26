@@ -1,5 +1,5 @@
 // World Cup 2026 - Main Application
-// Auto-generated: 2026-01-22T02:02:21.183Z
+// Auto-generated: 2026-01-26T18:46:40.664Z
 
 const APP_STATE = {
   selectedTeam: null,
@@ -254,13 +254,15 @@ function renderMatchCard(match) {
         ${match.team2.flag ? `<span class="text-xl">${match.team2.flag}</span>` : flagPlaceholder}
       </div>
       <div class="flex flex-col gap-2">
-        <div class="flex items-center gap-2">
-          <i class="ph ph-calendar" style="font-size: 20px; color: #7BD0C2;"></i>
-          <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">${match.date}</p>
-        </div>
-        <div class="flex items-center gap-2">
-          <i class="ph ph-map-pin" style="font-size: 20px; color: #7BD0C2;"></i>
-          <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">${match.city}</p>
+        <div class="flex items-start gap-4">
+          <div class="flex items-center gap-2">
+            <i class="ph ph-calendar" style="font-size: 20px; color: #7BD0C2;"></i>
+            <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">${match.date}</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <i class="ph ph-map-pin" style="font-size: 20px; color: #7BD0C2;"></i>
+            <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">${match.city}</p>
+          </div>
         </div>
         <div class="flex items-center gap-2">
           <i class="ph ph-clock" style="font-size: 20px; color: #7BD0C2;"></i>

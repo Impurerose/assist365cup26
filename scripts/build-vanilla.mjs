@@ -687,13 +687,15 @@ function renderMatchCard(match) {
         \${match.team2.flag ? \`<span class="text-xl">\${match.team2.flag}</span>\` : flagPlaceholder}
       </div>
       <div class="flex flex-col gap-2">
-        <div class="flex items-center gap-2">
-          <i class="ph ph-calendar" style="font-size: 20px; color: #7BD0C2;"></i>
-          <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">\${match.date}</p>
-        </div>
-        <div class="flex items-center gap-2">
-          <i class="ph ph-map-pin" style="font-size: 20px; color: #7BD0C2;"></i>
-          <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">\${match.city}</p>
+        <div class="flex items-start gap-4">
+          <div class="flex items-center gap-2">
+            <i class="ph ph-calendar" style="font-size: 20px; color: #7BD0C2;"></i>
+            <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">\${match.date}</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <i class="ph ph-map-pin" style="font-size: 20px; color: #7BD0C2;"></i>
+            <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">\${match.city}</p>
+          </div>
         </div>
         <div class="flex items-center gap-2">
           <i class="ph ph-clock" style="font-size: 20px; color: #7BD0C2;"></i>
