@@ -60,7 +60,7 @@ function VenuesSelectionTemplate() {
         <div className="hidden lg:block pt-4 pb-6">
           <Button
             classes="text-action-default"
-            color="ghost"
+            color="tertiary"
             iconPosition="left"
             icon={<CaretLeftIcon />}
             onClick={handleBackClick}
