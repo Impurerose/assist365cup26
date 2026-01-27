@@ -372,232 +372,219 @@ const html = `<!DOCTYPE html>
       </header>
 
       <!-- Main Content -->
-      <div class="w-full max-w-[1366px] mx-auto mt-4">
+      <div class="w-full max-w-[1366px] mx-auto lg:mt-4 px-4">
         <div class="max-w-[1200px] mx-auto">
           
-          <!-- Botones de navegación -->
-          <div class="mx-auto w-full flex items-center justify-between">
-            <div class="w-full lg:w-fit">
-              <button 
-                type="button"
-                onclick="window.location.href='mainpage.html'"
-                class="whitespace-nowrap overflow-hidden text-ellipsis font-semibold rounded-xl transition-all duration-300 ease-in-out focus:outline-none focus:ring-4 focus:ring-offset-0 text-lg py-[10px] h-[48px] px-4 w-full lg:w-fit text-brand-primary hover:text-bg-alt-secondary active:text-action-pressed focus:border-bg-alt-secondary focus:text-bg-alt-secondary focus:border-transparent focus:ring-border-primary focus:ring-opacity-100 flex items-center justify-center gap-2"
-              >
-                <i class="ph ph-caret-left flex-shrink-0" style="font-size: 20px; font-weight: bold;"></i>
-                Volver a partidos
-              </button>
-            </div>
-            <div class="w-full lg:w-fit">
-              <button 
-                type="button"
-                onclick="window.location.href='venues.html'"
-                class="whitespace-nowrap overflow-hidden text-ellipsis font-semibold rounded-xl transition-all duration-300 ease-in-out focus:outline-none focus:ring-4 focus:ring-offset-0 text-lg py-[10px] h-[48px] px-4 w-full lg:w-fit border-2 border-brand-primary text-brand-primary hover:border-bg-alt-secondary hover:text-bg-alt-secondary active:border-action-pressed active:text-action-pressed focus:border-bg-alt-secondary focus:text-bg-alt-secondary focus:border-transparent focus:ring-brand-primary focus:ring-opacity-100 flex items-center justify-center gap-2"
-              >
-                <i class="ph ph-airplane-tilt flex-shrink-0" style="font-size: 20px; font-weight: bold;"></i>
-                Explorar itinerarios
-              </button>
-            </div>
+          <!-- Botones de navegación (Desktop only) -->
+          <div class="hidden lg:flex mx-auto w-full items-center justify-between">
+            <button 
+              type="button"
+              onclick="window.location.href='mainpage.html'"
+              class="whitespace-nowrap overflow-hidden text-ellipsis font-semibold rounded-xl transition-all duration-300 ease-in-out focus:outline-none focus:ring-4 focus:ring-offset-0 text-lg py-[10px] h-[48px] px-4 w-fit text-brand-primary hover:text-bg-alt-secondary active:text-action-pressed focus:border-bg-alt-secondary focus:text-bg-alt-secondary focus:border-transparent focus:ring-border-primary focus:ring-opacity-100 flex items-center justify-center gap-2"
+            >
+              <i class="ph ph-caret-left flex-shrink-0" style="font-size: 20px; font-weight: bold;"></i>
+              Volver a partidos
+            </button>
+            <button 
+              type="button"
+              onclick="window.location.href='venues.html'"
+              class="whitespace-nowrap overflow-hidden text-ellipsis font-semibold rounded-xl transition-all duration-300 ease-in-out focus:outline-none focus:ring-4 focus:ring-offset-0 text-lg py-[10px] h-[48px] px-4 w-fit border-2 border-brand-primary text-brand-primary hover:border-bg-alt-secondary hover:text-bg-alt-secondary active:border-action-pressed active:text-action-pressed focus:border-bg-alt-secondary focus:text-bg-alt-secondary focus:border-transparent focus:ring-brand-primary focus:ring-opacity-100 flex items-center justify-center gap-2"
+            >
+              <i class="ph ph-airplane-tilt flex-shrink-0" style="font-size: 20px; font-weight: bold;"></i>
+              Explorar itinerarios
+            </button>
           </div>
 
-          <div class="max-w-[996px] mx-auto">
+          <div class="max-w-[548px] lg:max-w-[996px] mx-auto">
             <!-- Título ciudad -->
             <div class="text-text-default text-2xl font-semibold pt-8 pb-6 flex gap-x-2">
               <i class="ph-duotone ph-map-pin-line text-icon-default" style="font-size: 32px;"></i>
               ${cityData.name}
             </div>
 
-            <!-- Grid 2 columnas -->
-            <div class="grid grid-cols-2 gap-6 mb-6">
+            <!-- Grid principal con sistema de orders responsivo -->
+            <div class="flex flex-col lg:grid lg:grid-cols-2 gap-x-6 gap-y-4 mb-6">
               
-              <!-- COLUMNA IZQUIERDA -->
-              <div class="w-[486px] flex flex-col">
-                
-                <!-- 1. Descripción ciudad -->
-                <div class="bg-bg-primary rounded-3xl text-base text-text-default p-6">
-                  ${cityData.description}
-                </div>
-
-                <!-- 2. VenueInfo -->
-                <div class="bg-bg-primary rounded-3xl text-base text-text-default p-6 mt-4">
-                  <img src="${venueData.image}" alt="${venueData.name}" class="w-full h-auto rounded-2xl mb-4" />
-                  <div class="flex flex-col gap-y-4 text-base text-text-default">
-                    <span class="font-semibold text-xl">${venueData.name}</span>
-                    <div class="gap-y-2 flex flex-col">
-                      <span>
-                        <i class="ph-duotone ph-map-pin inline-block mr-2 text-icon-lighter" style="font-size: 20px;"></i>
-                        ${venueData.address}
-                      </span>
-                      <span>
-                        <i class="ph-duotone ph-users-four inline-block mr-2 text-icon-lighter" style="font-size: 20px;"></i>
-                        Capacidad: ${venueData.capacity}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- 3. Map Container (Google Maps) -->
-                <div class="rounded-3xl overflow-hidden w-[486px] h-[242px] mt-4">
-                  <div id="venueMap" class="w-full h-full"></div>
-                </div>
-
-                <!-- 4. CurrentWeather -->
-                <div class="bg-bg-primary rounded-3xl text-base text-text-default p-6 mt-4 min-h-[228px]">
-                  <p class="text-xl font-semibold text-text-default">Clima actual</p>
-                  <div class="flex gap-10 mt-4">
-                    <!-- Clima actual - izquierda -->
-                    <div class="flex gap-2 items-center pl-4">
-                      <i class="ph-duotone ph-cloud-sun text-text-lighter" style="font-size: 40px;"></i>
-                      <div class="flex flex-col gap-1.5 w-[98px]">
-                        <p class="text-sm text-text-default">Hoy</p>
-                        <div class="flex flex-col gap-1.5">
-                          <p class="text-4xl font-semibold text-text-default leading-10">${currentWeather.temp}</p>
-                          <p class="text-sm text-text-lighter">${currentWeather.description}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- Pronóstico 4 días - derecha -->
-                    <div class="flex flex-col gap-3 border-l border-border-primary w-full pl-4">
-                      ${forecastDays.map(day => generateForecastDay(day)).join('')}
-                    </div>
-                  </div>
-                </div>
-
-                <!-- 5. FlightsWidget -->
-                <div class="bg-bg-primary rounded-3xl text-base text-text-default p-6 mt-4 min-h-[260px]">
-                  <div class="flex flex-col gap-4">
-                    <!-- Header: Título y fecha -->
-                    <div class="flex items-center justify-between">
-                      <p class="text-xl font-semibold text-text-default">Vuelos</p>
-                      <div class="flex gap-2 items-center">
-                        <i class="ph-duotone ph-calendar-blank text-icon-lighter" style="font-size: 20px;"></i>
-                        <p class="text-base text-text-default">${flightsData.period}</p>
-                      </div>
-                    </div>
-                    <!-- Ruta: Origen -> Destino -->
-                    <div class="flex items-center justify-between">
-                      <p class="text-base text-text-default">${flightsData.origin}</p>
-                      <i class="ph ph-arrow-right text-icon-lighter" style="font-size: 20px;"></i>
-                      <p class="text-base text-text-default">${flightsData.destination}</p>
-                    </div>
-                    <!-- Lista de opciones de vuelos - tabla -->
-                    <table class="w-full">
-                      <tbody>
-                        ${flightsData.flights.map(flight => generateFlightOption(flight)).join('')}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-
-                <!-- 6. TransportInfo -->
-                <div class="bg-bg-primary rounded-3xl text-base text-text-default p-6 mt-4 min-h-[248px]">
-                  <div class="flex flex-col">
-                    <!-- Título -->
-                    <p class="text-xl font-semibold text-text-default pb-4">Traslados</p>
-                    <div class="flex flex-col gap-y-2">
-                      <!-- Descripción -->
-                      <p class="text-base text-text-default">${transportData.description}</p>
-                      <!-- Subtítulo con icono -->
-                      <div class="flex gap-2 items-center">
-                        <i class="ph-duotone ph-car text-icon-lighter" style="font-size: 20px;"></i>
-                        <p class="text-base text-text-default">Recomendados:</p>
-                      </div>
-                      <!-- Lista de recomendaciones -->
-                      <ul class="flex flex-col gap-1 list-disc ml-5">
-                        ${transportData.recommendations.map(rec => `<li class="text-sm text-text-default">${rec}</li>`).join('')}
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-
+              <!-- 1. Descripción - order-1 lg:order-1 -->
+              <div class="order-1 lg:order-1 bg-bg-primary rounded-3xl text-base text-text-default p-6">
+                ${cityData.description}
               </div>
 
-              <!-- COLUMNA DERECHA -->
-              <div class="w-[486px] h-[824px] self-stretch">
-                
-                <!-- 7. Partidos en Kansas City (card oscura) -->
-                <div class="bg-brand-darkening rounded-xl py-6 px-10 flex flex-col h-full">
-                  <span class="text-text-default text-base font-semibold block pb-3 flex-shrink-0">
-                    Partidos en Kansas City
-                  </span>
-                  <div class="flex-1 overflow-y-auto min-h-0 flex flex-col gap-4 w-full max-w-[368px] venues-scrollbar pr-1">
-                    ${kansasCityMatches.map(match => generateMatchCard(match)).join('')}
+              <!-- 2. Partidos - order-4 lg:order-2 (con row-span-3) -->
+              <div class="order-4 lg:order-2 bg-brand-darkening rounded-xl py-6 px-4 lg:px-10 flex flex-col lg:h-[836px] mt-4 lg:mt-0 lg:row-span-3">
+                <span class="text-text-default text-base font-semibold block pb-3 flex-shrink-0">
+                  Partidos en Kansas City
+                </span>
+                <div class="flex-1 overflow-y-auto min-h-0 flex flex-col gap-4 w-full max-w-[548px] lg:max-w-[368px] venues-scrollbar pr-2">
+                  ${kansasCityMatches.map(match => generateMatchCard(match)).join('')}
+                </div>
+              </div>
+
+              <!-- 3. Info Estadio - order-2 lg:order-3 -->
+              <div class="order-2 lg:order-3 bg-bg-primary rounded-3xl text-base text-text-default p-6">
+                <img src="${venueData.image}" alt="${venueData.name}" class="w-full h-auto rounded-2xl mb-4" />
+                <div class="flex flex-col gap-y-4 text-base text-text-default">
+                  <span class="font-semibold text-xl">${venueData.name}</span>
+                  <div class="gap-y-2 flex flex-col">
+                    <span>
+                      <i class="ph-duotone ph-map-pin inline-block mr-2 text-icon-lighter" style="font-size: 20px;"></i>
+                      ${venueData.address}
+                    </span>
+                    <span>
+                      <i class="ph-duotone ph-users-four inline-block mr-2 text-icon-lighter" style="font-size: 20px;"></i>
+                      Capacidad: ${venueData.capacity}
+                    </span>
                   </div>
                 </div>
+              </div>
 
-                <!-- 8. TypicalWeather -->
-                <div class="bg-bg-primary rounded-3xl text-base text-text-default p-6 mt-4 min-h-[228px]">
-                  <p class="text-base font-semibold text-text-default">Clima habitual en Junio - Julio</p>
-                  <div class="flex flex-col gap-2 mt-4">
-                    <!-- Temperaturas -->
-                    <div class="flex gap-2 items-center">
-                      <i class="ph-duotone ph-thermometer text-icon-lighter" style="font-size: 20px;"></i>
-                      <p class="text-base text-text-lighter">Temperaturas:</p>
-                      <p class="text-base text-text-default">22°C a 32°C</p>
-                    </div>
-                    <!-- Días calurosos -->
-                    <div class="flex gap-2 items-center">
-                      <i class="ph-duotone ph-sun text-icon-lighter" style="font-size: 20px;"></i>
-                      <p class="text-base text-text-default">Días calurosos y húmedos</p>
-                    </div>
-                    <!-- Tormentas -->
-                    <div class="flex gap-2 items-center">
-                      <i class="ph-duotone ph-cloud-lightning text-icon-lighter" style="font-size: 20px;"></i>
-                      <p class="text-base text-text-default">Posibles tormentas eléctricas aisladas</p>
-                    </div>
-                    <!-- Recomendación -->
-                    <div class="flex gap-2 items-start">
-                      <i class="ph-duotone ph-warning-circle text-icon-lighter flex-shrink-0" style="font-size: 20px;"></i>
-                      <p class="text-base text-text-default">Lleva ropa liviana, gorra, protector solar y botella reutilizable.</p>
+              <!-- 4. Mapa - order-3 lg:order-5 -->
+              <div class="order-3 lg:order-5 rounded-3xl overflow-hidden lg:w-[486px] h-[242px] mt-4">
+                <div id="venueMap" class="w-full h-full"></div>
+              </div>
+
+              <!-- 5. Clima Actual - order-5 lg:order-7 -->
+              <div class="order-5 lg:order-7 bg-bg-primary rounded-3xl text-base text-text-default p-6 min-h-[228px] lg:mt-4">
+                <p class="text-xl font-semibold text-text-default">Clima actual</p>
+                <div class="flex gap-10 mt-4">
+                  <!-- Clima actual - izquierda -->
+                  <div class="flex gap-2 items-center pl-4">
+                    <i class="ph-duotone ph-cloud-sun text-text-lighter" style="font-size: 40px;"></i>
+                    <div class="flex flex-col gap-1.5 w-[98px]">
+                      <p class="text-sm text-text-default">Hoy</p>
+                      <div class="flex flex-col gap-1.5">
+                        <p class="text-4xl font-semibold text-text-default leading-10">${currentWeather.temp}</p>
+                        <p class="text-sm text-text-lighter">${currentWeather.description}</p>
+                      </div>
                     </div>
                   </div>
+                  <!-- Pronóstico 4 días - derecha -->
+                  <div class="flex flex-col gap-3 border-l border-border-primary w-full pl-4">
+                    ${forecastDays.map(day => generateForecastDay(day)).join('')}
+                  </div>
                 </div>
+              </div>
 
-                <!-- 9. AirportInfo -->
-                <div class="bg-bg-primary rounded-3xl text-base text-text-default p-6 mt-4 min-h-[260px]">
-                  <div class="flex flex-col gap-2">
-                    <!-- Icono + Título -->
-                    <div class="flex flex-col gap-1">
-                      <i class="ph-duotone ph-airplane-takeoff text-icon-lighter" style="font-size: 32px;"></i>
-                      <p class="text-base font-semibold text-text-default">Aeropuerto</p>
+              <!-- 6. Clima Típico - order-6 lg:order-8 -->
+              <div class="order-6 lg:order-8 bg-bg-primary rounded-3xl text-base text-text-default p-6 min-h-[228px] lg:mt-4">
+                <p class="text-base font-semibold text-text-default">Clima habitual en Junio - Julio</p>
+                <div class="flex flex-col gap-2 mt-4">
+                  <!-- Temperaturas -->
+                  <div class="flex gap-2 items-center">
+                    <i class="ph-duotone ph-thermometer text-icon-lighter" style="font-size: 20px;"></i>
+                    <p class="text-base text-text-lighter">Temperaturas:</p>
+                    <p class="text-base text-text-default">22°C a 32°C</p>
+                  </div>
+                  <!-- Días calurosos -->
+                  <div class="flex gap-2 items-center">
+                    <i class="ph-duotone ph-sun text-icon-lighter" style="font-size: 20px;"></i>
+                    <p class="text-base text-text-default">Días calurosos y húmedos</p>
+                  </div>
+                  <!-- Tormentas -->
+                  <div class="flex gap-2 items-center">
+                    <i class="ph-duotone ph-cloud-lightning text-icon-lighter" style="font-size: 20px;"></i>
+                    <p class="text-base text-text-default">Posibles tormentas eléctricas aisladas</p>
+                  </div>
+                  <!-- Recomendación -->
+                  <div class="flex gap-2 items-start">
+                    <i class="ph-duotone ph-warning-circle text-icon-lighter flex-shrink-0" style="font-size: 20px;"></i>
+                    <p class="text-base text-text-default">Lleva ropa liviana, gorra, protector solar y botella reutilizable.</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 7. Vuelos - order-7 lg:order-9 -->
+              <div class="order-7 lg:order-9 bg-bg-primary rounded-3xl text-base text-text-default p-6 min-h-[260px] lg:mt-4">
+                <div class="flex flex-col gap-4">
+                  <!-- Header: Título y fecha -->
+                  <div class="flex items-center justify-between">
+                    <p class="text-xl font-semibold text-text-default">Vuelos</p>
+                    <div class="flex gap-2 items-center">
+                      <i class="ph-duotone ph-calendar-blank text-icon-lighter" style="font-size: 20px;"></i>
+                      <p class="text-base text-text-default">${flightsData.period}</p>
                     </div>
+                  </div>
+                  <!-- Ruta: Origen -> Destino -->
+                  <div class="flex items-center justify-between">
+                    <p class="text-base text-text-default">${flightsData.origin}</p>
+                    <i class="ph ph-arrow-right text-icon-lighter" style="font-size: 20px;"></i>
+                    <p class="text-base text-text-default">${flightsData.destination}</p>
+                  </div>
+                  <!-- Lista de opciones de vuelos - tabla -->
+                  <table class="w-full">
+                    <tbody>
+                      ${flightsData.flights.map(flight => generateFlightOption(flight)).join('')}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <!-- 8. Aeropuerto - order-7 lg:order-10 -->
+              <div class="order-7 lg:order-10 bg-bg-primary rounded-3xl text-base text-text-default p-6 min-h-[260px] lg:mt-4">
+                <div class="flex flex-col gap-2">
+                  <!-- Icono + Título -->
+                  <div class="flex flex-col gap-1">
+                    <i class="ph-duotone ph-airplane-takeoff text-icon-lighter" style="font-size: 32px;"></i>
+                    <p class="text-base font-semibold text-text-default">Aeropuerto</p>
+                  </div>
+                  <!-- Descripción -->
+                  <p class="text-base text-text-default">${airportData.description}</p>
+                  <!-- Lista de características -->
+                  <ul class="flex flex-col gap-1 list-disc ml-5">
+                    ${airportData.features.map(feature => `<li class="text-sm text-text-default">${feature}</li>`).join('')}
+                  </ul>
+                  <!-- Enlace a info oficial -->
+                  <a href="${airportData.officialLink}" target="_blank" rel="noopener noreferrer" 
+                    class="flex gap-1 items-center text-base font-semibold text-action-default hover:underline">
+                    Más info oficial
+                    <i class="ph ph-arrow-square-out" style="font-size: 16px;"></i>
+                  </a>
+                </div>
+              </div>
+
+              <!-- 9. Transporte - order-8 lg:order-11 -->
+              <div class="order-8 lg:order-11 bg-bg-primary rounded-3xl text-base text-text-default p-6 min-h-[248px] lg:mt-4">
+                <div class="flex flex-col">
+                  <!-- Título -->
+                  <p class="text-xl font-semibold text-text-default pb-4">Traslados</p>
+                  <div class="flex flex-col gap-y-2">
                     <!-- Descripción -->
-                    <p class="text-base text-text-default">${airportData.description}</p>
-                    <!-- Lista de características -->
+                    <p class="text-base text-text-default">${transportData.description}</p>
+                    <!-- Subtítulo con icono -->
+                    <div class="flex gap-2 items-center">
+                      <i class="ph-duotone ph-car text-icon-lighter" style="font-size: 20px;"></i>
+                      <p class="text-base text-text-default">Recomendados:</p>
+                    </div>
+                    <!-- Lista de recomendaciones -->
                     <ul class="flex flex-col gap-1 list-disc ml-5">
-                      ${airportData.features.map(feature => `<li class="text-sm text-text-default">${feature}</li>`).join('')}
+                      ${transportData.recommendations.map(rec => `<li class="text-sm text-text-default">${rec}</li>`).join('')}
                     </ul>
-                    <!-- Enlace a info oficial -->
-                    <a href="${airportData.officialLink}" target="_blank" rel="noopener noreferrer" 
-                      class="flex gap-1 items-center text-base font-semibold text-action-default hover:underline">
-                      Más info oficial
-                      <i class="ph ph-arrow-square-out" style="font-size: 16px;"></i>
-                    </a>
                   </div>
                 </div>
-
-                <!-- 10. USEntryRequirements -->
-                <div class="bg-bg-primary rounded-3xl text-base text-text-default p-6 mt-4 min-h-[248px]">
-                  <div class="flex flex-col gap-2">
-                    <!-- Título -->
-                    <p class="text-xl font-semibold text-text-default">Normativas de Ingreso a Estados Unidos</p>
-                    <!-- Lista de requisitos -->
-                    <ul class="flex flex-col gap-1 list-disc ml-6">
-                      ${usEntryData.requirements.map(req => `<li class="text-base text-text-default">${req}</li>`).join('')}
-                    </ul>
-                    <!-- Enlace a info oficial -->
-                    <a href="${usEntryData.officialLink}" target="_blank" rel="noopener noreferrer"
-                      class="flex gap-1 items-center text-base font-semibold text-action-default hover:underline px-4 py-2 w-fit">
-                      Más info US gov
-                      <i class="ph ph-arrow-square-out" style="font-size: 16px;"></i>
-                    </a>
-                  </div>
-                </div>
-
               </div>
+
+              <!-- 10. Requisitos USA - order-10 lg:order-12 -->
+              <div class="order-10 lg:order-12 bg-bg-primary rounded-3xl text-base text-text-default p-6 min-h-[248px] lg:mt-4">
+                <div class="flex flex-col gap-2">
+                  <!-- Título -->
+                  <p class="text-xl font-semibold text-text-default">Normativas de Ingreso a Estados Unidos</p>
+                  <!-- Lista de requisitos -->
+                  <ul class="flex flex-col gap-1 list-disc ml-6">
+                    ${usEntryData.requirements.map(req => `<li class="text-base text-text-default">${req}</li>`).join('')}
+                  </ul>
+                  <!-- Enlace a info oficial -->
+                  <a href="${usEntryData.officialLink}" target="_blank" rel="noopener noreferrer"
+                    class="flex gap-1 items-center text-base font-semibold text-action-default hover:underline px-4 py-2 w-fit">
+                    Más info US gov
+                    <i class="ph ph-arrow-square-out" style="font-size: 16px;"></i>
+                  </a>
+                </div>
+              </div>
+
             </div>
 
-            <!-- 11. AccommodationsWidget (card ancha) -->
-            <div class="bg-brand-darkening p-6 rounded-3xl mt-10 mx-auto">
+            <!-- 11. AccommodationsWidget -->
+            <div class="bg-brand-darkening p-4 lg:p-6 rounded-3xl mt-4 lg:mt-10 mx-auto">
               <div class="flex flex-col gap-3">
                 <!-- Header con título e icono de Tripadvisor -->
                 <div class="flex gap-3 items-center">
@@ -617,8 +604,8 @@ const html = `<!DOCTYPE html>
               </div>
             </div>
 
-            <!-- 12. GastronomyWidget (card ancha) -->
-            <div class="bg-brand-darkening p-6 rounded-3xl mt-6 mx-auto">
+            <!-- 12. GastronomyWidget -->
+            <div class="bg-brand-darkening p-4 lg:p-6 rounded-3xl mt-6 mx-auto">
               <div class="flex flex-col gap-3">
                 <!-- Header con título e icono de Tripadvisor -->
                 <div class="flex gap-3 items-center">
@@ -638,13 +625,13 @@ const html = `<!DOCTYPE html>
               </div>
             </div>
 
-            <!-- Grid 2 columnas final -->
-            <div class="grid grid-cols-2 gap-6 mb-6 mt-10">
+            <!-- 13 y 14. Seguridad y Prevención (Grid 2 columnas) -->
+            <div class="grid lg:grid-cols-2 gap-4 lg:gap-6 mb-6 mt-4 lg:mt-10">
               
               <!-- 13. SafetyWidget -->
-              <div class="w-[486px] flex flex-col">
+              <div class="lg:w-[486px] flex flex-col">
                 <div class="bg-bg-primary rounded-3xl text-base text-text-default p-6">
-                  <div class="flex flex-col gap-2 h-[208px]">
+                  <div class="flex flex-col gap-2">
                     <!-- Título -->
                     <h3 class="text-xl font-semibold text-text-default">Seguridad</h3>
                     <!-- Descripción -->
@@ -665,7 +652,7 @@ const html = `<!DOCTYPE html>
               </div>
 
               <!-- 14. PreventionWidget -->
-              <div class="w-[486px] self-stretch bg-bg-primary rounded-3xl">
+              <div class="lg:w-[486px] self-stretch bg-bg-primary rounded-3xl">
                 <div class="bg-bg-primary rounded-3xl text-base text-text-default p-6">
                   <div class="flex flex-col gap-2">
                     <!-- Título -->
@@ -708,21 +695,21 @@ const html = `<!DOCTYPE html>
         </div>
 
         <!-- 15. Assist365BannersWidget -->
-        <div class="w-full max-w-[1200px] mx-auto mt-10">
+        <div class="w-full max-w-[548px] lg:max-w-full mx-auto mt-10">
           <div class="flex gap-6 items-center justify-center">
-            <!-- 1. Icono amarillo - Maleta -->
-            <div class="bg-brand-comp-yellow rounded-full w-[176px] h-[280px] flex items-center justify-center px-[27px] py-[78px]">
+            <!-- 1. Icono amarillo - Maleta (hidden en mobile) -->
+            <div class="hidden lg:flex bg-brand-comp-yellow rounded-full w-[176px] h-[280px] items-center justify-center px-[27px] py-[78px]">
               <i class="ph-duotone ph-suitcase-rolling text-white" style="font-size: 123px;"></i>
             </div>
-            <!-- 2. Card lila - Worldcup Care -->
-            <div class="bg-brand-comp-lilac rounded-2xl w-[486px] h-[280px] p-6 flex flex-col gap-6 justify-center relative overflow-hidden">
+            <!-- 2. Card lila - Worldcup Care (full width en mobile) -->
+            <div class="bg-brand-comp-lilac rounded-2xl w-full lg:w-[486px] lg:h-[280px] p-4 lg:p-6 flex flex-col gap-6 justify-center relative overflow-hidden">
               <!-- Imagen decorativa shape (absolute) -->
               <img src="https://assistcdn.s3.us-west-1.amazonaws.com/assets/site/banner/shape3.svg" alt="" class="absolute right-0 top-1/2 -translate-y-1/2 w-[143px] h-[300px]" />
               <!-- Textos -->
               <div class="flex flex-col gap-1 relative z-10">
-                <p class="text-xl font-semibold text-text-default leading-7">Viví cada partido sin preocupaciones</p>
-                <p class="text-3xl font-semibold text-text-default leading-9">Worldcup Care</p>
-                <p class="text-2xl text-text-default leading-8">La cobertura pensada para acompañarte dentro y fuera de la cancha</p>
+                <p class="text-base md:text-xl font-semibold text-text-default lg:leading-7">Viví cada partido sin preocupaciones</p>
+                <p class="text-2xl md:text-3xl font-semibold text-text-default lg:leading-9">Worldcup Care</p>
+                <p class="text-base md:text-2xl text-text-default lg:leading-8">La cobertura pensada para acompañarte dentro y fuera de la cancha</p>
               </div>
               <!-- Botón -->
               <button class="bg-action-default hover:bg-action-hover active:bg-action-pressed text-white font-semibold px-4 py-2 rounded-xl flex items-center gap-1 w-fit h-[36px] transition-colors relative z-10">
@@ -730,13 +717,55 @@ const html = `<!DOCTYPE html>
                 <i class="ph ph-arrow-right" style="font-size: 16px; font-weight: bold;"></i>
               </button>
             </div>
-            <!-- 3. Card verde - Pelota -->
-            <div class="bg-brand-comp-green rounded-xl w-[278px] h-[280px] flex items-center justify-center p-[62px]">
+            <!-- 3. Card verde - Pelota (hidden en mobile) -->
+            <div class="bg-brand-comp-green rounded-xl w-[278px] h-[280px] items-center justify-center p-[62px] hidden lg:flex">
               <i class="ph-duotone ph-soccer-ball text-icon-darker" style="font-size: 123px;"></i>
             </div>
-            <!-- 4. Icono celeste circular - Avión -->
-            <div class="bg-brand-comp-lightblue rounded-full w-[280px] h-[280px] flex items-center justify-center p-[62px]">
+            <!-- 4. Icono celeste circular - Avión (hidden en mobile) -->
+            <div class="bg-brand-comp-lightblue rounded-full w-[280px] h-[280px] hidden lg:flex items-center justify-center p-[62px]">
               <i class="ph-duotone ph-airplane-tilt text-white" style="font-size: 156px;"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- 16. VenuesCityGrid -->
+        <div class="w-full max-w-[548px] lg:max-w-[996px] mx-auto mt-10 lg:mt-28">
+          <div class="grid lg:grid-cols-[282px_282px_1fr] grid-cols-1 gap-y-4 lg:gap-y-0 lg:gap-x-6 gap-x-0">
+            <!-- Ciudad 1 -->
+            <div class="bg-bg-primary rounded-2xl p-4 flex items-center gap-4 flex-1">
+              <div class="overflow-hidden rounded-2xl flex-shrink-0">
+                <img src="https://placehold.co/80x80" alt="Ciudad placeholder" />
+              </div>
+              <div class="flex flex-col">
+                <span class="text-text-secondary text-sm">Estados Unidos</span>
+                <span class="text-text-default text-xl font-semibold">Atlanta</span>
+              </div>
+            </div>
+            <!-- Ciudad 2 -->
+            <div class="bg-bg-primary rounded-2xl p-4 flex items-center gap-4 flex-1">
+              <div class="overflow-hidden rounded-2xl flex-shrink-0">
+                <img src="https://placehold.co/80x80" alt="Ciudad placeholder" />
+              </div>
+              <div class="flex flex-col">
+                <span class="text-text-secondary text-sm">Estados Unidos</span>
+                <span class="text-text-default text-xl font-semibold">Atlanta</span>
+              </div>
+            </div>
+            <!-- Card de acción - Explorar todas las sedes -->
+            <div class="bg-bg-primary rounded-2xl p-4 flex items-center gap-4 flex-1">
+              <div class="w-20 h-20 bg-brand-comp-lightblue rounded-2xl flex items-center justify-center flex-shrink-0">
+                <i class="ph-duotone ph-map-pin-line text-icon-default" style="font-size: 32px;"></i>
+              </div>
+              <div class="flex flex-col gap-2">
+                <button 
+                  type="button"
+                  onclick="window.location.href='venuesSelection.html'"
+                  class="whitespace-nowrap overflow-hidden text-ellipsis font-semibold rounded-xl transition-all duration-300 ease-in-out focus:outline-none focus:ring-4 focus:ring-offset-0 text-lg py-[10px] h-[48px] px-4 w-fit text-brand-primary hover:text-bg-alt-secondary active:text-action-pressed focus:border-bg-alt-secondary focus:text-bg-alt-secondary focus:border-transparent focus:ring-border-primary focus:ring-opacity-100 flex items-center justify-center gap-2"
+                >
+                  Explorar todas las sedes
+                  <i class="ph ph-arrow-right flex-shrink-0" style="font-size: 16px; font-weight: bold;"></i>
+                </button>
+              </div>
             </div>
           </div>
         </div>
