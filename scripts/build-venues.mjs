@@ -331,6 +331,9 @@ const html = `<!DOCTYPE html>
     <!-- Phosphor Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
     
+    <!-- Micromodal -->
+    <script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+    
     <title>Kansas City - Sedes Mundial 2026</title>
     
     <!-- Styles -->
