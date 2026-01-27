@@ -338,9 +338,9 @@ function VenuesTemplate() {
   return (
     <div className="w-full min-h-screen flex flex-col bg-bg-secondary pb-10">
       <HeaderBar />
-      <div className="w-full max-w-[1366px] mx-auto lg:mt-4">
+      <div className="w-full max-w-[1366px] mx-auto lg:mt-4 px-4">
         <div className="max-w-[1200px] mx-auto">
-          <div className="hidden lg:flex lg:max-w-[996px] mx-auto w-full items-center justify-between">
+          <div className="hidden lg:flex xlg:max-w-[996px] mx-auto w-full items-center justify-between">
             <Button
               color="tertiary"
               iconPosition="left"
@@ -388,101 +388,109 @@ function VenuesTemplate() {
               {cityData.name}
             </div>
 
-            <div className="grid lg:grid-cols-2 gap-6 mb-6">
-              <div className="w-[486px] flex flex-col">
-                <VenueCard>{cityData.description}</VenueCard>
+            <div className="flex flex-col lg:grid lg:grid-cols-2 gap-x-6 gap-y-4 mb-6">
+              {/* Descripción - Tablet: 1, Desktop: col izq (1) */}
+              <VenueCard className="order-1 lg:order-1">
+                {cityData.description}
+              </VenueCard>
 
-                <VenueCard className="mt-4">
-                  <VenueInfo
-                    image={venueData.image}
-                    name={venueData.name}
-                    address={venueData.address}
-                    capacity={venueData.capacity}
-                  />
-                </VenueCard>
-
-                <div className="rounded-3xl overflow-hidden w-[486px] h-[242px] mt-4">
-                  <MapContainer
-                    selectedTeam={selectedTeam}
-                    selectedCity={selectedCity}
-                    setSelectedCity={setSelectedCity}
-                  />
+              {/* Partidos - Tablet: 4 (después mapa), Desktop: col der arriba (2) */}
+              <div className="order-4 lg:order-2 bg-brand-darkening rounded-xl py-6 px-4 lg:px-10 flex flex-col lg:h-[836px] mt-4 lg:mt-0 lg:row-span-3">
+                <span className="text-text-default text-base font-semibold block pb-3 flex-shrink-0">
+                  Partidos en Kansas City
+                </span>
+                <div className="flex-1 overflow-y-auto min-h-0 flex flex-col gap-4 w-full max-w-[548px] lg:max-w-[368px] venues-scrollbar pr-2">
+                  {kansasCityMatches.map((match, index) => (
+                    <MatchCard
+                      key={index}
+                      match={match}
+                      showMatchNumber={false}
+                    />
+                  ))}
                 </div>
-
-                <VenueCard className="mt-4 min-h-[228px]">
-                  <CurrentWeather />
-                </VenueCard>
-
-                <VenueCard className="mt-4 min-h-[260px]">
-                  <FlightsWidget
-                    origin={flightsData.origin}
-                    destination={flightsData.destination}
-                    period={flightsData.period}
-                    flights={flightsData.flights}
-                  />
-                </VenueCard>
-
-                <VenueCard className="mt-4 min-h-[248px]">
-                  <TransportInfo
-                    description={transportData.description}
-                    recommendations={transportData.recommendations}
-                  />
-                </VenueCard>
               </div>
 
-              <div className="w-[486px] h-[824px] self-stretch">
-                <div className="bg-brand-darkening rounded-xl py-6 px-10 flex flex-col h-full">
-                  <span className="text-text-default text-base font-semibold block pb-3 flex-shrink-0">
-                    Partidos en Kansas City
-                  </span>
-                  <div className="flex-1 overflow-y-auto min-h-0 flex flex-col gap-4 w-fuil max-w-[368px] venues-scrollbar pr-2">
-                    {kansasCityMatches.map((match, index) => (
-                      <MatchCard
-                        key={index}
-                        match={match}
-                        showMatchNumber={false}
-                      />
-                    ))}
-                  </div>
-                </div>
+              {/* Info Estadio - Tablet: 2, Desktop: col izq (3) */}
+              <VenueCard className="order-2 lg:order-3">
+                <VenueInfo
+                  image={venueData.image}
+                  name={venueData.name}
+                  address={venueData.address}
+                  capacity={venueData.capacity}
+                />
+              </VenueCard>
 
-                <VenueCard className="mt-4 min-h-[228px]">
-                  <TypicalWeather />
-                </VenueCard>
-
-                <VenueCard className="mt-4 min-h-[260px]">
-                  <AirportInfo
-                    name={airportData.name}
-                    description={airportData.description}
-                    features={airportData.features}
-                    officialLink={airportData.officialLink}
-                  />
-                </VenueCard>
-
-                <VenueCard className="mt-4 min-h-[248px]">
-                  <USEntryRequirements
-                    requirements={usEntryData.requirements}
-                    officialLink={usEntryData.officialLink}
-                  />
-                </VenueCard>
+              {/* Mapa - Tablet: 3, Desktop: col izq (5) */}
+              <div className="order-3 lg:order-5 rounded-3xl overflow-hidden lg:w-[486px] h-[242px] mt-4">
+                <MapContainer
+                  selectedTeam={selectedTeam}
+                  selectedCity={selectedCity}
+                  setSelectedCity={setSelectedCity}
+                />
               </div>
+
+              {/* Clima Actual - Tablet: 5, Desktop: col izq (7) */}
+              <VenueCard className="order-5 lg:order-7 min-h-[228px] lg:mt-4">
+                <CurrentWeather />
+              </VenueCard>
+
+              {/* Clima Típico - Tablet: 8, Desktop: col der (8) */}
+              <VenueCard className="order-6 lg:order-8 min-h-[228px] lg:mt-4">
+                <TypicalWeather />
+              </VenueCard>
+
+              {/* Vuelos - Tablet: 6, Desktop: col izq (9) */}
+              <VenueCard className="order-7 lg:order-9 min-h-[260px] lg:mt-4">
+                <FlightsWidget
+                  origin={flightsData.origin}
+                  destination={flightsData.destination}
+                  period={flightsData.period}
+                  flights={flightsData.flights}
+                />
+              </VenueCard>
+
+              {/* Aeropuerto - Tablet: 9, Desktop: col der (10) */}
+              <VenueCard className="order-7 lg:order-10 min-h-[260px] lg:mt-4">
+                <AirportInfo
+                  name={airportData.name}
+                  description={airportData.description}
+                  features={airportData.features}
+                  officialLink={airportData.officialLink}
+                />
+              </VenueCard>
+
+              {/* Transporte - Tablet: 7, Desktop: col izq (11) */}
+              <VenueCard className="order-8 lg:order-11 min-h-[248px] lg:mt-4">
+                <TransportInfo
+                  description={transportData.description}
+                  recommendations={transportData.recommendations}
+                />
+              </VenueCard>
+
+              {/* Requisitos USA - Tablet: 10, Desktop: col der (12) */}
+              <VenueCard className="order-10 lg:order-12 min-h-[248px] lg:mt-4">
+                <USEntryRequirements
+                  requirements={usEntryData.requirements}
+                  officialLink={usEntryData.officialLink}
+                />
+              </VenueCard>
             </div>
 
-            <div className="bg-brand-darkening p-6 rounded-3xl mt-10 mx-auto">
+            <div className="bg-brand-darkening p-4 lg:p-6 rounded-3xl mt-4 lg:mt-10 mx-auto">
               <AccommodationsWidget hotels={accommodationsData} />
             </div>
 
-            <div className="bg-brand-darkening p-6 rounded-3xl mt-6 mx-auto">
+            <div className="bg-brand-darkening p-4 lg:p-6 rounded-3xl mt-6 mx-auto">
               <GastronomyWidget restaurants={gastronomyData} />
             </div>
 
-            <div className="grid grid-cols-2 gap-6 mb-6 mt-10">
-              <div className="w-[486px] flex flex-col">
+            <div className="grid lg:grid-cols-2 gap-4 lg:gap-6 mb-6 mt-4 lg:mt-10">
+              <div className="lg:w-[486px] flex flex-col">
                 <VenueCard>
                   <SafetyWidget />
                 </VenueCard>
               </div>
-              <div className="w-[486px] self-stretch bg-bg-primary rounded-3xl">
+              <div className="lg:w-[486px] self-stretch bg-bg-primary rounded-3xl">
                 <VenueCard>
                   <PreventionWidget />
                 </VenueCard>
@@ -490,7 +498,7 @@ function VenuesTemplate() {
             </div>
           </div>
         </div>
-        <div className="w-full max-w-[1200px] mx-auto mt-10">
+        <div className="w-full max-w-[548px]  lg:max-w-full mx-auto mt-10">
           <Assist365BannersWidget />
         </div>
       </div>

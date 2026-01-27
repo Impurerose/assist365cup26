@@ -7,7 +7,7 @@ export default function CurrentWeather() {
         Clima actual
       </p>
 
-      <div className="flex gap-10 mt-4">
+      <div className="flex lg:gap-10 mt-4 flex-col lg:flex-row mx-auto">
         {/* Clima de hoy - izquierda */}
         <div className="flex gap-2 items-center pl-4">
           <CloudSun
@@ -29,7 +29,7 @@ export default function CurrentWeather() {
         </div>
 
         {/* Pronóstico 4 días - derecha */}
-        <div className="flex flex-col gap-3 border-l border-border-primary w-full _w-[209px] pl-4">
+        <div className="flex flex-col gap-3 border-t pt-2 mt-2 lg:border-t-0 lg:border-l border-border-primary w-full _w-[209px] pl-4">
           {/* Miércoles */}
           <div className="flex gap-4 items-center">
             <div className="flex gap-4 items-center">

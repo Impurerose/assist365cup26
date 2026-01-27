@@ -9,7 +9,7 @@ export default function PreventionWidget() {
       </h3>
       
       {/* Grid de 2 columnas */}
-      <div className="grid grid-cols-2 gap-4 mt-2">
+      <div className="grid lg:grid-cols-2 gap-4 mt-2">
         {/* Columna 1: Antes de viajar */}
         <div className="flex flex-col gap-2">
           <div className="flex gap-2 items-center">
