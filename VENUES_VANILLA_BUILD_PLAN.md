@@ -1,629 +1,1047 @@
-# Plan de Ajuste: Build Vanilla para Venues Template
+# Plan de Actualización: Build Vanilla de VenuesTemplate
 
-**Fecha:** 22 de enero de 2026  
-**Objetivo:** Hacer que `build-venues.mjs` genere un HTML 100% fiel a la maquetación del `VenuesTemplate.jsx`
+## 📋 Resumen Ejecutivo
 
----
+Este documento detalla **todas** las modificaciones necesarias para que el build vanilla de `VenuesTemplate.jsx` sea 100% idéntico pixel-perfect en desktop, tablet y mobile.
 
-## 📊 Estado Actual vs. Objetivo
-
-### Estado Actual
-- HTML minimalista con solo:
-  - Header con logo y botón compartir ✅
-  - Placeholder "Contenido en desarrollo..."
-  - Botón para volver a partidos
-
-### Objetivo
-- Replicar **toda** la estructura de VenuesTemplate con:
-  - Header completo ✅
-  - Botones de navegación (Volver a partidos / Explorar itinerarios)
-  - Título de ciudad con icono
-  - Grid de 2 columnas con todos los widgets
-  - Cards de hoteles y restaurantes
-  - Widgets de seguridad y prevención
-  - Footer con banners Assist365
+**Última actualización**: 2026-01-27  
+**Archivo analizado**: [VenuesTemplate.jsx](src/templates/VenuesTemplate.jsx)  
+**Script a modificar**: [build-venues.mjs](scripts/build-venues.mjs)
 
 ---
 
-## 🏗️ Estructura del Template React a Replicar
+## 🎯 Componentes Utilizados
 
-```
-VenuesTemplate
-├── HeaderBar (✅ ya existe)
-│
-├── Contenedor principal (max-w-[1366px])
-│   │
-│   ├── Navegación Superior
-│   │   ├── Button "Volver a partidos" (← icon, tertiary)
-│   │   └── Button "Explorar itinerarios" (✈️ icon, secondary)
-│   │
-│   ├── Título Ciudad
-│   │   └── MapPinLine icon + "Kansas City, Missouri, Estados Unidos"
-│   │
-│   └── Grid Principal 2 Columnas (grid-cols-2 gap-6)
-│       │
-│       ├── COLUMNA IZQUIERDA (w-[486px])
-│       │   ├── 1. VenueCard: Descripción de la ciudad
-│       │   ├── 2. VenueCard: VenueInfo
-│       │   │   └── Imagen + Nombre estadio + Dirección + Capacidad
-│       │   ├── 3. MapContainer (486x242px, rounded-3xl)
-│       │   ├── 4. VenueCard: CurrentWeather
-│       │   │   ├── Clima actual (hoy) - izquierda
-│       │   │   └── Pronóstico 4 días - derecha
-│       │   ├── 5. VenueCard: FlightsWidget
-│       │   │   ├── Origen → Destino
-│       │   │   └── Grid 2x2 opciones de vuelo
-│       │   └── 6. VenueCard: TransportInfo
-│       │       ├── Descripción
-│       │       └── Lista recomendaciones
-│       │
-│       └── COLUMNA DERECHA (w-[486px])
-│           ├── 7. Card Oscura: Partidos en Kansas City
-│           │   ├── h-[824px], overflow-y-auto
-│           │   └── 6 MatchCards
-│           ├── 8. VenueCard: TypicalWeather
-│           │   └── 4 items clima habitual
-│           ├── 9. VenueCard: AirportInfo
-│           │   ├── Nombre aeropuerto
-│           │   ├── Descripción + features
-│           │   └── Link oficial
-│           └── 10. VenueCard: USEntryRequirements
-│               ├── Lista requisitos
-│               └── Link oficial
-│
-├── Cards Anchas (full width max-w-[996px])
-│   ├── 11. AccommodationsWidget
-│   │   ├── Título "Alojamiento"
-│   │   └── Grid 3 columnas x 6 hoteles
-│   │       └── HotelCard: imagen, nombre, rating, reviews, precio
-│   └── 12. GastronomyWidget
-│       ├── Título "Gastronomía"
-│       └── Grid 3 columnas x 6 restaurantes
-│           └── RestaurantCard: imagen, nombre, rating, cuisine, priceRange
-│
-├── Grid 2 Columnas Final
-│   ├── 13. VenueCard: SafetyWidget
-│   └── 14. VenueCard: PreventionWidget
-│
-└── 15. Assist365BannersWidget (footer)
+### Componentes Importados (Total: 19)
+
+| # | Componente | Ruta | Uso |
+|---|------------|------|-----|
+| 1 | `HeaderBar` | `components/HeaderBar` | Barra superior con logo |
+| 2 | `MapContainer` | `components/MapContainer` | Mapa interactivo |
+| 3 | `MatchCard` | `components/MatchCard` | Card de partido individual |
+| 4 | `Button` | `dsys/Button` | Botones de navegación |
+| 5 | `VenueCard` | `components/VenueCard` | Contenedor de información |
+| 6 | `VenueInfo` | `components/VenueInfo` | Info detallada del estadio |
+| 7 | `CurrentWeather` | `components/CurrentWeather` | Clima actual con pronóstico |
+| 8 | `TypicalWeather` | `components/TypicalWeather` | Clima habitual de la ciudad |
+| 9 | `FlightsWidget` | `components/FlightsWidget` | Lista de vuelos disponibles |
+| 10 | `AirportInfo` | `components/AirportInfo` | Información del aeropuerto |
+| 11 | `TransportInfo` | `components/TransportInfo` | Info de transporte local |
+| 12 | `USEntryRequirements` | `components/USEntryRequirements` | Requisitos de entrada USA |
+| 13 | `AccommodationsWidget` | `components/AccommodationsWidget` | Grid de hoteles |
+| 14 | `GastronomyWidget` | `components/GastronomyWidget` | Grid de restaurantes |
+| 15 | `SafetyWidget` | `components/SafetyWidget` | Información de seguridad |
+| 16 | `PreventionWidget` | `components/PreventionWidget` | Tips de prevención |
+| 17 | `Assist365BannersWidget` | `components/Assist365BannersWidget` | Banners promocionales |
+| 18 | **`VenuesCityGrid`** | `components/VenuesCityGrid` | ⚠️ **NUEVO** Grid de ciudades |
+
+### Iconos de Phosphor (Total: 13)
+
+```javascript
+import {
+  AirplaneTiltIcon,      // Botón "Explorar itinerarios"
+  CaretLeftIcon,         // Botón "Volver a partidos"
+  MapPinLineIcon,        // Título de ciudad
+  CloudSun,              // Clima (usado en componentes)
+  Cloud,                 // Clima
+  CloudRain,             // Clima
+  CloudLightning,        // Clima
+  Sun,                   // Clima
+  Thermometer,           // Clima
+  WarningCircle,         // Clima
+  MapPinAreaIcon,        // (Importado pero no usado en template)
+  MapPinIcon,            // (Importado pero no usado en template)
+  SoccerBallIcon,        // (Importado pero no usado en template)
+  UsersFourIcon,         // (Importado pero no usado en template)
+} from "@phosphor-icons/react";
 ```
 
 ---
 
-## 📦 Componentes a Convertir a HTML Vanilla
+## 🏗️ Estructura del Layout Principal
 
-### 1. Botones de Navegación
-
-**React:**
+### 1. Container Principal
 ```jsx
-<Button color="tertiary" iconPosition="left" icon={<CaretLeftIcon />}>
+<div className="w-full min-h-screen flex flex-col bg-bg-secondary pb-10">
+```
+
+### 2. Container de Ancho Máximo
+```jsx
+<div className="w-full max-w-[1366px] mx-auto lg:mt-4 px-4">
+```
+⚠️ **CRÍTICO**: 
+- `px-4` agregado para mobile (padding horizontal)
+- `lg:mt-4` solo en desktop
+
+### 3. Container Interno (max-width secundario)
+```jsx
+<div className="max-w-[1200px] mx-auto">
+```
+
+### 4. Botones de Navegación (Desktop Only)
+```jsx
+<div className="hidden lg:flex mx-auto w-full items-center justify-between">
+```
+
+#### Botón "Volver a partidos"
+```jsx
+<Button
+  color="tertiary"
+  iconPosition="left"
+  classes="w-fit"
+  icon={<CaretLeftIcon />}
+  onClick={() => {
+    if (typeof window !== "undefined") {
+      const isVanilla = !document.getElementById("root");
+      if (isVanilla) {
+        window.location.href = "mainpage.html";
+      }
+    }
+  }}
+>
   Volver a partidos
 </Button>
-<Button color="secondary" iconPosition="left" icon={<AirplaneTiltIcon />}>
+```
+
+#### Botón "Explorar itinerarios"
+```jsx
+<Button
+  color="secondary"
+  iconPosition="left"
+  icon={<AirplaneTiltIcon />}
+  onClick={() => {
+    if (typeof window !== "undefined") {
+      const isVanilla = !document.getElementById("root");
+      if (isVanilla) {
+        window.location.href = "venues.html";
+      }
+    }
+  }}
+>
   Explorar itinerarios
 </Button>
 ```
 
-**Vanilla HTML:**
-```html
-<button onclick="window.location.href='mainpage.html'" 
-  class="inline-flex items-center justify-center gap-2 px-4 py-2 h-10 text-base font-semibold rounded-xl bg-transparent border border-border-primary text-text-default hover:bg-bg-alt-tertiary transition-colors">
-  <i class="ph ph-caret-left" style="font-size: 16px; font-weight: bold;"></i>
-  Volver a partidos
-</button>
+### 5. Container de Contenido Principal
+```jsx
+<div className="max-w-[548px] lg:max-w-[996px] mx-auto">
 ```
+⚠️ **CRÍTICO**: Width responsivo
+- Mobile: `max-w-[548px]`
+- Desktop: `lg:max-w-[996px]`
 
-**Clases por tipo:**
-- `tertiary`: bg-transparent, border, border-border-primary
-- `secondary`: bg-bg-alt-tertiary, text-text-default
+### 6. Título de Ciudad
+```jsx
+<div className="text-text-default text-2xl font-semibold pt-8 pb-6 flex gap-x-2">
+  <MapPinLineIcon
+    className="text-icon-default"
+    size={32}
+    weight="duotone"
+  />
+  {cityData.name}
+</div>
+```
 
 ---
 
-### 2. VenueCard (wrapper genérico)
+## 📊 Sistema de Grid con Orders Responsivos
 
-**React:**
+### Grid Container Principal
 ```jsx
-<VenueCard className="mt-4">
-  {children}
+<div className="flex flex-col lg:grid lg:grid-cols-2 gap-x-6 gap-y-4 mb-6">
+```
+
+⚠️ **CRÍTICO**: 
+- Mobile: `flex flex-col` (columna vertical)
+- Desktop: `lg:grid lg:grid-cols-2` (grid de 2 columnas)
+- Gap horizontal: `gap-x-6`
+- Gap vertical: `gap-y-4`
+
+### Tabla de Elementos con Orders
+
+| Elemento | Mobile Order | Desktop Order | Clases Tailwind Específicas | Min/Max Height |
+|----------|--------------|---------------|----------------------------|----------------|
+| **Descripción** | `order-1` | `lg:order-1` | - | - |
+| **Partidos** | `order-4` | `lg:order-2` | `bg-brand-darkening rounded-xl py-6 px-4 lg:px-10 flex flex-col mt-4 lg:mt-0 lg:row-span-3` | `lg:h-[836px]` |
+| **Info Estadio** | `order-2` | `lg:order-3` | - | - |
+| **Mapa** | `order-3` | `lg:order-5` | `rounded-3xl overflow-hidden mt-4` | `lg:w-[486px] h-[242px]` |
+| **Clima Actual** | `order-5` | `lg:order-7` | `lg:mt-4` | `min-h-[228px]` |
+| **Clima Típico** | `order-6` | `lg:order-8` | `lg:mt-4` | `min-h-[228px]` |
+| **Vuelos** | `order-7` | `lg:order-9` | `lg:mt-4` | `min-h-[260px]` |
+| **Aeropuerto** | `order-7` | `lg:order-10` | `lg:mt-4` | `min-h-[260px]` |
+| **Transporte** | `order-8` | `lg:order-11` | `lg:mt-4` | `min-h-[248px]` |
+| **Requisitos USA** | `order-10` | `lg:order-12` | `lg:mt-4` | `min-h-[248px]` |
+
+⚠️ **NOTAS IMPORTANTES**:
+1. Hay un **duplicado** de `order-7` en mobile (Vuelos y Aeropuerto) - mantener tal cual
+2. El componente **Partidos** usa `lg:row-span-3` para ocupar 3 filas en el grid de desktop
+3. Todos los elementos (excepto Descripción, Info Estadio y Partidos) tienen `lg:mt-4` en desktop
+
+---
+
+## 🎨 Análisis Detallado por Componente
+
+### 1. Descripción de Ciudad
+```jsx
+<VenueCard className="order-1 lg:order-1">
+  {cityData.description}
 </VenueCard>
 ```
 
-**Vanilla HTML:**
-```html
-<div class="bg-bg-primary rounded-3xl text-base text-text-default p-6 mt-4">
-  <!-- contenido -->
-</div>
-```
+**Props**:
+- `cityData.description`: String de texto descriptivo
 
 ---
 
-### 3. VenueInfo
+### 2. Partidos en Kansas City (Contenedor especial)
 
-**Elementos:**
-- Imagen del estadio (w-full, rounded-2xl, mb-4)
-- Nombre estadio (font-semibold, text-xl)
-- Dirección con MapPin icon
-- Capacidad con UsersFour icon
-
-**HTML:**
-```html
-<img src="[url]" alt="Arrowhead Stadium" class="w-full h-auto rounded-2xl mb-4" />
-<div class="flex flex-col gap-y-4 text-base text-text-default">
-  <span class="font-semibold text-xl">Arrowhead Stadium</span>
-  <div class="gap-y-2 flex flex-col">
-    <span>
-      <i class="ph-duotone ph-map-pin inline-block mr-2 text-icon-lighter" style="font-size: 20px;"></i>
-      1 Arrowhead Dr, Kansas City, MO 64129
-    </span>
-    <span>
-      <i class="ph-duotone ph-users-four inline-block mr-2 text-icon-lighter" style="font-size: 20px;"></i>
-      Capacidad: 67,513
-    </span>
-  </div>
-</div>
-```
-
----
-
-### 4. CurrentWeather
-
-**Layout:** flex gap-10
-- **Izquierda:** Clima actual (CloudSun icon + temp + descripción)
-- **Derecha:** 4 días pronóstico (border-l, pl-4)
-
-**Estructura:**
-```html
-<div class="flex gap-10 mt-4">
-  <!-- Clima actual -->
-  <div class="flex gap-2 items-center pl-4">
-    <i class="ph-duotone ph-cloud-sun text-text-lighter" style="font-size: 40px;"></i>
-    <div class="flex flex-col gap-1.5 w-[98px]">
-      <p class="text-sm text-text-default">Hoy</p>
-      <p class="text-4xl font-semibold text-text-default leading-10">17° C</p>
-      <p class="text-sm text-text-lighter">Nubes dispersas</p>
-    </div>
-  </div>
-  
-  <!-- Pronóstico 4 días -->
-  <div class="flex flex-col gap-3 border-l border-border-primary w-full pl-4">
-    <!-- ForecastDay x4 -->
-  </div>
-</div>
-```
-
-**ForecastDay:**
-```html
-<div class="flex items-center gap-2">
-  <span class="text-sm font-semibold text-text-default w-10">Mié</span>
-  <i class="ph-duotone ph-cloud text-text-lighter" style="font-size: 20px;"></i>
-  <span class="text-sm text-text-lighter">13° - 26°</span>
-  <span class="text-xs text-text-lighter ml-auto">Nubes</span>
-</div>
-```
-
-**Íconos clima:**
-- Cloud: `ph-cloud`
-- CloudRain: `ph-cloud-rain`
-- Sun: `ph-sun` (text-warning-primary)
-- CloudLightning: `ph-cloud-lightning`
-
----
-
-### 5. FlightsWidget
-
-**Estructura:**
-```html
-<div class="flex flex-col gap-4">
-  <!-- Header -->
-  <div class="flex items-center gap-2">
-    <i class="ph-duotone ph-airplane-tilt text-icon-default" style="font-size: 24px;"></i>
-    <span class="text-xl font-semibold text-text-default">Vuelos</span>
-  </div>
-  
-  <!-- Ruta -->
-  <div class="text-sm text-text-lighter">
-    <span>Ministro Pistarini Ezeiza (EZE)</span>
-    <i class="ph ph-arrow-right mx-2"></i>
-    <span>Kansas City International (MCI)</span>
-  </div>
-  <p class="text-sm text-text-lighter">Junio - Julio</p>
-  
-  <!-- Grid vuelos 2x2 -->
-  <div class="grid grid-cols-2 gap-3">
-    <!-- FlightOption x4 -->
-  </div>
-</div>
-```
-
-**FlightOption:**
-```html
-<div class="bg-bg-secondary rounded-xl p-3 flex flex-col gap-2">
-  <div class="flex items-center gap-2">
-    <img src="[logo]" alt="Aerolínea" class="w-8 h-8 rounded" />
-    <span class="text-sm font-semibold">Aerolinea</span>
-  </div>
-  <div class="text-xs text-text-lighter">
-    <p>16h 30min · Directo</p>
-    <p class="font-semibold text-text-default mt-1">desde USD XXX</p>
-  </div>
-</div>
-```
-
----
-
-### 6. TransportInfo
-
-```html
-<div class="flex flex-col gap-4">
-  <div class="flex items-center gap-2">
-    <i class="ph-duotone ph-car text-icon-default" style="font-size: 24px;"></i>
-    <span class="text-xl font-semibold">Traslados</span>
-  </div>
-  <p class="text-sm text-text-default">
-    Kansas City no cuenta con un sistema de transporte público muy extenso...
-  </p>
-  <ul class="list-disc list-inside text-sm text-text-default space-y-1">
-    <li>Uber / Lyft (muy disponibles y confiables)</li>
-    <li>Alquiler de auto (ideal si te alojas fuera del centro)</li>
-    <li>Servicios especiales de transporte al estadio en días de partido</li>
-  </ul>
-</div>
-```
-
----
-
-### 7. Partidos en Kansas City (Card Oscura)
-
-```html
-<div class="bg-brand-darkening rounded-xl py-6 px-10 flex flex-col h-[824px]">
-  <span class="text-text-default text-base font-semibold block pb-3 flex-shrink-0">
+```jsx
+<div className="order-4 lg:order-2 bg-brand-darkening rounded-xl py-6 px-4 lg:px-10 flex flex-col lg:h-[836px] mt-4 lg:mt-0 lg:row-span-3">
+  <span className="text-text-default text-base font-semibold block pb-3 flex-shrink-0">
     Partidos en Kansas City
   </span>
-  <div class="flex-1 overflow-y-auto min-h-0 flex flex-col gap-4 w-full max-w-[368px]">
-    <!-- MatchCard x6 -->
+  <div className="flex-1 overflow-y-auto min-h-0 flex flex-col gap-4 w-full max-w-[548px] lg:max-w-[368px] venues-scrollbar pr-2">
+    {kansasCityMatches.map((match, index) => (
+      <MatchCard
+        key={index}
+        match={match}
+        showMatchNumber={false}
+      />
+    ))}
   </div>
 </div>
 ```
 
-**MatchCard:**
-```html
-<div class="bg-bg-primary rounded-2xl p-4 flex flex-col gap-3">
-  <!-- Teams -->
-  <div class="flex items-center justify-between">
-    <div class="flex items-center gap-2">
-      <span class="text-2xl">🇯🇴</span>
-      <span class="text-sm font-semibold">Jordania</span>
-    </div>
-    <span class="text-xs text-text-lighter">vs</span>
-    <div class="flex items-center gap-2">
-      <span class="text-sm font-semibold">Argentina</span>
-      <span class="text-2xl">🇦🇷</span>
-    </div>
+**Clases únicas críticas**:
+- `px-4 lg:px-10` (padding horizontal responsivo)
+- `lg:h-[836px]` (altura fija en desktop para scroll)
+- `lg:row-span-3` (ocupa 3 filas del grid en desktop)
+- `mt-4 lg:mt-0` (margen condicional)
+- `max-w-[548px] lg:max-w-[368px]` (ancho del scroll container)
+- `venues-scrollbar` (clase custom para scrollbar)
+
+**Props**:
+- `kansasCityMatches`: Array de 6 objetos de partidos
+- Cada `MatchCard` recibe `showMatchNumber={false}`
+
+---
+
+### 3. Info Estadio
+```jsx
+<VenueCard className="order-2 lg:order-3">
+  <VenueInfo
+    image={venueData.image}
+    name={venueData.name}
+    address={venueData.address}
+    capacity={venueData.capacity}
+  />
+</VenueCard>
+```
+
+**Props**:
+- `venueData.image`: URL de imagen
+- `venueData.name`: String
+- `venueData.address`: String
+- `venueData.capacity`: String (ej: "67,513")
+
+---
+
+### 4. Mapa
+```jsx
+<div className="order-3 lg:order-5 rounded-3xl overflow-hidden lg:w-[486px] h-[242px] mt-4">
+  <MapContainer
+    selectedTeam={selectedTeam}
+    selectedCity={selectedCity}
+    setSelectedCity={setSelectedCity}
+  />
+</div>
+```
+
+**Clases específicas**:
+- `rounded-3xl overflow-hidden`
+- `lg:w-[486px]` (ancho fijo en desktop)
+- `h-[242px]` (altura fija siempre)
+- `mt-4` (margen superior)
+
+**Props**:
+- `selectedTeam`: State variable (null inicial)
+- `selectedCity`: State variable (null inicial)
+- `setSelectedCity`: Función setter
+
+---
+
+### 5. Clima Actual
+```jsx
+<VenueCard className="order-5 lg:order-7 min-h-[228px] lg:mt-4">
+  <CurrentWeather />
+</VenueCard>
+```
+
+**Props internos de CurrentWeather**:
+- `currentWeather.temp`: "17° C"
+- `currentWeather.description`: "Nubes dispersas"
+- `forecastDays`: Array de 4 objetos con:
+  - `day`: String ("Mié", "Jue", etc.)
+  - `Icon`: Componente de icono (Cloud, CloudRain, etc.)
+  - `tempMin`: String ("13")
+  - `tempMax`: String ("26")
+  - `description`: String ("Nubes", "Lluvia ligera", etc.)
+  - `iconColor`: String opcional ("text-warning-primary")
+
+---
+
+### 6. Clima Típico
+```jsx
+<VenueCard className="order-6 lg:order-8 min-h-[228px] lg:mt-4">
+  <TypicalWeather />
+</VenueCard>
+```
+
+**Props internos de TypicalWeather**:
+- `typicalWeatherItems`: Array de 4 objetos con:
+  - `Icon`: Componente (Thermometer, Sun, etc.)
+  - `label`: String opcional ("Temperaturas:")
+  - `value`: String de texto descriptivo
+  - `alignTop`: Boolean opcional (true para WarningCircle)
+
+---
+
+### 7. Vuelos
+```jsx
+<VenueCard className="order-7 lg:order-9 min-h-[260px] lg:mt-4">
+  <FlightsWidget
+    origin={flightsData.origin}
+    destination={flightsData.destination}
+    period={flightsData.period}
+    flights={flightsData.flights}
+  />
+</VenueCard>
+```
+
+**Props**:
+- `origin`: "Ministro Pistarini Ezeiza (EZE)"
+- `destination`: "Kansas City International (MCI)"
+- `period`: "Junio - Julio"
+- `flights`: Array de 4 objetos con:
+  - `airline`: String
+  - `logo`: URL
+  - `duration`: String ("16h 30min")
+  - `type`: String ("Directo" o "Conexión")
+  - `price`: String ("desde USD XXX")
+
+---
+
+### 8. Aeropuerto
+```jsx
+<VenueCard className="order-7 lg:order-10 min-h-[260px] lg:mt-4">
+  <AirportInfo
+    name={airportData.name}
+    description={airportData.description}
+    features={airportData.features}
+    officialLink={airportData.officialLink}
+  />
+</VenueCard>
+```
+
+**Props**:
+- `name`: "Kansas City International (MCI)"
+- `description`: String descriptivo
+- `features`: Array de 2 strings
+- `officialLink`: "https://www.flykci.com/"
+
+---
+
+### 9. Transporte
+```jsx
+<VenueCard className="order-8 lg:order-11 min-h-[248px] lg:mt-4">
+  <TransportInfo
+    description={transportData.description}
+    recommendations={transportData.recommendations}
+  />
+</VenueCard>
+```
+
+**Props**:
+- `description`: String descriptivo
+- `recommendations`: Array de 3 strings
+
+---
+
+### 10. Requisitos de Entrada USA
+```jsx
+<VenueCard className="order-10 lg:order-12 min-h-[248px] lg:mt-4">
+  <USEntryRequirements
+    requirements={usEntryData.requirements}
+    officialLink={usEntryData.officialLink}
+  />
+</VenueCard>
+```
+
+**Props**:
+- `requirements`: Array de 4 strings
+- `officialLink`: "https://travel.state.gov/"
+
+---
+
+## 📦 Secciones Fuera del Grid
+
+### 11. Alojamientos
+```jsx
+<div className="bg-brand-darkening p-4 lg:p-6 rounded-3xl mt-4 lg:mt-10 mx-auto">
+  <AccommodationsWidget hotels={accommodationsData} />
+</div>
+```
+
+**Clases específicas**:
+- `p-4 lg:p-6` (padding responsivo)
+- `mt-4 lg:mt-10` (margen superior responsivo)
+
+**Props**:
+- `hotels`: Array de 6 objetos con:
+  - `name`: String
+  - `image`: URL
+  - `rating`: Number (4.3, 4.5, etc.)
+  - `reviews`: String ("X reviews", "250 reviews", etc.)
+  - `priceLevel`: String ("$", "$$$", "$$$$$", etc.)
+
+---
+
+### 12. Gastronomía
+```jsx
+<div className="bg-brand-darkening p-4 lg:p-6 rounded-3xl mt-6 mx-auto">
+  <GastronomyWidget restaurants={gastronomyData} />
+</div>
+```
+
+**Clases específicas**:
+- `p-4 lg:p-6` (padding responsivo)
+- `mt-6` (margen superior fijo)
+
+**Props**:
+- `restaurants`: Array de 6 objetos con:
+  - `name`: String
+  - `image`: URL
+  - `rating`: Number (4.6, 4.8, etc.)
+  - `reviews`: String ("150 reviews", etc.)
+  - `cuisine`: String ("Italiana, pizzería", etc.)
+  - `priceRange`: Object con `min` y `max` ("$", "$$", "$$$", "$$$$")
+
+---
+
+### 13. Seguridad y Prevención (Grid 2 columnas)
+```jsx
+<div className="grid lg:grid-cols-2 gap-4 lg:gap-6 mb-6 mt-4 lg:mt-10">
+  <div className="lg:w-[486px] flex flex-col">
+    <VenueCard>
+      <SafetyWidget />
+    </VenueCard>
   </div>
-  
-  <!-- Info -->
-  <div class="text-xs text-text-lighter space-y-1">
-    <p>Sábado 27 de junio</p>
-    <p>Dallas</p>
-    <p>22:00 h (AR) · 19:00 h (DL)</p>
+  <div className="lg:w-[486px] self-stretch bg-bg-primary rounded-3xl">
+    <VenueCard>
+      <PreventionWidget />
+    </VenueCard>
   </div>
 </div>
 ```
 
+**Clases específicas**:
+- Container: `grid lg:grid-cols-2 gap-4 lg:gap-6 mb-6 mt-4 lg:mt-10`
+- Cada columna: `lg:w-[486px]`
+- Segunda columna adicional: `self-stretch bg-bg-primary rounded-3xl`
+
 ---
 
-### 8. TypicalWeather
-
-```html
-<div class="flex flex-col gap-4">
-  <span class="text-xl font-semibold">Clima habitual junio-julio</span>
-  
-  <!-- Items x4 -->
-  <div class="flex items-start gap-3">
-    <i class="ph-duotone ph-thermometer text-icon-lighter" style="font-size: 20px;"></i>
-    <div class="flex flex-col">
-      <span class="text-sm font-semibold">Temperaturas:</span>
-      <span class="text-sm text-text-lighter">22°C a 32°C</span>
-    </div>
-  </div>
-  
-  <div class="flex items-center gap-3">
-    <i class="ph-duotone ph-sun text-icon-lighter" style="font-size: 20px;"></i>
-    <span class="text-sm">Días calurosos y húmedos</span>
-  </div>
-  
-  <!-- ... más items -->
+### 14. Assist365 Banners
+```jsx
+<div className="w-full max-w-[548px] lg:max-w-full mx-auto mt-10">
+  <Assist365BannersWidget />
 </div>
 ```
 
+**Clases específicas**:
+- `max-w-[548px] lg:max-w-full` (ancho responsivo)
+- `mt-10` (margen superior)
+
 ---
 
-### 9. AirportInfo
-
-```html
-<div class="flex flex-col gap-4">
-  <div class="flex items-center gap-2">
-    <i class="ph-duotone ph-airplane-tilt text-icon-default" style="font-size: 24px;"></i>
-    <span class="text-xl font-semibold">Aeropuerto</span>
-  </div>
-  
-  <div>
-    <p class="font-semibold text-base">Kansas City International (MCI)</p>
-    <p class="text-sm text-text-lighter mt-2">
-      Kansas City International (MCI) es el principal.
-    </p>
-  </div>
-  
-  <ul class="list-disc list-inside text-sm space-y-1">
-    <li>Vuelos nacionales e internacionales</li>
-    <li>A 30–35 minutos del centro</li>
-  </ul>
-  
-  <a href="https://www.flykci.com/" target="_blank" rel="noopener noreferrer" 
-    class="text-sm text-brand-primary hover:underline">
-    Sitio oficial →
-  </a>
+### 15. VenuesCityGrid (NUEVO)
+```jsx
+<div className="w-full max-w-[548px] lg:max-w-[996px] mx-auto mt-10 lg:mt-28">
+  <VenuesCityGrid />
 </div>
 ```
 
----
-
-### 10. USEntryRequirements
-
-```html
-<div class="flex flex-col gap-4">
-  <div class="flex items-center gap-2">
-    <i class="ph-duotone ph-identification-card text-icon-default" style="font-size: 24px;"></i>
-    <span class="text-xl font-semibold">Requisitos de ingreso a EE.UU.</span>
-  </div>
-  
-  <ul class="list-disc list-inside text-sm space-y-1">
-    <li>Pasaporte vigente</li>
-    <li>Visa o ESTA (según nacionalidad)</li>
-    <li>Ticket de salida del país</li>
-    <li>Seguro médico de viaje recomendado</li>
-  </ul>
-  
-  <a href="https://travel.state.gov/" target="_blank" rel="noopener noreferrer"
-    class="text-sm text-brand-primary hover:underline">
-    Más información →
-  </a>
-</div>
-```
+**Clases específicas**:
+- `max-w-[548px] lg:max-w-[996px]` (ancho responsivo)
+- `mt-10 lg:mt-28` ⚠️ **CRÍTICO**: Margen superior grande en desktop
 
 ---
 
-### 11. AccommodationsWidget
+## 📝 Data Props Completa para Vanilla Build
 
-```html
-<div class="flex flex-col gap-4">
-  <div class="flex items-center gap-2">
-    <i class="ph-duotone ph-building text-icon-default" style="font-size: 24px;"></i>
-    <span class="text-xl font-semibold text-text-default">Alojamiento</span>
-  </div>
-  
-  <p class="text-sm text-text-lighter">
-    Opciones de hospedaje cerca del estadio y el centro de la ciudad.
-  </p>
-  
-  <!-- Grid 3 columnas -->
-  <div class="grid grid-cols-3 gap-4">
-    <!-- HotelCard x6 -->
-  </div>
-</div>
-```
-
-**HotelCard:**
-```html
-<div class="bg-bg-primary rounded-2xl overflow-hidden">
-  <img src="[url]" alt="Sheraton Hotel" class="w-full h-32 object-cover" />
-  <div class="p-4 flex flex-col gap-2">
-    <h4 class="font-semibold text-sm">Sheraton Hotel</h4>
-    <div class="flex items-center gap-2 text-xs">
-      <span class="flex items-center gap-1">
-        <i class="ph-fill ph-star text-warning-primary"></i>
-        4.3
-      </span>
-      <span class="text-text-lighter">X reviews</span>
-    </div>
-    <span class="text-xs font-semibold">$$$$$</span>
-  </div>
-</div>
-```
-
----
-
-### 12. GastronomyWidget
-
-Misma estructura que AccommodationsWidget pero con RestaurantCard.
-
-**RestaurantCard:**
-```html
-<div class="bg-bg-primary rounded-2xl overflow-hidden">
-  <img src="[url]" alt="La Trattoria" class="w-full h-32 object-cover" />
-  <div class="p-4 flex flex-col gap-2">
-    <h4 class="font-semibold text-sm">La Trattoria</h4>
-    <div class="flex items-center gap-2 text-xs">
-      <span class="flex items-center gap-1">
-        <i class="ph-fill ph-star text-warning-primary"></i>
-        4.6
-      </span>
-      <span class="text-text-lighter">150 reviews</span>
-    </div>
-    <p class="text-xs text-text-lighter">Italiana, pizzería</p>
-    <span class="text-xs font-semibold">$$ - $$$</span>
-  </div>
-</div>
-```
-
----
-
-### 13 & 14. SafetyWidget & PreventionWidget
-
-Widgets con contenido de texto sobre seguridad y prevención (similar estructura a otros cards con título + párrafos/listas).
-
----
-
-### 15. Assist365BannersWidget
-
-Banners footer con logos y enlaces a assist365.
-
----
-
-## 🎨 Datos Mock Completos
-
-Todos los datos ya están en `VenuesTemplate.jsx` (líneas 40-340):
-
+### cityData
 ```javascript
-const cityData = { name: "...", description: "..." };
-const venueData = { image: "...", name: "...", address: "...", capacity: "..." };
-const flightsData = { origin: "...", destination: "...", flights: [...] };
-const airportData = { name: "...", description: "...", features: [...] };
-const transportData = { description: "...", recommendations: [...] };
-const usEntryData = { requirements: [...], officialLink: "..." };
-const accommodationsData = [6 hoteles];
-const gastronomyData = [6 restaurantes];
-const currentWeather = { temp: "17° C", description: "Nubes dispersas" };
-const forecastDays = [4 días];
-const typicalWeatherItems = [4 items];
-const kansasCityMatches = [6 partidos];
+const cityData = {
+  name: "Kansas City, Missouri, Estados Unidos",
+  description: "Famosa por su cultura deportiva, su hospitalidad y su legendaria barbacoa, ofrece una experiencia cómoda y amigable para el viajero internacional.",
+};
 ```
 
----
-
-## 🔧 Pasos de Implementación
-
-### Fase 1: Estructura Base
-1. ✅ Header (ya existe)
-2. Agregar botones de navegación
-3. Agregar título de ciudad con MapPinLine
-4. Crear grid 2 columnas (max-w-[996px] mx-auto)
-
-### Fase 2: Columna Izquierda
-5. VenueCard: Descripción ciudad
-6. VenueCard: VenueInfo (imagen estadio + datos)
-7. MapContainer (placeholder imagen estática 486x242)
-8. VenueCard: CurrentWeather
-9. VenueCard: FlightsWidget
-10. VenueCard: TransportInfo
-
-### Fase 3: Columna Derecha
-11. Card oscura: Partidos (h-[824px], overflow-y-auto)
-12. VenueCard: TypicalWeather
-13. VenueCard: AirportInfo
-14. VenueCard: USEntryRequirements
-
-### Fase 4: Cards Anchas
-15. AccommodationsWidget (grid 3 cols)
-16. GastronomyWidget (grid 3 cols)
-
-### Fase 5: Grid Final + Footer
-17. Grid 2 cols: SafetyWidget + PreventionWidget
-18. Assist365BannersWidget
-
-### Fase 6: Refinamiento
-19. Verificar espaciados (mt-4, mt-6, mt-10, gap-6, pb-10)
-20. Verificar anchos (w-[486px], max-w-[996px], max-w-[1200px])
-21. Verificar alturas fijas (h-[824px], h-[242px])
-22. Verificar íconos Phosphor (weights, sizes)
-23. Testing visual vs React version
-
----
-
-## ⚠️ Consideraciones Especiales
-
-### MapContainer
-- **React:** Usa Leaflet interactivo
-- **Vanilla:** Usar imagen estática o `<iframe>` simple
-- **Mantener:** 486x242px, rounded-3xl, overflow-hidden
-
-### Íconos Phosphor
-- **Regular:** `<i class="ph ph-[nombre]">`
-- **Duotone:** `<i class="ph-duotone ph-[nombre]">`
-- **Fill:** `<i class="ph-fill ph-[nombre]">`
-- **Sizes:** Usar `style="font-size: [16|20|24|32|40]px;"`
-- **Weights:** Bold en íconos de botones
-
-### Gradiente Soccer Ball (Header)
-```html
-<svg width="0" height="0" class="absolute">
-  <defs>
-    <linearGradient id="soccerGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#59D3C2" stop-opacity="1" />
-      <stop offset="100%" stop-color="#006FE8" stop-opacity="1" />
-    </linearGradient>
-  </defs>
-</svg>
-<i class="ph-duotone ph-soccer-ball" style="font-size: 32px; background: linear-gradient(180deg, #59D3C2 0%, #006FE8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;"></i>
-```
-
-### Overflow y Scroll
-- Card de partidos: `overflow-y-auto`, altura fija `h-[824px]`
-- Contenedor interno: `flex-1 min-h-0` para correcto scroll
-
-### Links y Navegación
+### venueData
 ```javascript
-// Volver a partidos
-onclick="window.location.href='mainpage.html'"
-
-// Links externos
-target="_blank" rel="noopener noreferrer"
+const venueData = {
+  image: "https://assistcdn.s3.us-west-1.amazonaws.com/assets/img/affiliates/venue.png",
+  name: "Arrowhead Stadium",
+  address: "1 Arrowhead Dr, Kansas City, MO 64129",
+  capacity: "67,513",
+};
 ```
 
-### Colores Design System
+### flightsData
+```javascript
+const flightsData = {
+  origin: "Ministro Pistarini Ezeiza (EZE)",
+  destination: "Kansas City International (MCI)",
+  period: "Junio - Julio",
+  flights: [
+    {
+      airline: "Aerolinea",
+      logo: "https://www.figma.com/api/mcp/asset/c8f98591-ffd7-4846-9d97-65ea101be8e0",
+      duration: "16h 30min",
+      type: "Directo",
+      price: "desde USD XXX",
+    },
+    {
+      airline: "Aerolinea2",
+      logo: "https://www.figma.com/api/mcp/asset/c8f98591-ffd7-4846-9d97-65ea101be8e0",
+      duration: "14h 32min",
+      type: "Directo",
+      price: "desde USD XXX",
+    },
+    {
+      airline: "Aerolinea3",
+      logo: "https://www.figma.com/api/mcp/asset/c8f98591-ffd7-4846-9d97-65ea101be8e0",
+      duration: "17h 42min",
+      type: "Conexión",
+      price: "desde USD XXX",
+    },
+    {
+      airline: "Aerolinea4",
+      logo: "https://www.figma.com/api/mcp/asset/c8f98591-ffd7-4846-9d97-65ea101be8e0",
+      duration: "22h 7min",
+      type: "Conexión",
+      price: "desde USD XXX",
+    },
+  ],
+};
 ```
-bg-bg-secondary      // fondo principal
-bg-bg-primary        // fondo cards claras
-bg-brand-darkening   // fondo cards oscuras
-text-text-default    // texto principal
-text-text-lighter    // texto secundario
-text-icon-lighter    // íconos secundarios
-border-border-primary // bordes
+
+### airportData
+```javascript
+const airportData = {
+  name: "Kansas City International (MCI)",
+  description: "Kansas City International (MCI) es el principal.",
+  features: [
+    "Vuelos nacionales e internacionales",
+    "A 30–35 minutos del centro",
+  ],
+  officialLink: "https://www.flykci.com/",
+};
+```
+
+### transportData
+```javascript
+const transportData = {
+  description: "Kansas City no cuenta con un sistema de transporte público muy extenso, el traslado en auto es clave.",
+  recommendations: [
+    "Uber / Lyft (muy disponibles y confiables)",
+    "Alquiler de auto (ideal si te alojas fuera del centro)",
+    "Servicios especiales de transporte al estadio en días de partido",
+  ],
+};
+```
+
+### usEntryData
+```javascript
+const usEntryData = {
+  requirements: [
+    "Pasaporte vigente",
+    "Visa o ESTA (según nacionalidad)",
+    "Ticket de salida del país",
+    "Seguro médico de viaje recomendado",
+  ],
+  officialLink: "https://travel.state.gov/",
+};
+```
+
+### accommodationsData (6 hoteles)
+```javascript
+const accommodationsData = [
+  {
+    name: "Sheraton Hotel",
+    image: "https://www.figma.com/api/mcp/asset/ab043acf-c0ad-4656-ad5a-a118d3c9f470",
+    rating: 4.3,
+    reviews: "X reviews",
+    priceLevel: "$$$$$",
+  },
+  {
+    name: "Nombre Hotel",
+    image: "https://www.figma.com/api/mcp/asset/ab043acf-c0ad-4656-ad5a-a118d3c9f470",
+    rating: 4.3,
+    reviews: "X reviews",
+    priceLevel: "$$$",
+  },
+  {
+    name: "Nombre Hotel",
+    image: "https://www.figma.com/api/mcp/asset/ab043acf-c0ad-4656-ad5a-a118d3c9f470",
+    rating: 4.3,
+    reviews: "X reviews",
+    priceLevel: "$",
+  },
+  {
+    name: "Hilton Garden Inn",
+    image: "https://www.figma.com/api/mcp/asset/ab043acf-c0ad-4656-ad5a-a118d3c9f470",
+    rating: 4.5,
+    reviews: "250 reviews",
+    priceLevel: "$$$",
+  },
+  {
+    name: "Marriott Marquis",
+    image: "https://www.figma.com/api/mcp/asset/ab043acf-c0ad-4656-ad5a-a118d3c9f470",
+    rating: 4.7,
+    reviews: "1200 reviews",
+    priceLevel: "$$$$",
+  },
+  {
+    name: "Holiday Inn Express",
+    image: "https://www.figma.com/api/mcp/asset/ab043acf-c0ad-4656-ad5a-a118d3c9f470",
+    rating: 4.2,
+    reviews: "300 reviews",
+    priceLevel: "$$",
+  },
+];
+```
+
+### gastronomyData (6 restaurantes)
+```javascript
+const gastronomyData = [
+  {
+    name: "La Trattoria",
+    image: "https://www.figma.com/api/mcp/asset/ec478964-b6ac-42fd-afb8-1ab0f2cfd236",
+    rating: 4.6,
+    reviews: "150 reviews",
+    cuisine: "Italiana, pizzería",
+    priceRange: { min: "$$", max: "$$$" },
+  },
+  {
+    name: "Sushi Haven",
+    image: "https://www.figma.com/api/mcp/asset/ec478964-b6ac-42fd-afb8-1ab0f2cfd236",
+    rating: 4.8,
+    reviews: "200 reviews",
+    cuisine: "Japonesa, sushi bar",
+    priceRange: { min: "$", max: "$$" },
+  },
+  {
+    name: "Café de Paris",
+    image: "https://www.figma.com/api/mcp/asset/ec478964-b6ac-42fd-afb8-1ab0f2cfd236",
+    rating: 4.2,
+    reviews: "80 reviews",
+    cuisine: "Francesa, brasserie",
+    priceRange: { min: "$$$", max: "$$$$" },
+  },
+  {
+    name: "Taco Fiesta",
+    image: "https://www.figma.com/api/mcp/asset/ec478964-b6ac-42fd-afb8-1ab0f2cfd236",
+    rating: 4.5,
+    reviews: "120 reviews",
+    cuisine: "Mexicana, taquería",
+    priceRange: { min: "$", max: "$$" },
+  },
+  {
+    name: "The Spice Route",
+    image: "https://www.figma.com/api/mcp/asset/ec478964-b6ac-42fd-afb8-1ab0f2cfd236",
+    rating: 4.7,
+    reviews: "95 reviews",
+    cuisine: "India, curry house",
+    priceRange: { min: "$$", max: "$$$" },
+  },
+  {
+    name: "Burger Joint",
+    image: "https://www.figma.com/api/mcp/asset/ec478964-b6ac-42fd-afb8-1ab0f2cfd236",
+    rating: 4.3,
+    reviews: "300 reviews",
+    cuisine: "Americana, hamburguesería",
+    priceRange: { min: "$", max: "$$" },
+  },
+];
+```
+
+### currentWeather y forecastDays
+```javascript
+const currentWeather = {
+  temp: "17° C",
+  description: "Nubes dispersas",
+};
+
+const forecastDays = [
+  {
+    day: "Mié",
+    Icon: Cloud,
+    tempMin: "13",
+    tempMax: "26",
+    description: "Nubes",
+  },
+  {
+    day: "Jue",
+    Icon: CloudRain,
+    tempMin: "11",
+    tempMax: "24",
+    description: "Lluvia ligera",
+  },
+  {
+    day: "Vie",
+    Icon: Cloud,
+    tempMin: "9",
+    tempMax: "20",
+    description: "Nubes",
+  },
+  {
+    day: "Sáb",
+    Icon: Sun,
+    tempMin: "13",
+    tempMax: "26",
+    description: "Soleado",
+    iconColor: "text-warning-primary",
+  },
+];
+```
+
+### typicalWeatherItems
+```javascript
+const typicalWeatherItems = [
+  { Icon: Thermometer, label: "Temperaturas:", value: "22°C a 32°C" },
+  { Icon: Sun, value: "Días calurosos y húmedos" },
+  { Icon: CloudLightning, value: "Posibles tormentas eléctricas aisladas" },
+  {
+    Icon: WarningCircle,
+    value: "Lleva ropa liviana, gorra, protector solar y botella reutilizable.",
+    alignTop: true,
+  },
+];
+```
+
+### kansasCityMatches (6 partidos)
+```javascript
+const kansasCityMatches = [
+  {
+    team1: { name: "Jordania", flag: "🇯🇴" },
+    team2: { name: "Argentina", flag: "🇦🇷" },
+    date: "Sábado 27 de junio",
+    city: "Dallas",
+    time: { local: "22:00 h (AR)", venue: "19:00 h (DL)" },
+  },
+  {
+    team1: { name: "Argentina", flag: "🇦🇷" },
+    team2: { name: "Austria", flag: "🇦🇹" },
+    date: "Lunes 22 de junio",
+    city: "Dallas",
+    time: { local: "13:00 h (AR)", venue: "10:00 h (DL)" },
+  },
+  {
+    team1: { name: "Argentina", flag: "🇦🇷" },
+    team2: { name: "A definir", flag: null },
+    date: "Martes 16 de junio",
+    city: "Kansas city",
+    time: { local: "21:00 h (AR)", venue: "18:00 h (KCK)" },
+  },
+  {
+    team1: { name: "Jordania", flag: "🇯🇴" },
+    team2: { name: "Argentina", flag: "🇦🇷" },
+    date: "Sábado 27 de junio",
+    city: "Dallas",
+    time: { local: "22:00 h (AR)", venue: "19:00 h (DL)" },
+  },
+  {
+    team1: { name: "Argentina", flag: "🇦🇷" },
+    team2: { name: "Austria", flag: "🇦🇹" },
+    date: "Lunes 22 de junio",
+    city: "Dallas",
+    time: { local: "13:00 h (AR)", venue: "10:00 h (DL)" },
+  },
+  {
+    team1: { name: "Argentina", flag: "🇦🇷" },
+    team2: { name: "A definir", flag: null },
+    date: "Martes 16 de junio",
+    city: "Kansas city",
+    time: { local: "21:00 h (AR)", venue: "18:00 h (KCK)" },
+  },
+];
 ```
 
 ---
 
-## ✅ Criterios de Éxito
+## ✅ Checklist de Actualización para build-venues.mjs
 
-- [ ] HTML replica **exactamente** el JSX del template React
-- [ ] Grid 2 columnas con anchos correctos (486px cada columna)
-- [ ] Todos los espaciados coinciden con React version
-- [ ] Todos los íconos Phosphor se renderizan correctamente
-- [ ] Colores del design system aplicados
-- [ ] Border-radius correcto (rounded-3xl, rounded-2xl, rounded-xl)
-- [ ] Datos mock completos y formateados
-- [ ] Navegación funcional (mainpage.html ↔ venues.html)
-- [ ] Scroll funcional en sección de partidos (overflow-y-auto)
-- [ ] Visual **indistinguible** de la versión React
+### 1. Imports de Componentes
+- [ ] Agregar `VenuesCityGrid` a la lista de imports
+- [ ] Verificar que todos los 18 componentes estén importados
+- [ ] Verificar que los 13 iconos de Phosphor estén disponibles
+
+### 2. Clases Tailwind Críticas a Preservar
+
+#### Containers
+- [ ] `w-full min-h-screen flex flex-col bg-bg-secondary pb-10` (main)
+- [ ] `max-w-[1366px]` con `px-4` y `lg:mt-4`
+- [ ] `max-w-[1200px]`
+- [ ] `max-w-[548px] lg:max-w-[996px]` (contenido principal)
+- [ ] `max-w-[548px] lg:max-w-full` (Assist365)
+
+#### Grid Principal
+- [ ] `flex flex-col lg:grid lg:grid-cols-2 gap-x-6 gap-y-4 mb-6`
+
+#### Partidos (contenedor especial)
+- [ ] `order-4 lg:order-2`
+- [ ] `px-4 lg:px-10`
+- [ ] `lg:h-[836px]`
+- [ ] `lg:row-span-3`
+- [ ] `mt-4 lg:mt-0`
+- [ ] Scroll interno: `max-w-[548px] lg:max-w-[368px] venues-scrollbar`
+
+#### Mapa
+- [ ] `lg:w-[486px] h-[242px]`
+- [ ] `rounded-3xl overflow-hidden`
+- [ ] `mt-4`
+
+#### VenueCards con min-heights
+- [ ] `min-h-[228px]` (Clima Actual y Típico)
+- [ ] `min-h-[260px]` (Vuelos y Aeropuerto)
+- [ ] `min-h-[248px]` (Transporte y Requisitos USA)
+- [ ] Todos con `lg:mt-4` excepto Descripción e Info Estadio
+
+#### Alojamientos y Gastronomía
+- [ ] `bg-brand-darkening p-4 lg:p-6 rounded-3xl`
+- [ ] `mt-4 lg:mt-10` (Alojamientos)
+- [ ] `mt-6` (Gastronomía)
+
+#### Seguridad/Prevención
+- [ ] `grid lg:grid-cols-2 gap-4 lg:gap-6 mb-6 mt-4 lg:mt-10`
+- [ ] Cada columna: `lg:w-[486px]`
+
+#### VenuesCityGrid
+- [ ] `max-w-[548px] lg:max-w-[996px]`
+- [ ] `mt-10 lg:mt-28` ⚠️ **CRÍTICO**
+
+### 3. Sistema de Orders
+- [ ] Descripción: `order-1 lg:order-1`
+- [ ] Info Estadio: `order-2 lg:order-3`
+- [ ] Mapa: `order-3 lg:order-5`
+- [ ] Partidos: `order-4 lg:order-2`
+- [ ] Clima Actual: `order-5 lg:order-7`
+- [ ] Clima Típico: `order-6 lg:order-8`
+- [ ] Vuelos: `order-7 lg:order-9`
+- [ ] Aeropuerto: `order-7 lg:order-10` (duplicado intencional)
+- [ ] Transporte: `order-8 lg:order-11`
+- [ ] Requisitos USA: `order-10 lg:order-12`
+
+### 4. Props y Data
+- [ ] Inyectar `cityData` (2 propiedades)
+- [ ] Inyectar `venueData` (4 propiedades)
+- [ ] Inyectar `flightsData` (4 vuelos)
+- [ ] Inyectar `airportData` (3 props + array)
+- [ ] Inyectar `transportData` (1 + array de 3)
+- [ ] Inyectar `usEntryData` (array de 4 + link)
+- [ ] Inyectar `accommodationsData` (array de 6)
+- [ ] Inyectar `gastronomyData` (array de 6)
+- [ ] Inyectar `currentWeather` (2 props)
+- [ ] Inyectar `forecastDays` (array de 4)
+- [ ] Inyectar `typicalWeatherItems` (array de 4)
+- [ ] Inyectar `kansasCityMatches` (array de 6)
+
+### 5. State Management
+- [ ] `selectedTeam` = null (inicial)
+- [ ] `selectedCity` = null (inicial)
+- [ ] Pasar a MapContainer: `selectedTeam`, `selectedCity`, `setSelectedCity`
+
+### 6. Event Handlers
+- [ ] Botón "Volver a partidos": `window.location.href = "mainpage.html"`
+- [ ] Botón "Explorar itinerarios": `window.location.href = "venues.html"`
+- [ ] Los componentes hijos pueden tener handlers propios
+
+### 7. Renderizado de Componentes
+- [ ] `HeaderBar` (sin props)
+- [ ] 2 `Button` de navegación (solo desktop: `hidden lg:flex`)
+- [ ] Título con `MapPinLineIcon` size={32} weight="duotone"
+- [ ] 10 elementos dentro del grid con orders
+- [ ] `AccommodationsWidget` con array de 6
+- [ ] `GastronomyWidget` con array de 6
+- [ ] `SafetyWidget` (sin props)
+- [ ] `PreventionWidget` (sin props)
+- [ ] `Assist365BannersWidget` (sin props)
+- [ ] `VenuesCityGrid` (sin props - NUEVO)
 
 ---
 
-## 📝 Estructura del Script
+## 🎯 Valores Arbitrarios de Tailwind (NO MODIFICAR)
 
-El `build-venues.mjs` debe:
+Estos valores deben mantenerse **exactamente** como están:
 
-1. Importar datos desde VenuesTemplate o definirlos localmente
-2. Crear funciones helper para HTML repetitivo:
-   - `generateFlightOption(flight)`
-   - `generateMatchCard(match)`
-   - `generateHotelCard(hotel)`
-   - `generateRestaurantCard(restaurant)`
-   - `generateForecastDay(day)`
-3. Generar HTML completo con template literals
-4. Escribir a `dist-vanilla/venues.html`
-5. Reportar archivos generados
+```
+h-[242px]       → Mapa
+h-[836px]       → Partidos (desktop)
+max-w-[1366px]  → Container principal
+max-w-[1200px]  → Container secundario
+max-w-[996px]   → Contenido principal (desktop)
+max-w-[548px]   → Contenido principal (mobile)
+max-w-[368px]   → Scroll de partidos (desktop)
+min-h-[228px]   → Clima Actual y Típico
+min-h-[260px]   → Vuelos y Aeropuerto
+min-h-[248px]   → Transporte y Requisitos USA
+w-[486px]       → Mapa y columnas Seguridad/Prevención (desktop)
+```
+
+---
+
+## 📐 Breakpoints Responsivos
+
+### Mobile (< 1024px)
+- Layout: `flex flex-col` (columna vertical)
+- Padding: `px-4`, `p-4`
+- Max-width: `max-w-[548px]`
+- Heights: Variables según contenido (min-heights aplican)
+- Orders: 1, 2, 3, 4, 5, 6, 7, 7, 8, 10
+- Botones de navegación: ocultos (`hidden`)
+- Partidos: Sin height fijo, sin row-span
+
+### Desktop (≥ 1024px)
+- Layout: `lg:grid lg:grid-cols-2` (grid de 2 columnas)
+- Padding: `lg:px-10`, `lg:p-6`
+- Max-width: `lg:max-w-[996px]`, `lg:max-w-full`
+- Heights: Fijos donde se especifica (`lg:h-[836px]`)
+- Orders: 1, 2, 3, 5, 7, 8, 9, 10, 11, 12
+- Row-span: `lg:row-span-3` en Partidos
+- Margins: `lg:mt-4`, `lg:mt-10`, `lg:mt-28`
+- Gaps: `gap-x-6 gap-y-4`, `lg:gap-6`
+- Widths fijos: `lg:w-[486px]`
+- Botones de navegación: visibles (`lg:flex`)
+
+---
+
+## ⚠️ Problemas Detectados / Consideraciones
+
+1. **Duplicado de order-7**:
+   - Vuelos y Aeropuerto ambos tienen `order-7` en mobile
+   - Mantener tal cual (probablemente intencional para agruparlos)
+
+2. **VenuesCityGrid NUEVO**:
+   - Asegurar que el componente existe en `src/components/VenuesCityGrid.jsx`
+   - Verificar que renderiza correctamente sin props
+   - Verificar que tiene el botón de navegación a `venuesSelection.html`
+
+3. **Iconos sin usar**:
+   - `MapPinAreaIcon`, `MapPinIcon`, `SoccerBallIcon`, `UsersFourIcon` están importados pero no usados
+   - Pueden ser necesarios para componentes hijos
+
+4. **Heights precisos**:
+   - `lg:h-[836px]` en Partidos es crítico para que el scroll funcione
+   - `h-[242px]` en Mapa debe ser exacto
+
+5. **Clase custom `venues-scrollbar`**:
+   - Verificar que existe en el CSS global
+   - Probablemente define estilos custom para el scrollbar
+
+6. **Estado compartido**:
+   - `selectedTeam` y `selectedCity` se inicializan como `null`
+   - `setSelectedCity` se pasa a MapContainer para interactividad
+
+---
+
+## 📋 Testing Checklist Final
+
+Después de aplicar cambios, verificar **pixel-perfect**:
+
+### Layout
+- [ ] Mobile: Columna vertical sin overflow horizontal
+- [ ] Tablet: Transición suave entre breakpoints
+- [ ] Desktop: Grid de 2 columnas perfecto
+
+### Orden de Elementos
+- [ ] Mobile: Descripción → Info Estadio → Mapa → Partidos → Clima Actual → ...
+- [ ] Desktop: Columna izq (Descripción, Info, Mapa, Clima Actual, Vuelos, Transporte) + Columna der (Partidos span 3, Clima Típico, Aeropuerto, Requisitos)
+
+### Spacing
+- [ ] Padding: `px-4` mobile, `lg:px-10` desktop en Partidos
+- [ ] Padding: `p-4` mobile, `lg:p-6` desktop en Alojamientos/Gastronomía
+- [ ] Gaps: `gap-x-6 gap-y-4` en grid principal
+- [ ] Gaps: `gap-4 lg:gap-6` en Seguridad/Prevención
+- [ ] Margins: `mt-4 lg:mt-10` en secciones principales
+- [ ] Margin especial: `mt-10 lg:mt-28` en VenuesCityGrid
+
+### Heights
+- [ ] Partidos: Height auto mobile, `lg:h-[836px]` desktop con scroll
+- [ ] Mapa: `h-[242px]` siempre
+- [ ] Min-heights aplicados: 228px, 260px, 248px
+
+### Widths
+- [ ] Container principal: `max-w-[1366px]`
+- [ ] Container secundario: `max-w-[1200px]`
+- [ ] Contenido: `max-w-[548px]` mobile, `lg:max-w-[996px]` desktop
+- [ ] Mapa: `lg:w-[486px]` desktop
+- [ ] Assist365: `max-w-[548px]` mobile, `lg:max-w-full` desktop
+
+### Componentes
+- [ ] HeaderBar renderiza
+- [ ] Botones de navegación solo en desktop
+- [ ] Título con icono MapPinLine
+- [ ] 6 MatchCards en scroll de Partidos
+- [ ] Clima con 4 días de pronóstico
+- [ ] 6 hoteles en AccommodationsWidget
+- [ ] 6 restaurantes en GastronomyWidget
+- [ ] VenuesCityGrid al final con spacing correcto
+
+### Funcionalidad
+- [ ] Scroll vertical funciona en Partidos (desktop)
+- [ ] Botón "Volver a partidos" navega a `mainpage.html`
+- [ ] Botón "Explorar itinerarios" navega a `venues.html`
+- [ ] MapContainer recibe state correctamente
 
 ---
 
 ## 🚀 Próximos Pasos
 
-1. **Implementar** las modificaciones en `build-venues.mjs`
-2. **Ejecutar** `npm run build:venues` 
-3. **Comparar** visual lado a lado: React dev vs HTML generado
-4. **Ajustar** detalles finos (espaciados, tamaños, colores)
-5. **Validar** navegación entre páginas
-6. **Documentar** diferencias inevitables (mapa interactivo vs estático)
+1. **Actualizar `build-venues.mjs`**:
+   - Agregar import de `VenuesCityGrid`
+   - Inyectar todos los data objects como variables estáticas
+   - Preservar todas las clases Tailwind exactamente
+   - Implementar sistema de orders completo
+   - Agregar todos los componentes en el orden correcto
+
+2. **Ejecutar build**:
+   ```bash
+   npm run build:venues
+   ```
+
+3. **Verificar output**:
+   - Revisar `dist-vanilla/venues.html`
+   - Comparar con versión React en desarrollo
+
+4. **Testing visual**:
+   - Mobile: 375px, 414px
+   - Tablet: 768px, 834px
+   - Desktop: 1024px, 1366px, 1920px
+
+5. **Comparación pixel-perfect**:
+   - Usar DevTools para comparar layouts
+   - Verificar computed styles de elementos críticos
+   - Confirmar que no hay diferencias visuales
+
+6. **Ajustes si es necesario**:
+   - Documentar cualquier discrepancia encontrada
+   - Iterar hasta conseguir identidad 100%
 
 ---
 
-**Nota:** Este documento sirve como guía de implementación. No aplicar cambios hasta confirmación del usuario.
+**Fecha de creación**: 2026-01-27  
+**Versión**: 3.0  
+**Autor**: GitHub Copilot  
+**Estado**: ✅ Listo para implementación  
+**Archivo de respaldo**: VENUES_VANILLA_BUILD_PLAN_OLD.md

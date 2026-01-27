@@ -457,7 +457,7 @@ function VenuesTemplate() {
                   description={airportData.description}
                   features={airportData.features}
                   officialLink={airportData.officialLink}
-                />
+                 />
               </VenueCard>
 
               {/* Transporte - Tablet: 7, Desktop: col izq (11) */}
