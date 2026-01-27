@@ -338,9 +338,9 @@ function VenuesTemplate() {
   return (
     <div className="w-full min-h-screen flex flex-col bg-bg-secondary pb-10">
       <HeaderBar />
-      <div className="w-full max-w-[1366px] mx-auto mt-4">
+      <div className="w-full max-w-[1366px] mx-auto lg:mt-4">
         <div className="max-w-[1200px] mx-auto">
-          <div className="mx-auto w-full flex items-center justify-between">
+          <div className="hidden lg:flex lg:max-w-[996px] mx-auto w-full items-center justify-between">
             <Button
               color="tertiary"
               iconPosition="left"
@@ -378,7 +378,7 @@ function VenuesTemplate() {
             </Button>
           </div>
 
-          <div className="max-w-[996px] mx-auto">
+          <div className="max-w-[548px] lg:max-w-[996px] mx-auto">
             <div className="text-text-default text-2xl font-semibold pt-8 pb-6 flex gap-x-2">
               <MapPinLineIcon
                 className="text-icon-default"
@@ -388,7 +388,7 @@ function VenuesTemplate() {
               {cityData.name}
             </div>
 
-            <div className="grid grid-cols-2 gap-6 mb-6">
+            <div className="grid lg:grid-cols-2 gap-6 mb-6">
               <div className="w-[486px] flex flex-col">
                 <VenueCard>{cityData.description}</VenueCard>
 
