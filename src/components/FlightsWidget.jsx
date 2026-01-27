@@ -1,4 +1,4 @@
-import { CalendarBlank, ArrowRight } from '@phosphor-icons/react';
+import { CalendarBlankIcon, ArrowRightIcon, ArrowDownIcon } from '@phosphor-icons/react';
 
 export default function FlightsWidget({ origin, destination, period, flights }) {
   return (
@@ -9,7 +9,7 @@ export default function FlightsWidget({ origin, destination, period, flights }) 
           Vuelos
         </p>
         <div className="flex gap-2 items-center">
-          <CalendarBlank
+          <CalendarBlankIcon
             size={20}
             weight="duotone"
             className="text-icon-lighter"
@@ -21,13 +21,17 @@ export default function FlightsWidget({ origin, destination, period, flights }) 
       </div>
 
       {/* Ruta: Origen -> Destino */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between flex-col lg:flex-row">
         <p className="text-base text-text-default">
           {origin}
         </p>
-        <ArrowRight
+        <ArrowRightIcon
           size={20}
-          className="text-icon-lighter"
+          className="text-icon-lighter hidden lg:block"
+        />
+        <ArrowDownIcon
+          size={20}
+          className="text-icon-lighter block lg:hidden"
         />
         <p className="text-base text-text-default">
           {destination}
@@ -35,7 +39,7 @@ export default function FlightsWidget({ origin, destination, period, flights }) 
       </div>
 
       {/* Lista de opciones de vuelos - tabla */}
-      <table className="w-full">
+      <table className="w-full max-w-[420px] lg:max-w-full mx-auto">
         <tbody>
           {flights.map((flight, index) => (
             <tr key={index}>
