@@ -16,6 +16,7 @@ import GastronomyWidget from "../components/GastronomyWidget";
 import SafetyWidget from "../components/SafetyWidget";
 import PreventionWidget from "../components/PreventionWidget";
 import Assist365BannersWidget from "../components/Assist365BannersWidget";
+import VenuesCityGrid from "../components/VenuesCityGrid";
 import {
   AirplaneTiltIcon,
   CaretLeftIcon,
@@ -340,7 +341,7 @@ function VenuesTemplate() {
       <HeaderBar />
       <div className="w-full max-w-[1366px] mx-auto lg:mt-4 px-4">
         <div className="max-w-[1200px] mx-auto">
-          <div className="hidden lg:flex xlg:max-w-[996px] mx-auto w-full items-center justify-between">
+          <div className="hidden lg:flex mx-auto w-full items-center justify-between">
             <Button
               color="tertiary"
               iconPosition="left"
@@ -498,8 +499,11 @@ function VenuesTemplate() {
             </div>
           </div>
         </div>
-        <div className="w-full max-w-[548px]  lg:max-w-full mx-auto mt-10">
+        <div className="w-full max-w-[548px] lg:max-w-full mx-auto mt-10">
           <Assist365BannersWidget />
+        </div>
+        <div className="w-full max-w-[548px] lg:max-w-[996px] mx-auto mt-10 lg:mt-28">
+          <VenuesCityGrid />
         </div>
       </div>
     </div>
