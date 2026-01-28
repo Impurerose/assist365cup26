@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
     <!-- World Cup 2026 Map - Venues -->
-    <!-- Generated: 2026-01-28T14:42:14.809Z -->
+    <!-- Generated: 2026-01-28T16:04:33.477Z -->
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -50,12 +50,33 @@
       
       <!-- Header -->
       <header class="bg-white w-full">
-        <div class="flex items-center justify-between w-full max-w-[1200px] mx-auto px-6 py-3">
-          <div class="flex items-center gap-3">
+        <div class="flex items-center justify-between w-full max-w-[358px] md:max-w-[548px] lg:max-w-[1200px] mx-auto py-3">
+          <!-- Flecha de regreso (mobile/tablet only) -->
+          <button 
+            onclick="window.location.href='mainpage.html'" 
+            class="text-action-default block lg:hidden"
+            aria-label="Volver a partidos"
+          >
+            <i class="ph ph-arrow-left" style="font-size: 24px; font-weight: bold;"></i>
+          </button>
+
+          <!-- Logo + Soccer Ball + Título -->
+          <div class="flex w-fit items-center">
+            <!-- Logo desktop -->
             <img
+              class="hidden lg:block"
               src="https://assistcdn.s3.us-west-1.amazonaws.com/assets/site/home/img/brand/a365_logo_xa.svg"
               alt="A365 Logo"
             />
+            
+            <!-- Logo mobile/tablet -->
+            <img
+              class="block lg:hidden"
+              src="https://assistcdn.s3.us-west-1.amazonaws.com/assets/site/home/img/brand/Assist-logo.svg"
+              alt="Assist365"
+            />
+
+            <!-- Gradiente para Soccer Ball -->
             <svg width="0" height="0" class="absolute">
               <defs>
                 <linearGradient id="soccerGradient" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -64,13 +85,20 @@
                 </linearGradient>
               </defs>
             </svg>
-            <i class="ph-duotone ph-soccer-ball" style="font-size: 32px; background: linear-gradient(180deg, #59D3C2 0%, #006FE8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;"></i>
-            <h1 class="text-xl font-semibold text-text-decorative-darker">
+            
+            <!-- Soccer Ball responsive (mobile: 24px, desktop: 32px) -->
+            <i class="ph-duotone ph-soccer-ball block lg:hidden" style="font-size: 24px; background: linear-gradient(180deg, #59D3C2 0%, #006FE8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;"></i>
+            <i class="ph-duotone ph-soccer-ball hidden lg:block" style="font-size: 32px; background: linear-gradient(180deg, #59D3C2 0%, #006FE8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;"></i>
+            
+            <!-- Título responsive -->
+            <h1 class="text-base lg:text-xl font-semibold text-text-decorative-darker">
               World Cup Map 2026
             </h1>
           </div>
+
+          <!-- Botón Compartir con texto responsive -->
           <button class="inline-flex items-center justify-center gap-2 px-4 py-2 h-10 text-base font-semibold rounded-xl bg-brand-primary text-white hover:bg-bg-alt-secondary transition-colors">
-            Compartir
+            <span class="hidden lg:inline">Compartir</span>
             <i class="ph ph-paper-plane-tilt" style="font-size: 16px; font-weight: bold;"></i>
           </button>
         </div>

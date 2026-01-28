@@ -412,7 +412,7 @@ function VenuesTemplate() {
               </div>
 
               {/* Info Estadio - Tablet: 2, Desktop: col izq (3) */}
-              <VenueCard className="order-2 lg:order-3">
+              <VenueCard className="order-2 lg:oaca esta ocultorder-3">
                 <VenueInfo
                   image={venueData.image}
                   name={venueData.name}

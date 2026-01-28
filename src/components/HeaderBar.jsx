@@ -19,7 +19,7 @@ const SoccerBallGradient = () => (
 export default function HeaderBar() {
   return (
     <header className="bg-white w-full">
-      <div className="flex items-center justify-between w-full max-w-[358px] md:max-w-[548px] lg:max-w-[1200px] mx-auto py-3">
+      <div className="flex items-center justify-between w-full max-w-[358px] sm:max-w-[548px] lg:max-w-[1200px] mx-auto py-3 px-0 md:px-4">
         <ArrowLeft
           size={24}
           weight="bold"
