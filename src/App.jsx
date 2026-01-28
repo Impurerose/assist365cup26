@@ -115,6 +115,15 @@ function App() {
                   participá por un pasaje para ver a tu selección.
                 </span>
               </p>
+
+
+              <div className="form__container">
+
+
+                
+
+
+              </div>
             </main>
             <footer class="modal__footer flex items-center justify-center">
               <div className="max-w-[330px] mt-4">
