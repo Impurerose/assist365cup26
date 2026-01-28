@@ -6,6 +6,8 @@ import {
 } from "./templates";
 import ItinerariesTemplate from "./templates/ItinerariesTemplate";
 import MicroModal from "micromodal"; // es6 module
+import Button from "./dsys/Button";
+import { ShareFatIcon } from "@phosphor-icons/react";
 
 /**
  * App Component
@@ -36,7 +38,6 @@ function App() {
     if (templates[template]) {
       setActiveTemplate(template);
       MicroModal.init();
-
     } else {
       console.warn(`Template "${template}" no existe, usando "mainpage"`);
       setActiveTemplate("mainpage");
@@ -96,37 +97,40 @@ function App() {
       <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
         <div class="modal__overlay" tabindex="-1" data-micromodal-close>
           <div
-            class="modal__container"
+            class="modal__container shadow-xl"
             role="dialog"
             aria-modal="true"
             aria-labelledby="modal-1-title"
           >
-            <header class="modal__header">
-              <h2 class="modal__title" id="modal-1-title">
-                Micromodal
-              </h2>
-              <button
-                class="modal__close"
-                aria-label="Close modal"
-                data-micromodal-close
-              ></button>
-            </header>
             <main class="modal__content" id="modal-1-content">
-              <p>
-                Try hitting the <code>tab</code> key and notice how the focus
-                stays within the modal itself. Also, <code>esc</code> to close
-                modal.
+              <img
+                src="https://assistcdn.s3.us-west-1.amazonaws.com/assets/wc2026/SoccerPlaneIcon.svg"
+                alt="Soccer Plane Icon"
+                className="mb-6 mx-auto"
+              />
+
+              <p className="text-2xl text-text-default text-center">
+                Explorá la guía mundialista completa y{" "}
+                <span className="font-semibold">
+                  participá por un pasaje para ver a tu selección.
+                </span>
               </p>
             </main>
-            <footer class="modal__footer">
-              <button class="modal__btn modal__btn-primary">Continue</button>
-              <button
-                class="modal__btn"
-                data-micromodal-close
-                aria-label="Close this dialog window"
-              >
-                Close
-              </button>
+            <footer class="modal__footer flex items-center justify-center">
+              <div className="max-w-[330px] mt-4">
+                <Button
+                  variant="alt"
+                  iconPosition="right"
+                  icon={
+                    <ShareFatIcon
+                      size={16}
+                      className="text-text-alt-onbutton"
+                    />
+                  }
+                >
+                  Quiero participar
+                </Button>
+              </div>
             </footer>
           </div>
         </div>
