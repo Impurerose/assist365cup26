@@ -345,7 +345,7 @@ const html = `<!DOCTYPE html>
       
       <!-- Header -->
       <header class="bg-white w-full">
-        <div class="flex items-center justify-between w-full max-w-[358px] md:max-w-[548px] lg:max-w-[1200px] mx-auto py-3">
+        <div class="flex items-center justify-between w-full max-w-[358px] sm:max-w-[548px] lg:max-w-[1200px] mx-auto py-3 px-0 md:px-4">
           <!-- Flecha de regreso (mobile/tablet only) -->
           <button 
             onclick="window.location.href='mainpage.html'" 

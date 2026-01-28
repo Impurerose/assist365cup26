@@ -59,9 +59,15 @@ function generateHeaderBar() {
     <header class="bg-white w-full">
       <div class="flex items-center justify-between w-full max-w-[358px] md:max-w-[548px] lg:max-w-[1200px] mx-auto py-3">
         <!-- Flecha volver - Mobile/Tablet -->
-        <i class="ph ph-arrow-left text-action-default block lg:hidden cursor-pointer" style="font-size: 24px; font-weight: bold;" onclick="goBackToMainpage()"></i>
+        <button 
+          onclick="goBackToMainpage()" 
+          class="text-action-default block lg:hidden"
+          aria-label="Volver a partidos"
+        >
+          <i class="ph ph-arrow-left" style="font-size: 24px; font-weight: bold;"></i>
+        </button>
 
-        <!-- Logo y título -->
+        <!-- Logo + Soccer Ball + Título -->
         <div class="flex w-fit items-center">
           <!-- Logo desktop -->
           <img
@@ -74,10 +80,10 @@ function generateHeaderBar() {
           <img
             class="block lg:hidden"
             src="https://assistcdn.s3.us-west-1.amazonaws.com/assets/site/home/img/brand/Assist-logo.svg"
-            alt="Assist Logo"
+            alt="Assist365"
           />
 
-          <!-- Gradient SVG definition -->
+          <!-- Gradiente para Soccer Ball -->
           <svg width="0" height="0" class="absolute">
             <defs>
               <linearGradient id="soccerGradient" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -87,8 +93,9 @@ function generateHeaderBar() {
             </defs>
           </svg>
 
-          <!-- Soccer ball icon con gradient (responsive) -->
-          <i class="ph-duotone ph-soccer-ball w-6 h-6 lg:w-8 lg:h-8" style="font-size: 24px; background: linear-gradient(180deg, #59D3C2 0%, #006FE8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;"></i>
+          <!-- Soccer Ball responsive (mobile: 24px, desktop: 32px) -->
+          <i class="ph-duotone ph-soccer-ball block lg:hidden" style="font-size: 24px; background: linear-gradient(180deg, #59D3C2 0%, #006FE8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;"></i>
+          <i class="ph-duotone ph-soccer-ball hidden lg:block" style="font-size: 32px; background: linear-gradient(180deg, #59D3C2 0%, #006FE8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;"></i>
 
           <!-- Título responsive -->
           <h1 class="text-base lg:text-xl font-semibold text-text-decorative-darker">
@@ -96,9 +103,9 @@ function generateHeaderBar() {
           </h1>
         </div>
 
-        <!-- Botón Compartir -->
+        <!-- Botón Compartir con texto responsive -->
         <button class="inline-flex items-center gap-2 px-4 py-2 h-10 text-base font-semibold rounded-xl bg-brand-primary text-white hover:bg-bg-alt-secondary transition-colors">
-          <span class="hidden lg:block">Compartir</span>
+          <span class="hidden lg:inline">Compartir</span>
           <i class="ph ph-paper-plane-tilt" style="font-size: 16px; font-weight: bold;"></i>
         </button>
       </div>
