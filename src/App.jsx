@@ -8,6 +8,7 @@ import ItinerariesTemplate from "./templates/ItinerariesTemplate";
 import MicroModal from "micromodal"; // es6 module
 import Button from "./dsys/Button";
 import { ShareFatIcon } from "@phosphor-icons/react";
+import TextField from "./dsys/TextField";
 
 /**
  * App Component
@@ -116,18 +117,19 @@ function App() {
                 </span>
               </p>
 
-
-              <div className="form__container">
-
-
-                
-
-
+              <div className="form__container space-y-4 mx-auto max-w-[330px] pt-6 w-full">
+                <TextField fullWidth placeholder="Nombre completo" />
+                <TextField
+                  fullWidth
+                  placeholder="Ingresá tu correo electrónico"
+                />
               </div>
             </main>
-            <footer class="modal__footer flex items-center justify-center">
-              <div className="max-w-[330px] mt-4">
+            <footer class="modal__footer w-full flex items-center justify-center">
+              <div className="w-full max-w-[330px] mt-4">
                 <Button
+                  fullWidth
+                  classes="w-full"
                   variant="alt"
                   iconPosition="right"
                   icon={
