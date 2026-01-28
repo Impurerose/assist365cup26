@@ -63,26 +63,22 @@ function App() {
 
   return (
     <div className="w-full min-h-screen bg-bg-secondary">
-      {/* Dev Toolbar - Solo para desarrollo */}
+      {/* Dev Toolbar - Template Selector */}
       <div className="fixed top-4 right-4 z-50 bg-white p-4 rounded-xl shadow-lg border-2 border-brand-primary">
         <p className="text-xs text-gray-500 mb-2 font-semibold">
           Template Preview:
         </p>
-        <div className="flex gap-2">
+        <select
+          value={activeTemplate}
+          onChange={(e) => changeTemplate(e.target.value)}
+          className="w-full px-3 py-2 text-sm font-semibold text-text-default bg-white border-2 border-border-primary rounded-lg cursor-pointer hover:border-brand-primary focus:outline-none focus:border-brand-primary transition-all"
+        >
           {Object.keys(templates).map((name) => (
-            <button
-              key={name}
-              onClick={() => changeTemplate(name)}
-              className={`px-3 py-1.5 rounded-lg text-sm font-semibold transition-all ${
-                activeTemplate === name
-                  ? 'bg-brand-primary text-white shadow-md'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
-            >
+            <option key={name} value={name}>
               {name}
-            </button>
+            </option>
           ))}
-        </div>
+        </select>
         <p className="text-xs text-gray-400 mt-2 font-mono">
           ?template={activeTemplate}
         </p>

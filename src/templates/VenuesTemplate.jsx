@@ -341,43 +341,6 @@ function VenuesTemplate() {
       <HeaderBar />
       <div className="w-full max-w-[1366px] mx-auto lg:mt-4 px-4">
         <div className="max-w-[1200px] mx-auto">
-          <div className="hidden lg:flex mx-auto w-full items-center justify-between">
-            <Button
-              color="tertiary"
-              iconPosition="left"
-              classes="w-fit"
-              icon={<CaretLeftIcon />}
-              onClick={() => {
-                // En desarrollo React: cambiar template
-                // En vanilla: navegar a mainpage.html
-                if (typeof window !== "undefined") {
-                  const isVanilla = !document.getElementById("root");
-                  if (isVanilla) {
-                    window.location.href = "mainpage.html";
-                  }
-                }
-              }}
-            >
-              Volver a partidos
-            </Button>
-            <Button
-              color="secondary"
-              iconPosition="left"
-              icon={<AirplaneTiltIcon />}
-              onClick={() => {
-                // En desarrollo React: cambiar template
-                // En vanilla: navegar a venues.html
-                if (typeof window !== "undefined") {
-                  const isVanilla = !document.getElementById("root");
-                  if (isVanilla) {
-                    window.location.href = "venues.html";
-                  }
-                }
-              }}
-            >
-              Explorar itinerarios
-            </Button>
-          </div>
 
           <div className="max-w-[548px] lg:max-w-[996px] mx-auto">
             <div className="text-text-default text-2xl font-semibold pt-8 pb-6 flex gap-x-2">
