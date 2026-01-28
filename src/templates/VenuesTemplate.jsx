@@ -341,6 +341,37 @@ function VenuesTemplate() {
       <HeaderBar />
       <div className="w-full max-w-[1366px] mx-auto lg:mt-4 px-4">
         <div className="max-w-[1200px] mx-auto">
+          {/* Botón Volver (solo mobile) */}
+          <button
+            onClick={() => window.history.back()}
+            className="flex items-center gap-2 text-action-default mb-4 lg:hidden"
+          >
+            <CaretLeftIcon size={20} weight="regular" />
+            <span className="text-base font-semibold">Volver</span>
+          </button>
+
+          {/* Botones de navegación (Desktop only) */}
+          <div className="hidden lg:flex mx-auto w-full items-center justify-between">
+            <Button
+              variant="default"
+              color="tertiary"
+              iconPosition="right"
+              onClick={() => (window.location.href = "mainpage.html")}
+            >
+              <CaretLeftIcon size={20} weight="bold" className="pr-1" />
+              Volver a partidos
+            </Button>
+            <Button
+              variant="default"
+              color="secondary"
+              size="large"
+              onClick={() => (window.location.href = "itineraries.html")}
+              icon={<AirplaneTiltIcon size={20} weight="bold" />}
+              iconPosition="right"
+            >
+              Explorar itinerarios
+            </Button>
+          </div>
 
           <div className="max-w-[548px] lg:max-w-[996px] mx-auto">
             <div className="text-text-default text-2xl font-semibold pt-8 pb-6 flex gap-x-2">
@@ -420,7 +451,7 @@ function VenuesTemplate() {
                   description={airportData.description}
                   features={airportData.features}
                   officialLink={airportData.officialLink}
-                 />
+                />
               </VenueCard>
 
               {/* Transporte - Tablet: 7, Desktop: col izq (11) */}
