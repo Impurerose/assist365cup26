@@ -3,12 +3,9 @@ import {
   MainPageTemplate,
   VenuesTemplate,
   VenuesSelectionTemplate,
+  ModalTemplate,
 } from "./templates";
 import ItinerariesTemplate from "./templates/ItinerariesTemplate";
-import MicroModal from "micromodal"; // es6 module
-import Button from "./dsys/Button";
-import { ShareFatIcon } from "@phosphor-icons/react";
-import TextField from "./dsys/TextField";
 
 /**
  * App Component
@@ -25,6 +22,7 @@ function App() {
     venues: VenuesTemplate,
     venuesSelection: VenuesSelectionTemplate,
     itineraries: ItinerariesTemplate,
+    modal: ModalTemplate,
     // Fácil agregar más:
     // brackets: BracketsTemplate,
     // stats: StatsTemplate,
@@ -37,7 +35,6 @@ function App() {
 
     // Validar que el template existe
     if (templates[template]) {
-      setActiveTemplate(template);
       MicroModal.init();
     } else {
       console.warn(`Template "${template}" no existe, usando "mainpage"`);
@@ -95,63 +92,7 @@ function App() {
         </p>
       </div>
 
-      <div class="modal micromodal-slide" id="modal-1" aria-hidden="true">
-        <div class="modal__overlay" tabindex="-1" data-micromodal-close>
-          <div
-            class="modal__container shadow-xl"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="modal-1-title"
-          >
-            <main class="modal__content" id="modal-1-content">
-              <img
-                src="https://assistcdn.s3.us-west-1.amazonaws.com/assets/wc2026/SoccerPlaneIcon.svg"
-                alt="Soccer Plane Icon"
-                className="mb-6 mx-auto"
-              />
-
-              <p className="text-2xl text-text-default text-center">
-                Explorá la guía mundialista completa y{" "}
-                <span className="font-semibold">
-                  participá por un pasaje para ver a tu selección.
-                </span>
-              </p>
-
-              <div className="form__container space-y-4 mx-auto max-w-[330px] pt-6 w-full">
-                <TextField fullWidth placeholder="Nombre completo" />
-                <TextField
-                  fullWidth
-                  placeholder="Ingresá tu correo electrónico"
-                />
-              </div>
-            </main>
-            <footer class="modal__footer w-full flex items-center justify-center">
-              <div className="w-full max-w-[330px] mt-4">
-                <Button
-                  fullWidth
-                  classes="w-full"
-                  variant="alt"
-                  iconPosition="right"
-                  icon={
-                    <ShareFatIcon
-                      size={16}
-                      className="text-text-alt-onbutton"
-                    />
-                  }
-                >
-                  Quiero participar
-                </Button>
-              </div>
-            </footer>
-          </div>
-        </div>
-      </div>
-
       <TemplateComponent />
-
-      <div>
-        <button data-micromodal-trigger="modal-1">Open Modal</button>
-      </div>
     </div>
   );
 }
