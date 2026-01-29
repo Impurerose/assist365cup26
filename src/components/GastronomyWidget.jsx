@@ -1,18 +1,48 @@
-import { CaretRight } from '@phosphor-icons/react';
-import { useRef } from 'react';
+import { CaretRight, CaretLeft } from '@phosphor-icons/react';
+import { useRef, useState, useEffect } from 'react';
 import RestaurantCard from './RestaurantCard';
 
 export default function GastronomyWidget({ restaurants }) {
   const scrollContainerRef = useRef(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
 
-  const scrollToNext = () => {
-    if (scrollContainerRef.current) {
-      const cardWidth = 184 + 16; // ancho de card + gap
-      scrollContainerRef.current.scrollBy({ 
-        left: cardWidth, 
-        behavior: 'smooth' 
-      });
+  // Detectar si puede hacer scroll en ambas direcciones
+  const checkScroll = () => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+    
+    setCanScrollLeft(container.scrollLeft > 0);
+    setCanScrollRight(
+      container.scrollLeft < container.scrollWidth - container.clientWidth - 10
+    );
+  };
+
+  useEffect(() => {
+    checkScroll();
+    const container = scrollContainerRef.current;
+    if (container) {
+      container.addEventListener('scroll', checkScroll);
+      window.addEventListener('resize', checkScroll);
     }
+    return () => {
+      if (container) {
+        container.removeEventListener('scroll', checkScroll);
+      }
+      window.removeEventListener('resize', checkScroll);
+    };
+  }, [restaurants]);
+
+  const scrollTo = (direction) => {
+    if (!scrollContainerRef.current) return;
+    
+    // Scroll por "página" (ancho visible del container)
+    const scrollAmount = scrollContainerRef.current.clientWidth;
+    
+    scrollContainerRef.current.scrollBy({
+      left: direction === 'right' ? scrollAmount : -scrollAmount,
+      behavior: 'smooth'
+    });
   };
 
   return (
@@ -31,10 +61,20 @@ export default function GastronomyWidget({ restaurants }) {
 
       {/* Carousel de restaurantes */}
       <div className="relative">
+        {/* Botón de navegación izquierda */}
+        {canScrollLeft && (
+          <button
+            className="absolute left-1.5 top-1/2 -translate-y-1/2 bg-white rounded-full p-2 shadow-md hover:shadow-lg transition-shadow z-10"
+            onClick={() => scrollTo('left')}
+            aria-label="Scroll izquierda"
+          >
+            <CaretLeft size={20} weight="bold" className="text-action-default" />
+          </button>
+        )}
+
         <div 
           ref={scrollContainerRef}
-          className="flex gap-4 overflow-x-auto scrollbar-hide pb-2 snap-x snap-mandatory"
-          style={{ scrollSnapType: 'x mandatory' }}
+          className="flex gap-4 overflow-x-auto scrollbar-hide pb-2"
         >
           {restaurants.map((restaurant, index) => (
             <RestaurantCard
@@ -50,12 +90,15 @@ export default function GastronomyWidget({ restaurants }) {
         </div>
         
         {/* Botón de navegación derecha */}
-        <button
-          className="absolute right-1.5 top-1/2 -translate-y-1/2 bg-white rounded-full p-2 shadow-md hover:shadow-lg transition-shadow"
-          onClick={scrollToNext}
-        >
-          <CaretRight size={20} className="text-action-default" />
-        </button>
+        {canScrollRight && (
+          <button
+            className="absolute right-1.5 top-1/2 -translate-y-1/2 bg-white rounded-full p-2 shadow-md hover:shadow-lg transition-shadow z-10"
+            onClick={() => scrollTo('right')}
+            aria-label="Scroll derecha"
+          >
+            <CaretRight size={20} weight="bold" className="text-action-default" />
+          </button>
+        )}
       </div>
     </div>
   );
