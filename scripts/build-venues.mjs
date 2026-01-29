@@ -612,6 +612,28 @@ const html = `<!DOCTYPE html>
             </div>
 
             <!-- 11. AccommodationsWidget -->
+            <!-- 
+              SCROLL HORIZONTAL BIDIRECCIONAL
+              ================================
+              Este widget implementa un carousel con scroll nativo del navegador y flechas de navegación.
+              
+              Componentes:
+              - Container con overflow-x-auto: permite scroll horizontal nativo
+              - Botón izquierdo (id: accommodations-scroll-left): oculto por defecto con class 'hidden'
+              - Botón derecho (id: accommodations-scroll-right): visible por defecto
+              - JavaScript (ver línea ~830): controla visibilidad de botones según posición del scroll
+              
+              Funcionamiento:
+              1. Al inicio: solo botón derecho visible (no hay scroll hacia la izquierda)
+              2. Al hacer scroll: detecta posición y muestra/oculta botones automáticamente
+              3. Click en flechas: scrollea por 'páginas' (ancho completo del container visible)
+              4. Responsive: se adapta al resize del viewport
+              
+              IDs importantes:
+              - accommodations-scroll-container: div scrolleable
+              - accommodations-scroll-left: botón ←
+              - accommodations-scroll-right: botón →
+            -->
             <div class="bg-brand-darkening p-4 lg:p-6 rounded-3xl mt-4 lg:mt-10 mx-auto">
               <div class="flex flex-col gap-3">
                 <!-- Header con título e icono de Tripadvisor -->
@@ -621,18 +643,48 @@ const html = `<!DOCTYPE html>
                 </div>
                 <!-- Carousel de hoteles -->
                 <div class="relative">
-                  <div class="flex gap-4 overflow-x-auto scrollbar-hide pb-2 snap-x snap-mandatory" style="scroll-snap-type: x mandatory;">
+                  <!-- Botón de navegación izquierda (oculto por defecto con 'hidden') -->
+                  <button 
+                    id="accommodations-scroll-left"
+                    class="absolute left-1.5 top-1/2 -translate-y-1/2 bg-white rounded-full p-2 shadow-md hover:shadow-lg transition-shadow z-10 hidden"
+                    aria-label="Scroll izquierda"
+                  >
+                    <i class="ph-bold ph-caret-left text-action-default" style="font-size: 20px;"></i>
+                  </button>
+                  
+                  <!-- Container scrolleable: usa scroll nativo con overflow-x-auto -->
+                  <div 
+                    id="accommodations-scroll-container"
+                    class="flex gap-4 overflow-x-auto scrollbar-hide pb-2"
+                  >
                     ${accommodationsData.map(hotel => generateHotelCard(hotel)).join('')}
                   </div>
-                  <!-- Botón de navegación derecha -->
-                  <button class="absolute right-1.5 top-1/2 -translate-y-1/2 bg-white rounded-full p-2 shadow-md hover:shadow-lg transition-shadow">
-                    <i class="ph ph-caret-right text-action-default" style="font-size: 20px;"></i>
+                  
+                  <!-- Botón de navegación derecha (visible por defecto) -->
+                  <button 
+                    id="accommodations-scroll-right"
+                    class="absolute right-1.5 top-1/2 -translate-y-1/2 bg-white rounded-full p-2 shadow-md hover:shadow-lg transition-shadow z-10"
+                    aria-label="Scroll derecha"
+                  >
+                    <i class="ph-bold ph-caret-right text-action-default" style="font-size: 20px;"></i>
                   </button>
                 </div>
               </div>
             </div>
 
             <!-- 12. GastronomyWidget -->
+            <!-- 
+              SCROLL HORIZONTAL BIDIRECCIONAL (mismo patrón que AccommodationsWidget)
+              ========================================================================
+              Usa la misma lógica de scroll que Alojamientos, solo cambian los IDs.
+              
+              IDs importantes:
+              - gastronomy-scroll-container: div scrolleable
+              - gastronomy-scroll-left: botón ←
+              - gastronomy-scroll-right: botón →
+              
+              El JavaScript reutilizable (ver línea ~830) se encarga de toda la lógica.
+            -->
             <div class="bg-brand-darkening p-4 lg:p-6 rounded-3xl mt-6 mx-auto">
               <div class="flex flex-col gap-3">
                 <!-- Header con título e icono de Tripadvisor -->
@@ -642,12 +694,29 @@ const html = `<!DOCTYPE html>
                 </div>
                 <!-- Carousel de restaurantes -->
                 <div class="relative">
-                  <div class="flex gap-4 overflow-x-auto scrollbar-hide pb-2 snap-x snap-mandatory" style="scroll-snap-type: x mandatory;">
+                  <!-- Botón de navegación izquierda (oculto por defecto) -->
+                  <button 
+                    id="gastronomy-scroll-left"
+                    class="absolute left-1.5 top-1/2 -translate-y-1/2 bg-white rounded-full p-2 shadow-md hover:shadow-lg transition-shadow z-10 hidden"
+                    aria-label="Scroll izquierda"
+                  >
+                    <i class="ph-bold ph-caret-left text-action-default" style="font-size: 20px;"></i>
+                  </button>
+                  
+                  <div 
+                    id="gastronomy-scroll-container"
+                    class="flex gap-4 overflow-x-auto scrollbar-hide pb-2"
+                  >
                     ${gastronomyData.map(restaurant => generateRestaurantCard(restaurant)).join('')}
                   </div>
+                  
                   <!-- Botón de navegación derecha -->
-                  <button class="absolute right-1.5 top-1/2 -translate-y-1/2 bg-white rounded-full p-2 shadow-md hover:shadow-lg transition-shadow">
-                    <i class="ph ph-caret-right text-action-default" style="font-size: 20px;"></i>
+                  <button 
+                    id="gastronomy-scroll-right"
+                    class="absolute right-1.5 top-1/2 -translate-y-1/2 bg-white rounded-full p-2 shadow-md hover:shadow-lg transition-shadow z-10"
+                    aria-label="Scroll derecha"
+                  >
+                    <i class="ph-bold ph-caret-right text-action-default" style="font-size: 20px;"></i>
                   </button>
                 </div>
               </div>
@@ -800,6 +869,131 @@ const html = `<!DOCTYPE html>
 
       </div>
     </div>
+    
+    <!-- Scroll Bidireccional JavaScript -->
+    <!-- 
+      SISTEMA DE SCROLL HORIZONTAL BIDIRECCIONAL - VANILLA JS
+      ========================================================
+      
+      Implementación nativa sin dependencias externas (no Swiper, no librerías).
+      Usa las capacidades nativas del navegador para scroll suave y detección de posición.
+      
+      CARACTERÍSTICAS:
+      ✅ Scroll nativo con 'overflow-x-auto'
+      ✅ Flechas que aparecen/desaparecen automáticamente
+      ✅ Scroll por 'páginas' (ancho visible del container)
+      ✅ Responsive: se adapta a resize del viewport
+      ✅ Accesible: funciona con mouse, touch, teclado
+      ✅ Performante: usa event delegation y toggleClass
+      
+      CÓMO AGREGAR MÁS WIDGETS CON SCROLL:
+      1. En el HTML: agrega IDs únicos al container y botones (ej: 'mi-widget-scroll-container')
+      2. En DOMContentLoaded: llama initScrollWidget('mi-widget-scroll-container', 'mi-widget-scroll-left', 'mi-widget-scroll-right')
+      
+      PARIDAD CON REACT:
+      Este código replica exactamente la funcionalidad de AccommodationsWidget.jsx y GastronomyWidget.jsx
+      - React usa: useState, useEffect, useRef
+      - Vanilla usa: getElementById, addEventListener, classList.toggle
+      Resultado: idéntico comportamiento UX
+    -->
+    <script>
+      /**
+       * Inicializa un widget con scroll horizontal bidireccional
+       * 
+       * @param {string} containerId - ID del div scrolleable (overflow-x-auto)
+       * @param {string} leftBtnId - ID del botón de flecha izquierda
+       * @param {string} rightBtnId - ID del botón de flecha derecha
+       * 
+       * Funcionamiento:
+       * - Al inicio: detecta si hay contenido scrolleable y muestra/oculta flechas
+       * - Durante scroll: actualiza visibilidad de flechas según posición
+       * - Click en flechas: scrollea suavemente por el ancho completo del container
+       * - En resize: recalcula si hay espacio para scrollear
+       */
+      function initScrollWidget(containerId, leftBtnId, rightBtnId) {
+        // 1. Obtener referencias del DOM
+        const container = document.getElementById(containerId);
+        const leftBtn = document.getElementById(leftBtnId);
+        const rightBtn = document.getElementById(rightBtnId);
+
+        // Validación: si falta algún elemento, salir silenciosamente
+        if (!container || !leftBtn || !rightBtn) return;
+
+        /**
+         * Detecta la posición actual del scroll y actualiza visibilidad de botones
+         * 
+         * Lógica:
+         * - canScrollLeft: true si scrollLeft > 0 (hay contenido a la izquierda)
+         * - canScrollRight: true si no llegó al final (scrollLeft < scrollWidth - clientWidth)
+         * - Usa toggle('hidden', condition) para mostrar/ocultar con Tailwind CSS
+         */
+        function checkScroll() {
+          const canScrollLeft = container.scrollLeft > 0;
+          const canScrollRight = 
+            container.scrollLeft < container.scrollWidth - container.clientWidth - 10; // -10px de margen
+
+          // Tailwind CSS: agregar/remover class 'hidden' según condición
+          leftBtn.classList.toggle('hidden', !canScrollLeft);
+          rightBtn.classList.toggle('hidden', !canScrollRight);
+        }
+
+        /**
+         * Scrollea el container en la dirección especificada
+         * 
+         * @param {string} direction - 'left' o 'right'
+         * 
+         * Estrategia: scrollea por 'páginas' completas (ancho del container visible)
+         * Esto es mejor UX que scrollear por un valor fijo de px
+         */
+        function scrollTo(direction) {
+          const scrollAmount = container.clientWidth; // Ancho visible actual del container
+          container.scrollBy({
+            left: direction === 'right' ? scrollAmount : -scrollAmount,
+            behavior: 'smooth' // Scroll suave nativo del navegador
+          });
+        }
+
+        // 2. Event Listeners
+        // Detectar cambios en el scroll (usuario scrollea con mouse/touch/teclado)
+        container.addEventListener('scroll', checkScroll);
+        
+        // Recalcular al cambiar tamaño de ventana (responsive)
+        window.addEventListener('resize', checkScroll);
+        
+        // Clicks en los botones
+        leftBtn.addEventListener('click', () => scrollTo('left'));
+        rightBtn.addEventListener('click', () => scrollTo('right'));
+
+        // 3. Check inicial al cargar
+        // Importante: determina estado inicial de las flechas
+        checkScroll();
+      }
+
+      /**
+       * Punto de entrada: inicializar todos los widgets cuando el DOM esté listo
+       * 
+       * DOMContentLoaded: se ejecuta cuando el HTML está parseado pero antes de cargar CSS/imágenes
+       * Es más rápido que 'load' y suficiente para manipular el DOM
+       */
+      document.addEventListener('DOMContentLoaded', () => {
+        // Widget de Alojamientos
+        initScrollWidget(
+          'accommodations-scroll-container',
+          'accommodations-scroll-left',
+          'accommodations-scroll-right'
+        );
+        
+        // Widget de Gastronomía
+        initScrollWidget(
+          'gastronomy-scroll-container',
+          'gastronomy-scroll-left',
+          'gastronomy-scroll-right'
+        );
+        
+        // PARA AGREGAR MÁS WIDGETS:
+        // initScrollWidget('nuevo-widget-container', 'nuevo-widget-left', 'nuevo-widget-right');
+      });
+    </script>
     
     <!-- Google Maps JavaScript -->
     <script>
