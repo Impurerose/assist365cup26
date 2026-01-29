@@ -28,7 +28,7 @@ export default function MapPinWithNumber({ number }) {
         <NumberIcon 
           size={20} 
           weight="fill" 
-          className="absolute top-[13px] left-[6px] text-brand-primary"
+          className="absolute top-[13px] -right-[6px] text-brand-primary"
         />
       )}
     </div>

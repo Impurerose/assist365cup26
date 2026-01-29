@@ -352,7 +352,7 @@ function ItinerariesTemplate() {
             </div>
 
             {/* Lista de partidos del itinerario */}
-            <div className="flex flex-col gap-6 mb-10">
+            <div className="flex flex-col gap-6 gap-y-0 mb-10">
               {itineraryMatches.map((item, index) => (
                 <ItineraryMatchCard
                   key={index}

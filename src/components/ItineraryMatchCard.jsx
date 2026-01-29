@@ -48,7 +48,7 @@ export default function ItineraryMatchCard({
 
         {/* Card de vuelos */}
         {flights && flights.length > 0 && (
-          <div className="bg-brand-darkening rounded-xl p-3 flex flex-col gap-2">
+          <div className="bg-brand-darkening rounded-xl p-4 flex flex-col gap-2">
             {flights.slice(0, 2).map((flight, index) => (
               <FlightOption key={index} flight={flight} variant="list" />
             ))}

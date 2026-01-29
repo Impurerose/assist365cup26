@@ -7,7 +7,7 @@ import { AirplaneIcon } from '@phosphor-icons/react';
  */
 export default function ItineraryConnector() {
   return (
-    <div className="flex flex-col items-center gap-[12px]">
+    <div className="flex flex-col items-center gap-[8px]">
       {/* 4 círculos superiores */}
       {[...Array(4)].map((_, i) => (
         <div 
