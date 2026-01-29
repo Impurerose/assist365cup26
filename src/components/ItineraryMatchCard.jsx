@@ -35,12 +35,21 @@ export default function ItineraryMatchCard({
 
         {/* Línea de conexión con avión (solo desktop) */}
         {showConnection && (
-          <div className="hidden lg:flex items-center gap-1 pl-4">
-            <AirplaneIcon size={16} weight="fill" className="text-brand-primary rotate-90" />
-            {[...Array(8)].map((_, i) => (
+          <div className="hidden lg:flex flex-col items-start gap-3 pl-2">
+            {/* 4 círculos superiores */}
+            {[...Array(4)].map((_, i) => (
               <div 
-                key={i} 
-                className="w-1 h-1 rounded-full bg-brand-primary opacity-40"
+                key={`top-${i}`} 
+                className="w-1 h-1 rounded-full bg-icon-lighter"
+              />
+            ))}
+            {/* Avión en el medio, rotado 90° */}
+            <AirplaneIcon size={16} weight="fill" className="text-icon-lighter rotate-180" />
+            {/* 4 círculos inferiores */}
+            {[...Array(4)].map((_, i) => (
+              <div 
+                key={`bottom-${i}`} 
+                className="w-1 h-1 rounded-full bg-icon-lighter"
               />
             ))}
           </div>

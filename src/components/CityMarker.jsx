@@ -24,12 +24,12 @@ export default function CityMarker({ cityName, number }) {
   return (
     <div className="flex items-center gap-2">
       <div className="relative">
-        <MapPinIcon size={32} weight="duotone" className="text-icon-default" />
+        <MapPinIcon size={32} weight="duotone" className="text-icon-lighter" />
         {NumberIcon && (
           <NumberIcon 
-            size={20} 
+            size={18} 
             weight="fill" 
-            className="absolute top-[6px] left-[6px] text-brand-primary"
+            className="absolute top-[12px] -right-[3px] text-brand-primary"
           />
         )}
       </div>
