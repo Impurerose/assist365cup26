@@ -31,6 +31,8 @@ const Chip = ({
   const sizeClasses =
     size === 'small'
       ? 'text-base py-[6px]'
+      : size === 'auto' || size === 'responsive'
+      ? 'text-base py-[6px] lg:text-lg lg:py-[10px]'
       : 'text-lg py-[10px]';
 
   const chipClasses = classNames(

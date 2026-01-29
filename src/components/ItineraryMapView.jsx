@@ -7,7 +7,7 @@ import MapContainer from './MapContainer';
  */
 export default function ItineraryMapView({ selectedCity, onCitySelect }) {
   return (
-    <div className="w-full max-w-[792px] mx-auto h-[448px] rounded-3xl overflow-hidden">
+    <div className="w-full lg:max-w-[792px] mx-auto h-[448px] lg:rounded-3xl overflow-hidden w-full">
       <MapContainer
         selectedTeam={null}
         selectedCity={selectedCity}

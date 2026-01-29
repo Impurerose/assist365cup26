@@ -7,12 +7,13 @@ import Chip from '../dsys/Chip';
  */
 export default function PhaseFilters({ phases, activePhase, onPhaseChange }) {
   return (
-    <div className="flex flex-wrap gap-2 lg:gap-4">
+    <div className="flex flex-wrap gap-1.5 lg:gap-4">
       {phases.map((phase, index) => (
         <Chip
           key={index}
           variant="default"
           color="primary"
+          size="auto"
           state={activePhase === phase ? 'selected' : 'default'}
           onClick={() => onPhaseChange(phase)}
           classes="cursor-pointer"

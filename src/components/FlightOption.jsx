@@ -6,7 +6,7 @@
 export default function FlightOption({ flight, variant = 'table' }) {
   if (variant === 'list') {
     return (
-      <div className="flex items-center w-full gap-4">
+      <div className="flex items-center w-full gap-2">
         {/* Aerolínea con logo */}
         <div className="flex gap-2 items-center w-32">
           <img 

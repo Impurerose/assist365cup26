@@ -1,8 +1,8 @@
-import MatchCard from './MatchCard';
-import CityMarker from './CityMarker';
-import FlightOption from './FlightOption';
-import MapPinWithNumber from './MapPinWithNumber';
-import ItineraryConnector from './ItineraryConnector';
+import MatchCard from "./MatchCard";
+import CityMarker from "./CityMarker";
+import FlightOption from "./FlightOption";
+import MapPinWithNumber from "./MapPinWithNumber";
+import ItineraryConnector from "./ItineraryConnector";
 
 /**
  * ItineraryMatchCard Component
@@ -11,17 +11,17 @@ import ItineraryConnector from './ItineraryConnector';
  * 2. MapPin + Conector (medio)
  * 3. Nombre + Vuelos (derecha)
  */
-export default function ItineraryMatchCard({ 
-  match, 
-  phase, 
-  city, 
+export default function ItineraryMatchCard({
+  match,
+  phase,
+  city,
   flights,
-  showConnection = true
+  showConnection = true,
 }) {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[368px_auto_1fr] gap-4 lg:gap-6 w-full">
       {/* Columna 1: Match Card */}
-      <div className="w-full">
+      <div className="w-full overflow-visible">
         <MatchCard match={{ ...match, phase }} showMatchNumber={false} />
       </div>
 
@@ -39,7 +39,7 @@ export default function ItineraryMatchCard({
           <div className="lg:hidden">
             <CityMarker cityName={city.name} number={city.number} />
           </div>
-          
+
           {/* Nombre solo en desktop */}
           <span className="hidden lg:block text-text-default text-xl font-semibold">
             {city.name}
@@ -48,7 +48,7 @@ export default function ItineraryMatchCard({
 
         {/* Card de vuelos */}
         {flights && flights.length > 0 && (
-          <div className="bg-brand-darkening rounded-xl p-4 flex flex-col gap-2">
+          <div className="bg-brand-darkening rounded-xl p-4 flex flex-col gap-2 max-w-[367px] relative lg:-left-5">
             {flights.slice(0, 2).map((flight, index) => (
               <FlightOption key={index} flight={flight} variant="list" />
             ))}
