@@ -4,6 +4,7 @@ import {
   VenuesTemplate,
   VenuesSelectionTemplate,
   ModalTemplate,
+  AwayMatchesModalTemplate,
 } from "./templates";
 import ItinerariesTemplate from "./templates/ItinerariesTemplate";
 
@@ -23,6 +24,7 @@ function App() {
     venuesSelection: VenuesSelectionTemplate,
     itineraries: ItinerariesTemplate,
     modal: ModalTemplate,
+    awayMatches: AwayMatchesModalTemplate,
     // Fácil agregar más:
     // brackets: BracketsTemplate,
     // stats: StatsTemplate,
