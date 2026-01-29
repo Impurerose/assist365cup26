@@ -17,6 +17,7 @@ import SafetyWidget from "../components/SafetyWidget";
 import PreventionWidget from "../components/PreventionWidget";
 import Assist365BannersWidget from "../components/Assist365BannersWidget";
 import VenuesCityGrid from "../components/VenuesCityGrid";
+import Spinner from "../components/Spinner";
 import {
   AirplaneTiltIcon,
   CaretLeftIcon,
@@ -43,7 +44,6 @@ import {
 function VenuesTemplate() {
   const [selectedTeam, setSelectedTeam] = useState(null);
   const [selectedCity, setSelectedCity] = useState(null);
-
 
   // Datos de la ciudad
   const cityData = {
@@ -341,7 +341,7 @@ function VenuesTemplate() {
   return (
     <div className="w-full min-h-screen flex flex-col bg-bg-secondary pb-10">
       <HeaderBar />
-      
+
       {/* Overlay fijo en el bottom con degradado y blur */}
       {/* <div
         className="fixed bottom-0 left-0 right-0 max-h-[750px] h-[750px] z-40 pointer-events-none"
@@ -438,7 +438,8 @@ function VenuesTemplate() {
               </div>
 
               {/* Clima Actual - Tablet: 5, Desktop: col izq (7) */}
-              <VenueCard className="order-5 lg:order-7 min-h-[228px] lg:mt-4">
+              <VenueCard className="relative order-5 lg:order-7 min-h-[228px] lg:mt-4">
+                <Spinner />
                 <CurrentWeather />
               </VenueCard>
 
@@ -513,8 +514,6 @@ function VenuesTemplate() {
           <VenuesCityGrid />
         </div>
       </div>
-
-
     </div>
   );
 }

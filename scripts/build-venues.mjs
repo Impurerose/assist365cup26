@@ -472,7 +472,29 @@ const html = `<!DOCTYPE html>
               </div>
 
               <!-- 5. Clima Actual - order-5 lg:order-7 -->
-              <div class="order-5 lg:order-7 bg-bg-primary rounded-3xl text-base text-text-default p-6 min-h-[228px] lg:mt-4">
+              <div class="relative order-5 lg:order-7 bg-bg-primary rounded-3xl text-base text-text-default p-6 min-h-[228px] lg:mt-4">
+                <!-- Spinner overlay (centrado absoluto) -->
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <div class="spinner-container" style="width: 48px; height: 48px;">
+                    <svg 
+                      viewBox="0 0 48 48" 
+                      class="w-full h-full"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <circle
+                        cx="24"
+                        cy="24"
+                        r="20"
+                        fill="none"
+                        stroke="#006FE8"
+                        stroke-width="4"
+                        stroke-linecap="round"
+                        stroke-dasharray="94 188"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                
                 <p class="text-xl font-semibold text-text-default">Clima actual</p>
                 <div class="flex gap-10 mt-4">
                   <!-- Clima actual - izquierda -->
