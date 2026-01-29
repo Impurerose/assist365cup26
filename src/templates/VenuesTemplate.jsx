@@ -32,6 +32,7 @@ import {
   MapPinLineIcon,
   SoccerBallIcon,
   UsersFourIcon,
+  ShareFat,
 } from "@phosphor-icons/react";
 
 /**
@@ -42,6 +43,7 @@ import {
 function VenuesTemplate() {
   const [selectedTeam, setSelectedTeam] = useState(null);
   const [selectedCity, setSelectedCity] = useState(null);
+
 
   // Datos de la ciudad
   const cityData = {
@@ -339,6 +341,17 @@ function VenuesTemplate() {
   return (
     <div className="w-full min-h-screen flex flex-col bg-bg-secondary pb-10">
       <HeaderBar />
+      
+      {/* Overlay fijo en el bottom con degradado y blur */}
+      <div
+        className="fixed bottom-0 left-0 right-0 max-h-[750px] h-[750px] z-40 pointer-events-none"
+        style={{
+          background: 'linear-gradient(to top, rgba(242, 242, 242, 1) 0%, rgba(242, 242, 242, 1) 33%, rgba(242, 242, 242, 0.5) 100%)',
+          backdropFilter: 'blur(6px)',
+          WebkitBackdropFilter: 'blur(6px)',
+        }}
+      />
+
       <div className="w-full max-w-[1366px] mx-auto lg:mt-4 px-4">
         <div className="max-w-[1200px] mx-auto">
           {/* Botón Volver (solo mobile) */}
@@ -500,6 +513,8 @@ function VenuesTemplate() {
           <VenuesCityGrid />
         </div>
       </div>
+
+
     </div>
   );
 }
