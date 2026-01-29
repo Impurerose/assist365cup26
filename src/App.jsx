@@ -5,6 +5,7 @@ import {
   VenuesSelectionTemplate,
   ModalTemplate,
   AwayMatchesModalTemplate,
+  ModalSuccessTemplate,
 } from "./templates";
 import ItinerariesTemplate from "./templates/ItinerariesTemplate";
 
@@ -25,6 +26,7 @@ function App() {
     itineraries: ItinerariesTemplate,
     modal: ModalTemplate,
     awayMatches: AwayMatchesModalTemplate,
+    modalSuccess: ModalSuccessTemplate,
     // Fácil agregar más:
     // brackets: BracketsTemplate,
     // stats: StatsTemplate,
