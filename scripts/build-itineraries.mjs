@@ -368,7 +368,7 @@ function generateItineraryMatchCard(matchData, index, isLast) {
       <div class="grid grid-cols-[auto_1fr] lg:grid-cols-[368px_auto_1fr] gap-0 lg:gap-6">
         <!-- Columna 1: Match Card - SOLO DESKTOP -->
         <div class="hidden lg:block w-full overflow-visible">
-          <div class="w-full max-w-[350px] w-[350px] bg-white border border-border-primary rounded-xl px-3 py-4 flex flex-col gap-4 relative overflow-visible">
+          <div class="w-[350px] bg-white border border-border-primary rounded-xl px-3 py-4 flex flex-col gap-4 relative overflow-visible">
             <!-- Badge de fase -->
             <div class="absolute right-8 -top-[6px]">
               <div class="bg-[#0059BA] text-white text-sm font-normal px-2 py-1 rounded-full whitespace-nowrap" style="font-family: 'Titillium Web', sans-serif; line-height: 20px;">
@@ -463,7 +463,7 @@ function generateItineraryMatchCard(matchData, index, isLast) {
           <!-- Match card - SOLO MOBILE/TABLET -->
           <div class="lg:hidden">
             <span class="pt-2 text-text-default text-xl font-semibold pl-5 mb-3 block">${city.name}</span>
-            <div class="w-full max-w-[350px] w-[350px] bg-white border border-border-primary rounded-xl px-3 py-4 flex flex-col gap-x-4 gap-y-1 relative overflow-visible">
+            <div class="w-[350px] bg-white border border-border-primary rounded-xl px-3 py-4 flex flex-col gap-x-4 gap-y-1 relative overflow-visible">
               <!-- Badge de fase -->
               <div class="absolute right-8 -top-[6px]">
                 <div class="bg-[#0059BA] text-white text-sm font-normal px-2 py-1 rounded-full whitespace-nowrap" style="font-family: 'Titillium Web', sans-serif; line-height: 20px;">
@@ -538,7 +538,7 @@ function generateItineraryMatchCard(matchData, index, isLast) {
 
           <!-- Card de vuelos con bg-brand-darkening -->
           ${flights && flights.length > 0 ? `
-            <div class="-left-2 relative w-[350px] rounded-xl p-4 flex flex-col gap-2" style="background-color: rgba(81, 90, 96, 0.06);">
+            <div class="w-[350px] rounded-xl p-4 flex flex-col gap-2" style="background-color: rgba(81, 90, 96, 0.06);">
               ${flights.slice(0, 2).map(flight => `
                 <div class="flex items-center gap-2 w-full">
                   <!-- Logo + Aerolínea + Duración -->
@@ -611,7 +611,7 @@ function generateCountryRequirements() {
   ];
 
   return `
-    <div class="mt-14 bg-white border border-border-primary rounded-3xl p-4 lg:px-6 lg:py-10 mb-10 lg:mb-6 max-w-[548px] lg:max-w-[996px] mx-auto">
+    <div class="mt-14 bg-white border border-border-primary rounded-3xl p-4 lg:px-6 lg:py-6 mb-10 lg:mb-6 max-w-[548px] lg:max-w-[996px] mx-auto">
       <div class="grid lg:grid-cols-3 gap-6 lg:gap-8">
         ${countries.map(country => `
           <div class="flex flex-col gap-2">
@@ -670,7 +670,7 @@ function generateAssist365Banners() {
 
 function generateVenuesCityGrid() {
   return `
-    <div class="w-full max-w-[548px] lg:max-w-[996px] mx-auto mt-10 lg:mt-28">
+    <div class="w-full max-w-[548px] lg:max-w-[996px] mx-auto mt-10 lg:mt-6">
       <div class="grid lg:grid-cols-[282px_282px_1fr] grid-cols-1 gap-y-4 lg:gap-y-0 lg:gap-x-6 gap-x-0">
         <!-- Ciudad 1 -->
         <div class="bg-bg-primary rounded-2xl p-4 flex items-center gap-4 flex-1">
@@ -790,9 +790,6 @@ const htmlTemplate = `<!DOCTYPE html>
       <!-- Normativas de ingreso -->
       ${generateCountryRequirements()}
     </div>
-
-    <!-- Banner promocional -->
-    ${generateAssist365Banners()}
 
     <!-- Grid de ciudades -->
     ${generateVenuesCityGrid()}
