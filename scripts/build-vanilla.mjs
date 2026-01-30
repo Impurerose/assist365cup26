@@ -929,6 +929,7 @@ document.addEventListener('DOMContentLoaded', () => {
   populateOtherTeamSelect();
   initChipsNav();
   initAllSections();
+  populateSelects(); // Initialize selection controls on page load
 });
 `;
 
@@ -1038,7 +1039,7 @@ const html = `<!DOCTYPE html>
           <!-- Botón Compartir con texto responsive -->
           <button class="inline-flex items-center justify-center gap-2 px-4 py-2 h-10 text-base font-semibold rounded-xl bg-brand-primary text-white hover:bg-bg-alt-secondary transition-colors">
             <span class="hidden lg:inline">Compartir</span>
-            <i class="ph ph-share-network" style="font-size: 16px; font-weight: bold;"></i>
+            <i class="ph ph-paper-plane-tilt" style="font-size: 16px; font-weight: bold;"></i>
           </button>
         </div>
       </header>
@@ -1072,7 +1073,11 @@ const html = `<!DOCTYPE html>
           
           <!-- SECTION 1: Map + Side Panel Container -->
           <div class="gap-6 w-full flex flex-col lg:flex-row justify-center bg-bg-secondary">
-            <div class="rounded-2xl overflow-hidden w-full lg:w-[715px] h-[640px]">
+            <div class="relative rounded-2xl overflow-hidden w-full lg:w-[715px] h-[640px]">
+              <!-- Botón flotante de compartir sobre el mapa -->
+              <button class="z-50 absolute bottom-3 right-3 inline-flex items-center justify-center gap-2 px-4 py-2 h-10 text-base font-semibold rounded-xl bg-brand-primary text-white hover:bg-bg-alt-secondary transition-colors shadow-lg">
+                <i class="ph ph-paper-plane-tilt" style="font-size: 20px; font-weight: bold;"></i>
+              </button>
               <div id="map" class="w-full h-full"></div>
             </div>
 

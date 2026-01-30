@@ -1,5 +1,5 @@
 // World Cup 2026 - Main Application
-// Auto-generated: 2026-01-26T18:46:40.664Z
+// Auto-generated: 2026-01-30T17:41:31.970Z
 
 const APP_STATE = {
   selectedTeam: null,
@@ -496,4 +496,5 @@ document.addEventListener('DOMContentLoaded', () => {
   populateOtherTeamSelect();
   initChipsNav();
   initAllSections();
+  populateSelects(); // Initialize selection controls on page load
 });
