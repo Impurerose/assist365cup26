@@ -371,7 +371,7 @@ function ItinerariesTemplate() {
             </div>
 
             {/* Lista de partidos del itinerario */}
-            <div className="flex flex-col gap-6 gap-y-0 mb-20 max-w-[792px] pt-3">
+            <div className="flex flex-col gap-6 gap-y-0 tf-mb-14 lg:mb-20 max-w-[792px] pt-3 mx-auto">
               {itineraryMatches.map((item, index) => (
                 <ItineraryMatchCard
                   key={index}
@@ -386,7 +386,7 @@ function ItinerariesTemplate() {
           </div>
 
           {/* Normativas de ingreso - Grid 3 columnas */}
-          <div className="bg-white border border-border-primary rounded-3xl p-4 lg:px-6 lg:py-10 mb-6 max-w-[548px] lg:max-w-[996px] mx-auto">
+          <div className="bg-white border border-border-primary rounded-3xl p-4 lg:px-6 lg:py-10 mb-10 lg:mb-6 max-w-[548px] lg:max-w-[996px] mx-auto">
             <div className="grid lg:grid-cols-3 gap-6 lg:gap-8">
               {countryRequirements.map((country, index) => (
                 <CountryRequirementsCard

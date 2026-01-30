@@ -20,7 +20,7 @@ export default function FlightRoute({ origin, destination, flights, size = 'defa
         
         {/* Flecha: abajo en mobile, derecha en desktop */}
         <ArrowDownIcon 
-          size={32} 
+          size={20} 
           className="text-icon-lighter lg:hidden" 
           weight="regular"
         />
