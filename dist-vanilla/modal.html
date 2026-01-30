@@ -1,30 +1,4 @@
-import { execSync } from 'child_process';
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-console.log('🎭 Generando Modal Template (HTML + CSS)...\n');
-
-const distPath = path.join(__dirname, '..', 'dist-vanilla');
-
-// 1. Crear carpeta si no existe
-if (!fs.existsSync(distPath)) {
-  fs.mkdirSync(distPath, { recursive: true });
-}
-if (!fs.existsSync(path.join(distPath, 'assets'))) {
-  fs.mkdirSync(path.join(distPath, 'assets'));
-}
-
-console.log('📝 Generando modal.html...\n');
-
-// ============================================================================
-// HTML DEL MODAL TEMPLATE
-// ============================================================================
-
-const html = `<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
@@ -171,31 +145,4 @@ const html = `<!DOCTYPE html>
     });
   </script>
 </body>
-</html>`;
-
-// 2. Escribir archivo
-const modalPath = path.join(distPath, 'modal.html');
-fs.writeFileSync(modalPath, html);
-
-console.log('✅ HTML generado\n');
-
-// 3. Compilar Tailwind CSS
-console.log('🎨 Compilando Tailwind CSS...');
-try {
-  execSync(
-    'npx tailwindcss -i ./src/index.css -o ./dist-vanilla/assets/styles.css --minify',
-    { stdio: 'inherit' }
-  );
-  console.log('✅ CSS compilado\n');
-} catch (error) {
-  console.error('❌ Error compilando CSS:', error.message);
-  process.exit(1);
-}
-
-// 4. Reportar
-console.log('📦 Archivos generados:\n');
-console.log('  📝 modal.html');
-console.log('  🎨 assets/styles.css (incluye estilos de MicroModal)\n');
-
-console.log('✅ Build Modal completado en: dist-vanilla/modal.html\n');
-console.log('💡 Para ver: Abrí dist-vanilla/modal.html en el navegador\n');
+</html>

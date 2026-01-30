@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import MicroModal from 'micromodal';
 import Button from '../dsys/Button';
 import TextField from '../dsys/TextField';
+import Select from '../dsys/Select';
 import { ShareFat } from '@phosphor-icons/react';
 
 /**
@@ -50,16 +51,37 @@ export default function ModalTemplate() {
                 </span>
               </p>
 
-              <div className="form__container space-y-4 mx-auto max-w-[330px] pt-6 w-full">
-                <TextField fullWidth placeholder="Nombre completo" />
+              <div className="form__container space-y-4 mx-auto max-w-[548px] pt-6 w-full">
+                <TextField fullWidth placeholder="Ingresá tu nombre completo" />
+                
+                {/* Fila con Select de tipo de documento y campo de número */}
+                <div className="flex 
+               flex-col lg:flex-row gap-4 lg:gap-2 items-center w-full">
+                  <Select
+                  fullWidth
+                    placeholder="DNI"
+                    options={[
+                      { id: 'dni', name: 'DNI' },
+                      { id: 'passport', name: 'Pasaporte' },
+                      { id: 'cedula', name: 'Cédula' },
+                      { id: 'other', name: 'Otro' }
+                    ]}
+                    classes="w-full xl:max-w-[150px]"
+                  />
+                  <TextField
+                    placeholder="Ingresá tu tipo y número de documento"
+                    fullWidth
+                  />
+                </div>
+
                 <TextField
                   fullWidth
                   placeholder="Ingresá tu correo electrónico"
                 />
               </div>
             </main>
-            <footer className="modal__footer w-full flex items-center justify-center">
-              <div className="w-full max-w-[330px] mt-4">
+            <footer className="modal__footer w-full flex flex-col items-center justify-center">
+              <div className="w-full max-w-[548px] mt-4">
                 <Button
                   fullWidth
                   classes="w-full"
@@ -75,8 +97,13 @@ export default function ModalTemplate() {
                 >
                   Quiero participar
                 </Button>
-              </div>
-            </footer>
+              </div>              
+              {/* Texto legal */}
+              <div className="w-full max-w-[548px] pt-8">
+                <p className="text-base text-text-lighter text-center">
+                  El envío del formulario implica la aceptación de los Términos y Condiciones del sorteo y de la Política de Privacidad del Organizador.
+                </p>
+              </div>            </footer>
           </div>
         </div>
       </div>
