@@ -62,7 +62,7 @@ export default function HeaderBar() {
             iconPosition="right"
             responsive={true}
           >
-            <span className="pl-1">Compartir</span>
+            <span className="pl-1 hidden lg:flex">Compartir</span>
           </Button>
         </ToolTip>
       </div>
