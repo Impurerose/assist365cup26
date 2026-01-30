@@ -56,7 +56,6 @@ export default function HeaderBar() {
         </div>
 
         <div className="">
-          xxx
           <Button
             icon={<PaperPlaneTiltIcon size={16} weight="bold" />}
             iconPosition="right"

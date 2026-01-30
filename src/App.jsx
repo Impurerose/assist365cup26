@@ -78,7 +78,7 @@ function App() {
   return (
     <div className="w-full min-h-screen bg-bg-secondary">
       {/* Dev Toolbar - Template Selector */}
-      <div className="fixed top-4 right-4 z-50 bg-white p-4 rounded-xl shadow-lg border-2 border-brand-primary">
+      <div className="fixed bottom-4 right-4 z-50 bg-white p-4 rounded-xl shadow-lg border-2 border-brand-primary">
         <p className="text-xs text-gray-500 mb-2 font-semibold">
           Template Preview:
         </p>
