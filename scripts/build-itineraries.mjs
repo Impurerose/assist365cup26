@@ -786,7 +786,7 @@ const htmlTemplate = `<!DOCTYPE html>
         </div>
 
         <!-- Lista de partidos del itinerario -->
-        <div class="flex flex-col gap-6 mb-14 lg:mb-20 max-w-[792px] pt-3 mx-auto">
+        <div class="-left-4 lg:left-0 relative flex flex-col gap-6 gap-y-0 mb-14 lg:mb-20 max-w-[792px] pt-3 mx-auto">
           ${ITINERARY_DATA.matches.map((match, index) => 
             generateItineraryMatchCard(match, index, index === ITINERARY_DATA.matches.length - 1)
           ).join('\n')}

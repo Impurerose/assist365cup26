@@ -46,7 +46,7 @@ export default function ItineraryMatchCard({
                 <ItineraryConnector topCircles={12} />
               </div>
               <div className="hidden lg:block">
-                <ItineraryConnector topCircles={5} />xxx
+                <ItineraryConnector topCircles={5} />
               </div>
             </>
           )}
@@ -74,7 +74,7 @@ export default function ItineraryMatchCard({
 
           {/* Card de vuelos */}
           {flights && flights.length > 0 && (
-            <div className="-left-2 relative w-[350px] bg-brand-darkening rounded-xl p-4 flex flex-col gap-2">
+            <div className="w-[350px] bg-brand-darkening rounded-xl p-4 flex flex-col gap-2">
               {flights.slice(0, 2).map((flight, index) => (
                 <FlightOption key={index} flight={flight} variant="list" />
               ))}
