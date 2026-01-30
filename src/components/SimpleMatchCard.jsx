@@ -1,9 +1,9 @@
 /**
- * MatchCard Component
+ * SimpleMatchCard Component
  * Card de partido según diseño de Figma
  */
 
-const MatchCard = ({ match, showMatchNumber = true }) => {
+const SimpleMatchCard = ({ match, showMatchNumber = true }) => {
   return (
     <div className="w-full max-w-[350px] w-full w-[350px] bg-white border border-border-primary rounded-xl px-3 py-4 flex flex-col gap-4 relative overflow-visible">
       {/* Número de partido (badge azul) - condicional */}
@@ -111,9 +111,9 @@ const MatchCard = ({ match, showMatchNumber = true }) => {
       </div>
 
       {/* Información del partido */}
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 text-text-default text-sm">
         {/* Fecha y ubicación */}
-        <div className="flex items-start gap-4">
+        <div className="flex items-start gap-x-2 text-text-default text-sm">
           {/* Fecha */}
           <div className="flex items-center gap-2">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -149,86 +149,40 @@ const MatchCard = ({ match, showMatchNumber = true }) => {
               />
             </svg>
             <p
-              className="text-base text-text-default"
-              style={{ fontFamily: "Titillium Web, sans-serif" }}
             >
               {match.date}
             </p>
           </div>
 
-          {/* Ubicación */}
-          <div className="flex items-center gap-2">
+          {/* Horarios */}
+          <div className="flex items-center bg- gap-0 text-sm">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <circle cx="10" cy="8.125" r="2.5" fill="#7BD0C2" opacity="0.2" />
-              <path
-                d="M10 17.5C10 17.5 15.625 13.125 15.625 8.125C15.625 5.01675 13.1083 2.5 10 2.5C6.89175 2.5 4.375 5.01675 4.375 8.125C4.375 13.125 10 17.5 10 17.5Z"
+              <circle cx="10" cy="10" r="6.25" fill="#7BD0C2" opacity="0.2" />
+              <circle
+                cx="10"
+                cy="10"
+                r="7.5"
                 stroke="#7BD0C2"
                 strokeWidth="1.25"
                 strokeLinecap="round"
                 strokeLinejoin="round"
               />
-              <circle
-                cx="10"
-                cy="8.125"
-                r="2.5"
+              <path
+                d="M10 6.25V10L12.5 12.5"
                 stroke="#7BD0C2"
                 strokeWidth="1.25"
                 strokeLinecap="round"
                 strokeLinejoin="round"
               />
             </svg>
-            <p
-              className="text-base text-text-default"
-              style={{ fontFamily: "Titillium Web, sans-serif" }}
-            >
-              {match.city}
-            </p>
+            <p>{match.time.local}</p>
+            <p>-</p>
+            <p>{match.time.venue}</p>
           </div>
-        </div>
-
-        {/* Horarios */}
-        <div className="flex items-center gap-2 text-sm">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <circle cx="10" cy="10" r="6.25" fill="#7BD0C2" opacity="0.2" />
-            <circle
-              cx="10"
-              cy="10"
-              r="7.5"
-              stroke="#7BD0C2"
-              strokeWidth="1.25"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M10 6.25V10L12.5 12.5"
-              stroke="#7BD0C2"
-              strokeWidth="1.25"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-          <p
-            className="text-text-default"
-            style={{ fontFamily: "Titillium Web, sans-serif" }}
-          >
-            {match.time.local}
-          </p>
-          <p
-            className="text-base text-text-default"
-            style={{ fontFamily: "Titillium Web, sans-serif" }}
-          >
-            -
-          </p>
-          <p
-            className="text-base text-text-default"
-            style={{ fontFamily: "Titillium Web, sans-serif" }}
-          >
-            {match.time.venue}
-          </p>
         </div>
       </div>
     </div>
   );
 };
 
-export default MatchCard;
+export default SimpleMatchCard;

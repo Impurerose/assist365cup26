@@ -3,6 +3,8 @@ import CityMarker from "./CityMarker";
 import FlightOption from "./FlightOption";
 import MapPinWithNumber from "./MapPinWithNumber";
 import ItineraryConnector from "./ItineraryConnector";
+import { MapPinIcon } from "@phosphor-icons/react";
+import SimpleMatchCard from "./SimpleMatchCard";
 
 /**
  * ItineraryMatchCard Component
@@ -19,40 +21,57 @@ export default function ItineraryMatchCard({
   showConnection = true,
 }) {
   return (
-    <div className="grid grid-cols-[auto_1fr] lg:grid-cols-[368px_auto_1fr] gap-4 lg:gap-6 w-full max-w-[360px] lg:max-w-full mx-auto">
-      {/* Columna 1: Match Card - SOLO DESKTOP */}
-      <div className="hidden lg:block w-full overflow-visible">
-        <MatchCard match={{ ...match, phase }} showMatchNumber={false} />
-      </div>
+    <div className="flex flex-col gap-4 max-w-[360px] lg:max-w-full mx-auto">
+      {/* Título con MapPin grande - SOLO MOBILE/TABLET */}
+      {/* <div className="lg:hidden flex items-center gap-2">
+        <MapPinIcon size={32} weight="duotone" className="text-brand-primary" />
+        <span className="text-text-default text-xl font-semibold">
+          {city.name}
+        </span>
+      </div> */}
 
-      {/* Columna 2: MapPin + Conector - SIEMPRE VISIBLE */}
-      <div className="flex flex-col items-center gap-2">
-        <MapPinWithNumber number={city.number} />
-        {showConnection && <ItineraryConnector />}
-      </div>
-
-      {/* Columna 3: Cards apiladas */}
-      <div className="flex flex-col gap-2 min-w-0">
-        {/* Match card - SOLO MOBILE/TABLET */}
-        <div className="lg:hidden">
+      {/* Grid de columnas */}
+      <div className="grid grid-cols-[auto_1fr] lg:grid-cols-[368px_auto_1fr] gap-4 lg:gap-6">
+        {/* Columna 1: Match Card - SOLO DESKTOP */}
+        <div className="hidden lg:block w-full overflow-visible">
           <MatchCard match={{ ...match, phase }} showMatchNumber={false} />
         </div>
 
-        {/* Nombre de ciudad - SOLO DESKTOP */}
-        <div className="hidden lg:flex items-center gap-2">
-          <span className="text-text-default text-xl font-semibold">
-            {city.name}
-          </span>
+        {/* Columna 2: MapPin + Conector - SIEMPRE VISIBLE */}
+        <div className="flex flex-col items-center gap-2">
+          <MapPinWithNumber number={city.number} />
+          {showConnection && <ItineraryConnector topCircles={16} />}
         </div>
 
-        {/* Card de vuelos */}
-        {flights && flights.length > 0 && (
-          <div className="bg-brand-darkening rounded-xl p-4 flex flex-col gap-2 max-w-[350px]">
-            {flights.slice(0, 2).map((flight, index) => (
-              <FlightOption key={index} flight={flight} variant="list" />
-            ))}
+        {/* Columna 3: Cards apiladas */}
+        <div className="flex flex-col gap-2 min-w-0">
+          {/* Match card - SOLO MOBILE/TABLET */}
+          <div className="lg:hidden">
+            <span className="text-text-default text-xl font-semibold mb-3 block">
+              {city.name}
+            </span>
+            <SimpleMatchCard
+              match={{ ...match, phase }}
+              showMatchNumber={false}
+            />
           </div>
-        )}
+
+          {/* Nombre de ciudad - SOLO DESKTOP */}
+          <div className="hidden lg:flex items-center gap-2">
+            <span className="text-text-default text-xl font-semibold">
+              {city.name}
+            </span>
+          </div>
+
+          {/* Card de vuelos */}
+          {flights && flights.length > 0 && (
+            <div className="bg-brand-darkening rounded-xl p-4 flex flex-col gap-2">
+              {flights.slice(0, 2).map((flight, index) => (
+                <FlightOption key={index} flight={flight} variant="list" />
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
