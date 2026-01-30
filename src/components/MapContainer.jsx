@@ -1,11 +1,9 @@
-import { useEffect } from 'react';
-import { APIProvider, Map, useMap } from '@vis.gl/react-google-maps';
-import { 
-  MAP_CONFIG, 
-  MAP_RESTRICTIONS, 
-  VENUES 
-} from '../config/mapConfig';
-import VenueMarker from './VenueMarker';
+import { useEffect } from "react";
+import { APIProvider, Map, useMap } from "@vis.gl/react-google-maps";
+import { MAP_CONFIG, MAP_RESTRICTIONS, VENUES } from "../config/mapConfig";
+import VenueMarker from "./VenueMarker";
+import Button from "../dsys/Button";
+import { PaperPlaneTiltIcon } from "@phosphor-icons/react";
 
 function MapContent({ selectedCity, setSelectedCity }) {
   const map = useMap();
@@ -16,10 +14,10 @@ function MapContent({ selectedCity, setSelectedCity }) {
     // Solo log del zoom, sin aplicar estilos locales
     // Los estilos se manejan desde Google Cloud Map Styling
     const handleZoomChange = () => {
-      console.log('Zoom level:', map.getZoom());
+      console.log("Zoom level:", map.getZoom());
     };
 
-    const listener = map.addListener('zoom_changed', handleZoomChange);
+    const listener = map.addListener("zoom_changed", handleZoomChange);
 
     // Cleanup: remover listener cuando el componente se desmonte
     return () => {
@@ -46,16 +44,27 @@ function MapContent({ selectedCity, setSelectedCity }) {
   );
 }
 
-export default function MapContainer({ selectedTeam, selectedCity, setSelectedCity }) {
+export default function MapContainer({
+  selectedTeam,
+  selectedCity,
+  setSelectedCity,
+}) {
   return (
-    <div className="rounded-2xl overflow-hidden w-full lg:w-[790px] h-[640px]">
+    <div className="relative rounded-2xl overflow-hidden w-full lg:w-[790px] h-[640px]">
+      <Button
+        classes="z-50 absolute bottom-3 right-3"
+        icon={<PaperPlaneTiltIcon size={20} weight="bold" className="text-text-onbutton" />}
+      ></Button>
       <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
         <Map
           className="w-full h-full"
           restriction={MAP_RESTRICTIONS}
           {...MAP_CONFIG}
         >
-          <MapContent selectedCity={selectedCity} setSelectedCity={setSelectedCity} />
+          <MapContent
+            selectedCity={selectedCity}
+            setSelectedCity={setSelectedCity}
+          />
         </Map>
       </APIProvider>
     </div>

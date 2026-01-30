@@ -9,3 +9,4 @@ export { default as VenuesSelectionTemplate } from './VenuesSelectionTemplate';
 export { default as ModalTemplate } from './ModalTemplate';
 export { default as AwayMatchesModalTemplate } from './AwayMatchesModalTemplate';
 export { default as ModalSuccessTemplate } from './ModalSuccessTemplate';
+export { default as FooterTemplate } from './FooterTemplate';

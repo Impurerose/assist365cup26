@@ -14,7 +14,8 @@
     "build:venues": "node scripts/build-venues.mjs",
     "build:modal": "node scripts/build-modal.mjs",
     "build:modal-success": "node scripts/build-modal-success.mjs",
-    "build:all-vanilla": "npm run build:vanilla && npm run build:mainpage && npm run build:venues",
+    "build:footer": "node scripts/build-footer.mjs",
+    "build:all-vanilla": "npm run build:vanilla && npm run build:mainpage && npm run build:venues && npm run build:footer",
     "help": "bash scripts/help.sh",
     "preview": "vite preview",
     "lint": "eslint ."

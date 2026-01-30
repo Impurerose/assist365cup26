@@ -79,7 +79,7 @@ const Footer = () => {
         <div className="bg-white flex items-start xl:items-center justify-between px-[83px] pt-10 pb-16 flex-col-reverse xl:flex-row gap-y-8 xl:gap-y-0">
           {/* Izquierda: Redes Sociales */}
           <div className="max-w-[548px] mx-auto flex flex-col gap-4 w-full">
-            <h3 className="text-[#0059BA] font-semibold text-base leading-6">
+            <h3 className="text-text-decorative-darker font-semibold text-base leading-6">
               Seguinos en redes
             </h3>
             <div className="flex gap-3">
@@ -88,7 +88,7 @@ const Footer = () => {
                   key={social.name}
                   type="button"
                   onClick={() => handleSocialClick(social.url)}
-                  className="w-9 h-9 p-2 border-2 border-[#006FE8] rounded-xl flex items-center justify-center hover:border-[#0059BA] hover:text-[#0059BA] active:border-[#003D7A] active:text-[#003D7A] focus:outline-none focus:ring-4 focus:ring-[#006FE8] focus:ring-opacity-100 focus:border-transparent transition-all duration-300"
+                  className="w-9 h-9 p-2 border-2 border-brand-primary rounded-xl flex items-center justify-center hover:border-text-decorative-darker hover:text-text-decorative-darker active:border-action-pressed active:text-action-pressed focus:outline-none focus:ring-4 focus:ring-brand-primary focus:ring-opacity-100 focus:border-transparent transition-all duration-300"
                   aria-label={`Visitar ${social.name}`}
                 >
                   <img
@@ -103,7 +103,7 @@ const Footer = () => {
 
           {/* Derecha: Tagline + CTA */}
           <div className=" max-w-[548px] flex xl:items-end gap-6 xl:gap-12 mx-auto xl:mx-0 flex-col xl:flex-row  xl:max-w-full items-center w-full">
-            <p className="text-[#0059BA] text-[36px] leading-10">
+            <p className="text-text-decorative-darker text-[36px] leading-10">
               <span className="font-normal">En tu viaje,</span>{" "}
               <span className="font-semibold">a tu lado.</span>
             </p>
