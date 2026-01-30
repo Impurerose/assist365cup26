@@ -385,9 +385,6 @@ function generateItineraryMatchCard(matchData, index, isLast) {
               ${match.team2.flag ? `<span class="text-xl">${match.team2.flag}</span>` : ''}
             </div>
 
-            <!-- Divider -->
-            <div class="h-px bg-border-primary w-full"></div>
-
             <!-- Información del partido -->
             <div class="flex flex-col gap-2">
               <!-- Fecha y ubicación -->
@@ -482,9 +479,6 @@ function generateItineraryMatchCard(matchData, index, isLast) {
                 </p>
                 ${match.team2.flag ? `<span class="text-xl">${match.team2.flag}</span>` : ''}
               </div>
-
-              <!-- Divider -->
-              <div class="h-px bg-border-primary w-full"></div>
 
               <!-- Información del partido -->
               <div class="flex flex-col gap-2">
