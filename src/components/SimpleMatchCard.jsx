@@ -5,7 +5,7 @@
 
 const SimpleMatchCard = ({ match, showMatchNumber = true }) => {
   return (
-    <div className="w-full max-w-[350px] w-full w-[350px] bg-white border border-border-primary rounded-xl px-3 py-4 flex flex-col gap-4 relative overflow-visible">
+    <div className="w-full max-w-[350px] w-full w-[350px] bg-white border border-border-primary rounded-xl px-3 py-4 flex flex-col gap-x-4 gap-y-1 relative overflow-visible">
       {/* Número de partido (badge azul) - condicional */}
       {showMatchNumber && match.number && (
         <div className="absolute right-[7px] -top-[3px] w-5 h-5">

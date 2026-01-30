@@ -272,7 +272,7 @@ function ItinerariesTemplate() {
       <HeaderBar />
 
       <div className="w-full max-w-[1366px] mx-auto lg:mt-4 ">
-        <div className="max-w-[1200px] mx-auto">
+        <div className="max-w-[1200px] mx-auto px-4 lg:px-0">
           {/* Botón Volver (solo mobile) */}
           {/* <button
             onClick={() => window.history.back()}
@@ -283,7 +283,7 @@ function ItinerariesTemplate() {
           </button> */}
 
           {/* Botones de navegación (desktop) */}
-          <div className="px-4 lg:flex items-center justify-between mb-6 max-w-[548px] lg:max-w-full mt-4 lg:mt-0 mx-auto lg:mx-0">
+          <div className="lg:flex items-center justify-between mb-6 max-w-[548px] lg:max-w-full mt-4 lg:mt-0 mx-auto lg:mx-0">
             <div className="flex items-center gap-x-8">
               <Button
                 variant="default"
@@ -329,7 +329,7 @@ function ItinerariesTemplate() {
           </div>
 
           {/* Container con mismo ancho que el mapa */}
-          <div className="px-4 max-w-[548px] lg:max-w-[792px] mx-auto">
+          <div className="max-w-[548px] lg:max-w-[792px] mx-auto">
             {/* Título principal */}
             <h1 className="text-text-default text-2xl lg:text-3xl font-semibold pt-4 lg:pt-8 pb-4">
               Cómo moverte entre sedes durante el Mundial
@@ -386,7 +386,7 @@ function ItinerariesTemplate() {
           </div>
 
           {/* Normativas de ingreso - Grid 3 columnas */}
-          <div className="bg-white border border-border-primary rounded-3xl p-4 lg:px-6 lg:py-10 mb-10 lg:mb-6 max-w-[548px] lg:max-w-[996px] mx-auto">
+          <div className="mt-14 bg-white border border-border-primary rounded-3xl p-4 lg:px-6 lg:py-10 mb-10 lg:mb-6 max-w-[548px] lg:max-w-[996px] mx-auto">
             <div className="grid lg:grid-cols-3 gap-6 lg:gap-8">
               {countryRequirements.map((country, index) => (
                 <CountryRequirementsCard

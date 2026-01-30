@@ -31,7 +31,7 @@ export default function ItineraryMatchCard({
       </div> */}
 
       {/* Grid de columnas */}
-      <div className="grid grid-cols-[auto_1fr] lg:grid-cols-[368px_auto_1fr] gap-4 lg:gap-6">
+      <div className="grid grid-cols-[auto_1fr] lg:grid-cols-[368px_auto_1fr] gap-0 lg:gap-6">
         {/* Columna 1: Match Card - SOLO DESKTOP */}
         <div className="hidden lg:block w-full overflow-visible">
           <MatchCard match={{ ...match, phase }} showMatchNumber={false} />
@@ -40,14 +40,23 @@ export default function ItineraryMatchCard({
         {/* Columna 2: MapPin + Conector - SIEMPRE VISIBLE */}
         <div className="flex flex-col items-center gap-2">
           <MapPinWithNumber number={city.number} />
-          {showConnection && <ItineraryConnector topCircles={16} />}
+          {showConnection && (
+            <>
+              <div className="lg:hidden">
+                <ItineraryConnector topCircles={12} />
+              </div>
+              <div className="hidden lg:block">
+                <ItineraryConnector topCircles={4} />
+              </div>
+            </>
+          )}
         </div>
 
         {/* Columna 3: Cards apiladas */}
         <div className="flex flex-col gap-2 min-w-0">
           {/* Match card - SOLO MOBILE/TABLET */}
           <div className="lg:hidden">
-            <span className="text-text-default text-xl font-semibold mb-3 block">
+            <span className="text-text-default text-xl font-semibold pl-5 mb-3 block">
               {city.name}
             </span>
             <SimpleMatchCard
@@ -65,7 +74,7 @@ export default function ItineraryMatchCard({
 
           {/* Card de vuelos */}
           {flights && flights.length > 0 && (
-            <div className="bg-brand-darkening rounded-xl p-4 flex flex-col gap-2">
+            <div className="w-full w-[350px] bg-brand-darkening rounded-xl p-4 flex flex-col gap-2">
               {flights.slice(0, 2).map((flight, index) => (
                 <FlightOption key={index} flight={flight} variant="list" />
               ))}

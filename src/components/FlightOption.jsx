@@ -6,33 +6,33 @@
 export default function FlightOption({ flight, variant = 'table' }) {
   if (variant === 'list') {
     return (
-      <div className="flex items-center w-full gap-2">
-        {/* Aerolínea con logo */}
-        <div className="flex gap-2 items-center w-32">
-          <img 
-            src={flight.logo} 
-            alt={flight.airline}
-            className="w-6 h-6 object-cover"
-          />
-          <p className="text-sm text-text-default">
-            {flight.airline}
-          </p>
+      <div className="flex items-center gap-2 w-full">
+        {/* Logo + Aerolínea + Duración */}
+        <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1">
+            <img 
+              src={flight.logo} 
+              alt={flight.airline}
+              className="w-6 h-6 object-cover"
+            />
+            <span className="text-sm text-text-default leading-5">
+              {flight.airline}
+            </span>
+          </div>
+          <span className="text-sm text-text-lighter leading-5">
+            {flight.duration}
+          </span>
         </div>
-        
-        {/* Duración */}
-        <p className="text-sm text-text-lighter w-24">
-          {flight.duration}
-        </p>
-        
-        {/* Tipo (Directo/Conexión) */}
-        <p className="text-sm text-text-lighter flex-1">
+
+        {/* Tipo */}
+        <span className="text-sm text-text-lighter leading-5">
           {flight.type}
-        </p>
-        
+        </span>
+
         {/* Precio */}
-        <p className="text-sm text-text-default text-right w-32">
+        <span className="text-sm text-text-default leading-5">
           {flight.price}
-        </p>
+        </span>
       </div>
     );
   }
