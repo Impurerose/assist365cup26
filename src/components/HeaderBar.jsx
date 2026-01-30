@@ -51,16 +51,19 @@ export default function HeaderBar() {
             />
           </svg>
           <h1 className="text-base lg:text-xl font-semibold text-text-decorative-darker">
-            World Cup Map 2026
+            World Cup Map 2026x
           </h1>
         </div>
 
-        <Button
-          icon={<PaperPlaneTiltIcon size={16} weight="bold" />}
-          iconPosition="right"
-        >
-          <span className="hidden lg:block">Compartir</span>
-        </Button>
+        <div className="">
+          xxx
+          <Button
+            icon={<PaperPlaneTiltIcon size={16} weight="bold" />}
+            iconPosition="right"
+          >
+            <span className="hidden lg:block">Compartir</span>
+          </Button>
+        </div>
       </div>
     </header>
   );

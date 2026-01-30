@@ -12,10 +12,11 @@
     "build:vanilla": "node scripts/build-vanilla.mjs",
     "build:mainpage": "node scripts/build-mainpage.mjs",
     "build:venues": "node scripts/build-venues.mjs",
+    "build:itineraries": "node scripts/build-itineraries.mjs",
     "build:modal": "node scripts/build-modal.mjs",
     "build:modal-success": "node scripts/build-modal-success.mjs",
     "build:footer": "node scripts/build-footer.mjs",
-    "build:all-vanilla": "npm run build:vanilla && npm run build:mainpage && npm run build:venues && npm run build:footer",
+    "build:all-vanilla": "npm run build:vanilla && npm run build:mainpage && npm run build:venues && npm run build:itineraries && npm run build:modal && npm run build:modal-success && npm run build:footer",
     "help": "bash scripts/help.sh",
     "preview": "vite preview",
     "lint": "eslint ."

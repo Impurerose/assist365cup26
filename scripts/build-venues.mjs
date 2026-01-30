@@ -399,6 +399,12 @@ const html = `<!DOCTYPE html>
         </div>
       </header>
 
+      <!-- Overlay fijo en el bottom con degradado y blur -->
+      <div 
+        class="fixed bottom-0 left-0 right-0 max-h-[750px] h-[750px] z-40 pointer-events-none"
+        style="background: linear-gradient(to top, rgba(242, 242, 242, 1) 0%, rgba(242, 242, 242, 1) 33%, rgba(242, 242, 242, 0.5) 100%); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);"
+      ></div>
+
       <!-- Main Content -->
       <div class="w-full max-w-[1366px] mx-auto lg:mt-4 px-4">
         <div class="max-w-[1200px] mx-auto">
