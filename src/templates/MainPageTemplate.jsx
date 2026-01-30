@@ -14,6 +14,7 @@ import { MapPinAreaIcon } from "@phosphor-icons/react";
 import { mockMatches } from "../data/mockMatches";
 import { mockMatchesWithoutPending } from "../data/mockMatchesWithoutPending";
 import { mockMatchesFinished } from "../data/mockMatchesFinished";
+import Footer from "../components/Footer";
 
 /**
  * MainPage Template
@@ -157,6 +158,9 @@ function MainPageTemplate() {
           </div>
         </div>
       </div>
+
+
+      <Footer />
     </div>
   );
 }
