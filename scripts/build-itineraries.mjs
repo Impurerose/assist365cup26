@@ -52,7 +52,23 @@ const ITINERARY_DATA = {
         team2: { name: 'A definir', flag: null },
         date: 'Viernes 3 de julio',
         time: { local: '18:00 h (AR)', venue: '16:00 h (MIA)' }
-      }
+      },
+      flights: [
+        {
+          airline: 'Aerolínea',
+          logo: 'https://www.figma.com/api/mcp/asset/c8f98591-ffd7-4846-9d97-65ea101be8e0',
+          duration: '16h 30min',
+          type: 'Directo',
+          price: 'desde USD XXX'
+        },
+        {
+          airline: 'Aerolínea 2',
+          logo: 'https://www.figma.com/api/mcp/asset/c8f98591-ffd7-4846-9d97-65ea101be8e0',
+          duration: '14h 32min',
+          type: 'Directo',
+          price: 'desde USD XXX'
+        }
+      ]
     },
     {
       phase: 'Cuartos',
@@ -62,7 +78,23 @@ const ITINERARY_DATA = {
         team2: { name: 'A definir', flag: null },
         date: 'Martes 7 de julio',
         time: { local: '12:00 h (AR)', venue: '10:00 h (ATL)' }
-      }
+      },
+      flights: [
+        {
+          airline: 'Aerolínea',
+          logo: 'https://www.figma.com/api/mcp/asset/c8f98591-ffd7-4846-9d97-65ea101be8e0',
+          duration: '2h 15min',
+          type: 'Directo',
+          price: 'desde USD XXX'
+        },
+        {
+          airline: 'Aerolínea 2',
+          logo: 'https://www.figma.com/api/mcp/asset/c8f98591-ffd7-4846-9d97-65ea101be8e0',
+          duration: '3h 45min',
+          type: '1 escala',
+          price: 'desde USD XXX'
+        }
+      ]
     },
     {
       phase: 'Semi',
@@ -72,7 +104,23 @@ const ITINERARY_DATA = {
         team2: { name: 'A definir', flag: null },
         date: 'Sábado 11 de julio',
         time: { local: '21:00 h (AR)', venue: '19:00 h (KSK)' }
-      }
+      },
+      flights: [
+        {
+          airline: 'Aerolínea',
+          logo: 'https://www.figma.com/api/mcp/asset/c8f98591-ffd7-4846-9d97-65ea101be8e0',
+          duration: '2h 15min',
+          type: 'Directo',
+          price: 'desde USD XXX'
+        },
+        {
+          airline: 'Aerolínea 2',
+          logo: 'https://www.figma.com/api/mcp/asset/c8f98591-ffd7-4846-9d97-65ea101be8e0',
+          duration: '3h 45min',
+          type: '1 escala',
+          price: 'desde USD XXX'
+        }
+      ]
     },
     {
       phase: '3ro',
@@ -82,7 +130,23 @@ const ITINERARY_DATA = {
         team2: { name: 'A definir', flag: null },
         date: 'Miércoles 15 de julio',
         time: { local: '12:00 h (AR)', venue: '10:00 h (ATL)' }
-      }
+      },
+      flights: [
+        {
+          airline: 'Aerolínea',
+          logo: 'https://www.figma.com/api/mcp/asset/c8f98591-ffd7-4846-9d97-65ea101be8e0',
+          duration: '2h 15min',
+          type: 'Directo',
+          price: 'desde USD XXX'
+        },
+        {
+          airline: 'Aerolínea 2',
+          logo: 'https://www.figma.com/api/mcp/asset/c8f98591-ffd7-4846-9d97-65ea101be8e0',
+          duration: '3h 45min',
+          type: '1 escala',
+          price: 'desde USD XXX'
+        }
+      ]
     },
     {
       phase: 'Final',
@@ -92,7 +156,23 @@ const ITINERARY_DATA = {
         team2: { name: 'A definir', flag: null },
         date: 'Domingo 19 de julio',
         time: { local: '15:00 h (AR)', venue: '13:00 h (NY)' }
-      }
+      },
+      flights: [
+        {
+          airline: 'Aerolínea',
+          logo: 'https://www.figma.com/api/mcp/asset/c8f98591-ffd7-4846-9d97-65ea101be8e0',
+          duration: '2h 15min',
+          type: 'Directo',
+          price: 'desde USD XXX'
+        },
+        {
+          airline: 'Aerolínea 2',
+          logo: 'https://www.figma.com/api/mcp/asset/c8f98591-ffd7-4846-9d97-65ea101be8e0',
+          duration: '3h 45min',
+          type: '1 escala',
+          price: 'desde USD XXX'
+        }
+      ]
     }
   ],
   
@@ -261,6 +341,24 @@ function generateFlightRoute(origin, destination, flights, background = 'white')
   `;
 }
 
+function generateItineraryConnector(topCircles = 4, bottomCircles = 4) {
+  let topDots = Array.from({length: topCircles}).map(() => 
+    '<div class="w-1 h-1 rounded-full bg-icon-lighter"></div>'
+  ).join('\n              ');
+  
+  let bottomDots = Array.from({length: bottomCircles}).map(() => 
+    '<div class="w-1 h-1 rounded-full bg-icon-lighter"></div>'
+  ).join('\n              ');
+
+  return `
+    <div class="flex flex-col items-center gap-2">
+      ${topDots}
+      <i class="ph-fill ph-airplane text-icon-lighter rotate-180" style="font-size: 16px;"></i>
+      ${bottomDots}
+    </div>
+  `;
+}
+
 function generateItineraryMatchCard(matchData, index, isLast) {
   const { phase, city, match, flights } = matchData;
   
@@ -291,26 +389,51 @@ function generateItineraryMatchCard(matchData, index, isLast) {
             <div class="h-px bg-border-primary w-full"></div>
 
             <!-- Información del partido -->
-            <div class="flex flex-col gap-3">
-              <!-- Fecha -->
-              <div class="flex items-center gap-2">
-                <i class="ph ph-calendar-blank text-icon-default" style="font-size: 24px;"></i>
-                <p class="text-sm text-text-default" style="font-family: 'Titillium Web', sans-serif; line-height: 20px;">
-                  ${match.date}
-                </p>
-              </div>
-
-              <!-- Horario -->
-              <div class="flex items-center gap-2">
-                <i class="ph ph-clock text-icon-default" style="font-size: 24px;"></i>
-                <div class="flex gap-2">
-                  <p class="text-sm text-text-default" style="font-family: 'Titillium Web', sans-serif; line-height: 20px;">
-                    ${match.time.local}
-                  </p>
-                  <p class="text-sm text-text-lighter" style="font-family: 'Titillium Web', sans-serif; line-height: 20px;">
-                    ${match.time.venue}
+            <div class="flex flex-col gap-2">
+              <!-- Fecha y ubicación -->
+              <div class="flex items-start gap-4">
+                <!-- Fecha con SVG duotone -->
+                <div class="flex items-center gap-2">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <rect x="3.125" y="3.125" width="13.75" height="13.75" rx="1.25" fill="#7BD0C2" opacity="0.2"/>
+                    <path d="M15.625 6.25H4.375C3.68464 6.25 3.125 6.80964 3.125 7.5V15.625C3.125 16.3154 3.68464 16.875 4.375 16.875H15.625C16.3154 16.875 16.875 16.3154 16.875 15.625V7.5C16.875 6.80964 16.3154 6.25 15.625 6.25Z" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M13.125 3.75V6.25" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M6.875 3.75V6.25" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                    ${match.date}
                   </p>
                 </div>
+
+                <!-- Ubicación con SVG duotone -->
+                <div class="flex items-center gap-2">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <circle cx="10" cy="8.125" r="2.5" fill="#7BD0C2" opacity="0.2"/>
+                    <path d="M10 17.5C10 17.5 15.625 13.125 15.625 8.125C15.625 5.01675 13.1083 2.5 10 2.5C6.89175 2.5 4.375 5.01675 4.375 8.125C4.375 13.125 10 17.5 10 17.5Z" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="10" cy="8.125" r="2.5" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                    ${match.city}
+                  </p>
+                </div>
+              </div>
+
+              <!-- Horarios con SVG duotone -->
+              <div class="flex items-center gap-2 text-sm">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <circle cx="10" cy="10" r="6.25" fill="#7BD0C2" opacity="0.2"/>
+                  <circle cx="10" cy="10" r="7.5" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M10 6.25V10L12.5 12.5" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <p class="text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                  ${match.time.local}
+                </p>
+                <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                  -
+                </p>
+                <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                  ${match.time.venue}
+                </p>
               </div>
             </div>
           </div>
@@ -327,17 +450,13 @@ function generateItineraryMatchCard(matchData, index, isLast) {
             ${city.number === 5 ? '<i class="ph-fill ph-number-circle-five text-brand-primary absolute top-[13px] -right-[6px]" style="font-size: 20px;"></i>' : ''}
           </div>
           ${!isLast ? `
-            <!-- Conector de puntos - mobile -->
-            <div class="lg:hidden flex flex-col items-center gap-1">
-              ${Array.from({length: 12}).map(() => `
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              `).join('')}
+            <!-- Connector mobile -->
+            <div class="lg:hidden">
+              ${generateItineraryConnector(12, 4)}
             </div>
-            <!-- Conector de puntos - desktop -->
-            <div class="hidden lg:flex flex-col items-center gap-1">
-              ${Array.from({length: 4}).map(() => `
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              `).join('')}
+            <!-- Connector desktop -->
+            <div class="hidden lg:block">
+              ${generateItineraryConnector(4, 4)}
             </div>
           ` : ''}
         </div>
@@ -346,7 +465,7 @@ function generateItineraryMatchCard(matchData, index, isLast) {
         <div class="flex flex-col gap-2 min-w-0">
           <!-- Match card - SOLO MOBILE/TABLET -->
           <div class="lg:hidden">
-            <span class="text-text-default text-xl font-semibold pl-5 mb-3 block">${city.name}</span>
+            <span class="pt-2 text-text-default text-xl font-semibold pl-5 mb-3 block">${city.name}</span>
             <div class="w-full max-w-[350px] w-[350px] bg-white border border-border-primary rounded-xl px-3 py-4 flex flex-col gap-x-4 gap-y-1 relative overflow-visible">
               <!-- Badge de fase -->
               <div class="absolute right-8 -top-[6px]">
@@ -368,26 +487,51 @@ function generateItineraryMatchCard(matchData, index, isLast) {
               <div class="h-px bg-border-primary w-full"></div>
 
               <!-- Información del partido -->
-              <div class="flex flex-col gap-x-4 gap-y-1">
-                <!-- Fecha -->
-                <div class="flex items-center gap-2">
-                  <i class="ph ph-calendar-blank text-icon-default" style="font-size: 24px;"></i>
-                  <p class="text-sm text-text-default" style="font-family: 'Titillium Web', sans-serif; line-height: 20px;">
-                    ${match.date}
-                  </p>
-                </div>
-
-                <!-- Horario -->
-                <div class="flex items-center gap-2">
-                  <i class="ph ph-clock text-icon-default" style="font-size: 24px;"></i>
-                  <div class="flex gap-2">
-                    <p class="text-sm text-text-default" style="font-family: 'Titillium Web', sans-serif; line-height: 20px;">
-                      ${match.time.local}
-                    </p>
-                    <p class="text-sm text-text-lighter" style="font-family: 'Titillium Web', sans-serif; line-height: 20px;">
-                      ${match.time.venue}
+              <div class="flex flex-col gap-2">
+                <!-- Fecha y ubicación -->
+                <div class="flex items-start gap-4">
+                  <!-- Fecha con SVG duotone -->
+                  <div class="flex items-center gap-2">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                      <rect x="3.125" y="3.125" width="13.75" height="13.75" rx="1.25" fill="#7BD0C2" opacity="0.2"/>
+                      <path d="M15.625 6.25H4.375C3.68464 6.25 3.125 6.80964 3.125 7.5V15.625C3.125 16.3154 3.68464 16.875 4.375 16.875H15.625C16.3154 16.875 16.875 16.3154 16.875 15.625V7.5C16.875 6.80964 16.3154 6.25 15.625 6.25Z" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M13.125 3.75V6.25" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M6.875 3.75V6.25" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                      ${match.date}
                     </p>
                   </div>
+
+                  <!-- Ubicación con SVG duotone -->
+                  <div class="flex items-center gap-2">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                      <circle cx="10" cy="8.125" r="2.5" fill="#7BD0C2" opacity="0.2"/>
+                      <path d="M10 17.5C10 17.5 15.625 13.125 15.625 8.125C15.625 5.01675 13.1083 2.5 10 2.5C6.89175 2.5 4.375 5.01675 4.375 8.125C4.375 13.125 10 17.5 10 17.5Z" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                      <circle cx="10" cy="8.125" r="2.5" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                      ${match.city}
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Horarios con SVG duotone -->
+                <div class="flex items-center gap-2 text-sm">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <circle cx="10" cy="10" r="6.25" fill="#7BD0C2" opacity="0.2"/>
+                    <circle cx="10" cy="10" r="7.5" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M10 6.25V10L12.5 12.5" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <p class="text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                    ${match.time.local}
+                  </p>
+                  <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                    -
+                  </p>
+                  <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                    ${match.time.venue}
+                  </p>
                 </div>
               </div>
             </div>
@@ -398,20 +542,33 @@ function generateItineraryMatchCard(matchData, index, isLast) {
             <span class="text-text-default text-xl font-semibold">${city.name}</span>
           </div>
 
-          <!-- Card de vuelos -->
+          <!-- Card de vuelos con bg-brand-darkening -->
           ${flights && flights.length > 0 ? `
-            <div class="w-full w-[350px] bg-brand-darkening rounded-xl p-4 flex flex-col gap-2">
+            <div class="-left-2 relative w-[350px] rounded-xl p-4 flex flex-col gap-2" style="background-color: rgba(81, 90, 96, 0.06);">
               ${flights.slice(0, 2).map(flight => `
                 <div class="flex items-center gap-2 w-full">
+                  <!-- Logo + Aerolínea + Duración -->
                   <div class="flex items-center gap-2">
                     <div class="flex items-center gap-1">
                       <img src="${flight.logo}" alt="${flight.airline}" class="w-6 h-6 object-cover" />
-                      <span class="text-sm text-text-default leading-5">${flight.airline}</span>
+                      <span class="text-sm text-text-default leading-5" style="font-family: 'Titillium Web', sans-serif;">
+                        ${flight.airline}
+                      </span>
                     </div>
-                    <span class="text-sm text-text-lighter leading-5">${flight.duration}</span>
+                    <span class="text-sm text-text-lighter leading-5" style="font-family: 'Titillium Web', sans-serif;">
+                      ${flight.duration}
+                    </span>
                   </div>
-                  <span class="text-sm text-text-lighter leading-5">${flight.type}</span>
-                  <span class="text-sm text-text-default leading-5">${flight.price}</span>
+
+                  <!-- Tipo -->
+                  <span class="text-sm text-text-lighter leading-5" style="font-family: 'Titillium Web', sans-serif;">
+                    ${flight.type}
+                  </span>
+
+                  <!-- Precio -->
+                  <span class="text-sm text-text-default leading-5" style="font-family: 'Titillium Web', sans-serif;">
+                    ${flight.price}
+                  </span>
                 </div>
               `).join('')}
             </div>

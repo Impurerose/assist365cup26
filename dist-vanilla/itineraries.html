@@ -236,26 +236,51 @@
             <div class="h-px bg-border-primary w-full"></div>
 
             <!-- Información del partido -->
-            <div class="flex flex-col gap-3">
-              <!-- Fecha -->
-              <div class="flex items-center gap-2">
-                <i class="ph ph-calendar-blank text-icon-default" style="font-size: 24px;"></i>
-                <p class="text-sm text-text-default" style="font-family: 'Titillium Web', sans-serif; line-height: 20px;">
-                  Viernes 3 de julio
-                </p>
-              </div>
-
-              <!-- Horario -->
-              <div class="flex items-center gap-2">
-                <i class="ph ph-clock text-icon-default" style="font-size: 24px;"></i>
-                <div class="flex gap-2">
-                  <p class="text-sm text-text-default" style="font-family: 'Titillium Web', sans-serif; line-height: 20px;">
-                    18:00 h (AR)
-                  </p>
-                  <p class="text-sm text-text-lighter" style="font-family: 'Titillium Web', sans-serif; line-height: 20px;">
-                    16:00 h (MIA)
+            <div class="flex flex-col gap-2">
+              <!-- Fecha y ubicación -->
+              <div class="flex items-start gap-4">
+                <!-- Fecha con SVG duotone -->
+                <div class="flex items-center gap-2">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <rect x="3.125" y="3.125" width="13.75" height="13.75" rx="1.25" fill="#7BD0C2" opacity="0.2"/>
+                    <path d="M15.625 6.25H4.375C3.68464 6.25 3.125 6.80964 3.125 7.5V15.625C3.125 16.3154 3.68464 16.875 4.375 16.875H15.625C16.3154 16.875 16.875 16.3154 16.875 15.625V7.5C16.875 6.80964 16.3154 6.25 15.625 6.25Z" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M13.125 3.75V6.25" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M6.875 3.75V6.25" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                    Viernes 3 de julio
                   </p>
                 </div>
+
+                <!-- Ubicación con SVG duotone -->
+                <div class="flex items-center gap-2">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <circle cx="10" cy="8.125" r="2.5" fill="#7BD0C2" opacity="0.2"/>
+                    <path d="M10 17.5C10 17.5 15.625 13.125 15.625 8.125C15.625 5.01675 13.1083 2.5 10 2.5C6.89175 2.5 4.375 5.01675 4.375 8.125C4.375 13.125 10 17.5 10 17.5Z" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="10" cy="8.125" r="2.5" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                    undefined
+                  </p>
+                </div>
+              </div>
+
+              <!-- Horarios con SVG duotone -->
+              <div class="flex items-center gap-2 text-sm">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <circle cx="10" cy="10" r="6.25" fill="#7BD0C2" opacity="0.2"/>
+                  <circle cx="10" cy="10" r="7.5" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M10 6.25V10L12.5 12.5" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <p class="text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                  18:00 h (AR)
+                </p>
+                <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                  -
+                </p>
+                <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                  16:00 h (MIA)
+                </p>
               </div>
             </div>
           </div>
@@ -272,45 +297,45 @@
             
           </div>
           
-            <!-- Conector de puntos - mobile -->
-            <div class="lg:hidden flex flex-col items-center gap-1">
+            <!-- Connector mobile -->
+            <div class="lg:hidden">
               
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
+    <div class="flex flex-col items-center gap-2">
+      <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+      <i class="ph-fill ph-airplane text-icon-lighter rotate-180" style="font-size: 16px;"></i>
+      <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+    </div>
+  
             </div>
-            <!-- Conector de puntos - desktop -->
-            <div class="hidden lg:flex flex-col items-center gap-1">
+            <!-- Connector desktop -->
+            <div class="hidden lg:block">
               
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
+    <div class="flex flex-col items-center gap-2">
+      <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+      <i class="ph-fill ph-airplane text-icon-lighter rotate-180" style="font-size: 16px;"></i>
+      <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+    </div>
+  
             </div>
           
         </div>
@@ -319,7 +344,7 @@
         <div class="flex flex-col gap-2 min-w-0">
           <!-- Match card - SOLO MOBILE/TABLET -->
           <div class="lg:hidden">
-            <span class="text-text-default text-xl font-semibold pl-5 mb-3 block">Miami (USA)</span>
+            <span class="pt-2 text-text-default text-xl font-semibold pl-5 mb-3 block">Miami (USA)</span>
             <div class="w-full max-w-[350px] w-[350px] bg-white border border-border-primary rounded-xl px-3 py-4 flex flex-col gap-x-4 gap-y-1 relative overflow-visible">
               <!-- Badge de fase -->
               <div class="absolute right-8 -top-[6px]">
@@ -341,26 +366,51 @@
               <div class="h-px bg-border-primary w-full"></div>
 
               <!-- Información del partido -->
-              <div class="flex flex-col gap-x-4 gap-y-1">
-                <!-- Fecha -->
-                <div class="flex items-center gap-2">
-                  <i class="ph ph-calendar-blank text-icon-default" style="font-size: 24px;"></i>
-                  <p class="text-sm text-text-default" style="font-family: 'Titillium Web', sans-serif; line-height: 20px;">
-                    Viernes 3 de julio
-                  </p>
-                </div>
-
-                <!-- Horario -->
-                <div class="flex items-center gap-2">
-                  <i class="ph ph-clock text-icon-default" style="font-size: 24px;"></i>
-                  <div class="flex gap-2">
-                    <p class="text-sm text-text-default" style="font-family: 'Titillium Web', sans-serif; line-height: 20px;">
-                      18:00 h (AR)
-                    </p>
-                    <p class="text-sm text-text-lighter" style="font-family: 'Titillium Web', sans-serif; line-height: 20px;">
-                      16:00 h (MIA)
+              <div class="flex flex-col gap-2">
+                <!-- Fecha y ubicación -->
+                <div class="flex items-start gap-4">
+                  <!-- Fecha con SVG duotone -->
+                  <div class="flex items-center gap-2">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                      <rect x="3.125" y="3.125" width="13.75" height="13.75" rx="1.25" fill="#7BD0C2" opacity="0.2"/>
+                      <path d="M15.625 6.25H4.375C3.68464 6.25 3.125 6.80964 3.125 7.5V15.625C3.125 16.3154 3.68464 16.875 4.375 16.875H15.625C16.3154 16.875 16.875 16.3154 16.875 15.625V7.5C16.875 6.80964 16.3154 6.25 15.625 6.25Z" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M13.125 3.75V6.25" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M6.875 3.75V6.25" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                      Viernes 3 de julio
                     </p>
                   </div>
+
+                  <!-- Ubicación con SVG duotone -->
+                  <div class="flex items-center gap-2">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                      <circle cx="10" cy="8.125" r="2.5" fill="#7BD0C2" opacity="0.2"/>
+                      <path d="M10 17.5C10 17.5 15.625 13.125 15.625 8.125C15.625 5.01675 13.1083 2.5 10 2.5C6.89175 2.5 4.375 5.01675 4.375 8.125C4.375 13.125 10 17.5 10 17.5Z" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                      <circle cx="10" cy="8.125" r="2.5" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                      undefined
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Horarios con SVG duotone -->
+                <div class="flex items-center gap-2 text-sm">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <circle cx="10" cy="10" r="6.25" fill="#7BD0C2" opacity="0.2"/>
+                    <circle cx="10" cy="10" r="7.5" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M10 6.25V10L12.5 12.5" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <p class="text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                    18:00 h (AR)
+                  </p>
+                  <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                    -
+                  </p>
+                  <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                    16:00 h (MIA)
+                  </p>
                 </div>
               </div>
             </div>
@@ -371,7 +421,61 @@
             <span class="text-text-default text-xl font-semibold">Miami (USA)</span>
           </div>
 
-          <!-- Card de vuelos -->
+          <!-- Card de vuelos con bg-brand-darkening -->
+          
+            <div class="-left-2 relative w-[350px] rounded-xl p-4 flex flex-col gap-2" style="background-color: rgba(81, 90, 96, 0.06);">
+              
+                <div class="flex items-center gap-2 w-full">
+                  <!-- Logo + Aerolínea + Duración -->
+                  <div class="flex items-center gap-2">
+                    <div class="flex items-center gap-1">
+                      <img src="https://www.figma.com/api/mcp/asset/c8f98591-ffd7-4846-9d97-65ea101be8e0" alt="Aerolínea" class="w-6 h-6 object-cover" />
+                      <span class="text-sm text-text-default leading-5" style="font-family: 'Titillium Web', sans-serif;">
+                        Aerolínea
+                      </span>
+                    </div>
+                    <span class="text-sm text-text-lighter leading-5" style="font-family: 'Titillium Web', sans-serif;">
+                      16h 30min
+                    </span>
+                  </div>
+
+                  <!-- Tipo -->
+                  <span class="text-sm text-text-lighter leading-5" style="font-family: 'Titillium Web', sans-serif;">
+                    Directo
+                  </span>
+
+                  <!-- Precio -->
+                  <span class="text-sm text-text-default leading-5" style="font-family: 'Titillium Web', sans-serif;">
+                    desde USD XXX
+                  </span>
+                </div>
+              
+                <div class="flex items-center gap-2 w-full">
+                  <!-- Logo + Aerolínea + Duración -->
+                  <div class="flex items-center gap-2">
+                    <div class="flex items-center gap-1">
+                      <img src="https://www.figma.com/api/mcp/asset/c8f98591-ffd7-4846-9d97-65ea101be8e0" alt="Aerolínea 2" class="w-6 h-6 object-cover" />
+                      <span class="text-sm text-text-default leading-5" style="font-family: 'Titillium Web', sans-serif;">
+                        Aerolínea 2
+                      </span>
+                    </div>
+                    <span class="text-sm text-text-lighter leading-5" style="font-family: 'Titillium Web', sans-serif;">
+                      14h 32min
+                    </span>
+                  </div>
+
+                  <!-- Tipo -->
+                  <span class="text-sm text-text-lighter leading-5" style="font-family: 'Titillium Web', sans-serif;">
+                    Directo
+                  </span>
+
+                  <!-- Precio -->
+                  <span class="text-sm text-text-default leading-5" style="font-family: 'Titillium Web', sans-serif;">
+                    desde USD XXX
+                  </span>
+                </div>
+              
+            </div>
           
         </div>
       </div>
@@ -404,26 +508,51 @@
             <div class="h-px bg-border-primary w-full"></div>
 
             <!-- Información del partido -->
-            <div class="flex flex-col gap-3">
-              <!-- Fecha -->
-              <div class="flex items-center gap-2">
-                <i class="ph ph-calendar-blank text-icon-default" style="font-size: 24px;"></i>
-                <p class="text-sm text-text-default" style="font-family: 'Titillium Web', sans-serif; line-height: 20px;">
-                  Martes 7 de julio
-                </p>
-              </div>
-
-              <!-- Horario -->
-              <div class="flex items-center gap-2">
-                <i class="ph ph-clock text-icon-default" style="font-size: 24px;"></i>
-                <div class="flex gap-2">
-                  <p class="text-sm text-text-default" style="font-family: 'Titillium Web', sans-serif; line-height: 20px;">
-                    12:00 h (AR)
-                  </p>
-                  <p class="text-sm text-text-lighter" style="font-family: 'Titillium Web', sans-serif; line-height: 20px;">
-                    10:00 h (ATL)
+            <div class="flex flex-col gap-2">
+              <!-- Fecha y ubicación -->
+              <div class="flex items-start gap-4">
+                <!-- Fecha con SVG duotone -->
+                <div class="flex items-center gap-2">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <rect x="3.125" y="3.125" width="13.75" height="13.75" rx="1.25" fill="#7BD0C2" opacity="0.2"/>
+                    <path d="M15.625 6.25H4.375C3.68464 6.25 3.125 6.80964 3.125 7.5V15.625C3.125 16.3154 3.68464 16.875 4.375 16.875H15.625C16.3154 16.875 16.875 16.3154 16.875 15.625V7.5C16.875 6.80964 16.3154 6.25 15.625 6.25Z" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M13.125 3.75V6.25" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M6.875 3.75V6.25" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                    Martes 7 de julio
                   </p>
                 </div>
+
+                <!-- Ubicación con SVG duotone -->
+                <div class="flex items-center gap-2">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <circle cx="10" cy="8.125" r="2.5" fill="#7BD0C2" opacity="0.2"/>
+                    <path d="M10 17.5C10 17.5 15.625 13.125 15.625 8.125C15.625 5.01675 13.1083 2.5 10 2.5C6.89175 2.5 4.375 5.01675 4.375 8.125C4.375 13.125 10 17.5 10 17.5Z" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="10" cy="8.125" r="2.5" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                    undefined
+                  </p>
+                </div>
+              </div>
+
+              <!-- Horarios con SVG duotone -->
+              <div class="flex items-center gap-2 text-sm">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <circle cx="10" cy="10" r="6.25" fill="#7BD0C2" opacity="0.2"/>
+                  <circle cx="10" cy="10" r="7.5" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M10 6.25V10L12.5 12.5" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <p class="text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                  12:00 h (AR)
+                </p>
+                <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                  -
+                </p>
+                <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                  10:00 h (ATL)
+                </p>
               </div>
             </div>
           </div>
@@ -440,45 +569,45 @@
             
           </div>
           
-            <!-- Conector de puntos - mobile -->
-            <div class="lg:hidden flex flex-col items-center gap-1">
+            <!-- Connector mobile -->
+            <div class="lg:hidden">
               
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
+    <div class="flex flex-col items-center gap-2">
+      <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+      <i class="ph-fill ph-airplane text-icon-lighter rotate-180" style="font-size: 16px;"></i>
+      <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+    </div>
+  
             </div>
-            <!-- Conector de puntos - desktop -->
-            <div class="hidden lg:flex flex-col items-center gap-1">
+            <!-- Connector desktop -->
+            <div class="hidden lg:block">
               
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
+    <div class="flex flex-col items-center gap-2">
+      <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+      <i class="ph-fill ph-airplane text-icon-lighter rotate-180" style="font-size: 16px;"></i>
+      <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+    </div>
+  
             </div>
           
         </div>
@@ -487,7 +616,7 @@
         <div class="flex flex-col gap-2 min-w-0">
           <!-- Match card - SOLO MOBILE/TABLET -->
           <div class="lg:hidden">
-            <span class="text-text-default text-xl font-semibold pl-5 mb-3 block">Atlanta (USA)</span>
+            <span class="pt-2 text-text-default text-xl font-semibold pl-5 mb-3 block">Atlanta (USA)</span>
             <div class="w-full max-w-[350px] w-[350px] bg-white border border-border-primary rounded-xl px-3 py-4 flex flex-col gap-x-4 gap-y-1 relative overflow-visible">
               <!-- Badge de fase -->
               <div class="absolute right-8 -top-[6px]">
@@ -509,26 +638,51 @@
               <div class="h-px bg-border-primary w-full"></div>
 
               <!-- Información del partido -->
-              <div class="flex flex-col gap-x-4 gap-y-1">
-                <!-- Fecha -->
-                <div class="flex items-center gap-2">
-                  <i class="ph ph-calendar-blank text-icon-default" style="font-size: 24px;"></i>
-                  <p class="text-sm text-text-default" style="font-family: 'Titillium Web', sans-serif; line-height: 20px;">
-                    Martes 7 de julio
-                  </p>
-                </div>
-
-                <!-- Horario -->
-                <div class="flex items-center gap-2">
-                  <i class="ph ph-clock text-icon-default" style="font-size: 24px;"></i>
-                  <div class="flex gap-2">
-                    <p class="text-sm text-text-default" style="font-family: 'Titillium Web', sans-serif; line-height: 20px;">
-                      12:00 h (AR)
-                    </p>
-                    <p class="text-sm text-text-lighter" style="font-family: 'Titillium Web', sans-serif; line-height: 20px;">
-                      10:00 h (ATL)
+              <div class="flex flex-col gap-2">
+                <!-- Fecha y ubicación -->
+                <div class="flex items-start gap-4">
+                  <!-- Fecha con SVG duotone -->
+                  <div class="flex items-center gap-2">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                      <rect x="3.125" y="3.125" width="13.75" height="13.75" rx="1.25" fill="#7BD0C2" opacity="0.2"/>
+                      <path d="M15.625 6.25H4.375C3.68464 6.25 3.125 6.80964 3.125 7.5V15.625C3.125 16.3154 3.68464 16.875 4.375 16.875H15.625C16.3154 16.875 16.875 16.3154 16.875 15.625V7.5C16.875 6.80964 16.3154 6.25 15.625 6.25Z" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M13.125 3.75V6.25" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M6.875 3.75V6.25" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                      Martes 7 de julio
                     </p>
                   </div>
+
+                  <!-- Ubicación con SVG duotone -->
+                  <div class="flex items-center gap-2">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                      <circle cx="10" cy="8.125" r="2.5" fill="#7BD0C2" opacity="0.2"/>
+                      <path d="M10 17.5C10 17.5 15.625 13.125 15.625 8.125C15.625 5.01675 13.1083 2.5 10 2.5C6.89175 2.5 4.375 5.01675 4.375 8.125C4.375 13.125 10 17.5 10 17.5Z" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                      <circle cx="10" cy="8.125" r="2.5" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                      undefined
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Horarios con SVG duotone -->
+                <div class="flex items-center gap-2 text-sm">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <circle cx="10" cy="10" r="6.25" fill="#7BD0C2" opacity="0.2"/>
+                    <circle cx="10" cy="10" r="7.5" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M10 6.25V10L12.5 12.5" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <p class="text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                    12:00 h (AR)
+                  </p>
+                  <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                    -
+                  </p>
+                  <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                    10:00 h (ATL)
+                  </p>
                 </div>
               </div>
             </div>
@@ -539,7 +693,61 @@
             <span class="text-text-default text-xl font-semibold">Atlanta (USA)</span>
           </div>
 
-          <!-- Card de vuelos -->
+          <!-- Card de vuelos con bg-brand-darkening -->
+          
+            <div class="-left-2 relative w-[350px] rounded-xl p-4 flex flex-col gap-2" style="background-color: rgba(81, 90, 96, 0.06);">
+              
+                <div class="flex items-center gap-2 w-full">
+                  <!-- Logo + Aerolínea + Duración -->
+                  <div class="flex items-center gap-2">
+                    <div class="flex items-center gap-1">
+                      <img src="https://www.figma.com/api/mcp/asset/c8f98591-ffd7-4846-9d97-65ea101be8e0" alt="Aerolínea" class="w-6 h-6 object-cover" />
+                      <span class="text-sm text-text-default leading-5" style="font-family: 'Titillium Web', sans-serif;">
+                        Aerolínea
+                      </span>
+                    </div>
+                    <span class="text-sm text-text-lighter leading-5" style="font-family: 'Titillium Web', sans-serif;">
+                      2h 15min
+                    </span>
+                  </div>
+
+                  <!-- Tipo -->
+                  <span class="text-sm text-text-lighter leading-5" style="font-family: 'Titillium Web', sans-serif;">
+                    Directo
+                  </span>
+
+                  <!-- Precio -->
+                  <span class="text-sm text-text-default leading-5" style="font-family: 'Titillium Web', sans-serif;">
+                    desde USD XXX
+                  </span>
+                </div>
+              
+                <div class="flex items-center gap-2 w-full">
+                  <!-- Logo + Aerolínea + Duración -->
+                  <div class="flex items-center gap-2">
+                    <div class="flex items-center gap-1">
+                      <img src="https://www.figma.com/api/mcp/asset/c8f98591-ffd7-4846-9d97-65ea101be8e0" alt="Aerolínea 2" class="w-6 h-6 object-cover" />
+                      <span class="text-sm text-text-default leading-5" style="font-family: 'Titillium Web', sans-serif;">
+                        Aerolínea 2
+                      </span>
+                    </div>
+                    <span class="text-sm text-text-lighter leading-5" style="font-family: 'Titillium Web', sans-serif;">
+                      3h 45min
+                    </span>
+                  </div>
+
+                  <!-- Tipo -->
+                  <span class="text-sm text-text-lighter leading-5" style="font-family: 'Titillium Web', sans-serif;">
+                    1 escala
+                  </span>
+
+                  <!-- Precio -->
+                  <span class="text-sm text-text-default leading-5" style="font-family: 'Titillium Web', sans-serif;">
+                    desde USD XXX
+                  </span>
+                </div>
+              
+            </div>
           
         </div>
       </div>
@@ -572,26 +780,51 @@
             <div class="h-px bg-border-primary w-full"></div>
 
             <!-- Información del partido -->
-            <div class="flex flex-col gap-3">
-              <!-- Fecha -->
-              <div class="flex items-center gap-2">
-                <i class="ph ph-calendar-blank text-icon-default" style="font-size: 24px;"></i>
-                <p class="text-sm text-text-default" style="font-family: 'Titillium Web', sans-serif; line-height: 20px;">
-                  Sábado 11 de julio
-                </p>
-              </div>
-
-              <!-- Horario -->
-              <div class="flex items-center gap-2">
-                <i class="ph ph-clock text-icon-default" style="font-size: 24px;"></i>
-                <div class="flex gap-2">
-                  <p class="text-sm text-text-default" style="font-family: 'Titillium Web', sans-serif; line-height: 20px;">
-                    21:00 h (AR)
-                  </p>
-                  <p class="text-sm text-text-lighter" style="font-family: 'Titillium Web', sans-serif; line-height: 20px;">
-                    19:00 h (KSK)
+            <div class="flex flex-col gap-2">
+              <!-- Fecha y ubicación -->
+              <div class="flex items-start gap-4">
+                <!-- Fecha con SVG duotone -->
+                <div class="flex items-center gap-2">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <rect x="3.125" y="3.125" width="13.75" height="13.75" rx="1.25" fill="#7BD0C2" opacity="0.2"/>
+                    <path d="M15.625 6.25H4.375C3.68464 6.25 3.125 6.80964 3.125 7.5V15.625C3.125 16.3154 3.68464 16.875 4.375 16.875H15.625C16.3154 16.875 16.875 16.3154 16.875 15.625V7.5C16.875 6.80964 16.3154 6.25 15.625 6.25Z" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M13.125 3.75V6.25" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M6.875 3.75V6.25" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                    Sábado 11 de julio
                   </p>
                 </div>
+
+                <!-- Ubicación con SVG duotone -->
+                <div class="flex items-center gap-2">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <circle cx="10" cy="8.125" r="2.5" fill="#7BD0C2" opacity="0.2"/>
+                    <path d="M10 17.5C10 17.5 15.625 13.125 15.625 8.125C15.625 5.01675 13.1083 2.5 10 2.5C6.89175 2.5 4.375 5.01675 4.375 8.125C4.375 13.125 10 17.5 10 17.5Z" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="10" cy="8.125" r="2.5" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                    undefined
+                  </p>
+                </div>
+              </div>
+
+              <!-- Horarios con SVG duotone -->
+              <div class="flex items-center gap-2 text-sm">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <circle cx="10" cy="10" r="6.25" fill="#7BD0C2" opacity="0.2"/>
+                  <circle cx="10" cy="10" r="7.5" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M10 6.25V10L12.5 12.5" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <p class="text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                  21:00 h (AR)
+                </p>
+                <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                  -
+                </p>
+                <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                  19:00 h (KSK)
+                </p>
               </div>
             </div>
           </div>
@@ -608,45 +841,45 @@
             
           </div>
           
-            <!-- Conector de puntos - mobile -->
-            <div class="lg:hidden flex flex-col items-center gap-1">
+            <!-- Connector mobile -->
+            <div class="lg:hidden">
               
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
+    <div class="flex flex-col items-center gap-2">
+      <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+      <i class="ph-fill ph-airplane text-icon-lighter rotate-180" style="font-size: 16px;"></i>
+      <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+    </div>
+  
             </div>
-            <!-- Conector de puntos - desktop -->
-            <div class="hidden lg:flex flex-col items-center gap-1">
+            <!-- Connector desktop -->
+            <div class="hidden lg:block">
               
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
+    <div class="flex flex-col items-center gap-2">
+      <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+      <i class="ph-fill ph-airplane text-icon-lighter rotate-180" style="font-size: 16px;"></i>
+      <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+    </div>
+  
             </div>
           
         </div>
@@ -655,7 +888,7 @@
         <div class="flex flex-col gap-2 min-w-0">
           <!-- Match card - SOLO MOBILE/TABLET -->
           <div class="lg:hidden">
-            <span class="text-text-default text-xl font-semibold pl-5 mb-3 block">Kansas city (USA)</span>
+            <span class="pt-2 text-text-default text-xl font-semibold pl-5 mb-3 block">Kansas city (USA)</span>
             <div class="w-full max-w-[350px] w-[350px] bg-white border border-border-primary rounded-xl px-3 py-4 flex flex-col gap-x-4 gap-y-1 relative overflow-visible">
               <!-- Badge de fase -->
               <div class="absolute right-8 -top-[6px]">
@@ -677,26 +910,51 @@
               <div class="h-px bg-border-primary w-full"></div>
 
               <!-- Información del partido -->
-              <div class="flex flex-col gap-x-4 gap-y-1">
-                <!-- Fecha -->
-                <div class="flex items-center gap-2">
-                  <i class="ph ph-calendar-blank text-icon-default" style="font-size: 24px;"></i>
-                  <p class="text-sm text-text-default" style="font-family: 'Titillium Web', sans-serif; line-height: 20px;">
-                    Sábado 11 de julio
-                  </p>
-                </div>
-
-                <!-- Horario -->
-                <div class="flex items-center gap-2">
-                  <i class="ph ph-clock text-icon-default" style="font-size: 24px;"></i>
-                  <div class="flex gap-2">
-                    <p class="text-sm text-text-default" style="font-family: 'Titillium Web', sans-serif; line-height: 20px;">
-                      21:00 h (AR)
-                    </p>
-                    <p class="text-sm text-text-lighter" style="font-family: 'Titillium Web', sans-serif; line-height: 20px;">
-                      19:00 h (KSK)
+              <div class="flex flex-col gap-2">
+                <!-- Fecha y ubicación -->
+                <div class="flex items-start gap-4">
+                  <!-- Fecha con SVG duotone -->
+                  <div class="flex items-center gap-2">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                      <rect x="3.125" y="3.125" width="13.75" height="13.75" rx="1.25" fill="#7BD0C2" opacity="0.2"/>
+                      <path d="M15.625 6.25H4.375C3.68464 6.25 3.125 6.80964 3.125 7.5V15.625C3.125 16.3154 3.68464 16.875 4.375 16.875H15.625C16.3154 16.875 16.875 16.3154 16.875 15.625V7.5C16.875 6.80964 16.3154 6.25 15.625 6.25Z" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M13.125 3.75V6.25" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M6.875 3.75V6.25" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                      Sábado 11 de julio
                     </p>
                   </div>
+
+                  <!-- Ubicación con SVG duotone -->
+                  <div class="flex items-center gap-2">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                      <circle cx="10" cy="8.125" r="2.5" fill="#7BD0C2" opacity="0.2"/>
+                      <path d="M10 17.5C10 17.5 15.625 13.125 15.625 8.125C15.625 5.01675 13.1083 2.5 10 2.5C6.89175 2.5 4.375 5.01675 4.375 8.125C4.375 13.125 10 17.5 10 17.5Z" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                      <circle cx="10" cy="8.125" r="2.5" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                      undefined
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Horarios con SVG duotone -->
+                <div class="flex items-center gap-2 text-sm">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <circle cx="10" cy="10" r="6.25" fill="#7BD0C2" opacity="0.2"/>
+                    <circle cx="10" cy="10" r="7.5" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M10 6.25V10L12.5 12.5" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <p class="text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                    21:00 h (AR)
+                  </p>
+                  <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                    -
+                  </p>
+                  <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                    19:00 h (KSK)
+                  </p>
                 </div>
               </div>
             </div>
@@ -707,7 +965,61 @@
             <span class="text-text-default text-xl font-semibold">Kansas city (USA)</span>
           </div>
 
-          <!-- Card de vuelos -->
+          <!-- Card de vuelos con bg-brand-darkening -->
+          
+            <div class="-left-2 relative w-[350px] rounded-xl p-4 flex flex-col gap-2" style="background-color: rgba(81, 90, 96, 0.06);">
+              
+                <div class="flex items-center gap-2 w-full">
+                  <!-- Logo + Aerolínea + Duración -->
+                  <div class="flex items-center gap-2">
+                    <div class="flex items-center gap-1">
+                      <img src="https://www.figma.com/api/mcp/asset/c8f98591-ffd7-4846-9d97-65ea101be8e0" alt="Aerolínea" class="w-6 h-6 object-cover" />
+                      <span class="text-sm text-text-default leading-5" style="font-family: 'Titillium Web', sans-serif;">
+                        Aerolínea
+                      </span>
+                    </div>
+                    <span class="text-sm text-text-lighter leading-5" style="font-family: 'Titillium Web', sans-serif;">
+                      2h 15min
+                    </span>
+                  </div>
+
+                  <!-- Tipo -->
+                  <span class="text-sm text-text-lighter leading-5" style="font-family: 'Titillium Web', sans-serif;">
+                    Directo
+                  </span>
+
+                  <!-- Precio -->
+                  <span class="text-sm text-text-default leading-5" style="font-family: 'Titillium Web', sans-serif;">
+                    desde USD XXX
+                  </span>
+                </div>
+              
+                <div class="flex items-center gap-2 w-full">
+                  <!-- Logo + Aerolínea + Duración -->
+                  <div class="flex items-center gap-2">
+                    <div class="flex items-center gap-1">
+                      <img src="https://www.figma.com/api/mcp/asset/c8f98591-ffd7-4846-9d97-65ea101be8e0" alt="Aerolínea 2" class="w-6 h-6 object-cover" />
+                      <span class="text-sm text-text-default leading-5" style="font-family: 'Titillium Web', sans-serif;">
+                        Aerolínea 2
+                      </span>
+                    </div>
+                    <span class="text-sm text-text-lighter leading-5" style="font-family: 'Titillium Web', sans-serif;">
+                      3h 45min
+                    </span>
+                  </div>
+
+                  <!-- Tipo -->
+                  <span class="text-sm text-text-lighter leading-5" style="font-family: 'Titillium Web', sans-serif;">
+                    1 escala
+                  </span>
+
+                  <!-- Precio -->
+                  <span class="text-sm text-text-default leading-5" style="font-family: 'Titillium Web', sans-serif;">
+                    desde USD XXX
+                  </span>
+                </div>
+              
+            </div>
           
         </div>
       </div>
@@ -740,26 +1052,51 @@
             <div class="h-px bg-border-primary w-full"></div>
 
             <!-- Información del partido -->
-            <div class="flex flex-col gap-3">
-              <!-- Fecha -->
-              <div class="flex items-center gap-2">
-                <i class="ph ph-calendar-blank text-icon-default" style="font-size: 24px;"></i>
-                <p class="text-sm text-text-default" style="font-family: 'Titillium Web', sans-serif; line-height: 20px;">
-                  Miércoles 15 de julio
-                </p>
-              </div>
-
-              <!-- Horario -->
-              <div class="flex items-center gap-2">
-                <i class="ph ph-clock text-icon-default" style="font-size: 24px;"></i>
-                <div class="flex gap-2">
-                  <p class="text-sm text-text-default" style="font-family: 'Titillium Web', sans-serif; line-height: 20px;">
-                    12:00 h (AR)
-                  </p>
-                  <p class="text-sm text-text-lighter" style="font-family: 'Titillium Web', sans-serif; line-height: 20px;">
-                    10:00 h (ATL)
+            <div class="flex flex-col gap-2">
+              <!-- Fecha y ubicación -->
+              <div class="flex items-start gap-4">
+                <!-- Fecha con SVG duotone -->
+                <div class="flex items-center gap-2">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <rect x="3.125" y="3.125" width="13.75" height="13.75" rx="1.25" fill="#7BD0C2" opacity="0.2"/>
+                    <path d="M15.625 6.25H4.375C3.68464 6.25 3.125 6.80964 3.125 7.5V15.625C3.125 16.3154 3.68464 16.875 4.375 16.875H15.625C16.3154 16.875 16.875 16.3154 16.875 15.625V7.5C16.875 6.80964 16.3154 6.25 15.625 6.25Z" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M13.125 3.75V6.25" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M6.875 3.75V6.25" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                    Miércoles 15 de julio
                   </p>
                 </div>
+
+                <!-- Ubicación con SVG duotone -->
+                <div class="flex items-center gap-2">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <circle cx="10" cy="8.125" r="2.5" fill="#7BD0C2" opacity="0.2"/>
+                    <path d="M10 17.5C10 17.5 15.625 13.125 15.625 8.125C15.625 5.01675 13.1083 2.5 10 2.5C6.89175 2.5 4.375 5.01675 4.375 8.125C4.375 13.125 10 17.5 10 17.5Z" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="10" cy="8.125" r="2.5" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                    undefined
+                  </p>
+                </div>
+              </div>
+
+              <!-- Horarios con SVG duotone -->
+              <div class="flex items-center gap-2 text-sm">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <circle cx="10" cy="10" r="6.25" fill="#7BD0C2" opacity="0.2"/>
+                  <circle cx="10" cy="10" r="7.5" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M10 6.25V10L12.5 12.5" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <p class="text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                  12:00 h (AR)
+                </p>
+                <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                  -
+                </p>
+                <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                  10:00 h (ATL)
+                </p>
               </div>
             </div>
           </div>
@@ -776,45 +1113,45 @@
             
           </div>
           
-            <!-- Conector de puntos - mobile -->
-            <div class="lg:hidden flex flex-col items-center gap-1">
+            <!-- Connector mobile -->
+            <div class="lg:hidden">
               
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
+    <div class="flex flex-col items-center gap-2">
+      <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+      <i class="ph-fill ph-airplane text-icon-lighter rotate-180" style="font-size: 16px;"></i>
+      <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+    </div>
+  
             </div>
-            <!-- Conector de puntos - desktop -->
-            <div class="hidden lg:flex flex-col items-center gap-1">
+            <!-- Connector desktop -->
+            <div class="hidden lg:block">
               
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
-                <div class="w-2 h-2 rounded-full border-2 border-border-primary"></div>
-              
+    <div class="flex flex-col items-center gap-2">
+      <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+      <i class="ph-fill ph-airplane text-icon-lighter rotate-180" style="font-size: 16px;"></i>
+      <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+              <div class="w-1 h-1 rounded-full bg-icon-lighter"></div>
+    </div>
+  
             </div>
           
         </div>
@@ -823,7 +1160,7 @@
         <div class="flex flex-col gap-2 min-w-0">
           <!-- Match card - SOLO MOBILE/TABLET -->
           <div class="lg:hidden">
-            <span class="text-text-default text-xl font-semibold pl-5 mb-3 block">Atlanta (USA)</span>
+            <span class="pt-2 text-text-default text-xl font-semibold pl-5 mb-3 block">Atlanta (USA)</span>
             <div class="w-full max-w-[350px] w-[350px] bg-white border border-border-primary rounded-xl px-3 py-4 flex flex-col gap-x-4 gap-y-1 relative overflow-visible">
               <!-- Badge de fase -->
               <div class="absolute right-8 -top-[6px]">
@@ -845,26 +1182,51 @@
               <div class="h-px bg-border-primary w-full"></div>
 
               <!-- Información del partido -->
-              <div class="flex flex-col gap-x-4 gap-y-1">
-                <!-- Fecha -->
-                <div class="flex items-center gap-2">
-                  <i class="ph ph-calendar-blank text-icon-default" style="font-size: 24px;"></i>
-                  <p class="text-sm text-text-default" style="font-family: 'Titillium Web', sans-serif; line-height: 20px;">
-                    Miércoles 15 de julio
-                  </p>
-                </div>
-
-                <!-- Horario -->
-                <div class="flex items-center gap-2">
-                  <i class="ph ph-clock text-icon-default" style="font-size: 24px;"></i>
-                  <div class="flex gap-2">
-                    <p class="text-sm text-text-default" style="font-family: 'Titillium Web', sans-serif; line-height: 20px;">
-                      12:00 h (AR)
-                    </p>
-                    <p class="text-sm text-text-lighter" style="font-family: 'Titillium Web', sans-serif; line-height: 20px;">
-                      10:00 h (ATL)
+              <div class="flex flex-col gap-2">
+                <!-- Fecha y ubicación -->
+                <div class="flex items-start gap-4">
+                  <!-- Fecha con SVG duotone -->
+                  <div class="flex items-center gap-2">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                      <rect x="3.125" y="3.125" width="13.75" height="13.75" rx="1.25" fill="#7BD0C2" opacity="0.2"/>
+                      <path d="M15.625 6.25H4.375C3.68464 6.25 3.125 6.80964 3.125 7.5V15.625C3.125 16.3154 3.68464 16.875 4.375 16.875H15.625C16.3154 16.875 16.875 16.3154 16.875 15.625V7.5C16.875 6.80964 16.3154 6.25 15.625 6.25Z" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M13.125 3.75V6.25" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M6.875 3.75V6.25" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                      Miércoles 15 de julio
                     </p>
                   </div>
+
+                  <!-- Ubicación con SVG duotone -->
+                  <div class="flex items-center gap-2">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                      <circle cx="10" cy="8.125" r="2.5" fill="#7BD0C2" opacity="0.2"/>
+                      <path d="M10 17.5C10 17.5 15.625 13.125 15.625 8.125C15.625 5.01675 13.1083 2.5 10 2.5C6.89175 2.5 4.375 5.01675 4.375 8.125C4.375 13.125 10 17.5 10 17.5Z" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                      <circle cx="10" cy="8.125" r="2.5" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                      undefined
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Horarios con SVG duotone -->
+                <div class="flex items-center gap-2 text-sm">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <circle cx="10" cy="10" r="6.25" fill="#7BD0C2" opacity="0.2"/>
+                    <circle cx="10" cy="10" r="7.5" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M10 6.25V10L12.5 12.5" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <p class="text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                    12:00 h (AR)
+                  </p>
+                  <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                    -
+                  </p>
+                  <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                    10:00 h (ATL)
+                  </p>
                 </div>
               </div>
             </div>
@@ -875,7 +1237,61 @@
             <span class="text-text-default text-xl font-semibold">Atlanta (USA)</span>
           </div>
 
-          <!-- Card de vuelos -->
+          <!-- Card de vuelos con bg-brand-darkening -->
+          
+            <div class="-left-2 relative w-[350px] rounded-xl p-4 flex flex-col gap-2" style="background-color: rgba(81, 90, 96, 0.06);">
+              
+                <div class="flex items-center gap-2 w-full">
+                  <!-- Logo + Aerolínea + Duración -->
+                  <div class="flex items-center gap-2">
+                    <div class="flex items-center gap-1">
+                      <img src="https://www.figma.com/api/mcp/asset/c8f98591-ffd7-4846-9d97-65ea101be8e0" alt="Aerolínea" class="w-6 h-6 object-cover" />
+                      <span class="text-sm text-text-default leading-5" style="font-family: 'Titillium Web', sans-serif;">
+                        Aerolínea
+                      </span>
+                    </div>
+                    <span class="text-sm text-text-lighter leading-5" style="font-family: 'Titillium Web', sans-serif;">
+                      2h 15min
+                    </span>
+                  </div>
+
+                  <!-- Tipo -->
+                  <span class="text-sm text-text-lighter leading-5" style="font-family: 'Titillium Web', sans-serif;">
+                    Directo
+                  </span>
+
+                  <!-- Precio -->
+                  <span class="text-sm text-text-default leading-5" style="font-family: 'Titillium Web', sans-serif;">
+                    desde USD XXX
+                  </span>
+                </div>
+              
+                <div class="flex items-center gap-2 w-full">
+                  <!-- Logo + Aerolínea + Duración -->
+                  <div class="flex items-center gap-2">
+                    <div class="flex items-center gap-1">
+                      <img src="https://www.figma.com/api/mcp/asset/c8f98591-ffd7-4846-9d97-65ea101be8e0" alt="Aerolínea 2" class="w-6 h-6 object-cover" />
+                      <span class="text-sm text-text-default leading-5" style="font-family: 'Titillium Web', sans-serif;">
+                        Aerolínea 2
+                      </span>
+                    </div>
+                    <span class="text-sm text-text-lighter leading-5" style="font-family: 'Titillium Web', sans-serif;">
+                      3h 45min
+                    </span>
+                  </div>
+
+                  <!-- Tipo -->
+                  <span class="text-sm text-text-lighter leading-5" style="font-family: 'Titillium Web', sans-serif;">
+                    1 escala
+                  </span>
+
+                  <!-- Precio -->
+                  <span class="text-sm text-text-default leading-5" style="font-family: 'Titillium Web', sans-serif;">
+                    desde USD XXX
+                  </span>
+                </div>
+              
+            </div>
           
         </div>
       </div>
@@ -908,26 +1324,51 @@
             <div class="h-px bg-border-primary w-full"></div>
 
             <!-- Información del partido -->
-            <div class="flex flex-col gap-3">
-              <!-- Fecha -->
-              <div class="flex items-center gap-2">
-                <i class="ph ph-calendar-blank text-icon-default" style="font-size: 24px;"></i>
-                <p class="text-sm text-text-default" style="font-family: 'Titillium Web', sans-serif; line-height: 20px;">
-                  Domingo 19 de julio
-                </p>
-              </div>
-
-              <!-- Horario -->
-              <div class="flex items-center gap-2">
-                <i class="ph ph-clock text-icon-default" style="font-size: 24px;"></i>
-                <div class="flex gap-2">
-                  <p class="text-sm text-text-default" style="font-family: 'Titillium Web', sans-serif; line-height: 20px;">
-                    15:00 h (AR)
-                  </p>
-                  <p class="text-sm text-text-lighter" style="font-family: 'Titillium Web', sans-serif; line-height: 20px;">
-                    13:00 h (NY)
+            <div class="flex flex-col gap-2">
+              <!-- Fecha y ubicación -->
+              <div class="flex items-start gap-4">
+                <!-- Fecha con SVG duotone -->
+                <div class="flex items-center gap-2">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <rect x="3.125" y="3.125" width="13.75" height="13.75" rx="1.25" fill="#7BD0C2" opacity="0.2"/>
+                    <path d="M15.625 6.25H4.375C3.68464 6.25 3.125 6.80964 3.125 7.5V15.625C3.125 16.3154 3.68464 16.875 4.375 16.875H15.625C16.3154 16.875 16.875 16.3154 16.875 15.625V7.5C16.875 6.80964 16.3154 6.25 15.625 6.25Z" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M13.125 3.75V6.25" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M6.875 3.75V6.25" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                    Domingo 19 de julio
                   </p>
                 </div>
+
+                <!-- Ubicación con SVG duotone -->
+                <div class="flex items-center gap-2">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <circle cx="10" cy="8.125" r="2.5" fill="#7BD0C2" opacity="0.2"/>
+                    <path d="M10 17.5C10 17.5 15.625 13.125 15.625 8.125C15.625 5.01675 13.1083 2.5 10 2.5C6.89175 2.5 4.375 5.01675 4.375 8.125C4.375 13.125 10 17.5 10 17.5Z" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="10" cy="8.125" r="2.5" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                    undefined
+                  </p>
+                </div>
+              </div>
+
+              <!-- Horarios con SVG duotone -->
+              <div class="flex items-center gap-2 text-sm">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <circle cx="10" cy="10" r="6.25" fill="#7BD0C2" opacity="0.2"/>
+                  <circle cx="10" cy="10" r="7.5" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M10 6.25V10L12.5 12.5" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <p class="text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                  15:00 h (AR)
+                </p>
+                <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                  -
+                </p>
+                <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                  13:00 h (NY)
+                </p>
               </div>
             </div>
           </div>
@@ -950,7 +1391,7 @@
         <div class="flex flex-col gap-2 min-w-0">
           <!-- Match card - SOLO MOBILE/TABLET -->
           <div class="lg:hidden">
-            <span class="text-text-default text-xl font-semibold pl-5 mb-3 block">Nueva York (USA)</span>
+            <span class="pt-2 text-text-default text-xl font-semibold pl-5 mb-3 block">Nueva York (USA)</span>
             <div class="w-full max-w-[350px] w-[350px] bg-white border border-border-primary rounded-xl px-3 py-4 flex flex-col gap-x-4 gap-y-1 relative overflow-visible">
               <!-- Badge de fase -->
               <div class="absolute right-8 -top-[6px]">
@@ -972,26 +1413,51 @@
               <div class="h-px bg-border-primary w-full"></div>
 
               <!-- Información del partido -->
-              <div class="flex flex-col gap-x-4 gap-y-1">
-                <!-- Fecha -->
-                <div class="flex items-center gap-2">
-                  <i class="ph ph-calendar-blank text-icon-default" style="font-size: 24px;"></i>
-                  <p class="text-sm text-text-default" style="font-family: 'Titillium Web', sans-serif; line-height: 20px;">
-                    Domingo 19 de julio
-                  </p>
-                </div>
-
-                <!-- Horario -->
-                <div class="flex items-center gap-2">
-                  <i class="ph ph-clock text-icon-default" style="font-size: 24px;"></i>
-                  <div class="flex gap-2">
-                    <p class="text-sm text-text-default" style="font-family: 'Titillium Web', sans-serif; line-height: 20px;">
-                      15:00 h (AR)
-                    </p>
-                    <p class="text-sm text-text-lighter" style="font-family: 'Titillium Web', sans-serif; line-height: 20px;">
-                      13:00 h (NY)
+              <div class="flex flex-col gap-2">
+                <!-- Fecha y ubicación -->
+                <div class="flex items-start gap-4">
+                  <!-- Fecha con SVG duotone -->
+                  <div class="flex items-center gap-2">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                      <rect x="3.125" y="3.125" width="13.75" height="13.75" rx="1.25" fill="#7BD0C2" opacity="0.2"/>
+                      <path d="M15.625 6.25H4.375C3.68464 6.25 3.125 6.80964 3.125 7.5V15.625C3.125 16.3154 3.68464 16.875 4.375 16.875H15.625C16.3154 16.875 16.875 16.3154 16.875 15.625V7.5C16.875 6.80964 16.3154 6.25 15.625 6.25Z" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M13.125 3.75V6.25" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M6.875 3.75V6.25" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                      Domingo 19 de julio
                     </p>
                   </div>
+
+                  <!-- Ubicación con SVG duotone -->
+                  <div class="flex items-center gap-2">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                      <circle cx="10" cy="8.125" r="2.5" fill="#7BD0C2" opacity="0.2"/>
+                      <path d="M10 17.5C10 17.5 15.625 13.125 15.625 8.125C15.625 5.01675 13.1083 2.5 10 2.5C6.89175 2.5 4.375 5.01675 4.375 8.125C4.375 13.125 10 17.5 10 17.5Z" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                      <circle cx="10" cy="8.125" r="2.5" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                      undefined
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Horarios con SVG duotone -->
+                <div class="flex items-center gap-2 text-sm">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <circle cx="10" cy="10" r="6.25" fill="#7BD0C2" opacity="0.2"/>
+                    <circle cx="10" cy="10" r="7.5" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M10 6.25V10L12.5 12.5" stroke="#7BD0C2" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <p class="text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                    15:00 h (AR)
+                  </p>
+                  <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                    -
+                  </p>
+                  <p class="text-base text-text-default" style="font-family: 'Titillium Web', sans-serif;">
+                    13:00 h (NY)
+                  </p>
                 </div>
               </div>
             </div>
@@ -1002,7 +1468,61 @@
             <span class="text-text-default text-xl font-semibold">Nueva York (USA)</span>
           </div>
 
-          <!-- Card de vuelos -->
+          <!-- Card de vuelos con bg-brand-darkening -->
+          
+            <div class="-left-2 relative w-[350px] rounded-xl p-4 flex flex-col gap-2" style="background-color: rgba(81, 90, 96, 0.06);">
+              
+                <div class="flex items-center gap-2 w-full">
+                  <!-- Logo + Aerolínea + Duración -->
+                  <div class="flex items-center gap-2">
+                    <div class="flex items-center gap-1">
+                      <img src="https://www.figma.com/api/mcp/asset/c8f98591-ffd7-4846-9d97-65ea101be8e0" alt="Aerolínea" class="w-6 h-6 object-cover" />
+                      <span class="text-sm text-text-default leading-5" style="font-family: 'Titillium Web', sans-serif;">
+                        Aerolínea
+                      </span>
+                    </div>
+                    <span class="text-sm text-text-lighter leading-5" style="font-family: 'Titillium Web', sans-serif;">
+                      2h 15min
+                    </span>
+                  </div>
+
+                  <!-- Tipo -->
+                  <span class="text-sm text-text-lighter leading-5" style="font-family: 'Titillium Web', sans-serif;">
+                    Directo
+                  </span>
+
+                  <!-- Precio -->
+                  <span class="text-sm text-text-default leading-5" style="font-family: 'Titillium Web', sans-serif;">
+                    desde USD XXX
+                  </span>
+                </div>
+              
+                <div class="flex items-center gap-2 w-full">
+                  <!-- Logo + Aerolínea + Duración -->
+                  <div class="flex items-center gap-2">
+                    <div class="flex items-center gap-1">
+                      <img src="https://www.figma.com/api/mcp/asset/c8f98591-ffd7-4846-9d97-65ea101be8e0" alt="Aerolínea 2" class="w-6 h-6 object-cover" />
+                      <span class="text-sm text-text-default leading-5" style="font-family: 'Titillium Web', sans-serif;">
+                        Aerolínea 2
+                      </span>
+                    </div>
+                    <span class="text-sm text-text-lighter leading-5" style="font-family: 'Titillium Web', sans-serif;">
+                      3h 45min
+                    </span>
+                  </div>
+
+                  <!-- Tipo -->
+                  <span class="text-sm text-text-lighter leading-5" style="font-family: 'Titillium Web', sans-serif;">
+                    1 escala
+                  </span>
+
+                  <!-- Precio -->
+                  <span class="text-sm text-text-default leading-5" style="font-family: 'Titillium Web', sans-serif;">
+                    desde USD XXX
+                  </span>
+                </div>
+              
+            </div>
           
         </div>
       </div>
