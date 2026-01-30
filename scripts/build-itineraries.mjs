@@ -202,26 +202,60 @@ function generateHeaderBar() {
   return `
     <!-- Header Bar -->
     <header class="w-full bg-white border-b border-border-primary">
-      <div class="flex items-center justify-between w-full max-w-[358px] sm:max-w-[548px] lg:max-w-[1200px] mx-auto py-3 px-4 lg:px-0">
-        <!-- Logo Assist (mobile) -->
-        <div class="block lg:hidden">
-          <img src="https://assistcdn.s3.us-west-1.amazonaws.com/assets/img/wcm26/assist-logo.svg" alt="Assist 365" class="h-[50px]" />
-        </div>
+      <div class="flex items-center justify-between w-full max-w-[358px] sm:max-w-[548px] lg:max-w-[1200px] mx-auto py-3 px-0 md:px-4">
+        <!-- Flecha volver (mobile/tablet) -->
+        <i class="ph-bold ph-arrow-left text-action-default block lg:hidden" style="font-size: 24px;"></i>
 
-        <!-- Logo A365 + Soccer Ball + Title (desktop) -->
-        <div class="hidden lg:flex items-center gap-3">
-          <img src="https://assistcdn.s3.us-west-1.amazonaws.com/assets/img/wcm26/a365-logo.svg" alt="A365" class="h-[50px]" />
-          <i class="ph-duotone ph-soccer-ball" style="font-size: 32px; background: linear-gradient(180deg, #59D3C2 0%, #006FE8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;"></i>
+        <!-- Logo + Soccer Ball + Title (siempre visible, responsive) -->
+        <div class="flex w-fit items-center">
+          <!-- Logo A365 desktop -->
+          <img src="https://assistcdn.s3.us-west-1.amazonaws.com/assets/site/home/img/brand/a365_logo_xa.svg" alt="A365 Logo" class="hidden lg:block" />
+          
+          <!-- Logo Assist mobile/tablet -->
+          <img src="https://assistcdn.s3.us-west-1.amazonaws.com/assets/site/home/img/brand/Assist-logo.svg" alt="" class="block lg:hidden" />
+
+          <!-- Gradiente para Soccer Ball -->
+          <svg width="0" height="0" class="absolute">
+            <defs>
+              <linearGradient id="soccerGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#59D3C2" stop-opacity="1" />
+                <stop offset="100%" stop-color="#006FE8" stop-opacity="1" />
+              </linearGradient>
+            </defs>
+          </svg>
+
+          <!-- Soccer Ball responsive (mobile: 24px, desktop: 32px) -->
+          <i class="ph-duotone ph-soccer-ball block lg:hidden flex-shrink-0" style="background: linear-gradient(180deg, #59D3C2 0%, #006FE8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-size: 24px;"></i>
+          <i class="ph-duotone ph-soccer-ball hidden lg:block flex-shrink-0" style="background: linear-gradient(180deg, #59D3C2 0%, #006FE8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-size: 32px;"></i>
+
+          <!-- Título responsive -->
           <h1 class="text-base lg:text-xl font-semibold text-text-decorative-darker">
             World Cup Map 2026
           </h1>
         </div>
 
-        <!-- Share button -->
-        <button class="inline-flex items-center justify-center gap-2 px-4 py-2 h-10 text-base font-semibold rounded-xl bg-brand-primary text-white hover:bg-bg-alt-secondary transition-colors">
-          <span class="hidden lg:inline">Compartir</span>
-          <i class="ph ph-paper-plane-tilt" style="font-size: 16px; font-weight: bold;"></i>
-        </button>
+        <!-- Share button with tooltip -->
+        <div class="relative">
+          <!-- Tooltip mobile/tablet - debajo del botón -->
+          <div class="block lg:hidden absolute top-[calc(100%+14px)] left-1/2 -translate-x-1/2 bg-[#CDE9FF] text-[#31363A] px-4 py-3 rounded-xl text-base font-normal whitespace-nowrap shadow-lg z-10 leading-6">
+            ¡Enlace copiado!
+            <!-- Arrow pointing up -->
+            <div class="absolute -top-[14px] left-1/2 -translate-x-1/2 w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-b-[14px] border-b-[#CDE9FF]"></div>
+          </div>
+          
+          <!-- Tooltip desktop - a la izquierda del botón -->
+          <div class="hidden lg:block absolute right-[calc(100%+14px)] top-1/2 -translate-y-1/2 bg-[#CDE9FF] text-[#31363A] px-4 py-3 rounded-xl text-base font-normal whitespace-nowrap shadow-lg z-10 leading-6">
+            ¡Enlace copiado!
+            <!-- Arrow pointing right -->
+            <div class="absolute -right-[14px] top-1/2 -translate-y-1/2 w-0 h-0 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent border-l-[14px] border-l-[#CDE9FF]"></div>
+          </div>
+          
+          <!-- Button responsive: small en mobile, large en desktop -->
+          <button class="inline-flex items-center justify-center gap-2 px-2 lg:px-4 py-[6px] lg:py-[10px] h-[36px] lg:h-[48px] text-base lg:text-lg font-semibold rounded-xl bg-brand-primary text-white hover:bg-bg-alt-secondary transition-colors">
+            <span class="hidden lg:inline pl-1">Compartir</span>
+            <i class="ph ph-paper-plane-tilt" style="font-size: 16px; font-weight: bold;"></i>
+          </button>
+        </div>
       </div>
     </header>
   `;

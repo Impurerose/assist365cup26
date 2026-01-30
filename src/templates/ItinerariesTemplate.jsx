@@ -283,8 +283,8 @@ function ItinerariesTemplate() {
           </button> */}
 
           {/* Botones de navegación (desktop) */}
-          <div className="lg:flex items-center justify-between mb-6 max-w-[548px] lg:max-w-full mt-4 lg:mt-0 mx-auto lg:mx-0">
-            <div className="flex items-center gap-x-8">
+          <div className="max-w-[360px] flex flex-col-reverse lg:flex-row gap-4 lg:gap-0 items-center justify-between mb-6 _max-w-[548px] lg:max-w-full mt-4 lg:mt-0 mx-auto lg:mx-0">
+            <div className="flex items-center gap-x-8 w-full">
               <Button
                 variant="default"
                 color="tertiary"
@@ -300,16 +300,20 @@ function ItinerariesTemplate() {
                 placeholder="Selecioná tu equipo"
                 options={TEAMS}
                 value={selectedTeam?.id}
+                fullWidth
                 handleSelectChange={setSelectedTeam}
-                classes="min-w-[200px] mx-auto w-full"
+                classes="min-w-[200px] max-w-[360px] lg:max-w-full mx-auto w-full"
               />
             </div>
 
-            <div className="hidden lg:flex gap-4">
+            <div className="w-full flex gap-y-4 gap-x-2 items-center justify-center">
               <Button
                 variant="default"
+                responsive={true}
                 color="secondary"
                 size="large"
+                fullWidth
+                classes="w-full lg:w-fit"
                 onClick={() => (window.location.href = "mainpage.html")}
               >
                 <SoccerBallIcon size={20} weight="duotone" />
@@ -317,9 +321,12 @@ function ItinerariesTemplate() {
               </Button>
 
               <Button
+                responsive={true}
                 variant="default"
                 color="secondary"
                 size="large"
+                fullWidth
+                classes="w-full lg:w-fit"
                 onClick={() => (window.location.href = "venuesSelection.html")}
               >
                 <MapPinIcon size={20} weight="duotone" />

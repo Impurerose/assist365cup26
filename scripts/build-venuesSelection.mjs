@@ -57,7 +57,7 @@ function getCountryDisplay(country) {
 function generateHeaderBar() {
   return `
     <header class="bg-white w-full">
-      <div class="flex items-center justify-between w-full max-w-[358px] md:max-w-[548px] lg:max-w-[1200px] mx-auto py-3">
+      <div class="flex items-center justify-between w-full max-w-[358px] md:max-w-[548px] lg:max-w-[1200px] mx-auto py-3 px-0 md:px-4">
         <!-- Flecha volver - Mobile/Tablet -->
         <button 
           onclick="goBackToMainpage()" 
@@ -103,11 +103,28 @@ function generateHeaderBar() {
           </h1>
         </div>
 
-        <!-- Botón Compartir con texto responsive -->
-        <button class="inline-flex items-center gap-2 px-4 py-2 h-10 text-base font-semibold rounded-xl bg-brand-primary text-white hover:bg-bg-alt-secondary transition-colors">
-          <span class="hidden lg:inline">Compartir</span>
-          <i class="ph ph-paper-plane-tilt" style="font-size: 16px; font-weight: bold;"></i>
-        </button>
+        <!-- Botón Compartir con tooltip responsive -->
+        <div class="relative">
+          <!-- Tooltip mobile/tablet - debajo del botón -->
+          <div class="block lg:hidden absolute top-[calc(100%+14px)] left-1/2 -translate-x-1/2 bg-[#CDE9FF] text-[#31363A] px-4 py-3 rounded-xl text-base font-normal whitespace-nowrap shadow-lg z-10 leading-6">
+            ¡Enlace copiado!
+            <!-- Arrow pointing up -->
+            <div class="absolute -top-[14px] left-1/2 -translate-x-1/2 w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-b-[14px] border-b-[#CDE9FF]"></div>
+          </div>
+          
+          <!-- Tooltip desktop - a la izquierda del botón -->
+          <div class="hidden lg:block absolute right-[calc(100%+14px)] top-1/2 -translate-y-1/2 bg-[#CDE9FF] text-[#31363A] px-4 py-3 rounded-xl text-base font-normal whitespace-nowrap shadow-lg z-10 leading-6">
+            ¡Enlace copiado!
+            <!-- Arrow pointing right -->
+            <div class="absolute -right-[14px] top-1/2 -translate-y-1/2 w-0 h-0 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent border-l-[14px] border-l-[#CDE9FF]"></div>
+          </div>
+          
+          <!-- Button responsive: small en mobile, large en desktop -->
+          <button class="inline-flex items-center gap-2 px-2 lg:px-4 py-[6px] lg:py-[10px] h-[36px] lg:h-[48px] text-base lg:text-lg font-semibold rounded-xl bg-brand-primary text-white hover:bg-bg-alt-secondary transition-colors">
+            <span class="hidden lg:inline pl-1">Compartir</span>
+            <i class="ph ph-paper-plane-tilt" style="font-size: 16px; font-weight: bold;"></i>
+          </button>
+        </div>
       </div>
     </header>
   `;

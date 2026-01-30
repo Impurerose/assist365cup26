@@ -4,6 +4,7 @@ import {
   ArrowLeft,
 } from "@phosphor-icons/react";
 import Button from "../dsys/Button.jsx";
+import ToolTip from "../dsys/ToolTip.jsx";
 
 const SoccerBallGradient = () => (
   <svg width="0" height="0" className="absolute">
@@ -51,18 +52,19 @@ export default function HeaderBar() {
             />
           </svg>
           <h1 className="text-base lg:text-xl font-semibold text-text-decorative-darker">
-            World Cup Map 2026x
+            World Cup Map 2026
           </h1>
         </div>
 
-        <div className="">
+        <ToolTip content="¡Enlace copiado!" alwaysVisible={true}>
           <Button
             icon={<PaperPlaneTiltIcon size={16} weight="bold" />}
             iconPosition="right"
+            responsive={true}
           >
-            <span className="hidden lg:block">Compartir</span>
+            <span className="pl-1">Compartir</span>
           </Button>
-        </div>
+        </ToolTip>
       </div>
     </header>
   );

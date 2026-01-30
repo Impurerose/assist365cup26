@@ -20,13 +20,41 @@
  * <ToolTip content="Tooltip sin flecha" arrow={false}>
  *   <Info size={20} />
  * </ToolTip>
+ * 
+ * // Con control externo de visibilidad
+ * const [show, setShow] = useState(false);
+ * <ToolTip 
+ *   content="¡Enlace copiado!" 
+ *   visible={show}
+ *   onVisibleChange={setShow}
+ * >
+ *   <Button onClick={() => setShow(true)}>Compartir</Button>
+ * </ToolTip>
  */
 
 import React, { useState, useRef } from 'react';
 
-const ToolTip = ({ content, children, className, arrow = true }) => {
-  const [visible, setVisible] = useState(false);
+const ToolTip = ({ 
+  content, 
+  children, 
+  className, 
+  arrow = true,
+  visible: externalVisible,
+  onVisibleChange,
+  alwaysVisible = false
+}) => {
+  const [internalVisible, setInternalVisible] = useState(false);
   const idRef = useRef('tooltip-' + Math.random().toString(36).slice(2, 9));
+
+  // Usar visible externo si existe, sino interno, o siempre visible si alwaysVisible=true
+  const visible = alwaysVisible || (externalVisible !== undefined ? externalVisible : internalVisible);
+  
+  const handleVisibilityChange = (newVisible) => {
+    if (externalVisible === undefined) {
+      setInternalVisible(newVisible);
+    }
+    onVisibleChange?.(newVisible);
+  };
 
   const containerClass = `${
     className ? className + ' ' : ''
@@ -35,15 +63,15 @@ const ToolTip = ({ content, children, className, arrow = true }) => {
   return (
     <span
       className={containerClass}
-      onMouseEnter={() => setVisible(true)}
-      onMouseLeave={() => setVisible(false)}
-      onFocus={() => setVisible(true)}
-      onBlur={() => setVisible(false)}
+      onMouseEnter={() => handleVisibilityChange(true)}
+      onMouseLeave={() => handleVisibilityChange(false)}
+      onFocus={() => handleVisibilityChange(true)}
+      onBlur={() => handleVisibilityChange(false)}
     >
       <button
         type="button"
         aria-describedby={idRef.current}
-        className="bg-transparent p-0 border-0 cursor-pointer"
+        className="bg-transparent p-0 border-0 cursor-pointer text-text-default"
       >
         {children || (
           <svg
@@ -63,32 +91,62 @@ const ToolTip = ({ content, children, className, arrow = true }) => {
       </button>
 
       {visible && content && (
-        <div
-          id={idRef.current}
-          role="tooltip"
-          className="absolute bg-bg-alt-secondary text-white p-4 rounded-xl text-[13px] w-[300px] z-50 shadow-lg font-light"
-          style={{ left: '50px', top: '50%', transform: 'translateY(-50%)' }}
-        >
-          {arrow && (
-            <span
-              aria-hidden="true"
-              style={{
-                position: 'absolute',
-                left: '-14px',
-                top: '50%',
-                transform: 'translateY(-50%)',
-                width: 0,
-                height: 0,
-                borderTop: '10px solid transparent',
-                borderBottom: '10px solid transparent',
-                borderRight: '19px solid #0059BA',
-                pointerEvents: 'none',
-              }}
-            />
-          )}
+        <>
+          {/* Tooltip para mobile/tablet - debajo del botón */}
+          <div
+            id={idRef.current}
+            role="tooltip"
+            className="block lg:hidden absolute bg-[#CDE9FF] text-[#31363A] p-4 rounded-xl text-base leading-6 z-50"
+            style={{ top: 'calc(100% + 14px)', left: '50%', transform: 'translateX(-50%)', whiteSpace: 'nowrap' }}
+          >
+            {content}
+            
+            {arrow && (
+              <span
+                aria-hidden="true"
+                style={{
+                  position: 'absolute',
+                  top: '-14px',
+                  left: '50%',
+                  transform: 'translateX(-50%)',
+                  width: 0,
+                  height: 0,
+                  borderLeft: '8px solid transparent',
+                  borderRight: '8px solid transparent',
+                  borderBottom: '14px solid #CDE9FF',
+                  pointerEvents: 'none',
+                }}
+              />
+            )}
+          </div>
 
-          {content}
-        </div>
+          {/* Tooltip para desktop - a la izquierda del botón */}
+          <div
+            role="tooltip"
+            className="hidden lg:block absolute bg-[#CDE9FF] text-[#31363A] p-4 rounded-xl text-base leading-6 z-50 shadow-lg"
+            style={{ right: 'calc(100% + 14px)', top: '50%', transform: 'translateY(-50%)', whiteSpace: 'nowrap' }}
+          >
+            {content}
+            
+            {arrow && (
+              <span
+                aria-hidden="true"
+                style={{
+                  position: 'absolute',
+                  right: '-14px',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  width: 0,
+                  height: 0,
+                  borderTop: '8px solid transparent',
+                  borderBottom: '8px solid transparent',
+                  borderLeft: '14px solid #CDE9FF',
+                  pointerEvents: 'none',
+                }}
+              />
+            )}
+          </div>
+        </>
       )}
     </span>
   );

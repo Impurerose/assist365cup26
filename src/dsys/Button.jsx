@@ -37,6 +37,18 @@ const SIZE_CLASSES = {
   },
 };
 
+// Tamaños responsive (mobile/tablet = small, desktop = size especificado)
+const SIZE_CLASSES_RESPONSIVE = {
+  small: {
+    default: 'text-base py-[6px] h-[36px]',
+    icon: 'text-base px-2 h-[40px]',
+  },
+  large: {
+    default: 'text-base py-[6px] h-[36px] lg:text-lg lg:py-[10px] lg:h-[48px]',
+    icon: 'text-base px-2 h-[40px] lg:text-lg lg:p-3 lg:h-[52px]',
+  },
+};
+
 // Variantes de estilo por tipo y color
 const VARIANT_STYLES = {
   default: {
@@ -110,11 +122,14 @@ const Button = ({
   mode = 'default',
   align = 'center',
   trackClass = '',
+  responsive = false,
   iconSize, // eslint-disable-line no-unused-vars -- Extraído para evitar pasarlo al DOM
   ...props
 }) => {
-  // Obtener clases de tamaño basado en modo
-  const sizeClass = SIZE_CLASSES[size]?.[mode] || SIZE_CLASSES.large.default;
+  // Obtener clases de tamaño basado en modo y responsive
+  const sizeClass = responsive
+    ? SIZE_CLASSES_RESPONSIVE[size]?.[mode] || SIZE_CLASSES_RESPONSIVE.large.default
+    : SIZE_CLASSES[size]?.[mode] || SIZE_CLASSES.large.default;
 
   // Obtener estilos de variante basado en estado
   const variantStyle = VARIANT_STYLES[variant]?.[color]?.[disabled ? 'disabled' : 'active'] || '';
@@ -125,8 +140,9 @@ const Button = ({
     sizeClass,
     variantStyle,
     {
-      // Padding solo para modo default
-      'px-4': padding && mode === 'default',
+      // Padding solo para modo default (responsive si aplica)
+      'px-4': padding && mode === 'default' && !responsive,
+      'px-2 lg:px-4': padding && mode === 'default' && responsive,
 
       // Width
       'w-full max-w-full': fullWidth,
