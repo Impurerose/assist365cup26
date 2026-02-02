@@ -2,6 +2,7 @@ import {
   SoccerBall,
   PaperPlaneTiltIcon,
   ArrowLeft,
+  List,
 } from "@phosphor-icons/react";
 import Button from "../dsys/Button.jsx";
 import ToolTip from "../dsys/ToolTip.jsx";
@@ -17,7 +18,7 @@ const SoccerBallGradient = () => (
   </svg>
 );
 
-export default function HeaderBar() {
+export default function HeaderBar({ showHamburger = false }) {
   return (
     <header className="bg-white w-full">
       <div className="flex items-center justify-between w-full max-w-[358px] sm:max-w-[548px] lg:max-w-[1200px] mx-auto py-3 px-0 md:px-4">
@@ -56,15 +57,23 @@ export default function HeaderBar() {
           </h1>
         </div>
 
-        <ToolTip content="¡Enlace copiado!" alwaysVisible={true}>
-          <Button
-            icon={<PaperPlaneTiltIcon size={16} weight="bold" />}
-            iconPosition="right"
-            responsive={true}
-          >
-            <span className="pl-1 hidden lg:flex">Compartir</span>
-          </Button>
-        </ToolTip>
+        <div className="flex items-center gap-2">
+          <ToolTip content="¡Enlace copiado!" alwaysVisible={true}>
+            <Button
+              icon={<PaperPlaneTiltIcon size={16} weight="bold" />}
+              iconPosition="right"
+              responsive={true}
+            >
+              <span className="pl-1 hidden lg:flex">Compartir</span>
+            </Button>
+          </ToolTip>
+
+          <List
+            size={24}
+            weight="bold"
+            className="text-action-default block lg:hidden cursor-pointer"
+          />
+        </div>
       </div>
     </header>
   );

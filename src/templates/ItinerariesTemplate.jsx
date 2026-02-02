@@ -269,7 +269,7 @@ function ItinerariesTemplate() {
 
   return (
     <div className="w-full min-h-screen flex flex-col bg-bg-secondary pb-10">
-      <HeaderBar />
+      <HeaderBar showHamburger={true} />
 
       <div className="w-full max-w-[1366px] mx-auto lg:mt-4 ">
         <div className="max-w-[1200px] mx-auto px-4 lg:px-0">

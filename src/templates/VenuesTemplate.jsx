@@ -340,7 +340,7 @@ function VenuesTemplate() {
 
   return (
     <div className="w-full min-h-screen flex flex-col bg-bg-secondary pb-10">
-      <HeaderBar />
+      <HeaderBar showHamburger={true} />
 
       {/* Overlay fijo en el bottom con degradado y blur */}
       <div

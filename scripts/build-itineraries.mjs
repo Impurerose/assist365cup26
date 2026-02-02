@@ -402,7 +402,7 @@ function generateItineraryMatchCard(matchData, index, isLast) {
       <div class="grid grid-cols-[auto_1fr] lg:grid-cols-[368px_auto_1fr] gap-0 lg:gap-6">
         <!-- Columna 1: Match Card - SOLO DESKTOP -->
         <div class="hidden lg:block w-full overflow-visible">
-          <div class="w-[350px] bg-white border border-border-primary rounded-xl px-3 py-4 flex flex-col gap-4 relative overflow-visible">
+          <div class="w-[360px] bg-white border border-border-primary rounded-xl px-3 py-4 flex flex-col gap-4 relative overflow-visible">
             <!-- Badge de fase -->
             <div class="absolute right-8 -top-[6px]">
               <div class="bg-[#0059BA] text-white text-sm font-normal px-2 py-1 rounded-full whitespace-nowrap" style="font-family: 'Titillium Web', sans-serif; line-height: 20px;">
@@ -497,7 +497,7 @@ function generateItineraryMatchCard(matchData, index, isLast) {
           <!-- Match card - SOLO MOBILE/TABLET -->
           <div class="lg:hidden">
             <span class="pt-2 text-text-default text-xl font-semibold pl-5 mb-3 block">${city.name}</span>
-            <div class="w-[350px] bg-white border border-border-primary rounded-xl px-3 py-4 flex flex-col gap-x-4 gap-y-1 relative overflow-visible">
+            <div class="w-[360px] bg-white border border-border-primary rounded-xl px-3 py-4 flex flex-col gap-x-4 gap-y-1 relative overflow-visible">
               <!-- Badge de fase -->
               <div class="absolute right-8 -top-[6px]">
                 <div class="bg-[#0059BA] text-white text-sm font-normal px-2 py-1 rounded-full whitespace-nowrap" style="font-family: 'Titillium Web', sans-serif; line-height: 20px;">
@@ -572,7 +572,7 @@ function generateItineraryMatchCard(matchData, index, isLast) {
 
           <!-- Card de vuelos con bg-brand-darkening -->
           ${flights && flights.length > 0 ? `
-            <div class="w-[350px] rounded-xl p-4 flex flex-col gap-2" style="background-color: rgba(81, 90, 96, 0.06);">
+            <div class="w-[360px] rounded-xl p-4 flex flex-col gap-2" style="background-color: rgba(81, 90, 96, 0.06);">
               ${flights.slice(0, 2).map(flight => `
                 <div class="flex items-center gap-2 w-full">
                   <!-- Logo + Aerolínea + Duración -->
