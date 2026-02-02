@@ -18,10 +18,11 @@ const SoccerBallGradient = () => (
   </svg>
 );
 
-export default function HeaderBar({ showHamburger = false }) {
+export default function HeaderBar({ showHamburger = false, onHamburgerClick }) {
   return (
     <header className="bg-white w-full">
       <div className="flex items-center justify-between w-full max-w-[358px] sm:max-w-[548px] lg:max-w-[1200px] mx-auto py-3 px-0 md:px-4">
+        {/* Flecha volver - IZQUIERDA */}
         <ArrowLeft
           size={24}
           weight="bold"
@@ -57,7 +58,8 @@ export default function HeaderBar({ showHamburger = false }) {
           </h1>
         </div>
 
-        <div className="flex items-center gap-2">
+        {/* Compartir + Hamburguesa - DERECHA */}
+        <div className="flex items-center gap-2 lg:gap-4">
           <ToolTip content="¡Enlace copiado!" alwaysVisible={true}>
             <Button
               icon={<PaperPlaneTiltIcon size={16} weight="bold" />}
@@ -68,11 +70,15 @@ export default function HeaderBar({ showHamburger = false }) {
             </Button>
           </ToolTip>
 
-          <List
-            size={24}
-            weight="bold"
-            className="text-action-default block lg:hidden cursor-pointer"
-          />
+          {showHamburger && (
+            <button
+              onClick={onHamburgerClick}
+              className="flex lg:hidden items-center justify-center w-9 h-9 text-action-default hover:text-bg-alt-secondary transition-colors"
+              aria-label="Abrir menú"
+            >
+              <List size={24} weight="bold" />
+            </button>
+          )}
         </div>
       </div>
     </header>

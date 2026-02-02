@@ -1,5 +1,6 @@
 import { useState } from "react";
 import HeaderBar from "../components/HeaderBar";
+import Sidebar from "../components/Sidebar";
 import Button from "../dsys/Button";
 import Select from "../dsys/Select";
 import PhaseFilters from "../components/PhaseFilters";
@@ -26,6 +27,15 @@ function ItinerariesTemplate() {
   const [activePhase, setActivePhase] = useState("Llave como 1ros");
   const [selectedCity, setSelectedCity] = useState(null);
   const [selectedTeam, setSelectedTeam] = useState(null);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const handleToggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
+
+  const handleCloseSidebar = () => {
+    setSidebarOpen(false);
+  };
 
   // Datos de fases
   const phases = [
@@ -269,7 +279,8 @@ function ItinerariesTemplate() {
 
   return (
     <div className="w-full min-h-screen flex flex-col bg-bg-secondary pb-10">
-      <HeaderBar showHamburger={true} />
+      <HeaderBar showHamburger={true} onHamburgerClick={handleToggleSidebar} />
+      <Sidebar isOpen={sidebarOpen} onClose={handleCloseSidebar} />
 
       <div className="w-full max-w-[1366px] mx-auto lg:mt-4 ">
         <div className="max-w-[1200px] mx-auto px-4 lg:px-0">

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import HeaderBar from "../components/HeaderBar";
+import Sidebar from "../components/Sidebar";
 import MapContainer from "../components/MapContainer";
 import MatchCard from "../components/MatchCard";
 import Button from "../dsys/Button";
@@ -44,6 +45,15 @@ import {
 function VenuesTemplate() {
   const [selectedTeam, setSelectedTeam] = useState(null);
   const [selectedCity, setSelectedCity] = useState(null);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const handleToggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
+
+  const handleCloseSidebar = () => {
+    setSidebarOpen(false);
+  };
 
   // Datos de la ciudad
   const cityData = {
@@ -340,7 +350,8 @@ function VenuesTemplate() {
 
   return (
     <div className="w-full min-h-screen flex flex-col bg-bg-secondary pb-10">
-      <HeaderBar showHamburger={true} />
+      <HeaderBar showHamburger={true} onHamburgerClick={handleToggleSidebar} />
+      <Sidebar isOpen={sidebarOpen} onClose={handleCloseSidebar} />
 
       {/* Overlay fijo en el bottom con degradado y blur */}
       <div
