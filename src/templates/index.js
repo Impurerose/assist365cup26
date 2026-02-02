@@ -10,3 +10,5 @@ export { default as ModalTemplate } from './ModalTemplate';
 export { default as AwayMatchesModalTemplate } from './AwayMatchesModalTemplate';
 export { default as ModalSuccessTemplate } from './ModalSuccessTemplate';
 export { default as FooterTemplate } from './FooterTemplate';
+export { default as EmailTemplate } from './EmailTemplate';
+export { default as EmailTemplate_br } from './EmailTemplate_br';
