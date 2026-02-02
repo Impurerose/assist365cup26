@@ -206,14 +206,14 @@ function generateSidebar() {
     <!-- Sidebar Panel -->
     <div id="sidebar-panel" class="fixed top-0 right-0 h-full w-[358px] sm:w-[400px] bg-white shadow-2xl z-[9999] transform translate-x-full transition-transform duration-300 ease-in-out">
       <!-- Header -->
-      <div class="flex items-center justify-end px-4 py-4 border-b border-border-primary">
+      <div class="flex items-center justify-end p-4 pb-0">
         <button id="sidebar-close" class="flex items-center justify-center w-10 h-10 text-action-default hover:text-bg-alt-secondary transition-colors" aria-label="Cerrar menú">
           <i class="ph-bold ph-x" style="font-size: 24px;"></i>
         </button>
       </div>
 
       <!-- Body -->
-      <div class="px-4 py-6 flex flex-col gap-8">
+      <div class="px-4 flex flex-col gap-8">
         <!-- Menu Options -->
         <ul class="flex flex-col">
           <li>
@@ -358,10 +358,10 @@ function generateNavigationButtons() {
 
 function generatePhaseFilters(phases) {
   return `
-    <div class="flex flex-wrap gap-2 lg:gap-4 mb-6">
+    <div class="flex flex-wrap gap-1.5 lg:gap-4 mb-6">
       ${phases.map((phase, index) => `
         <button 
-          class="phase-filter px-4 py-2 border-2 rounded-full font-semibold text-lg transition-all ${
+          class="phase-filter px-4 text-base py-[6px] lg:text-lg lg:py-[10px] border-2 rounded-full font-semibold transition-all ${
             index === 1 
               ? 'border-brand-primary text-text-default' 
               : 'border-border-primary text-text-lighter hover:border-brand-primary hover:text-text-default'

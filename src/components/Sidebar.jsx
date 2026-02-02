@@ -66,7 +66,7 @@ export default function Sidebar({ isOpen, onClose }) {
         aria-label="Menu lateral"
       >
         {/* Header - Solo botón X alineado a la derecha */}
-        <div className="flex items-center justify-end p-4">
+        <div className="flex items-center justify-end p-4 pb-0">
           <button
             onClick={onClose}
             className="p-2 hover:bg-bg-secondary rounded-lg transition-colors"
