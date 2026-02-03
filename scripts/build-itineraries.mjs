@@ -379,7 +379,13 @@ function generatePhaseFilters(phases) {
 
 function generateItineraryMap(cities) {
   return `
-    <div id="itinerary-map" class="mb-6 rounded-3xl overflow-hidden h-[400px] lg:h-[448px] bg-bg-primary"></div>
+        <div class="relative rounded-2xl overflow-hidden w-full lg:w-[715px] h-[640px] mb-6">
+          <!-- Botón flotante de compartir sobre el mapa -->
+          <button class="z-50 absolute bottom-3 right-3 inline-flex items-center justify-center gap-2 px-4 py-2 h-10 text-base font-semibold rounded-xl bg-brand-primary text-white hover:bg-bg-alt-secondary transition-colors shadow-lg">
+            <i class="ph ph-paper-plane-tilt" style="font-size: 20px; font-weight: bold;"></i>
+          </button>
+          <div id="map" class="w-full h-full"></div>
+        </div>
   `;
 }
 
@@ -821,9 +827,6 @@ const htmlTemplate = `<!DOCTYPE html>
   <!-- Phosphor Icons -->
   <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
   
-  <!-- Leaflet CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  
   <!-- Titillium Web Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -884,29 +887,29 @@ const htmlTemplate = `<!DOCTYPE html>
     ${generateVenuesCityGrid()}
   </main>
 
-  <!-- Leaflet JS -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  
+  <!-- Google Maps API with callback -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTLpnFO7BWQeVpblahIGHDLYzjVzF61oQ&callback=initMap&loading=async" async defer></script>
+
   <!-- Tom Select JS -->
   <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
   
-  <!-- App JavaScript -->
+  <!-- Application Data -->
+  <script src="assets/data.js"></script>
+  
+  <!-- Application Logic -->
+  <script src="assets/app.js"></script>
+  
+  <!-- Itineraries-specific JavaScript -->
   <script>
     // ========================================================================
-    // DATOS
+    // ITINERARIES SPECIFIC LOGIC
     // ========================================================================
-    const TEAMS = [
-      { id: 'argentina', name: 'Argentina', flag: '🇦🇷' },
-      { id: 'brasil', name: 'Brasil', flag: '🇧🇷' },
-      { id: 'uruguay', name: 'Uruguay', flag: '🇺🇾' },
-      { id: 'chile', name: 'Chile', flag: '🇨🇱' },
-      { id: 'colombia', name: 'Colombia', flag: '🇨🇴' }
-    ];
-
+    
+    // Datos del itinerario
     const CITIES = ${JSON.stringify(ITINERARY_DATA.matches.map(m => m.city))};
 
     // ========================================================================
-    // INICIALIZACIÓN
+    // DOM INITIALIZATION
     // ========================================================================
     document.addEventListener('DOMContentLoaded', () => {
       // Tom Select para equipos
@@ -941,47 +944,7 @@ const htmlTemplate = `<!DOCTYPE html>
         });
       });
 
-      // Mapa Leaflet
-      const map = L.map('itinerary-map').setView([37.0902, -95.7129], 4);
-      
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap contributors'
-      }).addTo(map);
-
-      // Agregar marcadores numerados
-      CITIES.forEach((city, index) => {
-        const marker = L.marker([city.lat, city.lng]).addTo(map);
-        
-        const divIcon = L.divIcon({
-          html: \`
-            <div style="background: #006FE8; color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 14px; border: 3px solid white; box-shadow: 0 2px 8px rgba(0,0,0,0.3);">
-              \${city.number}
-            </div>
-          \`,
-          className: '',
-          iconSize: [32, 32],
-          iconAnchor: [16, 16]
-        });
-        
-        marker.setIcon(divIcon);
-        marker.bindPopup(\`<b>\${city.name}</b>\`);
-      });
-
-      // Conectar ciudades con líneas
-      for (let i = 0; i < CITIES.length - 1; i++) {
-        const latlngs = [
-          [CITIES[i].lat, CITIES[i].lng],
-          [CITIES[i + 1].lat, CITIES[i + 1].lng]
-        ];
-        L.polyline(latlngs, {
-          color: '#006FE8',
-          weight: 3,
-          opacity: 0.6,
-          dashArray: '10, 5'
-        }).addTo(map);
-      }
-
-      console.log('✅ Itineraries Template cargado');
+      console.log('✅ Itineraries Template loaded - Using shared map from app.js');
     });
 
     // ========================================================================
