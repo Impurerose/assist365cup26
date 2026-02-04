@@ -36,41 +36,46 @@ if (!fs.existsSync(cssPath)) {
   console.log('✅ CSS ya existe, reutilizando...\n');
 }
 
-// 3. Importar build vanilla existente para reutilizar código
-const buildVanillaPath = path.join(__dirname, 'build-vanilla.mjs');
-const buildVanilla = await import(buildVanillaPath);
-
 console.log('📝 Generando mainpage.html...\n');
 
-// 4. Simplemente renombrar el index.html actual a mainpage.html
+// 3. Verificar que index.html existe (debe generarse con build:vanilla primero)
 const currentIndexPath = path.join(distPath, 'index.html');
 const mainpagePath = path.join(distPath, 'mainpage.html');
 
-// Si existe index.html del build-vanilla, renombrarlo
-if (fs.existsSync(currentIndexPath)) {
-  fs.copyFileSync(currentIndexPath, mainpagePath);
-  console.log('✅ mainpage.html generado desde index.html\n');
-} else {
-  // Si no existe, ejecutar build-vanilla primero
-  console.log('⚠️  index.html no encontrado, ejecutando build-vanilla...\n');
-  execSync('node scripts/build-vanilla.mjs', { stdio: 'inherit' });
-  
-  if (fs.existsSync(currentIndexPath)) {
-    fs.copyFileSync(currentIndexPath, mainpagePath);
-    console.log('✅ mainpage.html generado\n');
-  } else {
-    console.error('❌ Error: No se pudo generar index.html');
-    process.exit(1);
-  }
+if (!fs.existsSync(currentIndexPath)) {
+  console.error('❌ Error: index.html no existe en dist-vanilla/');
+  console.error('💡 Ejecutá primero: npm run build:vanilla');
+  process.exit(1);
 }
 
-// 5. Actualizar links internos en mainpage.html
+// 4. Copiar index.html a mainpage.html
+fs.copyFileSync(currentIndexPath, mainpagePath);
+console.log('✅ mainpage.html generado desde index.html\n');
+
+// 5. Actualizar links internos y agregar botón de itinerarios en mainpage.html
 let mainpageContent = fs.readFileSync(mainpagePath, 'utf-8');
 
 // Reemplazar referencias a venues si existen
 mainpageContent = mainpageContent.replace(
   /onclick=".*?venues\.html.*?"/g,
   'onclick="window.location.href=\'venues.html\'"'
+);
+
+// Agregar botón "Mirá cómo llegar a cada partido" en la sección 2
+const itinerariesButton = `
+                <button 
+                  class="mt-4 inline-flex items-center justify-center gap-2 px-4 py-2 h-12 text-lg font-semibold rounded-xl text-brand-primary hover:text-bg-alt-secondary active:text-action-pressed focus:outline-none focus:ring-4 focus:ring-border-primary transition-all duration-300 w-full lg:w-fit"
+                  onclick="window.location.href='itineraries.html'"
+                  style="font-family: 'Titillium Web', sans-serif;"
+                >
+                  <i class="ph-duotone ph-airplane-tilt" style="font-size: 16px;"></i>
+                  <span>Mirá cómo llegar a cada partido</span>
+                </button>`;
+
+// Insertar el botón DENTRO del matches-section-2, antes de cerrar el div
+mainpageContent = mainpageContent.replace(
+  /(id="matches-section-2"[^>]*>[\s\S]*?)(<!-- Populated by JavaScript -->)/,
+  `$1$2\n${itinerariesButton}`
 );
 
 fs.writeFileSync(mainpagePath, mainpageContent);

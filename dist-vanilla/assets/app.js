@@ -1,5 +1,5 @@
 // World Cup 2026 - Main Application
-// Auto-generated: 2026-01-30T20:35:07.562Z
+// Auto-generated: 2026-02-04T17:41:17.924Z
 
 const APP_STATE = {
   selectedTeam: null,
@@ -441,6 +441,14 @@ function initAllSections() {
   const section2 = document.getElementById('matches-section-2');
   if (section2) {
     section2.innerHTML = renderMatchesContainer(MOCK_MATCHES, 'groups');
+    
+    // Agregar botón "Mirá cómo llegar a cada partido"
+    const itinerariesButton = document.createElement('button');
+    itinerariesButton.className = 'mt-4 inline-flex items-center justify-center gap-2 px-4 py-2 h-12 text-lg font-semibold rounded-xl text-brand-primary hover:text-bg-alt-secondary active:text-action-pressed focus:outline-none focus:ring-4 focus:ring-border-primary transition-all duration-300 w-full lg:w-fit';
+    itinerariesButton.onclick = () => window.location.href = 'itineraries.html';
+    itinerariesButton.style.fontFamily = "'Titillium Web', sans-serif";
+    itinerariesButton.innerHTML = '<i class="ph-duotone ph-airplane-tilt" style="font-size: 16px;"></i><span>Mirá cómo llegar a cada partido</span>';
+    section2.appendChild(itinerariesButton);
   }
 
   // Section 3: Final Path Banner

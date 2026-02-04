@@ -121,6 +121,17 @@ function MainPageTemplate() {
                 color="tertiary"
                 icon={<AirplaneTiltIcon size={16} />}
                 iconPosition="left"
+                onClick={() => {
+                  if (typeof window !== "undefined") {
+                    const isVanilla = !document.getElementById("root");
+                    if (isVanilla) {
+                      window.location.href = "itineraries.html";
+                    } else {
+                      window.history.pushState({}, "", "?template=itineraries");
+                      window.dispatchEvent(new PopStateEvent("popstate"));
+                    }
+                  }
+                }}
               >
                 Mirá cómo llegar a cada partido
               </Button>

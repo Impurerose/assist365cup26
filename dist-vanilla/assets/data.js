@@ -1,5 +1,5 @@
 // World Cup 2026 - Data
-// Auto-generated: 2026-01-30T20:35:07.561Z
+// Auto-generated: 2026-02-04T17:41:17.924Z
 
 const TEAMS = [
   { id: 'ARG', name: 'Argentina', flag: '🇦🇷' },

@@ -10,12 +10,13 @@ console.log('🚀 Generando versión Vanilla (HTML + CSS + JS sin React)...\n');
 
 const distPath = path.join(__dirname, '..', 'dist-vanilla');
 
-// 1. Crear carpeta final
-if (fs.existsSync(distPath)) {
-  fs.rmSync(distPath, { recursive: true });
+// 1. Crear carpetas si no existen (NO borrar la carpeta existente)
+if (!fs.existsSync(distPath)) {
+  fs.mkdirSync(distPath, { recursive: true });
 }
-fs.mkdirSync(distPath);
-fs.mkdirSync(path.join(distPath, 'assets'));
+if (!fs.existsSync(path.join(distPath, 'assets'))) {
+  fs.mkdirSync(path.join(distPath, 'assets'));
+}
 
 console.log('📝 Generando archivos vanilla...\n');
 
@@ -874,6 +875,14 @@ function initAllSections() {
   const section2 = document.getElementById('matches-section-2');
   if (section2) {
     section2.innerHTML = renderMatchesContainer(MOCK_MATCHES, 'groups');
+    
+    // Agregar botón "Mirá cómo llegar a cada partido"
+    const itinerariesButton = document.createElement('button');
+    itinerariesButton.className = 'mt-4 inline-flex items-center justify-center gap-2 px-4 py-2 h-12 text-lg font-semibold rounded-xl text-brand-primary hover:text-bg-alt-secondary active:text-action-pressed focus:outline-none focus:ring-4 focus:ring-border-primary transition-all duration-300 w-full lg:w-fit';
+    itinerariesButton.onclick = () => window.location.href = 'itineraries.html';
+    itinerariesButton.style.fontFamily = "'Titillium Web', sans-serif";
+    itinerariesButton.innerHTML = '<i class="ph-duotone ph-airplane-tilt" style="font-size: 16px;"></i><span>Mirá cómo llegar a cada partido</span>';
+    section2.appendChild(itinerariesButton);
   }
 
   // Section 3: Final Path Banner
