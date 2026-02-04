@@ -65,7 +65,7 @@ function VenuesTemplate() {
   // Datos del estadio
   const venueData = {
     image:
-      "https://assistcdn.s3.us-west-1.amazonaws.com/assets/img/affiliates/venue.png",
+      "https://assistcdn.s3.us-west-1.amazonaws.com/assets/wc2026/venues/ArrowheadStadium_Kansas_EEUU.jpeg",
     name: "Arrowhead Stadium",
     address: "1 Arrowhead Dr, Kansas City, MO 64129",
     capacity: "67,513",
