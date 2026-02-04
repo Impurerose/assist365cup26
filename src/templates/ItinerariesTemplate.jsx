@@ -167,22 +167,7 @@ function ItinerariesTemplate() {
       },
       phase: "Semi",
       city: { name: "Kansas city (USA)", number: 3 },
-      flights: [
-        {
-          airline: "Aerolinea",
-          logo: "https://www.figma.com/api/mcp/asset/c8f98591-ffd7-4846-9d97-65ea101be8e0",
-          duration: "16h 30min",
-          type: "Directo",
-          price: "desde USD XXX",
-        },
-        {
-          airline: "Aerolinea2",
-          logo: "https://www.figma.com/api/mcp/asset/c8f98591-ffd7-4846-9d97-65ea101be8e0",
-          duration: "14h 32min",
-          type: "Directo",
-          price: "desde USD XXX",
-        },
-      ],
+      flights: [], // Sin vuelos disponibles
     },
     {
       match: {

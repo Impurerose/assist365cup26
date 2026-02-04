@@ -105,22 +105,7 @@ const ITINERARY_DATA = {
         date: 'Sábado 11 de julio',
         time: { local: '21:00 h (AR)', venue: '19:00 h (KSK)' }
       },
-      flights: [
-        {
-          airline: 'Aerolínea',
-          logo: 'https://www.figma.com/api/mcp/asset/c8f98591-ffd7-4846-9d97-65ea101be8e0',
-          duration: '2h 15min',
-          type: 'Directo',
-          price: 'desde USD XXX'
-        },
-        {
-          airline: 'Aerolínea 2',
-          logo: 'https://www.figma.com/api/mcp/asset/c8f98591-ffd7-4846-9d97-65ea101be8e0',
-          duration: '3h 45min',
-          type: '1 escala',
-          price: 'desde USD XXX'
-        }
-      ]
+      flights: [] // Sin vuelos disponibles
     },
     {
       phase: '3ro',
@@ -630,7 +615,7 @@ function generateItineraryMatchCard(matchData, index, isLast) {
             <span class="text-text-default text-xl font-semibold">${city.name}</span>
           </div>
 
-          <!-- Card de vuelos con bg-brand-darkening -->
+          <!-- Card de vuelos con bg-brand-darkening o mensaje de no disponibles -->
           ${flights && flights.length > 0 ? `
             <div class="w-[360px] rounded-xl p-4 flex flex-col gap-2" style="background-color: rgba(81, 90, 96, 0.06);">
               ${flights.slice(0, 2).map(flight => `
@@ -660,7 +645,17 @@ function generateItineraryMatchCard(matchData, index, isLast) {
                 </div>
               `).join('')}
             </div>
-          ` : ''}
+          ` : `
+            <!-- Card de "no hay vuelos disponibles" -->
+            <div class="w-[360px] h-[88px] rounded-xl p-4 flex items-center justify-center gap-1" style="background-color: rgba(81, 90, 96, 0.06);">
+              <div class="shrink-0 w-4 h-4">
+                <img src="https://assistcdn.s3.us-west-1.amazonaws.com/assets/wc2026/emptyIcon.png" class="w-4 h-4" alt="No flights" />
+              </div>
+              <p class="text-sm text-text-default leading-5 pl-1" style="font-family: 'Titillium Web', sans-serif;">
+                No encontramos vuelos disponibles para esta ruta.
+              </p>
+            </div>
+          `}
         </div>
       </div>
     </div>

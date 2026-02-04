@@ -5,6 +5,7 @@ import MapPinWithNumber from "./MapPinWithNumber";
 import ItineraryConnector from "./ItineraryConnector";
 import { MapPinIcon } from "@phosphor-icons/react";
 import SimpleMatchCard from "./SimpleMatchCard";
+import NoFlightsCard from "./NoFlightsCard";
 
 /**
  * ItineraryMatchCard Component
@@ -72,12 +73,16 @@ export default function ItineraryMatchCard({
             </span>
           </div>
 
-          {/* Card de vuelos */}
-          {flights && flights.length > 0 && (
+          {/* Card de vuelos o mensaje de no disponibles */}
+          {flights && flights.length > 0 ? (
             <div className="w-[360px] bg-brand-darkening rounded-xl p-4 flex flex-col gap-2 relative lg:-left-4">
               {flights.slice(0, 2).map((flight, index) => (
                 <FlightOption key={index} flight={flight} variant="list" />
               ))}
+            </div>
+          ) : (
+            <div className="relative lg:-left-4">
+              <NoFlightsCard />
             </div>
           )}
         </div>
