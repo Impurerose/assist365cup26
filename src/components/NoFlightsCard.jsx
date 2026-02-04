@@ -12,7 +12,7 @@ const EmptyIcon = () => (
  */
 export default function NoFlightsCard() {
   return (
-    <div className="w-[410px] h-[88px] bg-brand-darkening/[0.06] rounded-xl py-4 flex items-center justify-center gap-1">
+    <div className="w-full _w-[360px] lg:w-[410px] h-[88px] bg-brand-darkening/[0.06] rounded-xl py-4 flex items-center justify-center gap-1 p-4 lg:p-0">
       <div className="shrink-0 w-4 h-4">
         <EmptyIcon />
       </div>

@@ -5,7 +5,7 @@
 
 const SimpleMatchCard = ({ match, showMatchNumber = true }) => {
   return (
-    <div className="w-full max-w-[408px] lg:max-w-[350px] bg-white border border-border-primary rounded-xl px-3 py-4 flex flex-col gap-x-4 gap-y-1 relative overflow-visible">
+    <div className="w-full _max-w-[360px] md:max-w-[408px] lg:max-w-[350px] bg-white border border-border-primary rounded-xl px-3 py-4 flex flex-col gap-x-4 gap-y-1 relative overflow-visible">
       {/* Número de partido (badge azul) - condicional */}
       {showMatchNumber && match.number && (
         <div className="absolute right-[7px] -top-[3px] w-5 h-5">
@@ -113,7 +113,7 @@ const SimpleMatchCard = ({ match, showMatchNumber = true }) => {
       {/* Información del partido */}
       <div className="flex flex-col gap-2 text-text-default text-sm">
         {/* Fecha y ubicación */}
-        <div className="flex items-start gap-x-2 text-text-default text-sm">
+        <div className="flex items-start gap-x-2 text-text-default text-sm flex-col gap-y-2 lg:gap-y-0 lg:flex-row">
           {/* Fecha */}
           <div className="flex items-center gap-2">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -155,7 +155,7 @@ const SimpleMatchCard = ({ match, showMatchNumber = true }) => {
           </div>
 
           {/* Horarios */}
-          <div className="flex items-center bg- gap-0 text-sm">
+          <div className="flex items-center gap-2 lg:gap-0 text-sm">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
               <circle cx="10" cy="10" r="6.25" fill="#7BD0C2" opacity="0.2" />
               <circle

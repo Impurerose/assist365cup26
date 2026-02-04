@@ -22,7 +22,7 @@ export default function ItineraryMatchCard({
   showConnection = true,
 }) {
   return (
-    <div className="flex flex-col gap-4 max-w-[420px] lg:max-w-full mx-auto">
+    <div className="flex flex-col gap-4 max-w-[420px] lg:max-w-full mx-auto w-full">
       {/* Título con MapPin grande - SOLO MOBILE/TABLET */}
       {/* <div className="lg:hidden flex items-center gap-2">
         <MapPinIcon size={32} weight="duotone" className="text-brand-primary" />
@@ -32,7 +32,7 @@ export default function ItineraryMatchCard({
       </div> */}
 
       {/* Grid de columnas */}
-      <div className="grid grid-cols-[auto_1fr] lg:grid-cols-[350px_auto_1fr] gap-x-2 mx-auto">
+      <div className="grid grid-cols-[auto_1fr] lg:grid-cols-[350px_auto_1fr] gap-x-2 mx-auto w-full">
         {/* Columna 1: Match Card - SOLO DESKTOP */}
         <div className="hidden lg:block w-full overflow-visible">
           <MatchCard match={{ ...match, phase }} showMatchNumber={false} />
@@ -44,7 +44,7 @@ export default function ItineraryMatchCard({
           {showConnection && (
             <>
               <div className="lg:hidden">
-                <ItineraryConnector topCircles={12} />
+                <ItineraryConnector topCircles={17} />
               </div>
               <div className="hidden lg:block">
                 <ItineraryConnector topCircles={5} />
@@ -54,7 +54,7 @@ export default function ItineraryMatchCard({
         </div>
 
         {/* Columna 3: Cards apiladas */}
-        <div className="flex flex-col gap-2 min-w-0 w-full w-[420px]">
+        <div className="flex flex-col gap-2 min-w-0 w-full w-[360px] lg:w-[420px]">
           {/* Match card - SOLO MOBILE/TABLET */}
           <div className="lg:hidden">
             <span className="pt-2 text-text-default text-xl font-semibold pl-5 mb-3 block">
@@ -75,13 +75,13 @@ export default function ItineraryMatchCard({
 
           {/* Card de vuelos o mensaje de no disponibles */}
           {flights && flights.length > 0 ? (
-            <div className="w-[410px] bg-brand-darkening rounded-xl p-4 flex flex-col gap-2 relative lg:-left-1">
+            <div className="w-full _w-[360px] lg:w-[410px] bg-brand-darkening rounded-xl p-4 flex flex-col gap-2 relative lg:-left-1">
               {flights.slice(0, 2).map((flight, index) => (
                 <FlightOption key={index} flight={flight} variant="list" />
               ))}
             </div>
           ) : (
-            <div className="w-[410px] rounded-xl flex flex-col gap-2 relative">
+            <div className="w-full lg:w-[410px] rounded-xl flex flex-col gap-2 relative lg:-left-1">
               <NoFlightsCard />
             </div>
           )}
