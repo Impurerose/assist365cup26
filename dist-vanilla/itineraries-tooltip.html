@@ -276,9 +276,39 @@
         
         <div class="relative rounded-2xl overflow-hidden w-full lg:w-[715px] h-[640px] mb-6">
           <!-- Botón flotante de compartir sobre el mapa -->
-          <button class="z-50 absolute bottom-3 right-3 inline-flex items-center justify-center gap-2 px-4 py-2 h-10 text-base font-semibold rounded-xl bg-brand-primary text-white hover:bg-bg-alt-secondary transition-colors shadow-lg">
-            <i class="ph ph-paper-plane-tilt" style="font-size: 20px; font-weight: bold;"></i>
-          </button>
+          <div class="absolute bottom-3 right-3 z-50">
+            <!-- Tooltip del botón del mapa -->
+            <div 
+              id="tooltip-map" 
+              class="opacity-0 pointer-events-none transition-opacity duration-300 absolute bg-[#CDE9FF] text-[#31363A] p-4 rounded-xl text-base leading-6 z-50 shadow-lg"
+              style="bottom: calc(100% + 14px); right: 0; white-space: nowrap;"
+            >
+              ¡Enlace copiado!
+              
+              <!-- Arrow pointing down -->
+              <span
+                aria-hidden="true"
+                style="
+                  position: absolute;
+                  bottom: -14px;
+                  right: 16px;
+                  width: 0;
+                  height: 0;
+                  border-left: 8px solid transparent;
+                  border-right: 8px solid transparent;
+                  border-top: 14px solid #CDE9FF;
+                  pointer-events: none;
+                "
+              ></span>
+            </div>
+            
+            <button 
+              id="map-share-button"
+              data-clipboard-text=""
+              class="inline-flex items-center justify-center gap-2 px-4 py-2 h-10 text-base font-semibold rounded-xl bg-brand-primary text-white hover:bg-bg-alt-secondary transition-colors shadow-lg">
+              <i class="ph ph-paper-plane-tilt" style="font-size: 20px; font-weight: bold;"></i>
+            </button>
+          </div>
           <div id="map" class="w-full h-full"></div>
         </div>
   
@@ -1919,6 +1949,52 @@
       // Cleanup al salir de la página
       window.addEventListener('beforeunload', () => {
         clipboard.destroy();
+      });
+    }
+
+    // ========================================================================
+    // MAP SHARE BUTTON CON CLIPBOARD.JS
+    // ========================================================================
+    const mapShareButton = document.getElementById('map-share-button');
+    
+    if (mapShareButton) {
+      // Establecer URL actual en el atributo data
+      mapShareButton.setAttribute('data-clipboard-text', window.location.href);
+      
+      // Inicializar clipboard.js
+      const mapClipboard = new ClipboardJS('#map-share-button');
+      
+      // Evento SUCCESS de clipboard.js
+      mapClipboard.on('success', function(e) {
+        console.log('✅ Enlace copiado desde mapa:', e.text);
+        
+        // Mostrar tooltip del mapa
+        const mapTooltip = document.getElementById('tooltip-map');
+        if (mapTooltip) {
+          mapTooltip.classList.remove('opacity-0', 'pointer-events-none');
+          mapTooltip.classList.add('opacity-100');
+          
+          setTimeout(() => {
+            mapTooltip.classList.remove('opacity-100');
+            mapTooltip.classList.add('opacity-0', 'pointer-events-none');
+          }, 2000);
+        }
+        
+        e.clearSelection();
+      });
+      
+      // Evento ERROR de clipboard.js (fallback)
+      mapClipboard.on('error', function(e) {
+        console.error('❌ Error al copiar desde mapa');
+        const fallbackMessage = /Mac/i.test(navigator.userAgent) 
+          ? 'Presiona ⌘+C para copiar' 
+          : 'Presiona Ctrl+C para copiar';
+        alert(fallbackMessage);
+      });
+      
+      // Cleanup al salir de la página
+      window.addEventListener('beforeunload', () => {
+        mapClipboard.destroy();
       });
     }
   </script>
