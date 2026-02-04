@@ -1,4 +1,3 @@
-import MatchCard from "./MatchCard";
 import CityMarker from "./CityMarker";
 import FlightOption from "./FlightOption";
 import MapPinWithNumber from "./MapPinWithNumber";
@@ -35,7 +34,7 @@ export default function ItineraryMatchCard({
       <div className="grid grid-cols-[auto_1fr] lg:grid-cols-[350px_auto_1fr] gap-x-2 mx-auto w-full">
         {/* Columna 1: Match Card - SOLO DESKTOP */}
         <div className="hidden lg:block w-full overflow-visible">
-          <MatchCard match={{ ...match, phase }} showMatchNumber={false} />
+          <SimpleMatchCard match={{ ...match, phase }} showMatchNumber={false} />
         </div>
 
         {/* Columna 2: MapPin + Conector - SIEMPRE VISIBLE */}
