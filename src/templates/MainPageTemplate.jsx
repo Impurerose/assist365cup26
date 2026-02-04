@@ -10,7 +10,7 @@ import Select from "../dsys/Select";
 import Button from "../dsys/Button";
 import { TEAMS } from "../config/teamsConfig";
 import { VENUES } from "../config/mapConfig";
-import { MapPinAreaIcon } from "@phosphor-icons/react";
+import { AirplaneTiltIcon, MapPinAreaIcon } from "@phosphor-icons/react";
 import { mockMatches } from "../data/mockMatches";
 import { mockMatchesWithoutPending } from "../data/mockMatchesWithoutPending";
 import { mockMatchesFinished } from "../data/mockMatchesFinished";
@@ -88,14 +88,18 @@ function MainPageTemplate() {
               onClick={() => {
                 // En desarrollo React: cambiar template a venuesSelection
                 // En vanilla: navegar a venuesSelection.html
-                if (typeof window !== 'undefined') {
-                  const isVanilla = !document.getElementById('root');
+                if (typeof window !== "undefined") {
+                  const isVanilla = !document.getElementById("root");
                   if (isVanilla) {
-                    window.location.href = 'venuesSelection.html';
+                    window.location.href = "venuesSelection.html";
                   } else {
                     // En React, cambiar el parámetro de template
-                    window.history.pushState({}, '', '?template=venuesSelection');
-                    window.dispatchEvent(new PopStateEvent('popstate'));
+                    window.history.pushState(
+                      {},
+                      "",
+                      "?template=venuesSelection",
+                    );
+                    window.dispatchEvent(new PopStateEvent("popstate"));
                   }
                 }
               }}
@@ -111,6 +115,15 @@ function MainPageTemplate() {
 
             <SidePanel>
               <MatchesContainer matches={mockMatches} />
+
+              <Button
+                classes="mt-4"
+                color="tertiary"
+                icon={<AirplaneTiltIcon size={16} />}
+                iconPosition="left"
+              >
+                Mirá cómo llegar a cada partido
+              </Button>
             </SidePanel>
           </div>
 
@@ -158,7 +171,6 @@ function MainPageTemplate() {
           </div>
         </div>
       </div>
-
 
       <Footer />
     </div>
