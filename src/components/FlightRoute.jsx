@@ -11,7 +11,7 @@ export default function FlightRoute({ origin, destination, flights, size = 'defa
   const bgColor = background === 'dark' ? 'bg-brand-darkening' : 'bg-white';
 
   return (
-    <div className={`${bgColor} border border-border-primary rounded-xl p-4 flex flex-col gap-2 mx-auto max-w-[360px] lg:max-w-[792px]`}>
+    <div className={`${bgColor} border border-border-primary rounded-xl p-4 flex flex-col gap-2 mx-auto max-w-[420px] lg:max-w-[792px]`}>
       {/* Header: Origen ↓/→ Destino - columna en mobile, fila en desktop */}
       <div className="flex flex-col lg:flex-row items-center justify-center gap-0 lg:gap-4">
         <p className={`${textSize} text-text-default text-center lg:text-left`}>

@@ -6,12 +6,15 @@ import {
   PaperPlaneTilt,
 } from "@phosphor-icons/react";
 import Button from "../dsys/Button";
+import ToolTip from "../dsys/ToolTip";
+import { useClipboard } from "../hooks/useClipboard";
 
 /**
  * Sidebar Component
  * Panel deslizante desde la derecha con overlay
  */
 export default function Sidebar({ isOpen, onClose }) {
+  const { isCopied, copyToClipboard } = useClipboard();
   // Prevenir scroll del body cuando el sidebar está abierto
   useEffect(() => {
     if (isOpen) {
@@ -29,6 +32,11 @@ export default function Sidebar({ isOpen, onClose }) {
   const handleNavigation = (href) => {
     window.location.href = href;
     onClose();
+  };
+
+  // Handler de compartir
+  const handleShare = async () => {
+    await copyToClipboard(window.location.href);
   };
 
   // Opciones del menú
@@ -101,13 +109,21 @@ export default function Sidebar({ isOpen, onClose }) {
           </ul>
 
           {/* Botón Compartir */}
-          <Button
-            icon={<PaperPlaneTilt size={16} weight="bold" />}
-            iconPosition="right"
-            classes="w-fit"
+          <ToolTip 
+            content="¡Enlace copiado!" 
+            visible={isCopied}
+            position="right"
+            mobileAlign="left"
           >
-            Compartir
-          </Button>
+            <Button
+              icon={<PaperPlaneTilt size={16} weight="bold" />}
+              iconPosition="right"
+              classes="w-fit"
+              onClick={handleShare}
+            >
+              Compartir
+            </Button>
+          </ToolTip>
         </div>
       </div>
     </>

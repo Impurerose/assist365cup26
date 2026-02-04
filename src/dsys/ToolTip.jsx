@@ -3,33 +3,6 @@
  *
  * A flexible tooltip component that displays contextual information on hover/focus.
  * Adapted from @a365/ui-core for standalone use.
- *
- * @example
- * import ToolTip from './dsys/ToolTip';
- * import { Info } from '@phosphor-icons/react';
- *
- * // Con contenido personalizado
- * <ToolTip content="Esta es una ayuda contextual">
- *   <Info size={20} />
- * </ToolTip>
- *
- * // Con ícono por defecto
- * <ToolTip content="Información adicional" />
- *
- * // Sin flecha
- * <ToolTip content="Tooltip sin flecha" arrow={false}>
- *   <Info size={20} />
- * </ToolTip>
- * 
- * // Con control externo de visibilidad
- * const [show, setShow] = useState(false);
- * <ToolTip 
- *   content="¡Enlace copiado!" 
- *   visible={show}
- *   onVisibleChange={setShow}
- * >
- *   <Button onClick={() => setShow(true)}>Compartir</Button>
- * </ToolTip>
  */
 
 import React, { useState, useRef } from 'react';
@@ -41,24 +14,75 @@ const ToolTip = ({
   arrow = true,
   visible: externalVisible,
   onVisibleChange,
-  alwaysVisible = false
+  alwaysVisible = false,
+  position = 'left', // 'left' | 'right' | 'top' | 'bottom'
+  mobileAlign = 'center' // 'left' | 'center' | 'right'
 }) => {
   const [internalVisible, setInternalVisible] = useState(false);
   const idRef = useRef('tooltip-' + Math.random().toString(36).slice(2, 9));
 
-  // Usar visible externo si existe, sino interno, o siempre visible si alwaysVisible=true
   const visible = alwaysVisible || (externalVisible !== undefined ? externalVisible : internalVisible);
   
   const handleVisibilityChange = (newVisible) => {
     if (externalVisible === undefined) {
       setInternalVisible(newVisible);
     }
-    onVisibleChange?.(newVisible);
+    onVisibilityChange?.(newVisible);
   };
 
-  const containerClass = `${
-    className ? className + ' ' : ''
-  }relative inline-flex items-center`;
+  const containerClass = `${className ? className + ' ' : ''}relative inline-flex items-center`;
+
+  // Configuración de posición para desktop
+  const desktopPositions = {
+    left: {
+      container: { right: 'calc(100% + 14px)', top: '50%', transform: 'translateY(-50%)' },
+      arrow: {
+        position: 'absolute',
+        right: '-14px',
+        top: '50%',
+        transform: 'translateY(-50%)',
+        width: 0,
+        height: 0,
+        borderTop: '8px solid transparent',
+        borderBottom: '8px solid transparent',
+        borderLeft: '14px solid #CDE9FF',
+        pointerEvents: 'none',
+      }
+    },
+    right: {
+      container: { left: 'calc(100% + 14px)', top: '50%', transform: 'translateY(-50%)' },
+      arrow: {
+        position: 'absolute',
+        left: '-14px',
+        top: '50%',
+        transform: 'translateY(-50%)',
+        width: 0,
+        height: 0,
+        borderTop: '8px solid transparent',
+        borderBottom: '8px solid transparent',
+        borderRight: '14px solid #CDE9FF',
+        pointerEvents: 'none',
+      }
+    }
+  };
+
+  // Configuración de alineación para mobile
+  const mobileAlignments = {
+    left: { left: '0', transform: 'none' },
+    center: { left: '50%', transform: 'translateX(-50%)' },
+    right: { right: '0', left: 'auto', transform: 'none' }
+  };
+
+  const currentMobileAlign = mobileAlignments[mobileAlign] || mobileAlignments.center;
+  
+  const mobileArrowPosition = {
+    left: { left: '16px', transform: 'none' },
+    center: { left: '50%', transform: 'translateX(-50%)' },
+    right: { right: '16px', left: 'auto', transform: 'none' }
+  };
+  
+  const currentMobileArrow = mobileArrowPosition[mobileAlign] || mobileArrowPosition.center;
+  const currentPosition = desktopPositions[position] || desktopPositions.left;
 
   return (
     <span
@@ -92,23 +116,21 @@ const ToolTip = ({
 
       {visible && content && (
         <>
-          {/* Tooltip para mobile/tablet - debajo del botón */}
+          {/* Tooltip mobile */}
           <div
             id={idRef.current}
             role="tooltip"
             className="block lg:hidden absolute bg-[#CDE9FF] text-[#31363A] p-4 rounded-xl text-base leading-6 z-50"
-            style={{ top: 'calc(100% + 14px)', left: '50%', transform: 'translateX(-50%)', whiteSpace: 'nowrap' }}
+            style={{ top: 'calc(100% + 14px)', ...currentMobileAlign, whiteSpace: 'nowrap' }}
           >
             {content}
-            
             {arrow && (
               <span
                 aria-hidden="true"
                 style={{
                   position: 'absolute',
                   top: '-14px',
-                  left: '50%',
-                  transform: 'translateX(-50%)',
+                  ...currentMobileArrow,
                   width: 0,
                   height: 0,
                   borderLeft: '8px solid transparent',
@@ -120,29 +142,17 @@ const ToolTip = ({
             )}
           </div>
 
-          {/* Tooltip para desktop - a la izquierda del botón */}
+          {/* Tooltip desktop */}
           <div
             role="tooltip"
             className="hidden lg:block absolute bg-[#CDE9FF] text-[#31363A] p-4 rounded-xl text-base leading-6 z-50 shadow-lg"
-            style={{ right: 'calc(100% + 14px)', top: '50%', transform: 'translateY(-50%)', whiteSpace: 'nowrap' }}
+            style={{ ...currentPosition.container, whiteSpace: 'nowrap' }}
           >
             {content}
-            
             {arrow && (
               <span
                 aria-hidden="true"
-                style={{
-                  position: 'absolute',
-                  right: '-14px',
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                  width: 0,
-                  height: 0,
-                  borderTop: '8px solid transparent',
-                  borderBottom: '8px solid transparent',
-                  borderLeft: '14px solid #CDE9FF',
-                  pointerEvents: 'none',
-                }}
+                style={currentPosition.arrow}
               />
             )}
           </div>

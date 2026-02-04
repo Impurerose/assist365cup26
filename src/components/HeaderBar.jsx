@@ -6,6 +6,7 @@ import {
 } from "@phosphor-icons/react";
 import Button from "../dsys/Button.jsx";
 import ToolTip from "../dsys/ToolTip.jsx";
+import { useClipboard } from "../hooks/useClipboard";
 
 const SoccerBallGradient = () => (
   <svg width="0" height="0" className="absolute">
@@ -19,6 +20,12 @@ const SoccerBallGradient = () => (
 );
 
 export default function HeaderBar({ showHamburger = false, onHamburgerClick }) {
+  const { isCopied, copyToClipboard } = useClipboard();
+
+  const handleShare = async () => {
+    await copyToClipboard(window.location.href);
+  };
+
   return (
     <header className="bg-white w-full">
       <div className="flex items-center justify-between w-full max-w-[358px] sm:max-w-[548px] lg:max-w-[1200px] mx-auto py-3 px-0 md:px-4">
@@ -60,11 +67,12 @@ export default function HeaderBar({ showHamburger = false, onHamburgerClick }) {
 
         {/* Compartir + Hamburguesa - DERECHA */}
         <div className="flex items-center gap-2 lg:gap-4">
-          <ToolTip content="¡Enlace copiado!" alwaysVisible={true}>
+          <ToolTip content="¡Enlace copiado!" visible={isCopied}>
             <Button
               icon={<PaperPlaneTiltIcon size={16} weight="bold" />}
               iconPosition="right"
               responsive={true}
+              onClick={handleShare}
             >
               <span className="pl-1 hidden lg:flex">Compartir</span>
             </Button>
