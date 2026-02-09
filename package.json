@@ -17,6 +17,9 @@
     "build:modal-success": "node scripts/build-modal-success.mjs",
     "build:footer": "node scripts/build-footer.mjs",
     "build:all-vanilla": "npm run build:vanilla && npm run build:mainpage && npm run build:venues && npm run build:itineraries && npm run build:modal && npm run build:modal-success && npm run build:footer",
+    "css:build": "tailwindcss -i ./src/input.css -o ../assist365cup26/src/webroot/assets/styles.css",
+    "css:watch": "tailwindcss -i ./src/input.css -o ../assist365cup26/src/webroot/assets/styles.css --watch",
+    "css:minify": "tailwindcss -i ./src/input.css -o ../assist365cup26/src/webroot/assets/styles.css --minify",
     "help": "bash scripts/help.sh",
     "preview": "vite preview",
     "lint": "eslint ."

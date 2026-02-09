@@ -3,7 +3,9 @@ export default {
   content: [
     "./index.html", 
     "./src/**/*.{js,jsx,ts,tsx}",
-    "./dist-vanilla/**/*.html"
+    "./dist-vanilla/**/*.html",
+    "../assist365cup26/src/templates/**/*.php",
+    "../assist365cup26/src/templates/**/*.html"
   ],
   theme: {
     extend: {
